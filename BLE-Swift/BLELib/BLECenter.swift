@@ -1,0 +1,378 @@
+//
+//  BLECenter.swift
+//  BLE-Swift
+//
+//  Copyright © 2018年 ss. All rights reserved.
+//
+
+import UIKit
+import CoreBluetooth
+
+public struct CenterBlock {
+    var scanBlock:ScanBlock?
+    var scanStop:EmptyBlock?
+}
+
+public class BLECenter: NSObject, CBCentralManagerDelegate {
+    // MARK: - 公开属性
+    /// shared instance
+    public static let shared = BLECenter()
+    
+    public var state:CBManagerState = .unknown
+    
+    public var discoveredDevices:Set<BLEDevice> = Set()
+    
+    public var connectedDevices:[BLEDevice] {
+        return Array(BLEDevicesManager.shared.connectedDevices)
+    }
+    
+    // MARK: - 私有属性
+    var center:CBCentralManager?
+    
+    var devicesManager = BLEDevicesManager.shared
+    
+    var dataCenter = BLEDataCenter()
+    
+    // 蓝牙打开之后，需要做的人物列表
+    var powerOnToDoList: Array<BLEToDo> = Array()
+    var todoLock:NSLock = NSLock()
+    
+    // 回调
+    var block:CenterBlock = CenterBlock()
+    
+    // 默认发送数据的设备名称
+    var defaultInteractionDeviceName:String?
+    
+    // 定时器
+    var searchTimer:Timer?
+    var connectTimer:Timer?
+    var otaConnectTimer:Timer?
+    var disconnectTimer:Timer?
+    
+    // MARK: - 初始化
+    override init() {
+        super.init()
+        
+        self.todoLock.name = "BLECenter.todoLock"
+        
+        // 初始化center
+        let options:[String : Any] = [CBCentralManagerOptionShowPowerAlertKey: true,
+                       CBCentralManagerOptionRestoreIdentifierKey: "Appscomm.ble.center"]
+        
+        let backgroundModes = Bundle.main.infoDictionary?["UIBackgroundModes"] as? Array<String>
+        if let arr = backgroundModes, arr.contains("bluetooth-central") {
+            center = CBCentralManager(delegate: self, queue: nil, options: options)
+        } else {
+            center = CBCentralManager(delegate: self, queue: nil)
+        }
+        
+    }
+    
+    
+    // MARK: - 公开方法
+    
+    /// Scan bluetooth peripherals.
+    ///
+    /// - Parameter callback: callback will be called once peripherals are found
+    public func scan(callback:ScanBlock?) {
+        if self.state == .unknown {
+            addToDo(cmd: ToDo.scan) {
+                [unowned self] in
+                self.scan(callback: callback)
+            }
+        }
+        else {
+            if let err = checkBLE() {
+                callback?(nil, err)
+                stopScan()
+            } else {
+                center?.stopScan()
+                discoveredDevices.removeAll()
+                block.scanBlock = callback
+                let arr = getConnectedDevices(servicesUUIDs: [UUID.mainService])
+                if arr != nil && arr!.count > 0 {
+                    for d in arr! {
+                        discoveredDevices.insert(d)
+                    }
+                }
+                
+                scanCallback()
+                
+                center?.scanForPeripherals(withServices: nil, options: nil)
+            }
+        }
+        
+        
+    }
+    
+    /// Scan bluetooth peripherals and stop scanning after a specified time ‘after’, then stop will be called.
+    /// callback will be called once peripherals are found
+    ///
+    /// - Parameters:
+    ///   - callback: peripherals found callback
+    ///   - stop: stop callback
+    ///   - after: seconds of stop count timer
+    public func scan(callback:ScanBlock?,
+                     stop:EmptyBlock?,
+                     after:TimeInterval = kDefaultTimeout) {
+        scan(callback: callback)
+        self.block.scanStop = stop
+        addSearchTimer(sel: #selector(stopScan), timeout: after)
+    }
+    
+    private func scanCallback() {
+        var devices = Array(self.discoveredDevices)
+        // 按照信号量排序
+        devices.sort { (d1, d2) -> Bool in
+            let d1Rssi = d1.rssi ?? 0
+            let d2Rssi = d2.rssi ?? 0
+            return d1Rssi > d2Rssi
+        }
+        DispatchQueue.main.async {
+            self.block.scanBlock?(devices, nil)
+        }
+    }
+    
+    /// Stop scanning bluetooth peripherals
+    @objc public func stopScan() {
+        removeSearchTimer()
+        if self.state == .poweredOn {
+            self.center?.stopScan()
+        }
+        self.block.scanStop?()
+        self.block.scanBlock = nil
+        self.block.scanStop = nil
+    }
+    
+    
+    /// connect device by name, default timeout is kConnectTimeout
+    ///
+    /// - Parameter deviceName: device's name(peripheral.name)
+    public func connect(deviceName:String,
+                        callback:ConnectBlock?,
+                        timeout:TimeInterval = kDefaultTimeout) {
+        if devicesManager.connectDevice(withName: deviceName, callback: callback, timeout: timeout) {
+            // 先扫描，再连接
+            weak var weakSelf = self
+            scan(callback: { (devices, err) in
+                if devices != nil && devices!.count > 0 {
+                    for device in devices! {
+                        // 名字相同则进行连接
+                        if deviceName == device.name {
+                            weakSelf?.stopScan()
+                            weakSelf?.center?.connect(device.peripheral, options: nil)
+                        }
+                    }
+                }
+            }, stop: {
+                
+            }, after: timeout)
+        }
+    }
+    
+    public func connect(device:BLEDevice, callback:ConnectBlock?,
+        timeout:TimeInterval = kDefaultTimeout) {
+        if devicesManager.connectDevice(withBLEDevice: device, callback: callback, timeout: timeout) {
+            center?.connect(device.peripheral, options: nil)
+        }
+    }
+    
+    func send(data:BLEData, callback:CommonCallback?, toDeviceName:String? = nil, timeout:TimeInterval = kDefaultTimeout) -> BLETask? {
+        var deviceName = defaultInteractionDeviceName
+        if toDeviceName != nil {
+            deviceName = toDeviceName
+        }
+        
+        if deviceName == nil {
+            let err = NSError(domain: Domain.center, code: Code.paramsError, userInfo: nil)
+            print("deviceName and defaultInteractionDeviceName can not be nil at the same time")
+            DispatchQueue.main.async {
+                callback?(nil, err)
+            }
+            return nil
+        }
+  
+        
+        if let device = devicesManager.getConnectedDevice(byName: deviceName!) {
+            return dataCenter.sendData(toDevice: device, data: data, callback: callback)
+        } else {
+            let err = NSError(domain: Domain.center, code: Code.deviceDisconnected, userInfo: nil)
+            print("Please connect a device before sending data")
+            DispatchQueue.main.async {
+                callback?(nil, err)
+            }
+            return nil
+        }
+        
+    }
+    
+    // MARK: - 蓝牙状态改变方法实现
+    private func blePowerOn() {
+        print("蓝牙打开了")
+        // 检查需要打开蓝牙之后执行的任务
+        let todoList = getAllTodos()
+        for todo in todoList {
+            todo.block()
+        }
+        removeAllTodo()
+    }
+    
+    // MARK: - 蓝牙中心代理
+    public func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        // 先给自己属性赋值
+        self.state = center!.state
+        
+        if self.state == .poweredOn {
+            blePowerOn()
+        }
+        
+        // 发送状态改变通知
+        NotificationCenter.default.post(name: BLENotification.stateChanged, object: nil, userInfo: [BLEKey.state : self.state])
+    }
+    
+    public func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
+        
+    }
+    
+    public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        print("name:\(peripheral.name ?? "nil"), rssi:\(RSSI)")
+        let device = BLEDevice(peripheral, rssi: RSSI, advertisementData: advertisementData)
+        discoveredDevices.insert(device)
+        scanCallback()
+    }
+    
+    public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        self.devicesManager.peripheralConnected(peripheral)
+    }
+    
+    public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        
+    }
+    
+    public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        // 发送断链通知
+        NotificationCenter.default.post(name: BLEInnerNotification.deviceDisonnected, object: nil, userInfo: [BLEKey.device : peripheral])
+    }
+    
+    // MARK: - 超时处理
+    private func removeSearchTimer() {
+        self.searchTimer?.invalidate()
+        self.searchTimer = nil
+    }
+    
+    private func removeConnectTimer() {
+        self.connectTimer?.invalidate()
+        self.connectTimer = nil
+    }
+    
+    private func removeOtaConnectTimer() {
+        self.otaConnectTimer?.invalidate()
+        self.otaConnectTimer = nil
+    }
+    
+    private func removeDisconnectTimer() {
+        self.disconnectTimer?.invalidate()
+        self.disconnectTimer = nil
+    }
+    
+    private func addSearchTimer(sel:Selector, timeout:TimeInterval = kDefaultTimeout) {
+        removeSearchTimer()
+        self.searchTimer = Timer(timeInterval: timeout, target: self, selector: sel, userInfo: nil, repeats: false)
+        RunLoop.main.add(self.searchTimer!, forMode: .common)
+    }
+    
+    private func addDisconnectTimer(timeout:TimeInterval = kDefaultTimeout) {
+        removeDisconnectTimer()
+        self.disconnectTimer = Timer(timeInterval: timeout, target: self, selector: #selector(timeoutCallback(timer:)), userInfo: ["todo": ToDo.disconnect], repeats: false)
+        RunLoop.main.add(self.disconnectTimer!, forMode: .common)
+    }
+    
+    private func addConnectTimer(isAutoConnect:Bool, timeout:TimeInterval = kDefaultTimeout) {
+        removeConnectTimer()
+        let todo = isAutoConnect ? ToDo.autoConnect : ToDo.connect
+        self.connectTimer = Timer(timeInterval: timeout, target: self, selector: #selector(timeoutCallback(timer:)), userInfo: ["todo": todo], repeats: false)
+        RunLoop.main.add(self.connectTimer!, forMode: .common)
+    }
+    
+    private func addOtaConnectTimer(timeout:TimeInterval = kDefaultTimeout) {
+        removeOtaConnectTimer()
+        self.otaConnectTimer = Timer(timeInterval: timeout, target: self, selector: #selector(timeoutCallback(timer:)), userInfo: ["todo": ToDo.otaConnect], repeats: false)
+        RunLoop.main.add(self.otaConnectTimer!, forMode: .common)
+    }
+    
+    @objc private func timeoutCallback(timer:Timer) {
+        guard let userInfo = timer.userInfo as? Dictionary<String, Int> else {
+            return
+        }
+        let todo = userInfo["todo"];
+        switch todo {
+        case ToDo.connect:
+            if self.state == .poweredOn {
+                self.center?.stopScan()
+            }
+            //if let callback = self.block.co
+            print("do callback")
+        
+        default:
+            print("not handled")
+        }
+    }
+    
+    // MARK: - 工具方法
+    private func checkBLE() -> NSError? {
+        if self.state == .poweredOff {
+            return NSError(domain: Domain.center, code: Code.blePowerOff, userInfo: nil)
+        }
+        else if self.state == .poweredOn {
+            return nil
+        }
+        else {
+            return NSError(domain: Domain.center, code: Code.bleUnavaiable, userInfo: nil)
+        }
+    }
+    
+    private func getConnectedDevices(servicesUUIDs:Array<String>) -> Array<BLEDevice>? {
+        
+        var uuids:[CBUUID] = []
+        for id in servicesUUIDs {
+            uuids.append(CBUUID(string: id))
+        }
+        
+        let arr = self.center?.retrieveConnectedPeripherals(withServices: uuids)
+        guard let tmpArr = arr, tmpArr.count > 0 else {
+            return nil
+        }
+        
+        var devices:[BLEDevice] = []
+        for peripheral in tmpArr {
+            let device = BLEDevice(peripheral)
+            devices.append(device)
+        }
+        return devices
+    }
+    
+    private func addToDo(cmd:Int, block:@escaping EmptyBlock) {
+        let todo = BLEToDo(cmd: cmd, block: block)
+        todoLock.lock()
+        powerOnToDoList.append(todo)
+        todoLock.unlock()
+    }
+    
+    private func removeTodo(byCmd:Int) {
+        todoLock.lock()
+        powerOnToDoList = powerOnToDoList.filter { (todo) -> Bool in
+            return todo.cmd != byCmd
+        }
+        todoLock.unlock()
+    }
+    
+    private func removeAllTodo() {
+        todoLock.lock()
+        powerOnToDoList.removeAll()
+        todoLock.unlock()
+    }
+    
+    private func getAllTodos() -> Array<BLEToDo> {
+        return Array(powerOnToDoList)
+    }
+}
