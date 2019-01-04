@@ -11,10 +11,20 @@ import SVProgressHUD
 
 class BaseViewController: UIViewController {
 
+    var hideBack = false
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        // Do any additional setup after loading the view.
+        
+        SVProgressHUD.setBackgroundColor(kMainColor)
+        SVProgressHUD.setForegroundColor(UIColor.white)
+        
+        if self.navigationController != nil && self.navigationController!.viewControllers.count > 1 &&
+            !hideBack {
+            setNavLeftButton(withIcon: "fanhui", sel: #selector(backBtnClick))
+        }
     }
     
 
@@ -231,4 +241,9 @@ class BaseViewController: UIViewController {
         }
         UIApplication.shared.keyWindow?.rootViewController?.present(alertCtrl, animated: true, completion: nil)
     }
+    
+    @objc func backBtnClick() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }

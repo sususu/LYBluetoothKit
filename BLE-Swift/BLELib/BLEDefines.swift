@@ -31,6 +31,8 @@ public struct Code {
     static let blePowerOff = 10
     static let deviceDisconnected = 13
     static let noServices = 11
+    static let failToConnect = 99
+    static let failToDisconnect = 98
     static let noCharacteristics = 12
     static let sendFailed = 15
     static let timeout = 20
@@ -83,7 +85,7 @@ struct BLEInnerNotification {
     static let deviceReady = NSNotification.Name("BLECenterNotification.deviceReady")
     
     /// userInfo: BLEKey.device : CBPeripheral
-    static let deviceDisonnected = NSNotification.Name("BLECenterNotification.deviceDisconnected")
+//    static let deviceDisonnected = NSNotification.Name("BLECenterNotification.deviceDisconnected")
     
     /// userInfo: BLEKey.task : BLETask
     static let taskFinish = NSNotification.Name("BLECenterNotification.taskFinish")

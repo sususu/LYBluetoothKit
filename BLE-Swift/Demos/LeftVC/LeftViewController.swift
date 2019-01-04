@@ -8,7 +8,11 @@
 
 import UIKit
 
-class LeftViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, SlideMenuControllerDelegate {
+/// userInfo: device: BLEDevice
+let kEditDeviceNotification = NSNotification.Name("kEditDeviceNotification")
+
+
+class LeftViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, SlideMenuControllerDelegate, LeftDeviceCellDelegate {
     
     
     @IBOutlet weak var disconnectBtn: UIButton!
@@ -101,6 +105,7 @@ class LeftViewController: BaseViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! LeftDeviceCell;
         cell.updateUI(withDevice: self.devices[indexPath.row])
+        cell.delegate = self;
         return cell
     }
     
@@ -116,5 +121,18 @@ class LeftViewController: BaseViewController, UITableViewDataSource, UITableView
     }
 
     // MARK: - 代理实现
-    
+    func didClickEditBtn(cell: UITableViewCell)
+    {
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+        
+        let device = self.devices[indexPath.row]
+        
+        NotificationCenter.default.post(name: kEditDeviceNotification, object: nil, userInfo: ["device": device])
+        
+        let vc = DeviceInfoViewController(device: device)
+        let nav = LYNavigationController(rootViewController: vc)
+        present(nav, animated: true, completion: nil)
+    }
 }

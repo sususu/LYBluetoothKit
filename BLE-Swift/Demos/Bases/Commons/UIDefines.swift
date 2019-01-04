@@ -37,4 +37,5 @@ func bFont(_ size:CGFloat) -> UIFont {
     return UIFont.boldSystemFont(ofSize: size)
 }
 
-let kMainColor = rgb(200, 30, 30)
+// 1296db
+let kMainColor = rgb(0x12, 0x96, 0xdb)

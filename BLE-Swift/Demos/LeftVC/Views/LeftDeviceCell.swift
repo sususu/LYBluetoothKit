@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol LeftDeviceCellDelegate: NSObjectProtocol {
+    func didClickEditBtn(cell: UITableViewCell)
+}
+
+
 class LeftDeviceCell: UITableViewCell {
 
     @IBOutlet weak var signalView: SignalStrengthView!
@@ -17,6 +22,8 @@ class LeftDeviceCell: UITableViewCell {
     @IBOutlet weak var serviceLbl: UILabel!
     
     @IBOutlet weak var dot: UIView!
+    
+    weak var delegate: LeftDeviceCellDelegate?
     
     var device: BLEDevice? {
         didSet {
@@ -43,6 +50,10 @@ class LeftDeviceCell: UITableViewCell {
         dot.layer.masksToBounds = true
     }
 
+    @IBAction func editBtnClick(_ sender: Any) {
+        delegate?.didClickEditBtn(cell: self)
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

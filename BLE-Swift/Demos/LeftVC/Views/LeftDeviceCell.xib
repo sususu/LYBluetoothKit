@@ -65,6 +65,9 @@
                             <constraint firstAttribute="height" constant="40" id="S5z-D8-hAW"/>
                         </constraints>
                         <state key="normal" image="tianxie"/>
+                        <connections>
+                            <action selector="editBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nOw-Ku-ech"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

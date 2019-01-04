@@ -52,6 +52,7 @@ public enum BLETaskState {
     var deviceName:String?
     var device:BLEDevice?
     var connectBlock:ConnectBlock?
+    var isDisconnect = false
     
     var name:String? {
         return self.device?.name ?? self.deviceName;

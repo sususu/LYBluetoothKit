@@ -58,6 +58,11 @@
 		2B5832F4217704CD00259593 /* TableMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5832F3217704CD00259593 /* TableMenu.swift */; };
 		2B5832F6217705D400259593 /* TableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5832F5217705D400259593 /* TableSection.swift */; };
 		2B62A55921DDD84D0051DD38 /* RefreshBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A55821DDD84D0051DD38 /* RefreshBtn.swift */; };
+		2B62A55D21DEF2700051DD38 /* DeviceInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A55B21DEF2700051DD38 /* DeviceInfoViewController.swift */; };
+		2B62A55E21DEF2700051DD38 /* DeviceInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B62A55C21DEF2700051DD38 /* DeviceInfoViewController.xib */; };
+		2B62A56021DEF3DB0051DD38 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A55F21DEF3DB0051DD38 /* DeviceInfo.swift */; };
+		2B62A56521DF28470051DD38 /* CharacteristicCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A56321DF28470051DD38 /* CharacteristicCellTableViewCell.swift */; };
+		2B62A56621DF28470051DD38 /* CharacteristicCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B62A56421DF28470051DD38 /* CharacteristicCellTableViewCell.xib */; };
 		2B918D932153365A00B0B5DE /* ConnectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B918D922153365A00B0B5DE /* ConnectVC.swift */; };
 		2BEC5D6C21746A5A00E0902B /* BLECenterCommonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */; };
 		2BEC5D6E217470C300E0902B /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6D217470C300E0902B /* DataExtensions.swift */; };
@@ -143,6 +148,11 @@
 		2B5832F3217704CD00259593 /* TableMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableMenu.swift; sourceTree = "<group>"; };
 		2B5832F5217705D400259593 /* TableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSection.swift; sourceTree = "<group>"; };
 		2B62A55821DDD84D0051DD38 /* RefreshBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshBtn.swift; sourceTree = "<group>"; };
+		2B62A55B21DEF2700051DD38 /* DeviceInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoViewController.swift; sourceTree = "<group>"; };
+		2B62A55C21DEF2700051DD38 /* DeviceInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceInfoViewController.xib; sourceTree = "<group>"; };
+		2B62A55F21DEF3DB0051DD38 /* DeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
+		2B62A56321DF28470051DD38 /* CharacteristicCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicCellTableViewCell.swift; sourceTree = "<group>"; };
+		2B62A56421DF28470051DD38 /* CharacteristicCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacteristicCellTableViewCell.xib; sourceTree = "<group>"; };
 		2B918D922153365A00B0B5DE /* ConnectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectVC.swift; sourceTree = "<group>"; };
 		2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterCommonExtension.swift; sourceTree = "<group>"; };
 		2BEC5D6D217470C300E0902B /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
@@ -398,6 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				2B5832E92175CC2F00259593 /* Views */,
+				2B62A55A21DEF23C0051DD38 /* DeviceInfo */,
 				2B5832E52175C87B00259593 /* DevicesViewController.swift */,
 			);
 			path = Devices;
@@ -463,6 +474,18 @@
 				2B62A55821DDD84D0051DD38 /* RefreshBtn.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		2B62A55A21DEF23C0051DD38 /* DeviceInfo */ = {
+			isa = PBXGroup;
+			children = (
+				2B62A55B21DEF2700051DD38 /* DeviceInfoViewController.swift */,
+				2B62A55C21DEF2700051DD38 /* DeviceInfoViewController.xib */,
+				2B62A55F21DEF3DB0051DD38 /* DeviceInfo.swift */,
+				2B62A56321DF28470051DD38 /* CharacteristicCellTableViewCell.swift */,
+				2B62A56421DF28470051DD38 /* CharacteristicCellTableViewCell.xib */,
+			);
+			path = DeviceInfo;
 			sourceTree = "<group>";
 		};
 		2B918D912153363900B0B5DE /* Demos */ = {
@@ -621,10 +644,12 @@
 				2B36579D21DCC6330070E7AB /* SettingsViewController.xib in Resources */,
 				2B3657AC21DCD0140070E7AB /* LeftViewController.xib in Resources */,
 				2B3657BA21DDB05C0070E7AB /* LeftDeviceCell.xib in Resources */,
+				2B62A56621DF28470051DD38 /* CharacteristicCellTableViewCell.xib in Resources */,
 				2B36579921DCC6290070E7AB /* OtaViewController.xib in Resources */,
 				2B4874A5214F763500AC5841 /* Assets.xcassets in Resources */,
 				2B3657A721DCCF5C0070E7AB /* Icons.xcassets in Resources */,
 				2B5832F12176E46C00259593 /* DevicesVC.xib in Resources */,
+				2B62A55E21DEF2700051DD38 /* DeviceInfoViewController.xib in Resources */,
 				2B3657A121DCC6AA0070E7AB /* ProtocolViewController.xib in Resources */,
 				2B3657B421DDA15F0070E7AB /* logo.png in Resources */,
 				2B36579521DCC6190070E7AB /* ToolsViewController.xib in Resources */,
@@ -732,11 +757,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B404337216B367A00C6837B /* BLEToDo.swift in Sources */,
+				2B62A55D21DEF2700051DD38 /* DeviceInfoViewController.swift in Sources */,
 				2B2E27412172E76500726FC7 /* ArrayExtensions.swift in Sources */,
 				2BEC5D702174870100E0902B /* BLECenterDeviceExtension.swift in Sources */,
 				2B3657A521DCCD600070E7AB /* Functions.swift in Sources */,
 				2B2E273E2172D9B400726FC7 /* BLEConfig.swift in Sources */,
 				2B3657B621DDA83E0070E7AB /* ConnectBaseVC.swift in Sources */,
+				2B62A56021DEF3DB0051DD38 /* DeviceInfo.swift in Sources */,
 				2BEC5D6C21746A5A00E0902B /* BLECenterCommonExtension.swift in Sources */,
 				2B3C1C40218FEB37007F7DC6 /* DeviceCell.swift in Sources */,
 				2B40433A216C9AF100C6837B /* BLEDevicesManager.swift in Sources */,
@@ -757,6 +784,7 @@
 				2B5832EB2175CC4600259593 /* DevicesCell.swift in Sources */,
 				2B3657B021DCD54B0070E7AB /* SlideMenuController.swift in Sources */,
 				2B36579821DCC6290070E7AB /* OtaViewController.swift in Sources */,
+				2B62A56521DF28470051DD38 /* CharacteristicCellTableViewCell.swift in Sources */,
 				2B36579421DCC6190070E7AB /* ToolsViewController.swift in Sources */,
 				2B3657B921DDB05C0070E7AB /* LeftDeviceCell.swift in Sources */,
 				2B3657A021DCC6AA0070E7AB /* ProtocolViewController.swift in Sources */,

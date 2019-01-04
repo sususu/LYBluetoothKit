@@ -176,8 +176,21 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
         timeout:TimeInterval = kDefaultTimeout) {
         if devicesManager.connectDevice(withBLEDevice: device, callback: callback, timeout: timeout) {
             center?.connect(device.peripheral, options: nil)
+        } else {
+            let error = NSError(domain: Domain.device, code: Code.repeatOperation, userInfo: nil)
+            callback?(device, error)
         }
     }
+    
+    public func disconnect(device:BLEDevice, callback:ConnectBlock?, timeout:TimeInterval = kDefaultTimeout) {
+        if devicesManager.disconnectDevice(withBLEDevice: device, callback: callback, timeout: timeout) {
+            center?.cancelPeripheralConnection(device.peripheral)
+        } else {
+            let error = NSError(domain: Domain.device, code: Code.repeatOperation, userInfo: nil)
+            callback?(device, error)
+        }
+    }
+    
     
     func send(data:BLEData, callback:CommonCallback?, toDeviceName:String? = nil, timeout:TimeInterval = kDefaultTimeout) -> BLETask? {
         var deviceName = defaultInteractionDeviceName
@@ -250,12 +263,17 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     }
     
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        
+        self.devicesManager.peripheralFailToConnect(peripheral)
     }
     
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        // 发送断链通知
-        NotificationCenter.default.post(name: BLEInnerNotification.deviceDisonnected, object: nil, userInfo: [BLEKey.device : peripheral])
+        // 如果有错误，并且，当前外设还是处于链接状态，则认为是断链失败了
+        if error != nil && peripheral.state == .connected {
+            self.devicesManager.didFailToDisconnectPeripheral(peripheral)
+        } else {
+            self.devicesManager.didDisconnectPeripheral(peripheral)
+        }
+        
     }
     
     // MARK: - 超时处理
