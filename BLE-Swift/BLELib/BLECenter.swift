@@ -33,7 +33,7 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     
     var dataCenter = BLEDataCenter()
     
-    // 蓝牙打开之后，需要做的人物列表
+    // 蓝牙打开之后，需要做的任务列表
     var powerOnToDoList: Array<BLEToDo> = Array()
     var todoLock:NSLock = NSLock()
     
