@@ -13,14 +13,34 @@
 		2B2E27412172E76500726FC7 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2E27402172E76400726FC7 /* ArrayExtensions.swift */; };
 		2B2E27472173265800726FC7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2E27462173265800726FC7 /* BaseViewController.swift */; };
 		2B2E27492173266500726FC7 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2E27482173266500726FC7 /* BaseTableViewController.swift */; };
+		2B36578421DC9D100070E7AB /* apis_devices.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B36578321DC9D100070E7AB /* apis_devices.plist */; };
+		2B36578721DCA42E0070E7AB /* BLEDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36578621DCA42E0070E7AB /* BLEDataParser.swift */; };
+		2B36578C21DCBFC90070E7AB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36578B21DCBFC90070E7AB /* HomeViewController.swift */; };
+		2B36579421DCC6190070E7AB /* ToolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36579221DCC6190070E7AB /* ToolsViewController.swift */; };
+		2B36579521DCC6190070E7AB /* ToolsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B36579321DCC6190070E7AB /* ToolsViewController.xib */; };
+		2B36579821DCC6290070E7AB /* OtaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36579621DCC6290070E7AB /* OtaViewController.swift */; };
+		2B36579921DCC6290070E7AB /* OtaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B36579721DCC6290070E7AB /* OtaViewController.xib */; };
+		2B36579C21DCC6330070E7AB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36579A21DCC6330070E7AB /* SettingsViewController.swift */; };
+		2B36579D21DCC6330070E7AB /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B36579B21DCC6330070E7AB /* SettingsViewController.xib */; };
+		2B3657A021DCC6AA0070E7AB /* ProtocolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36579E21DCC6AA0070E7AB /* ProtocolViewController.swift */; };
+		2B3657A121DCC6AA0070E7AB /* ProtocolViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B36579F21DCC6AA0070E7AB /* ProtocolViewController.xib */; };
+		2B3657A321DCC7020070E7AB /* LYNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3657A221DCC7020070E7AB /* LYNavigationController.swift */; };
+		2B3657A521DCCD600070E7AB /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3657A421DCCD600070E7AB /* Functions.swift */; };
+		2B3657A721DCCF5C0070E7AB /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B3657A621DCCF5C0070E7AB /* Icons.xcassets */; };
+		2B3657AB21DCD0140070E7AB /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3657A921DCD0140070E7AB /* LeftViewController.swift */; };
+		2B3657AC21DCD0140070E7AB /* LeftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B3657AA21DCD0140070E7AB /* LeftViewController.xib */; };
+		2B3657B021DCD54B0070E7AB /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3657AF21DCD54B0070E7AB /* SlideMenuController.swift */; };
+		2B3657B421DDA15F0070E7AB /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B3657B321DDA15F0070E7AB /* logo.png */; };
+		2B3657B621DDA83E0070E7AB /* ConnectBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3657B521DDA83E0070E7AB /* ConnectBaseVC.swift */; };
+		2B3657B921DDB05C0070E7AB /* LeftDeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3657B721DDB05C0070E7AB /* LeftDeviceCell.swift */; };
+		2B3657BA21DDB05C0070E7AB /* LeftDeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B3657B821DDB05C0070E7AB /* LeftDeviceCell.xib */; };
+		2B3657BC21DDB0FF0070E7AB /* SignalStrengthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3657BB21DDB0FF0070E7AB /* SignalStrengthView.swift */; };
 		2B3C1C40218FEB37007F7DC6 /* DeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3C1C3E218FEB37007F7DC6 /* DeviceCell.swift */; };
 		2B3C1C41218FEB37007F7DC6 /* DeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B3C1C3F218FEB37007F7DC6 /* DeviceCell.xib */; };
 		2B404337216B367A00C6837B /* BLEToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B404336216B367A00C6837B /* BLEToDo.swift */; };
 		2B40433A216C9AF100C6837B /* BLEDevicesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B404339216C9AF100C6837B /* BLEDevicesManager.swift */; };
 		2B40433C216C9BF500C6837B /* BLETask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B40433B216C9BF500C6837B /* BLETask.swift */; };
 		2B48749E214F763400AC5841 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B48749D214F763400AC5841 /* AppDelegate.swift */; };
-		2B4874A0214F763400AC5841 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B48749F214F763400AC5841 /* ViewController.swift */; };
-		2B4874A3214F763400AC5841 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B4874A1214F763400AC5841 /* Main.storyboard */; };
 		2B4874A5214F763500AC5841 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B4874A4214F763500AC5841 /* Assets.xcassets */; };
 		2B4874A8214F763500AC5841 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B4874A6214F763500AC5841 /* LaunchScreen.storyboard */; };
 		2B4874B3214F763500AC5841 /* BLE_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4874B2214F763500AC5841 /* BLE_SwiftTests.swift */; };
@@ -37,6 +57,7 @@
 		2B5832F12176E46C00259593 /* DevicesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B5832EF2176E46C00259593 /* DevicesVC.xib */; };
 		2B5832F4217704CD00259593 /* TableMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5832F3217704CD00259593 /* TableMenu.swift */; };
 		2B5832F6217705D400259593 /* TableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5832F5217705D400259593 /* TableSection.swift */; };
+		2B62A55921DDD84D0051DD38 /* RefreshBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A55821DDD84D0051DD38 /* RefreshBtn.swift */; };
 		2B918D932153365A00B0B5DE /* ConnectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B918D922153365A00B0B5DE /* ConnectVC.swift */; };
 		2BEC5D6C21746A5A00E0902B /* BLECenterCommonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */; };
 		2BEC5D6E217470C300E0902B /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6D217470C300E0902B /* DataExtensions.swift */; };
@@ -71,6 +92,28 @@
 		2B2E27402172E76400726FC7 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		2B2E27462173265800726FC7 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		2B2E27482173266500726FC7 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
+		2B36578321DC9D100070E7AB /* apis_devices.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = apis_devices.plist; sourceTree = "<group>"; };
+		2B36578621DCA42E0070E7AB /* BLEDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDataParser.swift; sourceTree = "<group>"; };
+		2B36578B21DCBFC90070E7AB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		2B36579221DCC6190070E7AB /* ToolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsViewController.swift; sourceTree = "<group>"; };
+		2B36579321DCC6190070E7AB /* ToolsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToolsViewController.xib; sourceTree = "<group>"; };
+		2B36579621DCC6290070E7AB /* OtaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtaViewController.swift; sourceTree = "<group>"; };
+		2B36579721DCC6290070E7AB /* OtaViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OtaViewController.xib; sourceTree = "<group>"; };
+		2B36579A21DCC6330070E7AB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		2B36579B21DCC6330070E7AB /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		2B36579E21DCC6AA0070E7AB /* ProtocolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolViewController.swift; sourceTree = "<group>"; };
+		2B36579F21DCC6AA0070E7AB /* ProtocolViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProtocolViewController.xib; sourceTree = "<group>"; };
+		2B3657A221DCC7020070E7AB /* LYNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYNavigationController.swift; sourceTree = "<group>"; };
+		2B3657A421DCCD600070E7AB /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		2B3657A621DCCF5C0070E7AB /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
+		2B3657A921DCD0140070E7AB /* LeftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
+		2B3657AA21DCD0140070E7AB /* LeftViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeftViewController.xib; sourceTree = "<group>"; };
+		2B3657AF21DCD54B0070E7AB /* SlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = "<group>"; };
+		2B3657B321DDA15F0070E7AB /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		2B3657B521DDA83E0070E7AB /* ConnectBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectBaseVC.swift; sourceTree = "<group>"; };
+		2B3657B721DDB05C0070E7AB /* LeftDeviceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftDeviceCell.swift; sourceTree = "<group>"; };
+		2B3657B821DDB05C0070E7AB /* LeftDeviceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeftDeviceCell.xib; sourceTree = "<group>"; };
+		2B3657BB21DDB0FF0070E7AB /* SignalStrengthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalStrengthView.swift; sourceTree = "<group>"; };
 		2B3C1C3E218FEB37007F7DC6 /* DeviceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCell.swift; sourceTree = "<group>"; };
 		2B3C1C3F218FEB37007F7DC6 /* DeviceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceCell.xib; sourceTree = "<group>"; };
 		2B404336216B367A00C6837B /* BLEToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEToDo.swift; sourceTree = "<group>"; };
@@ -78,8 +121,6 @@
 		2B40433B216C9BF500C6837B /* BLETask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLETask.swift; sourceTree = "<group>"; };
 		2B48749A214F763400AC5841 /* BLE-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BLE-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B48749D214F763400AC5841 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2B48749F214F763400AC5841 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2B4874A2214F763400AC5841 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2B4874A4214F763500AC5841 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B4874A7214F763500AC5841 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B4874A9214F763500AC5841 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -101,6 +142,7 @@
 		2B5832EF2176E46C00259593 /* DevicesVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DevicesVC.xib; sourceTree = "<group>"; };
 		2B5832F3217704CD00259593 /* TableMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableMenu.swift; sourceTree = "<group>"; };
 		2B5832F5217705D400259593 /* TableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSection.swift; sourceTree = "<group>"; };
+		2B62A55821DDD84D0051DD38 /* RefreshBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshBtn.swift; sourceTree = "<group>"; };
 		2B918D922153365A00B0B5DE /* ConnectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectVC.swift; sourceTree = "<group>"; };
 		2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterCommonExtension.swift; sourceTree = "<group>"; };
 		2BEC5D6D217470C300E0902B /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
@@ -170,6 +212,7 @@
 			children = (
 				2B2E2743217323C100726FC7 /* Views */,
 				2B918D922153365A00B0B5DE /* ConnectVC.swift */,
+				2B3657B521DDA83E0070E7AB /* ConnectBaseVC.swift */,
 			);
 			path = Connect;
 			sourceTree = "<group>";
@@ -187,6 +230,7 @@
 		2B2E27442173263500726FC7 /* Bases */ = {
 			isa = PBXGroup;
 			children = (
+				2B62A55621DDD81D0051DD38 /* Custom */,
 				2B5832F2217704B400259593 /* Models */,
 				2B5832DE217573C800259593 /* Commons */,
 				2B2E27452173264100726FC7 /* Controllers */,
@@ -197,10 +241,83 @@
 		2B2E27452173264100726FC7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2B3657AF21DCD54B0070E7AB /* SlideMenuController.swift */,
 				2B2E27462173265800726FC7 /* BaseViewController.swift */,
 				2B2E27482173266500726FC7 /* BaseTableViewController.swift */,
+				2B3657A221DCC7020070E7AB /* LYNavigationController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		2B36578521DCA41F0070E7AB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2B36578621DCA42E0070E7AB /* BLEDataParser.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		2B36578821DCBF160070E7AB /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				2B36578B21DCBFC90070E7AB /* HomeViewController.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		2B36578D21DCC3DA0070E7AB /* OTA */ = {
+			isa = PBXGroup;
+			children = (
+				2B36579621DCC6290070E7AB /* OtaViewController.swift */,
+				2B36579721DCC6290070E7AB /* OtaViewController.xib */,
+			);
+			path = OTA;
+			sourceTree = "<group>";
+		};
+		2B36578E21DCC3EE0070E7AB /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				2B36579221DCC6190070E7AB /* ToolsViewController.swift */,
+				2B36579321DCC6190070E7AB /* ToolsViewController.xib */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		2B36578F21DCC5ED0070E7AB /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				2B36579A21DCC6330070E7AB /* SettingsViewController.swift */,
+				2B36579B21DCC6330070E7AB /* SettingsViewController.xib */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		2B3657A821DCCFFF0070E7AB /* LeftVC */ = {
+			isa = PBXGroup;
+			children = (
+				2B3657B121DD9FB20070E7AB /* Views */,
+				2B3657A921DCD0140070E7AB /* LeftViewController.swift */,
+				2B3657AA21DCD0140070E7AB /* LeftViewController.xib */,
+			);
+			path = LeftVC;
+			sourceTree = "<group>";
+		};
+		2B3657B121DD9FB20070E7AB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2B3657B721DDB05C0070E7AB /* LeftDeviceCell.swift */,
+				2B3657B821DDB05C0070E7AB /* LeftDeviceCell.xib */,
+				2B3657BB21DDB0FF0070E7AB /* SignalStrengthView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2B3657B221DDA1560070E7AB /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				2B3657B321DDA15F0070E7AB /* logo.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		2B487491214F763400AC5841 = {
@@ -228,14 +345,14 @@
 		2B48749C214F763400AC5841 /* BLE-Swift */ = {
 			isa = PBXGroup;
 			children = (
+				2B3657B221DDA1560070E7AB /* Images */,
 				2B4874CB214F763B00AC5841 /* BLELib */,
 				2B918D912153363900B0B5DE /* Demos */,
 				2B48749D214F763400AC5841 /* AppDelegate.swift */,
-				2B48749F214F763400AC5841 /* ViewController.swift */,
-				2B4874A1214F763400AC5841 /* Main.storyboard */,
 				2B4874A4214F763500AC5841 /* Assets.xcassets */,
 				2B4874A6214F763500AC5841 /* LaunchScreen.storyboard */,
 				2B4874A9214F763500AC5841 /* Info.plist */,
+				2B3657A621DCCF5C0070E7AB /* Icons.xcassets */,
 			);
 			path = "BLE-Swift";
 			sourceTree = "<group>";
@@ -261,6 +378,7 @@
 		2B4874CB214F763B00AC5841 /* BLELib */ = {
 			isa = PBXGroup;
 			children = (
+				2B36578521DCA41F0070E7AB /* Utils */,
 				2BEC5D6A2174698000E0902B /* APIs */,
 				2B2E273F2172E72B00726FC7 /* Extensions */,
 				2B4874CC214F766300AC5841 /* BLECenter.swift */,
@@ -290,6 +408,7 @@
 			children = (
 				2B5832DF217573E000259593 /* UIDefines.swift */,
 				2B5832E12175832200259593 /* StringExtensions.swift */,
+				2B3657A421DCCD600070E7AB /* Functions.swift */,
 			);
 			path = Commons;
 			sourceTree = "<group>";
@@ -306,6 +425,8 @@
 			isa = PBXGroup;
 			children = (
 				2B5832ED2176E08400259593 /* Devices */,
+				2B36579E21DCC6AA0070E7AB /* ProtocolViewController.swift */,
+				2B36579F21DCC6AA0070E7AB /* ProtocolViewController.xib */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -328,10 +449,31 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		2B62A55621DDD81D0051DD38 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				2B62A55721DDD8230051DD38 /* Views */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		2B62A55721DDD8230051DD38 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2B62A55821DDD84D0051DD38 /* RefreshBtn.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		2B918D912153363900B0B5DE /* Demos */ = {
 			isa = PBXGroup;
 			children = (
 				2B2E27442173263500726FC7 /* Bases */,
+				2B3657A821DCCFFF0070E7AB /* LeftVC */,
+				2B36578F21DCC5ED0070E7AB /* Settings */,
+				2B36578E21DCC3EE0070E7AB /* Tools */,
+				2B36578D21DCC3DA0070E7AB /* OTA */,
+				2B36578821DCBF160070E7AB /* Root */,
 				2B2E27422173234400726FC7 /* Connect */,
 				2B5832DD2175712B00259593 /* Devices */,
 				2B5832EC2176E05B00259593 /* Protocols */,
@@ -344,6 +486,7 @@
 			children = (
 				2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */,
 				2BEC5D6F2174870100E0902B /* BLECenterDeviceExtension.swift */,
+				2B36578321DC9D100070E7AB /* apis_devices.plist */,
 			);
 			path = APIs;
 			sourceTree = "<group>";
@@ -475,10 +618,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B4874A8214F763500AC5841 /* LaunchScreen.storyboard in Resources */,
+				2B36579D21DCC6330070E7AB /* SettingsViewController.xib in Resources */,
+				2B3657AC21DCD0140070E7AB /* LeftViewController.xib in Resources */,
+				2B3657BA21DDB05C0070E7AB /* LeftDeviceCell.xib in Resources */,
+				2B36579921DCC6290070E7AB /* OtaViewController.xib in Resources */,
 				2B4874A5214F763500AC5841 /* Assets.xcassets in Resources */,
+				2B3657A721DCCF5C0070E7AB /* Icons.xcassets in Resources */,
 				2B5832F12176E46C00259593 /* DevicesVC.xib in Resources */,
-				2B4874A3214F763400AC5841 /* Main.storyboard in Resources */,
+				2B3657A121DCC6AA0070E7AB /* ProtocolViewController.xib in Resources */,
+				2B3657B421DDA15F0070E7AB /* logo.png in Resources */,
+				2B36579521DCC6190070E7AB /* ToolsViewController.xib in Resources */,
 				2B3C1C41218FEB37007F7DC6 /* DeviceCell.xib in Resources */,
+				2B36578421DC9D100070E7AB /* apis_devices.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,29 +734,42 @@
 				2B404337216B367A00C6837B /* BLEToDo.swift in Sources */,
 				2B2E27412172E76500726FC7 /* ArrayExtensions.swift in Sources */,
 				2BEC5D702174870100E0902B /* BLECenterDeviceExtension.swift in Sources */,
+				2B3657A521DCCD600070E7AB /* Functions.swift in Sources */,
 				2B2E273E2172D9B400726FC7 /* BLEConfig.swift in Sources */,
+				2B3657B621DDA83E0070E7AB /* ConnectBaseVC.swift in Sources */,
 				2BEC5D6C21746A5A00E0902B /* BLECenterCommonExtension.swift in Sources */,
 				2B3C1C40218FEB37007F7DC6 /* DeviceCell.swift in Sources */,
 				2B40433A216C9AF100C6837B /* BLEDevicesManager.swift in Sources */,
+				2B36579C21DCC6330070E7AB /* SettingsViewController.swift in Sources */,
 				2B5832F02176E46C00259593 /* DevicesVC.swift in Sources */,
 				2B5832F6217705D400259593 /* TableSection.swift in Sources */,
 				2B2E27492173266500726FC7 /* BaseTableViewController.swift in Sources */,
 				2B4874CD214F766300AC5841 /* BLECenter.swift in Sources */,
+				2B3657A321DCC7020070E7AB /* LYNavigationController.swift in Sources */,
 				2B2E273C2172D13A00726FC7 /* BLEData.swift in Sources */,
 				2B918D932153365A00B0B5DE /* ConnectVC.swift in Sources */,
 				2B4874CF214F911300AC5841 /* BLEDevice.swift in Sources */,
 				2BEC5D6E217470C300E0902B /* DataExtensions.swift in Sources */,
 				2B5832E22175832200259593 /* StringExtensions.swift in Sources */,
 				2B5832F4217704CD00259593 /* TableMenu.swift in Sources */,
+				2B36578721DCA42E0070E7AB /* BLEDataParser.swift in Sources */,
+				2B62A55921DDD84D0051DD38 /* RefreshBtn.swift in Sources */,
 				2B5832EB2175CC4600259593 /* DevicesCell.swift in Sources */,
-				2B4874A0214F763400AC5841 /* ViewController.swift in Sources */,
+				2B3657B021DCD54B0070E7AB /* SlideMenuController.swift in Sources */,
+				2B36579821DCC6290070E7AB /* OtaViewController.swift in Sources */,
+				2B36579421DCC6190070E7AB /* ToolsViewController.swift in Sources */,
+				2B3657B921DDB05C0070E7AB /* LeftDeviceCell.swift in Sources */,
+				2B3657A021DCC6AA0070E7AB /* ProtocolViewController.swift in Sources */,
+				2B36578C21DCBFC90070E7AB /* HomeViewController.swift in Sources */,
 				2B4874D12150C83B00AC5841 /* BLEDefines.swift in Sources */,
 				2B40433C216C9BF500C6837B /* BLETask.swift in Sources */,
 				2B2E27472173265800726FC7 /* BaseViewController.swift in Sources */,
 				2BFAF610216F2089003AEAD6 /* BLEDataCenter.swift in Sources */,
 				2B5832E0217573E000259593 /* UIDefines.swift in Sources */,
+				2B3657BC21DDB0FF0070E7AB /* SignalStrengthView.swift in Sources */,
 				2B48749E214F763400AC5841 /* AppDelegate.swift in Sources */,
 				2B5832E72175C87B00259593 /* DevicesViewController.swift in Sources */,
+				2B3657AB21DCD0140070E7AB /* LeftViewController.swift in Sources */,
 				2B5832E421758ECA00259593 /* NumberView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -642,14 +806,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		2B4874A1214F763400AC5841 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2B4874A2214F763400AC5841 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2B4874A6214F763500AC5841 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

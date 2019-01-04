@@ -11,6 +11,9 @@ import UIKit
 public class BLEConfig: NSObject {
     public static let shared = BLEConfig()
     
+    var mtu:Int = 20
+    var shouldSend03End = true
+    
     var sendUUID:[BLEDataType : String] = [:]
     var recvUUID:[BLEDataType : String] = [:]
     var heartRateUUID = "2A37"

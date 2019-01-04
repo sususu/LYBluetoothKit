@@ -34,6 +34,7 @@ public enum BLETaskState {
     func startTimer() {
         stopTimer()
         timer = Timer(timeInterval: timeout, target: self, selector: #selector(timeoutHandler), userInfo: nil, repeats: false)
+        timer!.fireDate = Date(timeIntervalSinceNow: timeout)
         RunLoop.main.add(timer!, forMode: .common)
     }
     
@@ -96,10 +97,12 @@ public enum BLETaskState {
 
 
 // MARK: - Data Task
-@objcMembers public class BLEDataTask: BLETask {
+@objcMembers public class BLEDataTask: BLETask, BLEDataParserProtocol {
     var device:BLEDevice?
     var data:BLEData
     var callback:CommonCallback?
+    
+    var parser:BLEDataParser!
     
 //    var name:String? {
 //        return self.device?.name ?? self.deviceName;
@@ -124,6 +127,11 @@ public enum BLETaskState {
         super.init()
         self.timeout = timeout
         
+        self.parser = BLEDataParser()
+        self.parser.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(deviceDataUpdate), name: BLEInnerNotification.deviceDataUpdate, object: nil)
+        
         // 监听
         weak var weakSelf = self
         stateOb = data.observe(\BLEData.stateRaw) { (bleData, change) in
@@ -134,11 +142,13 @@ public enum BLETaskState {
                 weakSelf?.error = error
                 weakSelf?.state = .failed
                 weakSelf?.device = nil
+                weakSelf?.parser.clear()
             case .recvFailed:
                 let error = NSError(domain: Domain.data, code: Code.dataError, userInfo: nil)
                 weakSelf?.error = error
                 weakSelf?.state = .failed
                 weakSelf?.device = nil
+                weakSelf?.parser.clear()
             default:
                 break
             }
@@ -151,7 +161,42 @@ public enum BLETaskState {
     
     override func start() {
         super.start()
-        device?.writeData(data: data)
+        parser.clear()
+        
+        if data.sendToUuid == nil {
+            guard let uuid = BLEConfig.shared.sendUUID[data.type] else {
+                data.error = NSError(domain: Domain.data, code: Code.noCharacteristics, userInfo: nil)
+                data.state = .sendFailed
+                return
+            }
+            data.sendToUuid = uuid
+        }
+        
+        
+        guard let sendDevice = device else {
+            data.error = NSError(domain: Domain.data, code: Code.deviceDisconnected, userInfo: nil)
+            data.state = .sendFailed
+            return
+        }
+        
+        if !sendDevice.write(data.sendData, characteristicUUID: data.sendToUuid!) {
+            data.error = NSError(domain: Domain.data, code: Code.deviceDisconnected, userInfo: nil)
+            data.state = .sendFailed
+        }
+    }
+    
+    @objc func deviceDataUpdate(notification: Notification) {
+        guard let uuid = notification.userInfo?[BLEKey.uuid] as? String else {
+            return
+        }
+        guard let data = notification.userInfo?[BLEKey.data] as? Data else {
+            return
+        }
+        
+        if uuid == self.data.sendToUuid {
+            parser.standardParse(data: data, sendData: self.data.sendData, recvCount: self.data.recvDataCount)
+        }
+        
     }
 
     override func timeoutHandler() {
@@ -161,4 +206,14 @@ public enum BLETaskState {
         self.state = .failed
         NotificationCenter.default.post(name: BLEInnerNotification.taskFinish, object: nil, userInfo: [BLEKey.task : self])
     }
+    
+    /// MARK: - 代理实现
+    func didFinishParser(data: Data, dataArr: Array<Data>, recvCount: Int) {
+        if self.data.recvDataCount == recvCount {
+            self.data.recvDatas = dataArr
+            self.data.recvData = data
+            stopTimer()
+        }
+    }
+    
 }

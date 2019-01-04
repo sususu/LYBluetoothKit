@@ -30,6 +30,8 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
     /// all services of peripheral
     var services:Dictionary<String, CBService> = Dictionary()
     var discoveredServices:[CBService] = []
+    /// service uuids in broadcast package
+    var broadcastServiceUUIDs:[String] = []
     
     /// all characteristics of peripheral's services
     var characteristics:Dictionary<String, CBCharacteristic> = Dictionary()
@@ -37,10 +39,6 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
     var peripheral:CBPeripheral
     
     var getReadyCallback:GetReadyBlock?
-    
-    var sendData:BLEData?
-    var responseData:BLEData?
-    var addressBookData:BLEData?
     
     // MARK: - 初始化
     deinit {
@@ -50,6 +48,7 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
     public init(_ peripheral:CBPeripheral) {
         self.peripheral = peripheral
         self.name = peripheral.name ?? ""
+        self.rssi = 0;
         super.init()
         self.peripheral.delegate = self
     }
@@ -73,51 +72,48 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
         self.peripheral.delegate = self
     }
     
-    public func write(_ data:Data, characteristicUUID:String) {
-        if let characteristic = self.characteristics[characteristicUUID] {
-            print("write data:\(String(describing: data.hexEncodedString())) to:\(characteristicUUID)")
-            if characteristic.properties.contains(.writeWithoutResponse) {
-                
-                self.peripheral.writeValue(data, for:characteristic, type:.withoutResponse)
-            } else {
-                
-                self.peripheral.writeValue(data, for: characteristic, type: .withResponse)
-            }
-        } else {
-            print("can not find invalid characteristic to write data")
-        }
-    }
-    // 发送数据
-    func writeData(data:BLEData) {
-        data.state = .sending
+    public func write(_ data:Data, characteristicUUID:String) -> Bool {
         
-        let uuid = BLEConfig.shared.sendUUID[data.type]
-        if uuid != nil && peripheral.state == .connected {
-            write(data.sendData, characteristicUUID: uuid!)
-            if uuid == BLEConfig.shared.sendUUID[.normal] {
-                write03End()
-            }
-        } else {
-            data.state = .sendFailed
-//            NotificationCenter.default.post(name: BLEInnerNotification.taskFinish, object: nil, userInfo: [BLEKey.task : self])
-        }
-        data.state = .sent
-        
-        switch data.type {
-        case .normal:
-            sendData = data
-            
-        case .response:
-            responseData?.state = .recved
-//            NotificationCenter.default.post(name: BLEInnerNotification.taskFinish, object: nil, userInfo: [BLEKey.task : self])
-        case .addressBook:
-            addressBookData = data
+        if peripheral.state != .connected {
+            return false
         }
         
+        guard let characteristic = self.characteristics[characteristicUUID]  else {
+            return false
+        }
+        
+        doSliceWrite(data, characteristic: characteristic)
+        return true
     }
     
-    func write03End() {
-        write(Data([0x03]), characteristicUUID: BLEConfig.shared.recvUUID[BLEDataType.normal]!)
+    /// 分包发送，按照mtu（单次发送数据包大小）分多次发送到手表，mtu默认大小是20
+    ///
+    /// - Parameters:
+    ///   - data: 发送数据
+    ///   - characteristic: 发送的特征
+    private func doSliceWrite(_ data:Data, characteristic:CBCharacteristic)
+    {
+        var type = CBCharacteristicWriteType.withResponse;
+        if characteristic.properties.contains(.writeWithoutResponse) {
+            type = .withoutResponse;
+        }
+        
+        let mtu = BLEConfig.shared.mtu;
+        let lengthLeft = data.count % mtu;
+        let lengthTimes = data.count / mtu;
+        
+        for i in 0..<lengthTimes {
+            if data.count > (i + 1) * mtu {
+                let subData = data.subdata(in: i * mtu ..< (i + 1) * mtu);
+                self.peripheral.writeValue(subData, for: characteristic, type: type)
+            }
+        }
+        
+        if lengthLeft > 0 {
+            let subData = data.subdata(in: lengthTimes * mtu ..< lengthTimes * mtu + lengthLeft)
+            self.peripheral.writeValue(subData, for: characteristic, type: type)
+        }
+        
     }
     
     // MARK: - 代理实现
@@ -162,30 +158,10 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        let sendDataUUID = BLEConfig.shared.recvUUID[.normal]
-        let responseDataUUID = BLEConfig.shared.recvUUID[.response]
-        let addressBookDataUUID = BLEConfig.shared.recvUUID[.addressBook]
-        let heartRateUUID = BLEConfig.shared.heartRateUUID
         
         print("recv data:\(String(describing: characteristic.value?.hexEncodedString()))")
         
-        switch characteristic.uuid.uuidString {
-        case sendDataUUID:
-            handleRecvData(data: characteristic.value)
-            
-        case heartRateUUID:
-            handleHeartRateData(data: characteristic.value)
-            
-        case responseDataUUID:
-            handleRequestData(data: characteristic.value)
-            
-        case addressBookDataUUID:
-            handleAddressBookData(data: characteristic.value)
-            
-        default:
-            handleUnknownData(data: characteristic.value)
-        }
-
+        NotificationCenter.default.post(name: BLEInnerNotification.deviceDataUpdate, object: nil, userInfo: [BLEKey.data : characteristic.value ?? Data(), BLEKey.uuid : characteristic.uuid.uuidString])
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
@@ -200,93 +176,6 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
         print("订阅 \(characteristic.uuid.uuidString) 成功")
     }
-    
-    // MARK: - 数据处理
-    
-    // 设备响应数据
-    func handleRecvData(data:Data?) {
-        guard let sendM = sendData, let recvData = data else {
-            return
-        }
-        let sendBytes = sendM.sendData.bytes
-        let recvBytes = recvData.bytes
-        
-        // 目前只支持新协议
-        // 如果开头是 0x6f，可能是开头，如果是 0x6f + 指令码 + 0x80 那就是开头了
-        if recvBytes[0] == 0x6f && recvBytes.count > 2 {
-            
-            if recvBytes[1] == sendBytes[1] {
-                // 模版：0x6f 0x02 0x80 0x00 0x00 0x8f
-                // 具体含义，请查看appscomm蓝牙协议文档
-                if (recvBytes[2] == 0x80 || recvBytes[2] == 0x81) && recvBytes.count >= 6 {
-                    
-                    // 查询指令，接下来两位是数据长度
-                    sendM.recvDataLength = Int(recvBytes[3]) + Int(recvBytes[4] << 8)
-                    
-//                    if recvBytes.count - 6 >= sendM.recvDataLength {
-//
-//                        sendM.recvData = data?.subdata(in: 5..<sendM.recvDataLength + 5)
-//                    } else {
-//                        sendM.recvData = data?.subdata(in: 5..<data!.count)
-//                    }
-                    
-                    sendM.recvData = data?.subdata(in: 5..<data!.count)
-                    
-                } else {
-                    sendM.recvData?.append(data!)
-                }
-                
-            } else {
-                sendM.recvData?.append(data!)
-            }
-        }
-        else
-        {
-            sendM.recvData?.append(data!)
-        }
-        
-        // 判断是否结束
-        // +1 是因为，最后带了一个0x8f
-        if sendM.recvData!.count >= (sendM.recvDataLength + 1) {
-            // 最起码是单条结束了，如果是多条，另外处理
-            // 去掉最后一个 0x8f
-            sendM.recvData = sendM.recvData!.subdata(in: 0..<sendM.recvData!.count - 1)
-            if sendM.recvDataCount > 1 {
-                if sendM.recvDatas == nil {
-                    sendM.recvDatas = [sendM.recvData!]
-                } else {
-                    sendM.recvDatas?.append(sendM.recvData!)
-                }
-                sendM.recvData = nil
-            }
-            
-            // 结束了
-            if sendM.recvDataCount == 1 || sendM.recvDataCount == sendM.recvDatas!.count {
-                sendM.state = .recved
-//                NotificationCenter.default.post(name: BLEInnerNotification.taskFinish, object: nil, userInfo: [BLEKey.task : self])
-            }
-            
-        }
-        
-        
-    }
-    // 设备请求数据
-    func handleRequestData(data:Data?) {
-        
-    }
-    // 处理通讯录数据
-    func handleAddressBookData(data:Data?) {
-        
-    }
-    // 标准心率数据
-    func handleHeartRateData(data:Data?) {
-        
-    }
-    // 处理未知数据
-    func handleUnknownData(data:Data?) {
-        
-    }
-    
     
     // MARK: - 相等判断
     public override var hash: Int {

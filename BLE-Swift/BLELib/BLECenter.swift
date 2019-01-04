@@ -83,8 +83,10 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
         }
         else {
             if let err = checkBLE() {
-                callback?(nil, err)
-                stopScan()
+                DispatchQueue.main.async {
+                    callback?(nil, err)
+                    self.stopScan()
+                }
             } else {
                 center?.stopScan()
                 discoveredDevices.removeAll()
@@ -238,7 +240,9 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
         print("name:\(peripheral.name ?? "nil"), rssi:\(RSSI)")
         let device = BLEDevice(peripheral, rssi: RSSI, advertisementData: advertisementData)
         discoveredDevices.insert(device)
-        scanCallback()
+        DispatchQueue.main.async {
+            self.scanCallback()
+        }
     }
     
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -256,47 +260,51 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     
     // MARK: - 超时处理
     private func removeSearchTimer() {
-        self.searchTimer?.invalidate()
-        self.searchTimer = nil
+        searchTimer?.invalidate()
+        searchTimer = nil
     }
     
     private func removeConnectTimer() {
-        self.connectTimer?.invalidate()
-        self.connectTimer = nil
+        connectTimer?.invalidate()
+        connectTimer = nil
     }
     
     private func removeOtaConnectTimer() {
-        self.otaConnectTimer?.invalidate()
-        self.otaConnectTimer = nil
+        otaConnectTimer?.invalidate()
+        otaConnectTimer = nil
     }
     
     private func removeDisconnectTimer() {
-        self.disconnectTimer?.invalidate()
-        self.disconnectTimer = nil
+        disconnectTimer?.invalidate()
+        disconnectTimer = nil
     }
     
     private func addSearchTimer(sel:Selector, timeout:TimeInterval = kDefaultTimeout) {
         removeSearchTimer()
-        self.searchTimer = Timer(timeInterval: timeout, target: self, selector: sel, userInfo: nil, repeats: false)
+        searchTimer = Timer(timeInterval: timeout, target: self, selector: sel, userInfo: nil, repeats: false)
+        searchTimer!.fireDate = Date(timeIntervalSinceNow: timeout)
         RunLoop.main.add(self.searchTimer!, forMode: .common)
     }
     
     private func addDisconnectTimer(timeout:TimeInterval = kDefaultTimeout) {
         removeDisconnectTimer()
-        self.disconnectTimer = Timer(timeInterval: timeout, target: self, selector: #selector(timeoutCallback(timer:)), userInfo: ["todo": ToDo.disconnect], repeats: false)
+        disconnectTimer = Timer(timeInterval: timeout, target: self, selector: #selector(timeoutCallback(timer:)), userInfo: ["todo": ToDo.disconnect], repeats: false)
+        disconnectTimer!.fireDate = Date(timeIntervalSinceNow: timeout)
         RunLoop.main.add(self.disconnectTimer!, forMode: .common)
     }
     
     private func addConnectTimer(isAutoConnect:Bool, timeout:TimeInterval = kDefaultTimeout) {
         removeConnectTimer()
         let todo = isAutoConnect ? ToDo.autoConnect : ToDo.connect
-        self.connectTimer = Timer(timeInterval: timeout, target: self, selector: #selector(timeoutCallback(timer:)), userInfo: ["todo": todo], repeats: false)
+        connectTimer = Timer(timeInterval: timeout, target: self, selector: #selector(timeoutCallback(timer:)), userInfo: ["todo": todo], repeats: false)
+        connectTimer!.fireDate = Date(timeIntervalSinceNow: timeout)
         RunLoop.main.add(self.connectTimer!, forMode: .common)
     }
     
     private func addOtaConnectTimer(timeout:TimeInterval = kDefaultTimeout) {
         removeOtaConnectTimer()
-        self.otaConnectTimer = Timer(timeInterval: timeout, target: self, selector: #selector(timeoutCallback(timer:)), userInfo: ["todo": ToDo.otaConnect], repeats: false)
+        otaConnectTimer = Timer(timeInterval: timeout, target: self, selector: #selector(timeoutCallback(timer:)), userInfo: ["todo": ToDo.otaConnect], repeats: false)
+        otaConnectTimer!.fireDate = Date(timeIntervalSinceNow: timeout)
         RunLoop.main.add(self.otaConnectTimer!, forMode: .common)
     }
     

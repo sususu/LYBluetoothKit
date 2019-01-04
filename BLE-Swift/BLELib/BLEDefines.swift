@@ -51,6 +51,8 @@ public struct BLEKey {
     static let device = "BLEKey.device"
     static let connectTask = "BLEKey.connectTask"
     static let task = "BLEKey.task"
+    static let data = "BLEKey.data"
+    static let uuid = "BLEKey.uuid"
 }
 
 // MARK: - 服务特征ID
@@ -85,4 +87,10 @@ struct BLEInnerNotification {
     
     /// userInfo: BLEKey.task : BLETask
     static let taskFinish = NSNotification.Name("BLECenterNotification.taskFinish")
+    
+    /// userInfo: BLEKey.uuid : String;  BLEKey.data : Data
+    static let deviceDataUpdate = NSNotification.Name("BLECenterNotification.deviceDataUpdate")
+    
+    /// userInfo: BLEKey.data : Data
+    static let c8004DataComes = NSNotification.Name("BLECenterNotification.c8004DataComes")
 }

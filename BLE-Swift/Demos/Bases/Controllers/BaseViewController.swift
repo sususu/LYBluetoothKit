@@ -35,6 +35,38 @@ class BaseViewController: UIViewController {
         return kScreenHeight - navigationBarHeight - bottomBarHeight
     }
     
+    func handleBleError(error: NSError?) {
+        DispatchQueue.main.async {
+            guard let err = error else {
+                self.showSuccess(TR("Cool"))
+                return
+            }
+            switch err.code {
+            case Code.blePowerOff:
+                self.showError(TR("Please turn on bluetooth"))
+            case Code.bleUnavaiable:
+                self.showError(TR("Bluetooth is still unavailable"))
+            case Code.deviceDisconnected:
+                self.showError(TR("Bluetooth is disconnected"))
+            case Code.noServices:
+                self.showError(TR("No services found on devices"))
+            case Code.sendFailed:
+                self.showError("Failed");
+            case Code.timeout:
+                self.showError("Timeout");
+            case Code.dataError:
+                self.showError("Data error");
+            case Code.paramsError:
+                self.showError("Params error");
+            case Code.repeatOperation:
+                self.showError("Task repeated");
+            case Code.sendFailed:
+                self.showError("Failed to send data to device")
+            default:
+                break
+            }
+        }
+    }
     
     // MARK: - 导航条按钮
     func setNavLeftButton(text:String, sel:Selector?) {

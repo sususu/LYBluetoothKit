@@ -16,11 +16,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+    
+        SlideMenuOptions.leftViewWidth = UIScreen.main.bounds.width - 80;
+        SlideMenuOptions.panGesturesEnabled = false
         
-//        let a = "qwerty"
-//        let b = ""
-//        
-//        print("hash equal : \(b.hash)")
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let homeVC = HomeViewController()
+        
+        let slideVC = SlideMenuController(mainViewController: homeVC, leftMenuViewController: LeftViewController())
+
+        window?.rootViewController = slideVC
+        window?.makeKeyAndVisible()
+        
         
         return true
     }

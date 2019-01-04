@@ -19,6 +19,10 @@ let kiPhoneX_S = (kScreenWidth >= 375 && kScreenHeight >= 812)
 
 let kiPhoneXsMax = (kScreenWidth == 414 && kScreenHeight >= 896)
 
+// 是否全屏手机
+let kiFullScreen = kiPhoneX_S
+// 状态栏高度
+let kStatusBarHeight = (kiFullScreen ? 24 : 20)
 
 // MARK: - 方法
 func rgb(_ r:CGFloat, _ g:CGFloat, _ b:CGFloat, _ a:CGFloat = 1) -> UIColor {
@@ -32,3 +36,5 @@ func font(_ size:CGFloat) -> UIFont {
 func bFont(_ size:CGFloat) -> UIFont {
     return UIFont.boldSystemFont(ofSize: size)
 }
+
+let kMainColor = rgb(200, 30, 30)
