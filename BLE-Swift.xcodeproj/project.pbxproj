@@ -63,6 +63,20 @@
 		2B62A56021DEF3DB0051DD38 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A55F21DEF3DB0051DD38 /* DeviceInfo.swift */; };
 		2B62A56521DF28470051DD38 /* CharacteristicCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A56321DF28470051DD38 /* CharacteristicCellTableViewCell.swift */; };
 		2B62A56621DF28470051DD38 /* CharacteristicCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B62A56421DF28470051DD38 /* CharacteristicCellTableViewCell.xib */; };
+		2B62A57021DF68720051DD38 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A56F21DF68720051DD38 /* Protocol.swift */; };
+		2B62A57221DF68840051DD38 /* Param.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A57121DF68840051DD38 /* Param.swift */; };
+		2B62A57421DF6B070051DD38 /* ProtocolMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A57321DF6B070051DD38 /* ProtocolMenu.swift */; };
+		2B62A57621DF6B730051DD38 /* ProtocolJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A57521DF6B730051DD38 /* ProtocolJsonParser.swift */; };
+		2B62A57821E03D3E0051DD38 /* Protocol.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B62A57721E03D3E0051DD38 /* Protocol.json */; };
+		2B62A57C21E042680051DD38 /* ProtocolMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A57A21E042680051DD38 /* ProtocolMenuCell.swift */; };
+		2B62A57D21E042680051DD38 /* ProtocolMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B62A57B21E042680051DD38 /* ProtocolMenuCell.xib */; };
+		2B62A58021E0488A0051DD38 /* ProtocolMenuDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A57E21E0488A0051DD38 /* ProtocolMenuDetailsVC.swift */; };
+		2B62A58121E0488A0051DD38 /* ProtocolMenuDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B62A57F21E0488A0051DD38 /* ProtocolMenuDetailsVC.xib */; };
+		2B62A58421E04DB70051DD38 /* ProtocolMenuDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A58221E04DB70051DD38 /* ProtocolMenuDetailCell.swift */; };
+		2B62A58521E04DB70051DD38 /* ProtocolMenuDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B62A58321E04DB70051DD38 /* ProtocolMenuDetailCell.xib */; };
+		2B62A58721E0564C0051DD38 /* ProtocolResultDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A58621E0564C0051DD38 /* ProtocolResultDisplayView.swift */; };
+		2B62A58B21E087E60051DD38 /* ResultDisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A58921E087E60051DD38 /* ResultDisplayCell.swift */; };
+		2B62A58C21E087E60051DD38 /* ResultDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B62A58A21E087E60051DD38 /* ResultDisplayCell.xib */; };
 		2B918D932153365A00B0B5DE /* ConnectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B918D922153365A00B0B5DE /* ConnectVC.swift */; };
 		2BEC5D6C21746A5A00E0902B /* BLECenterCommonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */; };
 		2BEC5D6E217470C300E0902B /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6D217470C300E0902B /* DataExtensions.swift */; };
@@ -153,6 +167,20 @@
 		2B62A55F21DEF3DB0051DD38 /* DeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 		2B62A56321DF28470051DD38 /* CharacteristicCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicCellTableViewCell.swift; sourceTree = "<group>"; };
 		2B62A56421DF28470051DD38 /* CharacteristicCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacteristicCellTableViewCell.xib; sourceTree = "<group>"; };
+		2B62A56F21DF68720051DD38 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
+		2B62A57121DF68840051DD38 /* Param.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Param.swift; sourceTree = "<group>"; };
+		2B62A57321DF6B070051DD38 /* ProtocolMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolMenu.swift; sourceTree = "<group>"; };
+		2B62A57521DF6B730051DD38 /* ProtocolJsonParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolJsonParser.swift; sourceTree = "<group>"; };
+		2B62A57721E03D3E0051DD38 /* Protocol.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Protocol.json; sourceTree = "<group>"; };
+		2B62A57A21E042680051DD38 /* ProtocolMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolMenuCell.swift; sourceTree = "<group>"; };
+		2B62A57B21E042680051DD38 /* ProtocolMenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProtocolMenuCell.xib; sourceTree = "<group>"; };
+		2B62A57E21E0488A0051DD38 /* ProtocolMenuDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolMenuDetailsVC.swift; sourceTree = "<group>"; };
+		2B62A57F21E0488A0051DD38 /* ProtocolMenuDetailsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProtocolMenuDetailsVC.xib; sourceTree = "<group>"; };
+		2B62A58221E04DB70051DD38 /* ProtocolMenuDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtocolMenuDetailCell.swift; sourceTree = "<group>"; };
+		2B62A58321E04DB70051DD38 /* ProtocolMenuDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProtocolMenuDetailCell.xib; sourceTree = "<group>"; };
+		2B62A58621E0564C0051DD38 /* ProtocolResultDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolResultDisplayView.swift; sourceTree = "<group>"; };
+		2B62A58921E087E60051DD38 /* ResultDisplayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDisplayCell.swift; sourceTree = "<group>"; };
+		2B62A58A21E087E60051DD38 /* ResultDisplayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultDisplayCell.xib; sourceTree = "<group>"; };
 		2B918D922153365A00B0B5DE /* ConnectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectVC.swift; sourceTree = "<group>"; };
 		2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterCommonExtension.swift; sourceTree = "<group>"; };
 		2BEC5D6D217470C300E0902B /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
@@ -355,7 +383,7 @@
 		2B48749C214F763400AC5841 /* BLE-Swift */ = {
 			isa = PBXGroup;
 			children = (
-				2B3657B221DDA1560070E7AB /* Images */,
+				2B62A56721DF67410051DD38 /* Resources */,
 				2B4874CB214F763B00AC5841 /* BLELib */,
 				2B918D912153363900B0B5DE /* Demos */,
 				2B48749D214F763400AC5841 /* AppDelegate.swift */,
@@ -435,9 +463,13 @@
 		2B5832EC2176E05B00259593 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				2B62A58821E057660051DD38 /* ResultDisplay */,
+				2B62A57921E042490051DD38 /* Views */,
 				2B5832ED2176E08400259593 /* Devices */,
 				2B36579E21DCC6AA0070E7AB /* ProtocolViewController.swift */,
 				2B36579F21DCC6AA0070E7AB /* ProtocolViewController.xib */,
+				2B62A57E21E0488A0051DD38 /* ProtocolMenuDetailsVC.swift */,
+				2B62A57F21E0488A0051DD38 /* ProtocolMenuDetailsVC.xib */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -488,9 +520,59 @@
 			path = DeviceInfo;
 			sourceTree = "<group>";
 		};
+		2B62A56721DF67410051DD38 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2B62A56821DF67510051DD38 /* Jsons */,
+				2B3657B221DDA1560070E7AB /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		2B62A56821DF67510051DD38 /* Jsons */ = {
+			isa = PBXGroup;
+			children = (
+				2B62A57721E03D3E0051DD38 /* Protocol.json */,
+			);
+			path = Jsons;
+			sourceTree = "<group>";
+		};
+		2B62A56E21DF68630051DD38 /* 协议定义 */ = {
+			isa = PBXGroup;
+			children = (
+				2B62A56F21DF68720051DD38 /* Protocol.swift */,
+				2B62A57121DF68840051DD38 /* Param.swift */,
+				2B62A57321DF6B070051DD38 /* ProtocolMenu.swift */,
+				2B62A57521DF6B730051DD38 /* ProtocolJsonParser.swift */,
+			);
+			path = "协议定义";
+			sourceTree = "<group>";
+		};
+		2B62A57921E042490051DD38 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2B62A57A21E042680051DD38 /* ProtocolMenuCell.swift */,
+				2B62A57B21E042680051DD38 /* ProtocolMenuCell.xib */,
+				2B62A58221E04DB70051DD38 /* ProtocolMenuDetailCell.swift */,
+				2B62A58321E04DB70051DD38 /* ProtocolMenuDetailCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2B62A58821E057660051DD38 /* ResultDisplay */ = {
+			isa = PBXGroup;
+			children = (
+				2B62A58621E0564C0051DD38 /* ProtocolResultDisplayView.swift */,
+				2B62A58921E087E60051DD38 /* ResultDisplayCell.swift */,
+				2B62A58A21E087E60051DD38 /* ResultDisplayCell.xib */,
+			);
+			path = ResultDisplay;
+			sourceTree = "<group>";
+		};
 		2B918D912153363900B0B5DE /* Demos */ = {
 			isa = PBXGroup;
 			children = (
+				2B62A56E21DF68630051DD38 /* 协议定义 */,
 				2B2E27442173263500726FC7 /* Bases */,
 				2B3657A821DCCFFF0070E7AB /* LeftVC */,
 				2B36578F21DCC5ED0070E7AB /* Settings */,
@@ -643,8 +725,11 @@
 				2B4874A8214F763500AC5841 /* LaunchScreen.storyboard in Resources */,
 				2B36579D21DCC6330070E7AB /* SettingsViewController.xib in Resources */,
 				2B3657AC21DCD0140070E7AB /* LeftViewController.xib in Resources */,
+				2B62A58C21E087E60051DD38 /* ResultDisplayCell.xib in Resources */,
+				2B62A58521E04DB70051DD38 /* ProtocolMenuDetailCell.xib in Resources */,
 				2B3657BA21DDB05C0070E7AB /* LeftDeviceCell.xib in Resources */,
 				2B62A56621DF28470051DD38 /* CharacteristicCellTableViewCell.xib in Resources */,
+				2B62A57821E03D3E0051DD38 /* Protocol.json in Resources */,
 				2B36579921DCC6290070E7AB /* OtaViewController.xib in Resources */,
 				2B4874A5214F763500AC5841 /* Assets.xcassets in Resources */,
 				2B3657A721DCCF5C0070E7AB /* Icons.xcassets in Resources */,
@@ -653,6 +738,8 @@
 				2B3657A121DCC6AA0070E7AB /* ProtocolViewController.xib in Resources */,
 				2B3657B421DDA15F0070E7AB /* logo.png in Resources */,
 				2B36579521DCC6190070E7AB /* ToolsViewController.xib in Resources */,
+				2B62A58121E0488A0051DD38 /* ProtocolMenuDetailsVC.xib in Resources */,
+				2B62A57D21E042680051DD38 /* ProtocolMenuCell.xib in Resources */,
 				2B3C1C41218FEB37007F7DC6 /* DeviceCell.xib in Resources */,
 				2B36578421DC9D100070E7AB /* apis_devices.plist in Resources */,
 			);
@@ -702,11 +789,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-BLE-Swift/Pods-BLE-Swift-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -760,8 +849,11 @@
 				2B62A55D21DEF2700051DD38 /* DeviceInfoViewController.swift in Sources */,
 				2B2E27412172E76500726FC7 /* ArrayExtensions.swift in Sources */,
 				2BEC5D702174870100E0902B /* BLECenterDeviceExtension.swift in Sources */,
+				2B62A58421E04DB70051DD38 /* ProtocolMenuDetailCell.swift in Sources */,
 				2B3657A521DCCD600070E7AB /* Functions.swift in Sources */,
 				2B2E273E2172D9B400726FC7 /* BLEConfig.swift in Sources */,
+				2B62A58B21E087E60051DD38 /* ResultDisplayCell.swift in Sources */,
+				2B62A57221DF68840051DD38 /* Param.swift in Sources */,
 				2B3657B621DDA83E0070E7AB /* ConnectBaseVC.swift in Sources */,
 				2B62A56021DEF3DB0051DD38 /* DeviceInfo.swift in Sources */,
 				2BEC5D6C21746A5A00E0902B /* BLECenterCommonExtension.swift in Sources */,
@@ -773,18 +865,21 @@
 				2B2E27492173266500726FC7 /* BaseTableViewController.swift in Sources */,
 				2B4874CD214F766300AC5841 /* BLECenter.swift in Sources */,
 				2B3657A321DCC7020070E7AB /* LYNavigationController.swift in Sources */,
+				2B62A58021E0488A0051DD38 /* ProtocolMenuDetailsVC.swift in Sources */,
 				2B2E273C2172D13A00726FC7 /* BLEData.swift in Sources */,
 				2B918D932153365A00B0B5DE /* ConnectVC.swift in Sources */,
 				2B4874CF214F911300AC5841 /* BLEDevice.swift in Sources */,
 				2BEC5D6E217470C300E0902B /* DataExtensions.swift in Sources */,
 				2B5832E22175832200259593 /* StringExtensions.swift in Sources */,
 				2B5832F4217704CD00259593 /* TableMenu.swift in Sources */,
+				2B62A57C21E042680051DD38 /* ProtocolMenuCell.swift in Sources */,
 				2B36578721DCA42E0070E7AB /* BLEDataParser.swift in Sources */,
 				2B62A55921DDD84D0051DD38 /* RefreshBtn.swift in Sources */,
 				2B5832EB2175CC4600259593 /* DevicesCell.swift in Sources */,
 				2B3657B021DCD54B0070E7AB /* SlideMenuController.swift in Sources */,
 				2B36579821DCC6290070E7AB /* OtaViewController.swift in Sources */,
 				2B62A56521DF28470051DD38 /* CharacteristicCellTableViewCell.swift in Sources */,
+				2B62A57621DF6B730051DD38 /* ProtocolJsonParser.swift in Sources */,
 				2B36579421DCC6190070E7AB /* ToolsViewController.swift in Sources */,
 				2B3657B921DDB05C0070E7AB /* LeftDeviceCell.swift in Sources */,
 				2B3657A021DCC6AA0070E7AB /* ProtocolViewController.swift in Sources */,
@@ -793,9 +888,12 @@
 				2B40433C216C9BF500C6837B /* BLETask.swift in Sources */,
 				2B2E27472173265800726FC7 /* BaseViewController.swift in Sources */,
 				2BFAF610216F2089003AEAD6 /* BLEDataCenter.swift in Sources */,
+				2B62A58721E0564C0051DD38 /* ProtocolResultDisplayView.swift in Sources */,
 				2B5832E0217573E000259593 /* UIDefines.swift in Sources */,
 				2B3657BC21DDB0FF0070E7AB /* SignalStrengthView.swift in Sources */,
+				2B62A57021DF68720051DD38 /* Protocol.swift in Sources */,
 				2B48749E214F763400AC5841 /* AppDelegate.swift in Sources */,
+				2B62A57421DF6B070051DD38 /* ProtocolMenu.swift in Sources */,
 				2B5832E72175C87B00259593 /* DevicesViewController.swift in Sources */,
 				2B3657AB21DCD0140070E7AB /* LeftViewController.swift in Sources */,
 				2B5832E421758ECA00259593 /* NumberView.swift in Sources */,

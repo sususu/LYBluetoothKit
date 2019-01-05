@@ -20,7 +20,7 @@ class HomeViewController: UITabBarController {
         
         register(vc: otaVC, title: TR("OTA"), iconName: "icon_protocol", selectedIconName: "icon_protocol_sel")
         
-        register(vc: protocolVC, title: TR("Procotol"), iconName: "ota_icons_off", selectedIconName: "ota_icons_on")
+        register(vc: protocolVC, title: TR("Protocol"), iconName: "ota_icons_off", selectedIconName: "ota_icons_on")
         
         register(vc: toolsVC, title: TR("Tools"), iconName: "tool_icons_off", selectedIconName: "tool_icons_on")
         

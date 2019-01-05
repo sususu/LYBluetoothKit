@@ -36,7 +36,7 @@ class LeftViewController: BaseViewController, UITableViewDataSource, UITableView
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        scanDevices()
+//        scanDevices()
     }
     
     // MARK: - 初始化
