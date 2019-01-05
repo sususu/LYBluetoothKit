@@ -41,7 +41,7 @@ enum BLEDataState {
     }
     dynamic private(set) var stateRaw:String = ""
     
-    var error:NSError?
+    var error:BLEError?
     
     init(sendData:Data, type:BLEDataType) {
         self.sendData = sendData

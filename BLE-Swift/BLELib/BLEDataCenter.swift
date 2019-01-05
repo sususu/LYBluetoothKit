@@ -33,8 +33,8 @@ class BLEDataCenter: NSObject {
 
     func sendData(toDeviceName deviceName:String, data:BLEData, callback:CommonCallback?, timeout:TimeInterval = kDefaultTimeout) -> BLEDataTask {
         guard let device = BLEDevicesManager.shared.getConnectedDevice(byName: deviceName) else {
-            let error = NSError(domain: Domain.data, code: Code.deviceDisconnected, userInfo: nil)
-            callback?(nil, error)
+            let error = BLEError.deviceError(reason: .disconnected)
+            callback?(nil, BLEError.deviceError(reason: .disconnected))
             data.error = error
             return BLEDataTask(data: data)
         }
@@ -43,7 +43,7 @@ class BLEDataCenter: NSObject {
     
     func sendData(toDevice device:BLEDevice, data:BLEData, callback:CommonCallback?, timeout:TimeInterval = kDefaultTimeout) -> BLEDataTask {
         if device.state == .disconnected {
-            let error = NSError(domain: Domain.data, code: Code.deviceDisconnected, userInfo: nil)
+            let error = BLEError.deviceError(reason: .disconnected)
             callback?(nil, error)
             data.error = error
             return BLEDataTask(data: data)

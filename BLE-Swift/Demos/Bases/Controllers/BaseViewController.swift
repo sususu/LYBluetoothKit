@@ -45,35 +45,41 @@ class BaseViewController: UIViewController {
         return kScreenHeight - navigationBarHeight - bottomBarHeight
     }
     
-    func handleBleError(error: NSError?) {
+    func handleBleError(error: BLEError?) {
         DispatchQueue.main.async {
             guard let err = error else {
                 self.showSuccess(TR("Cool"))
                 return
             }
-            switch err.code {
-            case Code.blePowerOff:
-                self.showError(TR("Please turn on bluetooth"))
-            case Code.bleUnavaiable:
-                self.showError(TR("Bluetooth is still unavailable"))
-            case Code.deviceDisconnected:
-                self.showError(TR("Bluetooth is disconnected"))
-            case Code.noServices:
-                self.showError(TR("No services found on devices"))
-            case Code.sendFailed:
-                self.showError("Failed");
-            case Code.timeout:
-                self.showError("Timeout");
-            case Code.dataError:
-                self.showError("Data error");
-            case Code.paramsError:
-                self.showError("Params error");
-            case Code.repeatOperation:
-                self.showError("Task repeated");
-            case Code.sendFailed:
-                self.showError("Failed to send data to device")
-            default:
-                break
+            switch err {
+            case .phoneError(let reason):
+                if case .bluetoothPowerOff = reason {
+                    self.showError(TR("Please turn on bluetooth"))
+                } else {
+                    self.showError(TR("Bluetooth is still unavailable"))
+                }
+            case .deviceError(let reason):
+                switch reason {
+                case .disconnected:
+                    self.showError(TR("Bluetooth is disconnected"))
+                case .noServices:
+                    self.showError(TR("No services found on devices"))
+                default:
+                    break
+                }
+            case .taskError(let reason):
+                switch reason {
+                case .timeout:
+                    self.showError("Timeout");
+                case .sendFailed:
+                    self.showError("Failed");
+                case .paramsError:
+                    self.showError("Params error");
+                case .dataError:
+                    self.showError("Data error");
+                case .repeatTask:
+                    self.showError("Task repeated");
+                }
             }
         }
     }

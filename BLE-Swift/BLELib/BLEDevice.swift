@@ -123,7 +123,7 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
 
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         if error != nil {
-            self.getReadyCallback?(error as NSError?)
+            self.getReadyCallback?(BLEError.deviceError(reason: .noServices))
         } else {
             if let services = peripheral.services {
                 for service in services {
@@ -131,8 +131,7 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
                     peripheral.discoverCharacteristics(nil, for: service)
                 }
             } else {
-                let error = NSError(domain: Domain.device, code: Code.noServices, userInfo: nil)
-                self.getReadyCallback?(error)
+                self.getReadyCallback?(BLEError.deviceError(reason: .noServices))
             }
         }
     }
@@ -140,7 +139,7 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
     
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         if error != nil {
-            self.getReadyCallback?(error as NSError?)
+            self.getReadyCallback?(BLEError.deviceError(reason: .noCharacteristics))
         } else {
             self.discoveredServices.append(service)
             if let characteristics = service.characteristics {

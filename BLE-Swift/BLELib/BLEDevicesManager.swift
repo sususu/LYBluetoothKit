@@ -85,7 +85,7 @@ class BLEDevicesManager: NSObject {
             return true
         } else {
             DispatchQueue.main.async {
-                callback?(nil, NSError(domain: Domain.device, code: Code.repeatOperation, userInfo: nil))
+                callback?(nil, BLEError.taskError(reason: .repeatTask))
             }
             return false
         }
@@ -125,8 +125,7 @@ class BLEDevicesManager: NSObject {
             task.device = BLEDevice(peripheral)
         }
         task.device!.state = .disconnected
-        let error = NSError(domain: Domain.device, code: Code.failToConnect, userInfo: nil)
-        task.error = error
+        task.error = BLEError.deviceError(reason: .failToConnect)
         task.state = .failed
     }
     
@@ -160,8 +159,7 @@ class BLEDevicesManager: NSObject {
         guard let task = getConnectTask(byName: peripheral.name ?? "") else {
             return
         }
-        let error = NSError(domain: Domain.device, code: Code.failToDisconnect, userInfo: nil)
-        task.error = error
+        task.error = BLEError.deviceError(reason: .failToDisconnect)
         task.state = .failed
     }
     

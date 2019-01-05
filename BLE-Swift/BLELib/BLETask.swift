@@ -19,7 +19,7 @@ public enum BLETaskState {
 @objcMembers public class BLETask: NSObject {
     var timer:Timer?
     var state:BLETaskState = .plain
-    var error:NSError?
+    var error:BLEError?
     var timeout:TimeInterval = kDefaultTimeout
     var ob:NSKeyValueObservation?
     
@@ -79,7 +79,7 @@ public enum BLETaskState {
     
     override func timeoutHandler() {
         super.timeoutHandler()
-        self.error = NSError(domain: Domain.device, code: Code.timeout, userInfo: nil)
+        self.error = BLEError.taskError(reason: .timeout)
         self.device = nil
         self.state = .failed
     }
@@ -139,13 +139,13 @@ public enum BLETaskState {
 //            print("hello")
             switch bleData.state {
             case .sendFailed:
-                let error = NSError(domain: Domain.data, code: Code.sendFailed, userInfo: nil)
+                let error = BLEError.taskError(reason: .sendFailed)
                 weakSelf?.error = error
                 weakSelf?.state = .failed
                 weakSelf?.device = nil
                 weakSelf?.parser.clear()
             case .recvFailed:
-                let error = NSError(domain: Domain.data, code: Code.dataError, userInfo: nil)
+                let error = BLEError.taskError(reason: .dataError)
                 weakSelf?.error = error
                 weakSelf?.state = .failed
                 weakSelf?.device = nil
@@ -166,7 +166,7 @@ public enum BLETaskState {
         
         if data.sendToUuid == nil {
             guard let uuid = BLEConfig.shared.sendUUID[data.type] else {
-                data.error = NSError(domain: Domain.data, code: Code.noCharacteristics, userInfo: nil)
+                data.error = BLEError.deviceError(reason: .noCharacteristics)
                 data.state = .sendFailed
                 return
             }
@@ -175,13 +175,13 @@ public enum BLETaskState {
         
         
         guard let sendDevice = device else {
-            data.error = NSError(domain: Domain.data, code: Code.deviceDisconnected, userInfo: nil)
+            data.error = BLEError.deviceError(reason: .disconnected)
             data.state = .sendFailed
             return
         }
         
         if !sendDevice.write(data.sendData, characteristicUUID: data.sendToUuid!) {
-            data.error = NSError(domain: Domain.data, code: Code.deviceDisconnected, userInfo: nil)
+            data.error = BLEError.deviceError(reason: .disconnected)
             data.state = .sendFailed
         }
     }
@@ -202,7 +202,7 @@ public enum BLETaskState {
 
     override func timeoutHandler() {
         super.timeoutHandler()
-        self.error = NSError(domain: Domain.data, code: Code.timeout, userInfo: nil)
+        self.error = BLEError.taskError(reason: .timeout)
         self.device = nil
         self.state = .failed
         NotificationCenter.default.post(name: BLEInnerNotification.taskFinish, object: nil, userInfo: [BLEKey.task : self])

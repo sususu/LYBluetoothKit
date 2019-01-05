@@ -177,8 +177,7 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
         if devicesManager.connectDevice(withBLEDevice: device, callback: callback, timeout: timeout) {
             center?.connect(device.peripheral, options: nil)
         } else {
-            let error = NSError(domain: Domain.device, code: Code.repeatOperation, userInfo: nil)
-            callback?(device, error)
+            callback?(device, BLEError.taskError(reason: .repeatTask))
         }
     }
     
@@ -186,8 +185,7 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
         if devicesManager.disconnectDevice(withBLEDevice: device, callback: callback, timeout: timeout) {
             center?.cancelPeripheralConnection(device.peripheral)
         } else {
-            let error = NSError(domain: Domain.device, code: Code.repeatOperation, userInfo: nil)
-            callback?(device, error)
+            callback?(device, BLEError.taskError(reason: .repeatTask))
         }
     }
     
@@ -199,10 +197,9 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
         }
         
         if deviceName == nil {
-            let err = NSError(domain: Domain.center, code: Code.paramsError, userInfo: nil)
             print("deviceName and defaultInteractionDeviceName can not be nil at the same time")
             DispatchQueue.main.async {
-                callback?(nil, err)
+                callback?(nil, BLEError.taskError(reason: .paramsError))
             }
             return nil
         }
@@ -211,10 +208,9 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
         if let device = devicesManager.getConnectedDevice(byName: deviceName!) {
             return dataCenter.sendData(toDevice: device, data: data, callback: callback)
         } else {
-            let err = NSError(domain: Domain.center, code: Code.deviceDisconnected, userInfo: nil)
             print("Please connect a device before sending data")
             DispatchQueue.main.async {
-                callback?(nil, err)
+                callback?(nil, BLEError.deviceError(reason: .disconnected))
             }
             return nil
         }
@@ -345,15 +341,15 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     }
     
     // MARK: - 工具方法
-    private func checkBLE() -> NSError? {
+    private func checkBLE() -> BLEError? {
         if self.state == .poweredOff {
-            return NSError(domain: Domain.center, code: Code.blePowerOff, userInfo: nil)
+            return BLEError.phoneError(reason: .bluetoothPowerOff)
         }
         else if self.state == .poweredOn {
             return nil
         }
         else {
-            return NSError(domain: Domain.center, code: Code.bleUnavaiable, userInfo: nil)
+            return BLEError.phoneError(reason: .bluetoothUnavaliable)
         }
     }
     

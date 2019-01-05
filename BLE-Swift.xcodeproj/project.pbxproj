@@ -77,6 +77,7 @@
 		2B62A58721E0564C0051DD38 /* ProtocolResultDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A58621E0564C0051DD38 /* ProtocolResultDisplayView.swift */; };
 		2B62A58B21E087E60051DD38 /* ResultDisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A58921E087E60051DD38 /* ResultDisplayCell.swift */; };
 		2B62A58C21E087E60051DD38 /* ResultDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B62A58A21E087E60051DD38 /* ResultDisplayCell.xib */; };
+		2B62A58F21E0A0880051DD38 /* BLEDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A58E21E0A0880051DD38 /* BLEDataError.swift */; };
 		2B918D932153365A00B0B5DE /* ConnectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B918D922153365A00B0B5DE /* ConnectVC.swift */; };
 		2BEC5D6C21746A5A00E0902B /* BLECenterCommonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */; };
 		2BEC5D6E217470C300E0902B /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6D217470C300E0902B /* DataExtensions.swift */; };
@@ -181,6 +182,7 @@
 		2B62A58621E0564C0051DD38 /* ProtocolResultDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolResultDisplayView.swift; sourceTree = "<group>"; };
 		2B62A58921E087E60051DD38 /* ResultDisplayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDisplayCell.swift; sourceTree = "<group>"; };
 		2B62A58A21E087E60051DD38 /* ResultDisplayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultDisplayCell.xib; sourceTree = "<group>"; };
+		2B62A58E21E0A0880051DD38 /* BLEDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDataError.swift; sourceTree = "<group>"; };
 		2B918D922153365A00B0B5DE /* ConnectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectVC.swift; sourceTree = "<group>"; };
 		2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterCommonExtension.swift; sourceTree = "<group>"; };
 		2BEC5D6D217470C300E0902B /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 		2B4874CB214F763B00AC5841 /* BLELib */ = {
 			isa = PBXGroup;
 			children = (
+				2B62A58D21E0A03C0051DD38 /* Error */,
 				2B36578521DCA41F0070E7AB /* Utils */,
 				2BEC5D6A2174698000E0902B /* APIs */,
 				2B2E273F2172E72B00726FC7 /* Extensions */,
@@ -567,6 +570,14 @@
 				2B62A58A21E087E60051DD38 /* ResultDisplayCell.xib */,
 			);
 			path = ResultDisplay;
+			sourceTree = "<group>";
+		};
+		2B62A58D21E0A03C0051DD38 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				2B62A58E21E0A0880051DD38 /* BLEDataError.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 		2B918D912153363900B0B5DE /* Demos */ = {
@@ -862,6 +873,7 @@
 				2B36579C21DCC6330070E7AB /* SettingsViewController.swift in Sources */,
 				2B5832F02176E46C00259593 /* DevicesVC.swift in Sources */,
 				2B5832F6217705D400259593 /* TableSection.swift in Sources */,
+				2B62A58F21E0A0880051DD38 /* BLEDataError.swift in Sources */,
 				2B2E27492173266500726FC7 /* BaseTableViewController.swift in Sources */,
 				2B4874CD214F766300AC5841 /* BLECenter.swift in Sources */,
 				2B3657A321DCC7020070E7AB /* LYNavigationController.swift in Sources */,

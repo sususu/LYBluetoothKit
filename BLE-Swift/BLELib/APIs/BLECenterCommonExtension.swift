@@ -9,6 +9,23 @@
 import Foundation
 
 extension BLECenter {
+    
+    public func send(data:Data, dataArrayCallback: DataArrayCallback?, toDeviceName:String?)->BLETask? {
+        let d = BLEData(sendData: data, type: .normal)
+        return send(data: d, callback: { (recv, err) in
+            if err != nil {
+                dataArrayCallback?(nil, err)
+            } else {
+                if let recvData = recv as? BLEData {
+                    dataArrayCallback?(recvData.recvDatas, nil)
+                } else {
+                    dataArrayCallback?(nil, BLEError.taskError(reason: .dataError))
+                }
+            }
+        })
+    }
+    
+    
     public func send(data:Data, boolCallback:BoolCallback?, toDeviceName:String?)->BLETask? {
         let d = BLEData(sendData: data, type: .normal)
         return send(data: d, callback: { (recv, err) in
@@ -37,11 +54,11 @@ extension BLECenter {
                 stringCallback?(nil, err)
             } else {
                 var str:String? = nil
-                var err:NSError? = nil
+                var err:BLEError? = nil
                 if let recvData = recv as? BLEData, let dd = recvData.recvData {
                     str = String(bytes: dd, encoding: String.Encoding.utf8)
                 } else {
-                    err = NSError(domain: Domain.data, code: Code.dataError, userInfo: nil)
+                    err = BLEError.taskError(reason: .dataError)
                 }
                 stringCallback?(str, err)
             }
@@ -55,14 +72,14 @@ extension BLECenter {
             if err != nil {
                 intCallback?(result, err)
             } else {
-                var err:NSError? = nil
+                var err:BLEError? = nil
                 if let recvData = recv as? BLEData, let bytes = recvData.recvData?.bytes {
                     result = 0
                     for (i, v) in bytes.enumerated() {
                         result += Int(v << (i * 8))
                     }
                 } else {
-                    err = NSError(domain: Domain.data, code: Code.dataError, userInfo: nil)
+                    err = BLEError.taskError(reason: .dataError)
                 }
                 intCallback?(result, err)
             }

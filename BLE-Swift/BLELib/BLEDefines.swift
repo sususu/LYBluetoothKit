@@ -14,15 +14,16 @@ public let kScanTimeout:TimeInterval = 10
 
 
 // MARK: - 闭包定义
-public typealias GetReadyBlock = (NSError?)->Void
-public typealias WriteBlock = (NSError?)->Void
-public typealias ScanBlock = (Array<BLEDevice>?, NSError?)->Void
-public typealias ConnectBlock = (BLEDevice?, NSError?)->Void
+public typealias GetReadyBlock = (BLEError?)->Void
+public typealias WriteBlock = (BLEError?)->Void
+public typealias ScanBlock = (Array<BLEDevice>?, BLEError?)->Void
+public typealias ConnectBlock = (BLEDevice?, BLEError?)->Void
 public typealias EmptyBlock = ()->Void
-public typealias CommonCallback = (Any?, NSError?)->Void
-public typealias BoolCallback = (Bool, NSError?)->Void
-public typealias StringCallback = (String?, NSError?)->Void
-public typealias IntCallback = (Int, NSError?)->Void
+public typealias CommonCallback = (Any?, BLEError?)->Void
+public typealias BoolCallback = (Bool, BLEError?)->Void
+public typealias DataArrayCallback = (Array<Data>?, BLEError?)->Void
+public typealias StringCallback = (String?, BLEError?)->Void
+public typealias IntCallback = (Int, BLEError?)->Void
 
 
 // MARK: - 错误码定义
