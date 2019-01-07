@@ -24,6 +24,7 @@ public typealias BoolCallback = (Bool, BLEError?)->Void
 public typealias DataArrayCallback = (Array<Data>?, BLEError?)->Void
 public typealias StringCallback = (String?, BLEError?)->Void
 public typealias IntCallback = (Int, BLEError?)->Void
+public typealias DictArrayCallback = (Array<Dictionary<String, Any>>?, BLEError?)->Void
 
 
 // MARK: - 错误码定义

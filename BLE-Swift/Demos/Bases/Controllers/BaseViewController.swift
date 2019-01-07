@@ -27,6 +27,10 @@ class BaseViewController: UIViewController {
         }
     }
     
+    func showConnectState() {
+        let csv = ConnectStateHeaderView(frame: CGRect(x: 0, y: 0, width: 160, height: 44))
+        self.navigationItem.titleView = csv
+    }
 
     var navigationBarHeight:CGFloat {
         return kiPhoneX_S ? 88 : 64

@@ -8,26 +8,33 @@
 
 import UIKit
 
-class ConnectVC: BaseTableViewController {
+class ConnectVC: BaseTableViewController, LeftDeviceCellDelegate {
 
     var devices:[BLEDevice] = []
-    var numLbl:NumberView?
+    var numLbl:NumberView!
+    
+    var connectSingleOne = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.title = "Connect"
 
-        self.tableView.register(UINib(nibName: "DeviceCell", bundle: nil), forCellReuseIdentifier: "cellId")
-
-        setNavLeftButton(text: "Scan", sel: #selector(searchDevices))
+        self.tableView.register(UINib(nibName: "LeftDeviceCell", bundle: nil), forCellReuseIdentifier: "cellId")
         
-        numLbl = NumberView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
-        numLbl!.addTarget(self, action: #selector(showConnectedDevices), for: .touchUpInside)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: numLbl!)
+        configNav()
         
         searchDevices()
     }
+    
+    func configNav() {
+
+        numLbl = NumberView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
+        numLbl!.addTarget(self, action: #selector(showConnectedDevices), for: .touchUpInside)
+        self.navigationItem.titleView = numLbl
+        
+        setNavRightButton(withIcon: "shuaxin2", sel: #selector(searchDevices))
+        setNavLeftButton(withIcon: "fanhui", sel: #selector(backClick))
+    }
+    
     
     @objc func searchDevices() {
         BLECenter.shared.scan(callback: { (devices, err) in
@@ -45,6 +52,9 @@ class ConnectVC: BaseTableViewController {
         navigationController?.pushViewController(devicesVC, animated: true)
     }
     
+    func didClickEditBtn(cell: UITableViewCell) {
+        
+    }
     
     // MARK: - tableView
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,25 +66,36 @@ class ConnectVC: BaseTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! DeviceCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! LeftDeviceCell
         let device = self.devices[indexPath.row]
         cell.updateUI(withDevice: device)
+        cell.delegate = self;
+        cell.setDebugHidden(hidden: true)
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        BLECenter.shared.stopScan()
         self.startLoading(nil)
         let device = self.devices[indexPath.row]
         BLECenter.shared.connect(device: device, callback: { (device, err) in
             self.stopLoading()
             if err != nil {
-                self.showError("连接设备出错")
+                self.handleBleError(error: err!)
             } else {
-                self.showSuccess("连接成功")
-                self.numLbl?.num = BLECenter.shared.connectedDevices.count
+                self.showSuccess(TR("Connected"))
+                self.numLbl.num = BLECenter.shared.connectedDevices.count
+                if self.connectSingleOne {
+                    self.backClick()
+                }
             }
         })
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    @objc func backClick() {
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
 }

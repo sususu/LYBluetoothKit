@@ -13,5 +13,47 @@ class Protocol: NSObject {
     var code = ""
     var summary = ""
     var cmd = ""
-    var returnType = ""
+    var returnFormat = ReturnFormat()
+}
+
+extension Protocol {
+    var isBoolReturn: Bool {
+        get {
+            if returnFormat.type == "bool" {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+    
+    var isStringReturn: Bool {
+        get {
+            if returnFormat.type == "string" {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+    
+    var isDictionaryReturn: Bool {
+        get {
+            if returnFormat.type == "object" {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+    
+    var isArrayReturn: Bool {
+        get {
+            if returnFormat.type == "array" {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
 }

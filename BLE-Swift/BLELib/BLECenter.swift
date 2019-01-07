@@ -41,7 +41,14 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     var block:CenterBlock = CenterBlock()
     
     // 默认发送数据的设备名称
-    var defaultInteractionDeviceName:String?
+    var defaultInteractionDeviceName:String? {
+        get {
+            if connectedDevices.count > 0 {
+                return connectedDevices[0].name
+            }
+            return nil
+        }
+    }
     
     // 定时器
     var searchTimer:Timer?

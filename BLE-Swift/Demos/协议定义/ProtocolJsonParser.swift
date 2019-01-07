@@ -56,20 +56,42 @@ class ProtocolJsonParser: NSObject {
             let code = j["code"].string ?? ""
             let summary = j["summary"].string ?? ""
             let cmd = j["cmd"].string ?? ""
-            let returnType = j["returnType"].string ?? ""
             
             let p = Protocol()
             p.name = name
             p.code = code
             p.summary = summary
             p.cmd = cmd
-            p.returnType = returnType
+            
+            if let rfDict = j["returnFormat"].dictionary {
+                p.returnFormat = parserReturnFormat(dict: rfDict)
+            } else {
+                p.returnFormat = boolReturnFormat()
+            }
             protocols.append(p)
         }
         
         return protocols
     }
     
+    
+    func parserReturnFormat(dict: Dictionary<String, JSON>) -> ReturnFormat {
+        
+        let type = dict["type"]!.stringValue
+        let length = dict["length"]!.intValue
+        let byteFlag = dict["byteFlag"]!.intValue
+        
+        let rf = ReturnFormat()
+        rf.type = type
+        rf.length = length
+        rf.byteFlag = byteFlag
+        
+        if let subRf = dict["subFormat"]?.dictionary {
+            rf.subFormat = parserReturnFormat(dict: subRf)
+        }
+        
+        return rf
+    }
     
     
 }

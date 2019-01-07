@@ -23,6 +23,8 @@ class LeftDeviceCell: UITableViewCell {
     
     @IBOutlet weak var dot: UIView!
     
+    @IBOutlet weak var debugBtn: UIButton!
+    
     weak var delegate: LeftDeviceCellDelegate?
     
     var device: BLEDevice? {
@@ -42,6 +44,10 @@ class LeftDeviceCell: UITableViewCell {
             serviceLbl.text = device!.broadcastServiceUUIDs.count > 0 ? "[\(device!.broadcastServiceUUIDs.count) services]" : "No services"
             dot.isHidden = (device!.state == .disconnected)
         }
+    }
+    
+    func setDebugHidden(hidden: Bool) {
+        debugBtn.isHidden = hidden
     }
     
     override func awakeFromNib() {

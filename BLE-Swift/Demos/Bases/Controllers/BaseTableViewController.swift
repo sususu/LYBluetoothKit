@@ -11,15 +11,61 @@ import SVProgressHUD
 
 class BaseTableViewController: UITableViewController {
 
+    var hideBack = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.view.backgroundColor = UIColor.white
+        
+        SVProgressHUD.setBackgroundColor(kMainColor)
+        SVProgressHUD.setForegroundColor(UIColor.white)
+        
+        if self.navigationController != nil && self.navigationController!.viewControllers.count > 1 &&
+            !hideBack {
+            setNavLeftButton(withIcon: "fanhui", sel: #selector(backBtnClick))
+        }
     }
+    
+    func handleBleError(error: BLEError?) {
+        DispatchQueue.main.async {
+            guard let err = error else {
+                self.showSuccess(TR("Cool"))
+                return
+            }
+            switch err {
+            case .phoneError(let reason):
+                if case .bluetoothPowerOff = reason {
+                    self.showError(TR("Please turn on bluetooth"))
+                } else {
+                    self.showError(TR("Bluetooth is still unavailable"))
+                }
+            case .deviceError(let reason):
+                switch reason {
+                case .disconnected:
+                    self.showError(TR("Bluetooth is disconnected"))
+                case .noServices:
+                    self.showError(TR("No services found on devices"))
+                default:
+                    break
+                }
+            case .taskError(let reason):
+                switch reason {
+                case .timeout:
+                    self.showError("Timeout");
+                case .sendFailed:
+                    self.showError("Failed");
+                case .paramsError:
+                    self.showError("Params error");
+                case .dataError:
+                    self.showError("Data error");
+                case .repeatTask:
+                    self.showError("Task repeated");
+                }
+            }
+        }
+    }
+    
     
     var navigationBarHeight:CGFloat {
         return kiPhoneX_S ? 88 : 64
@@ -201,5 +247,9 @@ class BaseTableViewController: UITableViewController {
             alertCtrl.addAction(cancelAction)
         }
         UIApplication.shared.keyWindow?.rootViewController?.present(alertCtrl, animated: true, completion: nil)
+    }
+    
+    @objc func backBtnClick() {
+        self.navigationController?.popViewController(animated: true)
     }
 }

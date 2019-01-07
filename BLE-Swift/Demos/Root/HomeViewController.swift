@@ -8,6 +8,9 @@
 
 import UIKit
 
+let kShowConnectNotification = Notification.Name("kShowConnectNotification")
+
+
 class HomeViewController: UITabBarController {
 
     override func viewDidLoad() {
@@ -27,6 +30,9 @@ class HomeViewController: UITabBarController {
         register(vc: settingsVC, title: TR("Settings"), iconName: "setting_icons_off", selectedIconName: "setting_icons_on")
         
         self.tabBar.tintColor = kMainColor
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(showConnectVC), name: kShowConnectNotification, object: nil)
     }
     
 
@@ -39,5 +45,11 @@ class HomeViewController: UITabBarController {
         addChild(nav)
     }
     
+    
+    @objc func showConnectVC() {
+        let vc = ConnectVC()
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true, completion: nil)
+    }
 
 }

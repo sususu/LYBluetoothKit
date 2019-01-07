@@ -10,7 +10,7 @@
 		1DA6F8CA946DA6E806A47013 /* Pods_BLE_SwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5DE497842DC3B0E35F73E2 /* Pods_BLE_SwiftTests.framework */; };
 		2B2E273C2172D13A00726FC7 /* BLEData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2E273B2172D13A00726FC7 /* BLEData.swift */; };
 		2B2E273E2172D9B400726FC7 /* BLEConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2E273D2172D9B400726FC7 /* BLEConfig.swift */; };
-		2B2E27412172E76500726FC7 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2E27402172E76400726FC7 /* ArrayExtensions.swift */; };
+		2B2E27412172E76500726FC7 /* BLEArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2E27402172E76400726FC7 /* BLEArrayExtensions.swift */; };
 		2B2E27472173265800726FC7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2E27462173265800726FC7 /* BaseViewController.swift */; };
 		2B2E27492173266500726FC7 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2E27482173266500726FC7 /* BaseTableViewController.swift */; };
 		2B36578421DC9D100070E7AB /* apis_devices.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B36578321DC9D100070E7AB /* apis_devices.plist */; };
@@ -79,8 +79,12 @@
 		2B62A58C21E087E60051DD38 /* ResultDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B62A58A21E087E60051DD38 /* ResultDisplayCell.xib */; };
 		2B62A58F21E0A0880051DD38 /* BLEDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A58E21E0A0880051DD38 /* BLEDataError.swift */; };
 		2B918D932153365A00B0B5DE /* ConnectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B918D922153365A00B0B5DE /* ConnectVC.swift */; };
+		2BE7701121E2E3EF00FD6374 /* ReturnFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE7701021E2E3EF00FD6374 /* ReturnFormat.swift */; };
+		2BE7701421E2F9A600FD6374 /* ProtocolRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE7701321E2F9A600FD6374 /* ProtocolRunner.swift */; };
+		2BE7701621E2FBA700FD6374 /* BLEStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE7701521E2FBA700FD6374 /* BLEStringExtensions.swift */; };
+		2BE7701821E3207400FD6374 /* ConnectStateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE7701721E3207400FD6374 /* ConnectStateHeaderView.swift */; };
 		2BEC5D6C21746A5A00E0902B /* BLECenterCommonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */; };
-		2BEC5D6E217470C300E0902B /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6D217470C300E0902B /* DataExtensions.swift */; };
+		2BEC5D6E217470C300E0902B /* BLEDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6D217470C300E0902B /* BLEDataExtensions.swift */; };
 		2BEC5D702174870100E0902B /* BLECenterDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6F2174870100E0902B /* BLECenterDeviceExtension.swift */; };
 		2BFAF610216F2089003AEAD6 /* BLEDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFAF60F216F2089003AEAD6 /* BLEDataCenter.swift */; };
 		76C8C7ABC4084DA92023482F /* Pods_BLE_SwiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A9D2E2F02B2CC16DA69B09 /* Pods_BLE_SwiftUITests.framework */; };
@@ -109,7 +113,7 @@
 		29A9D2E2F02B2CC16DA69B09 /* Pods_BLE_SwiftUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLE_SwiftUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B2E273B2172D13A00726FC7 /* BLEData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEData.swift; sourceTree = "<group>"; };
 		2B2E273D2172D9B400726FC7 /* BLEConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEConfig.swift; sourceTree = "<group>"; };
-		2B2E27402172E76400726FC7 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+		2B2E27402172E76400726FC7 /* BLEArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEArrayExtensions.swift; sourceTree = "<group>"; };
 		2B2E27462173265800726FC7 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		2B2E27482173266500726FC7 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		2B36578321DC9D100070E7AB /* apis_devices.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = apis_devices.plist; sourceTree = "<group>"; };
@@ -184,8 +188,12 @@
 		2B62A58A21E087E60051DD38 /* ResultDisplayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultDisplayCell.xib; sourceTree = "<group>"; };
 		2B62A58E21E0A0880051DD38 /* BLEDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDataError.swift; sourceTree = "<group>"; };
 		2B918D922153365A00B0B5DE /* ConnectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectVC.swift; sourceTree = "<group>"; };
+		2BE7701021E2E3EF00FD6374 /* ReturnFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnFormat.swift; sourceTree = "<group>"; };
+		2BE7701321E2F9A600FD6374 /* ProtocolRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolRunner.swift; sourceTree = "<group>"; };
+		2BE7701521E2FBA700FD6374 /* BLEStringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEStringExtensions.swift; sourceTree = "<group>"; };
+		2BE7701721E3207400FD6374 /* ConnectStateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectStateHeaderView.swift; sourceTree = "<group>"; };
 		2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterCommonExtension.swift; sourceTree = "<group>"; };
-		2BEC5D6D217470C300E0902B /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
+		2BEC5D6D217470C300E0902B /* BLEDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDataExtensions.swift; sourceTree = "<group>"; };
 		2BEC5D6F2174870100E0902B /* BLECenterDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterDeviceExtension.swift; sourceTree = "<group>"; };
 		2BFAF60F216F2089003AEAD6 /* BLEDataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDataCenter.swift; sourceTree = "<group>"; };
 		3FFED2B6D2ED38A974E68B62 /* Pods_BLE_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLE_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -241,8 +249,9 @@
 		2B2E273F2172E72B00726FC7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				2B2E27402172E76400726FC7 /* ArrayExtensions.swift */,
-				2BEC5D6D217470C300E0902B /* DataExtensions.swift */,
+				2B2E27402172E76400726FC7 /* BLEArrayExtensions.swift */,
+				2BEC5D6D217470C300E0902B /* BLEDataExtensions.swift */,
+				2BE7701521E2FBA700FD6374 /* BLEStringExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -507,6 +516,7 @@
 			isa = PBXGroup;
 			children = (
 				2B62A55821DDD84D0051DD38 /* RefreshBtn.swift */,
+				2BE7701721E3207400FD6374 /* ConnectStateHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -547,6 +557,8 @@
 				2B62A57121DF68840051DD38 /* Param.swift */,
 				2B62A57321DF6B070051DD38 /* ProtocolMenu.swift */,
 				2B62A57521DF6B730051DD38 /* ProtocolJsonParser.swift */,
+				2BE7701021E2E3EF00FD6374 /* ReturnFormat.swift */,
+				2BE7701321E2F9A600FD6374 /* ProtocolRunner.swift */,
 			);
 			path = "协议定义";
 			sourceTree = "<group>";
@@ -856,9 +868,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BE7701821E3207400FD6374 /* ConnectStateHeaderView.swift in Sources */,
 				2B404337216B367A00C6837B /* BLEToDo.swift in Sources */,
 				2B62A55D21DEF2700051DD38 /* DeviceInfoViewController.swift in Sources */,
-				2B2E27412172E76500726FC7 /* ArrayExtensions.swift in Sources */,
+				2B2E27412172E76500726FC7 /* BLEArrayExtensions.swift in Sources */,
 				2BEC5D702174870100E0902B /* BLECenterDeviceExtension.swift in Sources */,
 				2B62A58421E04DB70051DD38 /* ProtocolMenuDetailCell.swift in Sources */,
 				2B3657A521DCCD600070E7AB /* Functions.swift in Sources */,
@@ -880,8 +893,9 @@
 				2B62A58021E0488A0051DD38 /* ProtocolMenuDetailsVC.swift in Sources */,
 				2B2E273C2172D13A00726FC7 /* BLEData.swift in Sources */,
 				2B918D932153365A00B0B5DE /* ConnectVC.swift in Sources */,
+				2BE7701621E2FBA700FD6374 /* BLEStringExtensions.swift in Sources */,
 				2B4874CF214F911300AC5841 /* BLEDevice.swift in Sources */,
-				2BEC5D6E217470C300E0902B /* DataExtensions.swift in Sources */,
+				2BEC5D6E217470C300E0902B /* BLEDataExtensions.swift in Sources */,
 				2B5832E22175832200259593 /* StringExtensions.swift in Sources */,
 				2B5832F4217704CD00259593 /* TableMenu.swift in Sources */,
 				2B62A57C21E042680051DD38 /* ProtocolMenuCell.swift in Sources */,
@@ -891,6 +905,7 @@
 				2B3657B021DCD54B0070E7AB /* SlideMenuController.swift in Sources */,
 				2B36579821DCC6290070E7AB /* OtaViewController.swift in Sources */,
 				2B62A56521DF28470051DD38 /* CharacteristicCellTableViewCell.swift in Sources */,
+				2BE7701421E2F9A600FD6374 /* ProtocolRunner.swift in Sources */,
 				2B62A57621DF6B730051DD38 /* ProtocolJsonParser.swift in Sources */,
 				2B36579421DCC6190070E7AB /* ToolsViewController.swift in Sources */,
 				2B3657B921DDB05C0070E7AB /* LeftDeviceCell.swift in Sources */,
@@ -904,6 +919,7 @@
 				2B5832E0217573E000259593 /* UIDefines.swift in Sources */,
 				2B3657BC21DDB0FF0070E7AB /* SignalStrengthView.swift in Sources */,
 				2B62A57021DF68720051DD38 /* Protocol.swift in Sources */,
+				2BE7701121E2E3EF00FD6374 /* ReturnFormat.swift in Sources */,
 				2B48749E214F763400AC5841 /* AppDelegate.swift in Sources */,
 				2B62A57421DF6B070051DD38 /* ProtocolMenu.swift in Sources */,
 				2B5832E72175C87B00259593 /* DevicesViewController.swift in Sources */,

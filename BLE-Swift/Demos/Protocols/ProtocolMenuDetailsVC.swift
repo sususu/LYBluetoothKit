@@ -14,6 +14,9 @@ class ProtocolMenuDetailsVC: BaseViewController, UITableViewDataSource, UITableV
     
     var protocols: Array<Protocol>
     
+    var runner = ProtocolRunner()
+    
+    
     init(protocols: Array<Protocol>) {
         self.protocols = protocols
         super.init(nibName: nil, bundle: nil)
@@ -32,6 +35,8 @@ class ProtocolMenuDetailsVC: BaseViewController, UITableViewDataSource, UITableV
         tableView.register(UINib(nibName: "ProtocolMenuDetailCell", bundle: nil), forCellReuseIdentifier: "cellId")
         tableView.rowHeight = 50
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 80))
+        
+        showConnectState()
     }
 
 
@@ -55,6 +60,17 @@ class ProtocolMenuDetailsVC: BaseViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        weak var weakSelf = self
+        runner.run(self.protocols[indexPath.row], boolCallback: { (bool) in
+            
+        }, stringCallback: { (str) in
+            weakSelf?.alert(msg: TR("Result"), confirmSel: nil, cancelText: nil, cancelSel: nil)
+        }, dictCallback: { (dict) in
+            
+        }, dictArrayCallback: { (dicts) in
+            
+        }) { (err) in
+            weakSelf?.handleBleError(error: err)
+        }
     }
 }

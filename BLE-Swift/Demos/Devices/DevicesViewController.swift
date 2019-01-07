@@ -45,7 +45,7 @@ class DevicesViewController: BaseViewController, UICollectionViewDataSource, UIC
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let device = BLECenter.shared.connectedDevices[indexPath.item];
-        BLECenter.shared.defaultInteractionDeviceName = device.name
+//        BLECenter.shared.defaultInteractionDeviceName = device.name
         let vc = DevicesVC()
         navigationController?.pushViewController(vc, animated: true)
     }

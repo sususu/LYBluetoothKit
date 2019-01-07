@@ -85,6 +85,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="debugBtn" destination="7Gz-ki-CjR" id="7O5-gO-TkJ"/>
                 <outlet property="dot" destination="Pb0-KE-8Jv" id="E3P-er-p4W"/>
                 <outlet property="nameLbl" destination="HFs-7n-3xs" id="TbC-PN-bVw"/>
                 <outlet property="serviceLbl" destination="fir-Pf-UEY" id="ACA-Vi-qDN"/>
