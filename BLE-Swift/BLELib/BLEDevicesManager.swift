@@ -15,7 +15,7 @@ class BLEDevicesManager: NSObject {
     
     var connectLock = NSLock()
     var connectTaskList:Set<BLEConnectTask> = []
-    var connectedDevices:Set<BLEDevice> = []
+    var connectedDevices:[BLEDevice] = []
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -33,7 +33,10 @@ class BLEDevicesManager: NSObject {
     
     func deviceReady(withTask task: BLEConnectTask) {
         if task.state == .success {
-            self.connectedDevices.insert(task.device!)
+            if self.connectedDevices.contains(task.device!) {
+                self.connectedDevices.remove(task.device!)
+            }
+            self.connectedDevices.insert(task.device!, at: 0)
         }
         DispatchQueue.main.async {
             // 回调连接的block

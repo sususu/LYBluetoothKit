@@ -17,14 +17,19 @@ class OtaViewController: ConnectBaseVC {
     }
 
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: - 事件处理
+    @IBAction func autoOtaBtnClick
+() {
+        
     }
-    */
 
+    @IBAction func sdBtnClick() {
+        let vc = OtaConfigVC()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func oneKeyOtaBtnClick() {
+        
+    }
 }

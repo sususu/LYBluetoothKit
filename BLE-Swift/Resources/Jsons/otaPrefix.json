@@ -1,0 +1,22 @@
+[
+  {
+    "deviceName" : "ZeTime 男款",
+    "bleName" : "ZeTime#",
+    "prefix" : "07A"
+  },
+  {
+    "deviceName" : "ZeTime 女款",
+    "bleName" : "ZeTime#",
+    "prefix" : "07B"
+  },
+  {
+    "deviceName" : "ZeFit4",
+    "bleName" : "ZeFit4#",
+    "prefix" : "L28Q"
+  },
+  {
+    "deviceName" : "ZeFit4 心率版",
+    "bleName" : "ZeFit4 HR#",
+    "prefix" : "L38Q"
+  }
+]

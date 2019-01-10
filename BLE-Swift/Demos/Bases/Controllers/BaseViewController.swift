@@ -239,16 +239,17 @@ class BaseViewController: UIViewController {
                 weakSelf?.performSelector(onMainThread: confirmSel!, with: nil, waitUntilDone: false)
             }
         }
-        let cancelAction = UIAlertAction(title: cancelText, style: .cancel) { (action) in
-            if cancelSel != nil {
-                weakSelf?.performSelector(onMainThread: cancelSel!, with: nil, waitUntilDone: false)
-            }
-        }
-        
         alertCtrl.addAction(confirmAction)
+        
         if cancelText != nil {
+            let cancelAction = UIAlertAction(title: cancelText, style: .cancel) { (action) in
+                if cancelSel != nil {
+                    weakSelf?.performSelector(onMainThread: cancelSel!, with: nil, waitUntilDone: false)
+                }
+            }
             alertCtrl.addAction(cancelAction)
         }
+        
         UIApplication.shared.keyWindow?.rootViewController?.present(alertCtrl, animated: true, completion: nil)
     }
     

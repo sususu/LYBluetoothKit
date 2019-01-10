@@ -35,9 +35,9 @@ class ConnectStateHeaderView: UIView {
 //        stateBtn.layer.masksToBounds = true
         stateBtn.addTarget(self, action: #selector(stateBtnClick), for: .touchUpInside)
         stateBtn.titleLabel?.font = font(16)
-        stateBtn.layer.shadowOffset = CGSize(width: 3, height: 3)
+        stateBtn.layer.shadowOffset = CGSize(width: 1, height: 1)
         stateBtn.layer.shadowColor = rgb(80, 80, 80).cgColor
-        stateBtn.layer.shadowOpacity = 0.8
+        stateBtn.layer.shadowOpacity = 0.6
         
         addSubview(stateBtn)
         

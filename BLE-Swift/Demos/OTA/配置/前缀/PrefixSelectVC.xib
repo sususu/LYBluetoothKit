@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PrefixSelectVC" customModule="BLE_Swift" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="SUG-AK-VaD" id="9yM-xt-E3F"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="SUG-AK-VaD">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <view key="tableHeaderView" contentMode="scaleToFill" id="rqv-TY-zPt" userLabel="headerView">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nordic和apollo2平台的手表手环，在进入ota模式时，会切换蓝牙名称（其规则为“前缀” + 设备ID后五位），具体前缀可以询问相关固件开发人员，或者自行使用lightblue查询" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZbZ-ew-8t6">
+                                <rect key="frame" x="15" y="10" width="345" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="1Wy-m0-O0z"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="0.2395336881" blue="0.21081201320000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NEq-UH-kVU">
+                                <rect key="frame" x="15" y="100" width="80" height="40"/>
+                                <color key="backgroundColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="URX-ik-ZYD"/>
+                                    <constraint firstAttribute="height" constant="40" id="ZNo-ZP-WX2"/>
+                                </constraints>
+                                <state key="normal" title="添加一项">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="addNewItem:" destination="-1" eventType="touchUpInside" id="kXb-So-Tuc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBU-fp-k9w">
+                                <rect key="frame" x="280" y="100" width="80" height="40"/>
+                                <color key="backgroundColor" red="1" green="0.2395336881" blue="0.21081201320000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="HFH-Eb-YLG"/>
+                                    <constraint firstAttribute="width" constant="80" id="RpJ-e7-YN7"/>
+                                </constraints>
+                                <state key="normal" title="导出配置">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="exportAllItems:" destination="-1" eventType="touchUpInside" id="dwf-mZ-xYi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="KBU-fp-k9w" firstAttribute="top" secondItem="ZbZ-ew-8t6" secondAttribute="bottom" constant="10" id="OAV-0z-Ceu"/>
+                            <constraint firstItem="ZbZ-ew-8t6" firstAttribute="top" secondItem="rqv-TY-zPt" secondAttribute="top" constant="10" id="SoH-Om-GLP"/>
+                            <constraint firstItem="ZbZ-ew-8t6" firstAttribute="leading" secondItem="rqv-TY-zPt" secondAttribute="leading" constant="15" id="W47-Ab-guP"/>
+                            <constraint firstItem="NEq-UH-kVU" firstAttribute="leading" secondItem="rqv-TY-zPt" secondAttribute="leading" constant="15" id="ewg-Ll-TeS"/>
+                            <constraint firstItem="NEq-UH-kVU" firstAttribute="top" secondItem="ZbZ-ew-8t6" secondAttribute="bottom" constant="10" id="ipx-5o-dqi"/>
+                            <constraint firstAttribute="trailing" secondItem="ZbZ-ew-8t6" secondAttribute="trailing" constant="15" id="psh-a4-Ms5"/>
+                            <constraint firstAttribute="trailing" secondItem="KBU-fp-k9w" secondAttribute="trailing" constant="15" id="tnK-EW-ORh"/>
+                        </constraints>
+                    </view>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="SUG-AK-VaD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6z0-k9-T2m"/>
+                <constraint firstItem="SUG-AK-VaD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="78F-gs-ebW"/>
+                <constraint firstAttribute="bottom" secondItem="SUG-AK-VaD" secondAttribute="bottom" id="Fmq-4J-UvG"/>
+                <constraint firstAttribute="trailing" secondItem="SUG-AK-VaD" secondAttribute="trailing" id="jm3-VJ-fMU"/>
+            </constraints>
+            <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
+        </view>
+    </objects>
+</document>

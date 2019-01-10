@@ -64,7 +64,7 @@ class ProtocolMenuDetailsVC: BaseViewController, UITableViewDataSource, UITableV
         runner.run(self.protocols[indexPath.row], boolCallback: { (bool) in
             
         }, stringCallback: { (str) in
-            weakSelf?.alert(msg: TR("Result"), confirmSel: nil, cancelText: nil, cancelSel: nil)
+            weakSelf?.alert(msg: (str ?? ""), confirmSel: nil, cancelText: nil, cancelSel: nil)
         }, dictCallback: { (dict) in
             
         }, dictArrayCallback: { (dicts) in

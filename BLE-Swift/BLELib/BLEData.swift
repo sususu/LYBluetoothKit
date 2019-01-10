@@ -33,7 +33,8 @@ enum BLEDataState {
     var recvDataLength:Int = 0
     var recvDataCount:Int = 1
     var type:BLEDataType = .normal
-    var sendToUuid:String?
+    var sendToUuid: String?
+    var recvFromUuid: String?
     var state:BLEDataState = .plain {
         didSet {
             stateRaw = "state change:\(state)"

@@ -138,20 +138,42 @@ public enum BLETaskState {
         stateOb = data.observe(\BLEData.stateRaw) { (bleData, change) in
 //            print("hello")
             switch bleData.state {
+            case .plain:
+                return
+            case .sending:
+                return
+            case .sent:
+                return
             case .sendFailed:
-                let error = BLEError.taskError(reason: .sendFailed)
-                weakSelf?.error = error
+                let error = weakSelf?.data.error
+                weakSelf?.error = error ?? BLEError.taskError(reason: .sendFailed)
                 weakSelf?.state = .failed
                 weakSelf?.device = nil
+                weakSelf?.data.recvData = nil
+                weakSelf?.data.recvDatas = nil
                 weakSelf?.parser.clear()
             case .recvFailed:
-                let error = BLEError.taskError(reason: .dataError)
+                let error = weakSelf?.data.error
+                weakSelf?.error = error ?? BLEError.taskError(reason: .dataError)
+                weakSelf?.state = .failed
+                weakSelf?.device = nil
+                weakSelf?.data.recvData = nil
+                weakSelf?.data.recvDatas = nil
+                weakSelf?.parser.clear()
+            case .recving:
+                return
+            case .recved:
+                weakSelf?.error = nil
+                weakSelf?.state = .success
+                weakSelf?.parser.clear()
+            case .timeout:
+                let error = BLEError.taskError(reason: .timeout)
                 weakSelf?.error = error
                 weakSelf?.state = .failed
                 weakSelf?.device = nil
+                weakSelf?.data.recvData = nil
+                weakSelf?.data.recvDatas = nil
                 weakSelf?.parser.clear()
-            default:
-                break
             }
             weakSelf?.stopTimer()
             if weakSelf != nil {
@@ -164,6 +186,8 @@ public enum BLETaskState {
         super.start()
         parser.clear()
         
+        data.state = .sending
+        
         if data.sendToUuid == nil {
             guard let uuid = BLEConfig.shared.sendUUID[data.type] else {
                 data.error = BLEError.deviceError(reason: .noCharacteristics)
@@ -171,6 +195,9 @@ public enum BLETaskState {
                 return
             }
             data.sendToUuid = uuid
+            
+            let recvUuid = BLEConfig.shared.recvUUID[data.type]
+            data.recvFromUuid = recvUuid
         }
         
         
@@ -183,6 +210,8 @@ public enum BLETaskState {
         if !sendDevice.write(data.sendData, characteristicUUID: data.sendToUuid!) {
             data.error = BLEError.deviceError(reason: .disconnected)
             data.state = .sendFailed
+        } else {
+            data.state = .sent
         }
     }
     
@@ -194,7 +223,11 @@ public enum BLETaskState {
             return
         }
         
-        if uuid == self.data.sendToUuid {
+        guard let device = notification.userInfo?[BLEKey.device] as? BLEDevice else {
+            return
+        }
+        
+        if uuid == self.data.recvFromUuid && device == self.device {
             parser.standardParse(data: data, sendData: self.data.sendData, recvCount: self.data.recvDataCount)
         }
         
@@ -202,18 +235,24 @@ public enum BLETaskState {
 
     override func timeoutHandler() {
         super.timeoutHandler()
-        self.error = BLEError.taskError(reason: .timeout)
-        self.device = nil
-        self.state = .failed
-        NotificationCenter.default.post(name: BLEInnerNotification.taskFinish, object: nil, userInfo: [BLEKey.task : self])
+        if self.data.state == .timeout ||
+            self.data.state == .sendFailed ||
+            self.data.state == .recvFailed {
+            return
+        }
+        // 在kvo里面处理
+        self.data.state = .timeout
     }
     
     /// MARK: - 代理实现
     func didFinishParser(data: Data, dataArr: Array<Data>, recvCount: Int) {
+        // kvo 里面处理完成任务
         if self.data.recvDataCount == recvCount {
             self.data.recvDatas = dataArr
             self.data.recvData = data
-            stopTimer()
+            self.data.state = .recved
+        } else {
+            self.data.state = .recvFailed
         }
     }
     

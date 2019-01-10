@@ -8,6 +8,9 @@
 
 import UIKit
 
+let kFirmwareFilePath = StorageUtils.getDocPath() + "/Firmwares"
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -17,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
     
+        createFirmwareDirectory()
+        
         SlideMenuOptions.leftViewWidth = UIScreen.main.bounds.width - 80;
         SlideMenuOptions.panGesturesEnabled = false
         
@@ -31,7 +36,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    // MARK: - 文件操作业务
+    func createFirmwareDirectory() {
+        if !StorageUtils.isFileExits(atPath: kFirmwareFilePath) {
+            _ = StorageUtils.createPath(path: kFirmwareFilePath)
+        }
+    }
+    
+    
+    
 
+    // MARK: - 生命周期
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -54,6 +70,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        let fileName = url.absoluteString.lastPathComponent
+        
+        let filePath = "Inbox".stringByAppending(pathComponent: fileName)
+        
+        let absolutePath = StorageUtils.getDocPath().stringByAppending(pathComponent: filePath)
+        
+        if !StorageUtils.isFileExits(atPath: absolutePath) {
+            return false
+        }
+        
+        var fm = Firmware()
+        fm.name = fileName
+        fm.path = filePath
+        fm.id = Int(Date().timeIntervalSince1970)
+        
+        let vc = FirmwareSaveVC()
+        vc.tmpFirmware = fm
+        
+        let nav = LYNavigationController(rootViewController: vc)
+        self.window?.rootViewController?.present(nav, animated: true, completion: nil)
+        
+        return true
+    }
 
 }
 

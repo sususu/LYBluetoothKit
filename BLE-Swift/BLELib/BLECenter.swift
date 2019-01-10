@@ -18,12 +18,16 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     /// shared instance
     public static let shared = BLECenter()
     
-    public var state:CBManagerState = .unknown
+    public var state: CBManagerState = .unknown
     
-    public var discoveredDevices:Set<BLEDevice> = Set()
+    public var discoveredDevices: Set<BLEDevice> = Set()
     
-    public var connectedDevices:[BLEDevice] {
-        return Array(BLEDevicesManager.shared.connectedDevices)
+    public var connectedDevices: [BLEDevice] {
+        return BLEDevicesManager.shared.connectedDevices
+    }
+    
+    public var hasConnectedDevice: Bool {
+        return connectedDevices.count > 0
     }
     
     // MARK: - 私有属性
@@ -198,15 +202,28 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     
     
     func send(data:BLEData, callback:CommonCallback?, toDeviceName:String? = nil, timeout:TimeInterval = kDefaultTimeout) -> BLETask? {
+        
+        if state != .poweredOn {
+            DispatchQueue.main.async {
+                if self.state == .poweredOff {
+                    callback?(nil, BLEError.phoneError(reason: .bluetoothPowerOff))
+                } else {
+                    callback?(nil, BLEError.phoneError(reason: .bluetoothUnavaliable))
+                }
+            }
+            return nil
+        }
+        
+        
         var deviceName = defaultInteractionDeviceName
         if toDeviceName != nil {
             deviceName = toDeviceName
         }
         
-        if deviceName == nil {
+        if deviceName == nil || self.connectedDevices.count == 0 {
             print("deviceName and defaultInteractionDeviceName can not be nil at the same time")
             DispatchQueue.main.async {
-                callback?(nil, BLEError.taskError(reason: .paramsError))
+                callback?(nil, BLEError.deviceError(reason: .disconnected))
             }
             return nil
         }
@@ -404,4 +421,18 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     private func getAllTodos() -> Array<BLEToDo> {
         return Array(powerOnToDoList)
     }
+    
+    public func isDeviceConnected(name: String?) -> Bool {
+        if name == nil {
+            return false
+        }
+        
+        for d in self.connectedDevices {
+            if d.name == name {
+                return true
+            }
+        }
+        return false
+    }
+    
 }

@@ -62,7 +62,7 @@ class BLEDataCenter: NSObject {
             return
         }
         DispatchQueue.main.async {
-            task.callback?(task.data, task.data.error)
+            task.callback?(task.data, task.error)
             task.callback = nil
         }
         self.removeTask(task: task)

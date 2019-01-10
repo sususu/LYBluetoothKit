@@ -5,6 +5,7 @@ target 'BLE-Swift' do
   pod 'PKHUD'
   pod 'SVProgressHUD'
   pod 'SwiftyJSON'
+  pod 'IQKeyboardManager'
 #  pod 'SlideMenuControllerSwift'
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!

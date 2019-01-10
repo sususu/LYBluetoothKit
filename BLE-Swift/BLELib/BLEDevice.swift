@@ -116,6 +116,15 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
         
     }
     
+    // MARK: - 公开方法
+    public func hasService(withUUID uuid: String) -> Bool {
+        if let _ = services[uuid] {
+            return true
+        }
+        return false
+    }
+    
+    
     // MARK: - 代理实现
     public func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
         self.rssi = RSSI.intValue
@@ -160,7 +169,7 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
         
         print("recv data:\(String(describing: characteristic.value?.hexEncodedString()))")
         
-        NotificationCenter.default.post(name: BLEInnerNotification.deviceDataUpdate, object: nil, userInfo: [BLEKey.data : characteristic.value ?? Data(), BLEKey.uuid : characteristic.uuid.uuidString])
+        NotificationCenter.default.post(name: BLEInnerNotification.deviceDataUpdate, object: nil, userInfo: [BLEKey.data : characteristic.value ?? Data(), BLEKey.uuid : characteristic.uuid.uuidString, BLEKey.device: self])
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {

@@ -30,6 +30,7 @@ class ConnectVC: BaseTableViewController, LeftDeviceCellDelegate {
         numLbl = NumberView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
         numLbl!.addTarget(self, action: #selector(showConnectedDevices), for: .touchUpInside)
         self.navigationItem.titleView = numLbl
+        self.numLbl.num = BLECenter.shared.connectedDevices.count
         
         setNavRightButton(withIcon: "shuaxin2", sel: #selector(searchDevices))
         setNavLeftButton(withIcon: "fanhui", sel: #selector(backClick))
@@ -39,7 +40,7 @@ class ConnectVC: BaseTableViewController, LeftDeviceCellDelegate {
     @objc func searchDevices() {
         BLECenter.shared.scan(callback: { (devices, err) in
             
-            self.devices = devices!
+            self.devices = devices ?? []
             self.tableView.reloadData()
             
         }, stop: {

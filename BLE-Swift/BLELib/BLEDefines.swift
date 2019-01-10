@@ -25,6 +25,7 @@ public typealias DataArrayCallback = (Array<Data>?, BLEError?)->Void
 public typealias StringCallback = (String?, BLEError?)->Void
 public typealias IntCallback = (Int, BLEError?)->Void
 public typealias DictArrayCallback = (Array<Dictionary<String, Any>>?, BLEError?)->Void
+public typealias FloatCallback = (Float, BLEError?)->Void
 
 
 // MARK: - 错误码定义
@@ -66,6 +67,10 @@ public struct UUID {
     static let c8002 = "8002"
     static let c8003 = "8003"
     static let c8004 = "8004"
+    
+    static let otaService = "1530"
+    static let otaNotifyC = "1531"
+    static let otaWriteC = "1532"
 }
 
 // MARK: - 常量定义
