@@ -435,4 +435,13 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
         return false
     }
     
+    public func getConnectedDevice(withName name: String) -> BLEDevice? {
+        for d in self.connectedDevices {
+            if d.name == name {
+                return d
+            }
+        }
+        return nil
+    }
+    
 }

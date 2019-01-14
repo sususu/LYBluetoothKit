@@ -8,6 +8,9 @@
 
 import UIKit
 
+let kOtaConfigLastPrefixKey = "kOtaConfigLastPrefixKey"
+
+
 class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegate, FirmwareSelectVCDelegate, PrefixSelectVCDelegate {
 
     @IBOutlet weak var platformSeg: UISegmentedControl!
@@ -24,7 +27,7 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
         // Do any additional setup after loading the view.
         prefixTextField.leftViewMode = .always
         let lbl = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: prefixTextField.bounds.height))
-        lbl.text = TR("   ota前缀: ")
+        lbl.text = TR("  OTA prefix: ")
         lbl.textColor = rgb(200, 30, 30)
         lbl.font = font(14)
         prefixTextField.leftView = lbl
@@ -34,13 +37,16 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
         tableView.register(UINib(nibName: "OtaDataSelectCell", bundle: nil), forCellReuseIdentifier: "cellId")
         tableView.rowHeight = 80
         
-        setNavRightButton(text: TR("Continue"), sel: #selector(continueBtnClick))
+        setNavRightButton(text: TR("CONTINUE"), sel: #selector(continueBtnClick))
         
         
         // 头部配置信息
         platformSeg.selectedSegmentIndex = Int(config.platform.rawValue)
         prefixTextField.text = config.prefix
         
+        if prefixTextField.text?.count == 0 {
+            prefixTextField.text = StorageUtils.getString(forKey: kOtaConfigLastPrefixKey)
+        }
         
         // 如果还没有连接任何设备，则进行连接
         if !BLECenter.shared.hasConnectedDevice {
@@ -109,6 +115,10 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
         let vc = SDOtaVC()
         vc.config = config
         navigationController?.pushViewController(vc, animated: true)
+        
+        if prefixTextField.text != nil {
+            StorageUtils.saveString(prefixTextField.text!, forKey: kOtaConfigLastPrefixKey)
+        }
     }
     
     // MARK: - 代理

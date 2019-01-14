@@ -1,0 +1,15 @@
+
+/* Class = "UISegmentedControl"; DFX-uY-SXU.segmentTitles[0] = "Apollo平台"; ObjectID = "DFX-uY-SXU"; */
+"DFX-uY-SXU.segmentTitles[0]" = "Apollo平台";
+
+/* Class = "UISegmentedControl"; DFX-uY-SXU.segmentTitles[1] = "Nordic平台"; ObjectID = "DFX-uY-SXU"; */
+"DFX-uY-SXU.segmentTitles[1]" = "Nordic平台";
+
+/* Class = "UILabel"; text = "Apollo3平台的手表手环不需要填写，其他的需要填写，详情点击前缀选择查看"; ObjectID = "HfN-v2-uBN"; */
+"HfN-v2-uBN.text" = "Apollo3平台的手表手环不需要填写，其他的需要填写，详情点击前缀选择查看";
+
+/* Class = "UIButton"; normalTitle = "前缀选择"; ObjectID = "c3F-iH-UAu"; */
+"c3F-iH-UAu.normalTitle" = "前缀选择";
+
+/* Class = "UIButton"; normalTitle = "继续"; ObjectID = "jiP-RM-0xI"; */
+"jiP-RM-0xI.normalTitle" = "继续";

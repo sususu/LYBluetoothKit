@@ -28,19 +28,19 @@ class FirmwareSelectCell: UITableViewCell {
         
         switch firmware.type {
         case .platform:
-            typeLbl.text = TR("固")
+            typeLbl.text = TR("FW")
             typeLbl.backgroundColor = rgb(200, 30, 30)
         case .picture:
-            typeLbl.text = TR("字")
+            typeLbl.text = TR("PIC")
             typeLbl.backgroundColor = rgb(30, 30, 200)
         case .heartRate:
-            typeLbl.text = TR("心")
+            typeLbl.text = TR("HR")
             typeLbl.backgroundColor = rgb(230, 10, 10)
         case .touchPanel:
-            typeLbl.text = TR("触")
+            typeLbl.text = TR("TP")
             typeLbl.backgroundColor = rgb(30, 200, 30)
         default:
-            typeLbl.text = TR("未知")
+            typeLbl.text = TR("UK")
             typeLbl.backgroundColor = rgb(150, 150, 150)
         }
         

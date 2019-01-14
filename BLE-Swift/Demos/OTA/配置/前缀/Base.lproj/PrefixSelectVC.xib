@@ -24,20 +24,20 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <view key="tableHeaderView" contentMode="scaleToFill" id="rqv-TY-zPt" userLabel="headerView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="165"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nordic和apollo2平台的手表手环，在进入ota模式时，会切换蓝牙名称（其规则为“前缀” + 设备ID后五位），具体前缀可以询问相关固件开发人员，或者自行使用lightblue查询" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZbZ-ew-8t6">
-                                <rect key="frame" x="15" y="10" width="345" height="80"/>
+                                <rect key="frame" x="15" y="10" width="345" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="1Wy-m0-O0z"/>
+                                    <constraint firstAttribute="height" constant="100" id="1Wy-m0-O0z"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="1" green="0.2395336881" blue="0.21081201320000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NEq-UH-kVU">
-                                <rect key="frame" x="15" y="100" width="80" height="40"/>
+                                <rect key="frame" x="15" y="115" width="80" height="40"/>
                                 <color key="backgroundColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="URX-ik-ZYD"/>
@@ -51,7 +51,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBU-fp-k9w">
-                                <rect key="frame" x="280" y="100" width="80" height="40"/>
+                                <rect key="frame" x="280" y="115" width="80" height="40"/>
                                 <color key="backgroundColor" red="1" green="0.2395336881" blue="0.21081201320000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="HFH-Eb-YLG"/>
@@ -67,11 +67,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="KBU-fp-k9w" firstAttribute="top" secondItem="ZbZ-ew-8t6" secondAttribute="bottom" constant="10" id="OAV-0z-Ceu"/>
+                            <constraint firstItem="KBU-fp-k9w" firstAttribute="top" secondItem="ZbZ-ew-8t6" secondAttribute="bottom" constant="5" id="OAV-0z-Ceu"/>
                             <constraint firstItem="ZbZ-ew-8t6" firstAttribute="top" secondItem="rqv-TY-zPt" secondAttribute="top" constant="10" id="SoH-Om-GLP"/>
                             <constraint firstItem="ZbZ-ew-8t6" firstAttribute="leading" secondItem="rqv-TY-zPt" secondAttribute="leading" constant="15" id="W47-Ab-guP"/>
                             <constraint firstItem="NEq-UH-kVU" firstAttribute="leading" secondItem="rqv-TY-zPt" secondAttribute="leading" constant="15" id="ewg-Ll-TeS"/>
-                            <constraint firstItem="NEq-UH-kVU" firstAttribute="top" secondItem="ZbZ-ew-8t6" secondAttribute="bottom" constant="10" id="ipx-5o-dqi"/>
+                            <constraint firstItem="NEq-UH-kVU" firstAttribute="top" secondItem="ZbZ-ew-8t6" secondAttribute="bottom" constant="5" id="ipx-5o-dqi"/>
                             <constraint firstAttribute="trailing" secondItem="ZbZ-ew-8t6" secondAttribute="trailing" constant="15" id="psh-a4-Ms5"/>
                             <constraint firstAttribute="trailing" secondItem="KBU-fp-k9w" secondAttribute="trailing" constant="15" id="tnK-EW-ORh"/>
                         </constraints>

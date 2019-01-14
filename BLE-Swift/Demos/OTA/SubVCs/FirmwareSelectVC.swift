@@ -73,17 +73,17 @@ class FirmwareSelectVC: BaseViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch selectType! {
         case .platform:
-            return TR("固件列表")
+            return TR("Firmware List")
         case .touchPanel:
-            return TR("触摸固件列表")
+            return TR("TouchPanel List")
         case .heartRate:
-            return TR("心率固件列表")
+            return TR("HeartRate List")
         case .picture:
-            return TR("字库固件列表")
+            return TR("Picture List")
         case .language:
-            return TR("语言固件列表")
+            return TR("Language List")
         case .freeScale:
-            return TR("飞思珂列表")
+            return TR("FressScale List")
         }
     }
     

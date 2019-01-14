@@ -211,6 +211,9 @@ public enum BLETaskState {
             data.error = BLEError.deviceError(reason: .disconnected)
             data.state = .sendFailed
         } else {
+            if BLEConfig.shared.shouldSend03End {
+                _ = sendDevice.write(Data(bytes: [0x03]), characteristicUUID: data.recvFromUuid!)
+            }
             data.state = .sent
         }
     }

@@ -1,0 +1,12 @@
+
+/* Class = "UIButton"; normalTitle = "手动升级模式"; ObjectID = "IuM-Qe-ycD"; */
+"IuM-Qe-ycD.normalTitle" = "Manual OTA mode";
+
+/* Class = "UILabel"; text = "手动配置每一步进行升级："; ObjectID = "ZAR-Ve-RgQ"; */
+"ZAR-Ve-RgQ.text" = "Manually configure each step for OTA: ";
+
+/* Class = "UILabel"; text = "生产使用，根据配置信息自动升级多台设备："; ObjectID = "e6d-QY-I50"; */
+"e6d-QY-I50.text" = "Automatic upgrade of multiple devices according to configuration information for production use: ";
+
+/* Class = "UIButton"; normalTitle = "自动升级模式"; ObjectID = "eao-gx-pIQ"; */
+"eao-gx-pIQ.normalTitle" = "Automatic OTA mode";

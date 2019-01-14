@@ -1,0 +1,9 @@
+
+/* Class = "UITextField"; placeholder = "Device name"; ObjectID = "N7Z-iy-IKa"; */
+"N7Z-iy-IKa.placeholder" = "Device name";
+
+/* Class = "UITextField"; placeholder = "OTA name prefix"; ObjectID = "UWA-LO-iYV"; */
+"UWA-LO-iYV.placeholder" = "OTA name prefix";
+
+/* Class = "UITextField"; placeholder = "Bluetooth name prefix"; ObjectID = "htt-DY-zHn"; */
+"htt-DY-zHn.placeholder" = "Bluetooth name prefix";

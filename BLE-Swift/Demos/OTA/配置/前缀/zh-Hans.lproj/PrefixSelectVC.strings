@@ -1,0 +1,9 @@
+
+/* Class = "UIButton"; normalTitle = "导出配置"; ObjectID = "KBU-fp-k9w"; */
+"KBU-fp-k9w.normalTitle" = "导出配置";
+
+/* Class = "UIButton"; normalTitle = "添加一项"; ObjectID = "NEq-UH-kVU"; */
+"NEq-UH-kVU.normalTitle" = "添加一项";
+
+/* Class = "UILabel"; text = "Nordic和apollo2平台的手表手环，在进入ota模式时，会切换蓝牙名称（其规则为“前缀” + 设备ID后五位），具体前缀可以询问相关固件开发人员，或者自行使用lightblue查询"; ObjectID = "ZbZ-ew-8t6"; */
+"ZbZ-ew-8t6.text" = "Nordic和apollo2平台的手表手环，在进入ota模式时，会切换蓝牙名称（其规则为“前缀” + 设备ID后五位），具体前缀可以询问相关固件开发人员，或者自行使用lightblue查询";

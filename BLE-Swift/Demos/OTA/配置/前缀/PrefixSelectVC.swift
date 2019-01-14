@@ -13,7 +13,7 @@ protocol PrefixSelectVCDelegate: NSObjectProtocol {
 }
 
 
-class PrefixSelectVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+class PrefixSelectVC: BaseViewController, UITableViewDataSource, UITableViewDelegate, PrefixAddVCDelegate {
 
     var prefixs: [OtaPrefix]!
     
@@ -34,15 +34,17 @@ class PrefixSelectVC: BaseViewController, UITableViewDataSource, UITableViewDele
         tableView.dataSource = self
         tableView.register(UINib(nibName: "PrefixCell", bundle: nil), forCellReuseIdentifier: "cellId")
         
-        title = TR("OTA前缀选择")
+        title = TR("OTA prefix selection")
         
-        setNavRightButton(text: TR("Edit"), sel: #selector(editBtnClick))
+        setNavRightButton(text: TR("EDIT"), sel: #selector(editBtnClick))
     }
 
 
     // MARK: - 事件处理
     @IBAction func addNewItem(_ sender: Any) {
-        
+        let vc = PrefixAddVC()
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func exportAllItems(_ sender: Any) {
@@ -77,5 +79,16 @@ class PrefixSelectVC: BaseViewController, UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return TR("Product List")
+    }
+    
+    // MARK: - 代理
+    func didSavePrefix(prefix: OtaPrefix) {
+        if OtaService.shared.prefixs.count == 0 {
+            prefixs = OtaService.shared.readPrefixsFromDisk()
+            OtaService.shared.prefixs = prefixs
+        } else {
+            prefixs = OtaService.shared.prefixs
+        }
+        tableView.reloadData()
     }
 }

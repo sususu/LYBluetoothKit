@@ -1,0 +1,18 @@
+
+/* Class = "UILabel"; text = "0%"; ObjectID = "E1C-dB-ru6"; */
+"E1C-dB-ru6.text" = "0%";
+
+/* Class = "UIButton"; normalTitle = "开始"; ObjectID = "a3w-Mg-IM3"; */
+"a3w-Mg-IM3.normalTitle" = "START";
+
+/* Class = "UIButton"; normalTitle = "重置设备"; ObjectID = "d8L-Zs-O8P"; */
+"d8L-Zs-O8P.normalTitle" = "RESET";
+
+/* Class = "UIButton"; normalTitle = "获取版本"; ObjectID = "dQo-Rn-Xw5"; */
+"dQo-Rn-Xw5.normalTitle" = "VERSION";
+
+/* Class = "UIButton"; normalTitle = "获取设备ID"; ObjectID = "myG-gw-e6T"; */
+"myG-gw-e6T.normalTitle" = "DEVICE ID";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "yAv-zx-4eG"; */
+"yAv-zx-4eG.text" = "";

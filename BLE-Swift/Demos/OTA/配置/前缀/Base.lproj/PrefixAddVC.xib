@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PrefixAddVC" customModule="BLE_Swift" customModuleProvider="target">
+            <connections>
+                <outlet property="bleNamePrefixTF" destination="htt-DY-zHn" id="Hdg-xh-k3b"/>
+                <outlet property="nameTF" destination="N7Z-iy-IKa" id="zOo-1P-v3y"/>
+                <outlet property="otaPrefixTF" destination="UWA-LO-iYV" id="MuO-yy-sCH"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Device name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N7Z-iy-IKa" userLabel="nameTF">
+                    <rect key="frame" x="20" y="40" width="335" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="EIy-Ec-Bmc"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Bluetooth name prefix" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="htt-DY-zHn" userLabel="bleName">
+                    <rect key="frame" x="20" y="100" width="335" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="7wC-ia-UlR"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="OTA name prefix" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UWA-LO-iYV" userLabel="otaName">
+                    <rect key="frame" x="20" y="160" width="335" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="c45-eg-RUb"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="N7Z-iy-IKa" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="2eA-uX-z3u"/>
+                <constraint firstItem="htt-DY-zHn" firstAttribute="top" secondItem="N7Z-iy-IKa" secondAttribute="bottom" constant="20" id="DYf-dH-wGW"/>
+                <constraint firstItem="htt-DY-zHn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="IHE-pJ-mTd"/>
+                <constraint firstItem="UWA-LO-iYV" firstAttribute="top" secondItem="htt-DY-zHn" secondAttribute="bottom" constant="20" id="KST-9G-pHX"/>
+                <constraint firstItem="N7Z-iy-IKa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="NxV-gg-q5Y"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="htt-DY-zHn" secondAttribute="trailing" constant="20" id="Zo7-ky-sT6"/>
+                <constraint firstItem="UWA-LO-iYV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="aLl-Ul-Vmq"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="UWA-LO-iYV" secondAttribute="trailing" constant="20" id="fu1-AQ-lKf"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="N7Z-iy-IKa" secondAttribute="trailing" constant="20" id="gJr-si-upE"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

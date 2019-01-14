@@ -97,7 +97,7 @@ class OtaService {
         }
     }
     
-    private func savePrefixsToDisk() {
+    func savePrefixsToDisk() {
         do {
             let data = try JSONEncoder().encode(prefixs)
             StorageUtils.save(data, forKey: kPrefixListCacheKey)

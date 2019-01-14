@@ -39,13 +39,13 @@ struct Firmware: Codable {
             return .platform
         }
         else if tmp.hasPrefix("heartrate") {
-            return .platform
+            return .heartRate
         }
         else if tmp.hasPrefix("picture") {
-            return .platform
+            return .picture
         }
         else if tmp.hasPrefix("touchpanel") {
-            return .platform
+            return .touchPanel
         }
         else {
             return .platform
@@ -55,15 +55,15 @@ struct Firmware: Codable {
     static func getTypeName(withType type: OtaDataType) -> String {
         switch type {
         case .platform:
-            return TR("固件")
+            return TR("FW")
         case .picture:
-            return TR("字库")
+            return TR("PIC")
         case .heartRate:
-            return TR("心率")
+            return TR("HR")
         case .touchPanel:
-            return TR("触摸")
+            return TR("TP")
         default:
-            return TR("未知")
+            return TR("UK")
         }
     }
     

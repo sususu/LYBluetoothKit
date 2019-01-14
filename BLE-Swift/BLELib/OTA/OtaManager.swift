@@ -8,46 +8,55 @@
 
 import UIKit
 
+// BLEKey.task: OtaTask
+let kOtaManagerAddTaskNotification = Notification.Name("kOtaManagerAddTaskNotification")
+let kOtaManagerRemoveTaskNotification = Notification.Name("kOtaManagerRemoveTaskNotification")
+let kOtaManagerRemoveAllTasksNotification = Notification.Name("kOtaManagerRemoveAllTasksNotification")
+
 public class OtaManager {
 
-    public func startOta(device: BLEDevice, otaDatas: [OtaDataModel], readyCallback: GetReadyBlock, progressCallback: FloatCallback, finishCallback: BoolCallback) {
-        
-        
-        
-    }
+    static let shared = OtaManager()
     
+    var taskList = [OtaTask]()
     
+    private init () {}
     
-    // MARK: - 工具
-    func crcData(for sendData: Data?) -> Data? {
-        var crc: UInt16 = 0xffff
-        let binBytes = sendData?.bytes
-        for i in 0..<(sendData?.count ?? 0) {
-            
-            crc = UInt16(Int(UInt8(crc >> 8)) | (Int(crc) << 8))
-            
-            crc ^= UInt16(binBytes?[i] ?? 0)
-            
-            crc ^= UInt16(Int(UInt8(crc & 0xff)) >> 4)
-            
-            crc ^= UInt16((Int(crc) << 8) << 4)
-            
-            crc ^= UInt16(((Int(crc) & 0xff) << 4) << 1)
+    public func startOta(device: BLEDevice, otaBleName: String, otaDatas: [OtaDataModel], readyCallback: EmptyBlock?, progressCallback: FloatCallback?, finishCallback: BoolCallback?) -> OtaTask?{
+        
+        if device.isOTAing {
+            return nil
         }
         
-        let dataCrc = Data(bytes: &crc, count: 2)
-        let num: Int = 4 - dataCrc.count
-        var zero: Int = 0
-        if num == 0 {
-            return dataCrc
-        } else {
-            var dataM = Data()
-            dataM.append(dataCrc)
-            dataM.append(Data(bytes: &zero, count: num))
-            return dataM
-        }
+        let task = OtaTask(device: device, otaBleName: otaBleName, otaDatas: otaDatas, readyCallback: readyCallback, progressCallback: progressCallback, finishCallback: finishCallback)
+        task.start()
+        taskList.append(task)
+        
+        
+        NotificationCenter.default.post(name: kOtaManagerAddTaskNotification, object: nil, userInfo: [BLEKey.task: task])
+        
+        return task
     }
-
+    
+    public func removeTask(_ task: OtaTask) {
+        taskList.remove(task)
+        
+        NotificationCenter.default.post(name: kOtaManagerRemoveTaskNotification, object: nil, userInfo: [BLEKey.task: task])
+    }
+    
+    public func cancelTask(_ task: OtaTask) {
+        if task.state == .otaing || task.state == .plain {
+            task.cancel()
+        }
+        removeTask(task)
+    }
+    
+    public func cancelAllTask() {
+        for task in taskList {
+            task.cancel()
+        }
+        taskList.removeAll()
+        NotificationCenter.default.post(name: kOtaManagerRemoveAllTasksNotification, object: nil, userInfo: nil)
+    }
     
     
 }

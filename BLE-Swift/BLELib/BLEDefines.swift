@@ -25,7 +25,7 @@ public typealias DataArrayCallback = (Array<Data>?, BLEError?)->Void
 public typealias StringCallback = (String?, BLEError?)->Void
 public typealias IntCallback = (Int, BLEError?)->Void
 public typealias DictArrayCallback = (Array<Dictionary<String, Any>>?, BLEError?)->Void
-public typealias FloatCallback = (Float, BLEError?)->Void
+public typealias FloatCallback = (Float)->Void
 
 
 // MARK: - 错误码定义
@@ -97,7 +97,8 @@ struct BLEInnerNotification {
     /// userInfo: BLEKey.task : BLETask
     static let taskFinish = NSNotification.Name("BLECenterNotification.taskFinish")
     
-    /// userInfo: BLEKey.uuid : String;  BLEKey.data : Data
+    /// userInfo: BLEKey.uuid : String;  BLEKey.data : Data;
+    /// BLEKey.device: BLEDevice
     static let deviceDataUpdate = NSNotification.Name("BLECenterNotification.deviceDataUpdate")
     
     /// userInfo: BLEKey.data : Data

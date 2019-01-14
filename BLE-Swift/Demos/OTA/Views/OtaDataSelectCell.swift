@@ -28,19 +28,19 @@ class OtaDataSelectCell: UITableViewCell {
         dataTextView.text = str
         switch type {
         case .platform:
-            nameLbl.text = TR("固件")
+            nameLbl.text = TR("FW")
             nameLbl.backgroundColor = rgb(200, 30, 30)
         case .picture:
-            nameLbl.text = TR("字库")
+            nameLbl.text = TR("PIC")
             nameLbl.backgroundColor = rgb(30, 30, 200)
         case .heartRate:
-            nameLbl.text = TR("心率")
+            nameLbl.text = TR("HR")
             nameLbl.backgroundColor = rgb(230, 10, 10)
         case .touchPanel:
-            nameLbl.text = TR("触摸")
+            nameLbl.text = TR("TP")
             nameLbl.backgroundColor = rgb(30, 200, 30)
         default:
-            nameLbl.text = TR("未知")
+            nameLbl.text = TR("UK")
             nameLbl.backgroundColor = rgb(150, 150, 150)
         }
     }

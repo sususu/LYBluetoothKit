@@ -29,6 +29,7 @@ public enum BLEError: Error {
         case dataError
         case timeout
         case repeatTask
+        case cancel
     }
     
     case phoneError(reason: PhoneReason)

@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "请正确填写下面信息，方便以后选择固件的时候，有更好的参照信息"; ObjectID = "2M9-Hu-jb4"; */
+"2M9-Hu-jb4.text" = "请正确填写下面信息，方便以后选择固件的时候，有更好的参照信息";
+
+/* Class = "UIButton"; normalTitle = "选择类型"; ObjectID = "3zW-om-JkX"; */
+"3zW-om-JkX.normalTitle" = "选择类型";
+
+/* Class = "UILabel"; text = "固件类型："; ObjectID = "5Xs-6s-AsV"; */
+"5Xs-6s-AsV.text" = "固件类型：";
+
+/* Class = "UILabel"; text = "固件名称："; ObjectID = "Wdq-o6-F2u"; */
+"Wdq-o6-F2u.text" = "固件名称：";
+
+/* Class = "UILabel"; text = "固件版本："; ObjectID = "ti4-9q-84q"; */
+"ti4-9q-84q.text" = "固件版本：";

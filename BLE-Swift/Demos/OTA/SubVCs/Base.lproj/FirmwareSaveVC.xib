@@ -24,16 +24,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请正确填写下面信息，方便以后选择固件的时候，有更好的参照信息" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2M9-Hu-jb4">
-                    <rect key="frame" x="30" y="94" width="315" height="60"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="60" id="jbO-cj-OKr"/>
-                    </constraints>
+                    <rect key="frame" x="30" y="94" width="315" height="38.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" red="0.46055788250000002" green="0.81455752609999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="固件名称：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wdq-o6-F2u">
-                    <rect key="frame" x="20" y="174" width="100" height="40"/>
+                    <rect key="frame" x="20" y="152.5" width="100" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="LH0-O8-wcY"/>
                         <constraint firstAttribute="width" constant="100" id="TXR-Yw-SLw"/>
@@ -43,7 +40,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SxQ-67-GIX" userLabel="nameTF">
-                    <rect key="frame" x="120" y="174" width="235" height="40"/>
+                    <rect key="frame" x="120" y="152.5" width="235" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Yt3-DB-fvT"/>
                     </constraints>
@@ -52,7 +49,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="固件版本：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ti4-9q-84q" userLabel="固件版本：">
-                    <rect key="frame" x="20" y="234" width="100" height="40"/>
+                    <rect key="frame" x="20" y="212.5" width="100" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Hn5-87-DmJ"/>
                         <constraint firstAttribute="width" constant="100" id="SvU-8B-5AY"/>
@@ -64,7 +61,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bD0-Wi-pPm" userLabel="versionTF">
-                    <rect key="frame" x="120" y="234" width="235" height="40"/>
+                    <rect key="frame" x="120" y="212.5" width="235" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="er9-Zn-sE6"/>
                     </constraints>
@@ -73,7 +70,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="固件类型：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Xs-6s-AsV" userLabel="固件类型：">
-                    <rect key="frame" x="20" y="294" width="100" height="40"/>
+                    <rect key="frame" x="20" y="272.5" width="100" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="A7N-nn-ePR"/>
                         <constraint firstAttribute="width" constant="100" id="FvE-la-R6w"/>
@@ -83,7 +80,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pB3-TP-pdr" userLabel="typeLbl">
-                    <rect key="frame" x="128" y="294" width="60" height="40"/>
+                    <rect key="frame" x="128" y="272.5" width="60" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="1da-q3-Juv"/>
                         <constraint firstAttribute="width" constant="60" id="nX1-gb-AQ2"/>
@@ -93,7 +90,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zW-om-JkX">
-                    <rect key="frame" x="208" y="294" width="147" height="40"/>
+                    <rect key="frame" x="208" y="272.5" width="147" height="40"/>
                     <color key="backgroundColor" red="0.46055788250000002" green="0.81455752609999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Sof-dd-Ktp"/>
@@ -106,7 +103,7 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TPT-X7-0m1" userLabel="line">
-                    <rect key="frame" x="128" y="333" width="60" height="1"/>
+                    <rect key="frame" x="128" y="311.5" width="60" height="1"/>
                     <color key="backgroundColor" red="0.46055788250000002" green="0.81455752609999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="aSH-Hc-4wb"/>
