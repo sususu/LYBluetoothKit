@@ -67,17 +67,21 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
             
             var f = true
             
-            for dict in firmwaresArr {
+            for i in 0 ..< firmwaresArr.count {
+                var dict = firmwaresArr[i]
                 let type = dict[kTypeKey] as! OtaDataType
                 if type == fm.type {
                     f = false
+                    
+                    var arr = dict[kFirmwaresKey] as! Array<Firmware>;
+                    arr.append(fm)
+                    dict[kFirmwaresKey] = arr
+                    firmwaresArr[i] = dict
                 }
-                var arr = dict[kFirmwaresKey] as! Array<Firmware>;
-                arr.append(fm)
             }
-            
+
             if f {
-                let name = TR("OTA LIST") + "(" + Firmware.getTypeName(withType: fm.type) + ")"
+                let name = Firmware.getTypeName(withType: fm.type)
                 var arr = [Firmware]();
                 arr.append(fm)
                 
@@ -131,7 +135,7 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
         
         guard let device = BLECenter.shared.getConnectedDevice(withName: config.deviceName) else {
             stopLoading()
-            showError(config.deviceName + TR("is disconnected, please reconnect"))
+            showError(config.deviceName + " " + TR("is disconnected, please reconnect"))
             self.startStopBtn.isEnabled = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 1                                                                             ) {
                 self.startStopBtn.isEnabled = true

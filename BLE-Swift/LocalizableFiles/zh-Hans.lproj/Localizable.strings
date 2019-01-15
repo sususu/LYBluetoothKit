@@ -1,0 +1,68 @@
+/* 
+  Localizations.strings
+  BLE-Swift
+
+  Created by SuJiang on 2019/1/14.
+  Copyright © 2019 ss. All rights reserved.
+*/
+
+"OTA prefix selection" = "OTA前缀选择";
+"SAVE" = "保存";
+"EDIT" = "编辑";
+"Add OTA Prefix" = "增加OTA前缀";
+"Success" = "成功";
+"Product List" = "产品列表";
+"No Task" = "没有OTA任务";
+"  OTA prefix: " = "   OTA前缀: ";
+"CONTINUE" = "继续";
+"DONE" = "完成";
+"Firmwares" = "固件";
+
+"Please input device name" = "请输入设备名称";
+"Please input bluetooth name" = "请输入蓝牙名称";
+"Please input OTA prefix name" = "请输入OTA名称前缀";
+
+
+"FW" = "固件";
+"PIC" = "字库";
+"HR" = "心率";
+"TP" = "触摸";
+"UK" = "位置";
+
+"Please select firmwares" = "请选择要升级的固件";
+"Please connect a device" = "请连接一个设备";
+"The connected device is not kind of Apollo3, please input OTA prefix" = "当前连接的设备不是Apollo3架构，需要输入OTA前缀";
+"Select your firmware for OTA" = "选择需要升级的固件";
+
+"Firmware List" = "固件列表";
+"TouchPanel List" = "触摸固件列表";
+"HeartRate List" = "心率固件列表";
+"Picture List" = "字库固件列表";
+"Language List" = "语言固件列表";
+"FressScale List" = "飞思珂列表";
+"OTA Tasks" = "OTA任务";
+"CANCEL All" = "取消所有";
+"YES" = "确定";
+"NO" = "取消";
+"Are you sure cancel all OTA tasks ?" = "您确定要取消所有的OTA任务吗？";
+"HOME" = "回到主页";
+"STOP" = "停止";
+"START" = "开始";
+"OTA LIST" = "升级列表";
+"Device'name is unsupported, please contact with administrator" = "设备名称不支持，请联系管理员";
+"is disconnected, please reconnect" = "断连了，请重新连接";
+"OtaDatas parse failed" = "OTA数据解析失败";
+"OTA success" = "OTA成功";
+"Cool" = "太棒了";
+"Please turn on bluetooth" = "请打开蓝牙";
+"Bluetooth is still unavailable" = "蓝牙暂时不可用";
+"Bluetooth is disconnected" = "蓝牙已断开";
+"No services found on devices" = "找不到设备的蓝牙服务";
+"Timeout" = "超时";
+"Failed" = "失败";
+"Params error" = "参数错误";
+"Data error" = "数据错误";
+"Task repeated" = "任务重复";
+"Task cancel" = "任务取消";
+"Please input name" = "请输入名称";
+"Please input version" = "请输入版本号";

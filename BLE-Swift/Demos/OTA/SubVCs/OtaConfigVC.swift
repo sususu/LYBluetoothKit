@@ -63,6 +63,8 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
     // 业务逻辑
     func updateUI() {
         
+        firmwareStrs = ["", "", "", ""]
+        
         // 设置固件配置信息
         for fm in config.firmwares {
             if fm.type == .picture {
@@ -147,16 +149,8 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     private func removeFirmwares(byType type: OtaDataType) {
-        var removeFms = [Int]()
-        for i in 0..<config.firmwares.count {
-            let fm = config.firmwares[i]
-            if fm.type == type {
-                removeFms.append(i)
-            }
-        }
-        
-        for fm in removeFms {
-            config.firmwares.remove(at: fm)
+        config.firmwares.removeAll { (fm) -> Bool in
+            return fm.type == type
         }
     }
     
@@ -196,7 +190,7 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
             if count <= 1 {
                 return 60
             } else {
-                return CGFloat(30 + 20 * (count - 1))
+                return CGFloat(40 + 25 * (count - 1))
             }
         }
         return 60

@@ -50,7 +50,7 @@ class OtaTaskTipView: UIView, UICollectionViewDataSource, UICollectionViewDelega
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: width, height: height)
         layout.minimumInteritemSpacing = 5
-        layout.minimumLineSpacing = 0
+        layout.minimumLineSpacing = 5
         collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height), collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self

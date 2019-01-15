@@ -25,7 +25,11 @@ class FirmwareSelectVC: BaseViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        firmwares = OtaService.shared.firmwares
+        for fm in OtaService.shared.firmwares {
+            if fm.type == selectType {
+                firmwares.append(fm)
+            }
+        }
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -52,6 +56,13 @@ class FirmwareSelectVC: BaseViewController, UITableViewDataSource, UITableViewDe
                     firmwares?.append(self.firmwares[ip.row])
                 }
             }
+            
+            if firmwares != nil {
+                firmwares?.sort(by: { (f1, f2) -> Bool in
+                    return Float(f1.versionName) ?? 0 < Float(f2.versionName) ?? 0
+                })
+            }
+            
             delegate?.didSelectFirmwares(firmwares: firmwares, selectType: selectType)
         }
         navigationController?.popViewController(animated: true)
