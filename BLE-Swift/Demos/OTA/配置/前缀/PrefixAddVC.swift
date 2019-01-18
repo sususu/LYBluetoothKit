@@ -55,6 +55,8 @@ class PrefixAddVC: BaseViewController {
         OtaService.shared.savePrefixsToDisk()
         delegate?.didSavePrefix(prefix: pf)
         showSuccess(TR("Success"))
+        
+        navigationController?.popViewController(animated: true)
     }
     
 }

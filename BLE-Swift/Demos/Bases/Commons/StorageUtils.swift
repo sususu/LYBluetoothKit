@@ -31,6 +31,29 @@ class StorageUtils {
     public static func get(forKey key: String) -> Any? {
         return UserDefaults.standard.value(forKey: key)
     }
+    
+    public static func saveAsFile(forString string: String, fileName: String) -> URL? {
+        guard let data = string.data(using: .utf8) else {
+            return nil
+        }
+        return saveAsFile(forData: data, fileName: fileName)
+    }
+    
+    public static func saveAsFile(forData data: Data, fileName: String) -> URL? {
+        let filePath = getDocPath().stringByAppending(pathComponent: fileName)
+        let url = URL(fileURLWithPath: getDocPath().stringByAppending(pathComponent: fileName))
+        if StorageUtils.isFileExits(atPath: filePath) {
+            _ = StorageUtils.deleteFile(atPath: filePath)
+        }
+        do {
+            try data.write(to: url, options: .atomic)
+        } catch {
+            return nil
+        }
+        return url
+    }
+    
+    
 
     public static func getDocPath() -> String {
         let manager = FileManager.default

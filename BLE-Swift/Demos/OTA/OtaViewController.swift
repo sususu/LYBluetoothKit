@@ -38,6 +38,12 @@ class OtaViewController: ConnectBaseVC, OtaTaskTipViewDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(otaTasksRemoveAllNotification(notification:)), name: kOtaManagerRemoveAllTasksNotification, object: nil)
         
         updateUI()
+        
+        
+//        let v = CmdInputView(frame: CGRect(x: 0, y: 200, width: kScreenWidth, height: 100))
+//        v.backgroundColor = UIColor.yellow
+//        self.view.addSubview(v)
+        
     }
 
     func didClickShowDetailBtn() {

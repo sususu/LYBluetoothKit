@@ -59,6 +59,7 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     // MARK: - 业务逻辑
+    // 解析ota配置模型 OtaConfig
     func parseConfigAndUpdateUI() {
         
         nameLbl.text = config.deviceName
@@ -101,12 +102,70 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
 
     // MARK: - 事件处理
     @IBAction func deviceIdBtnClick(_ sender: Any) {
+        
+        startLoading(nil)
+        weak var weakSelf = self
+        _ = BLECenter.shared.getDeviceID(stringCallback: { (str, err) in
+            weakSelf?.stopLoading()
+            if err != nil {
+                weakSelf?.handleBleError(error: err)
+            } else {
+                weakSelf?.showAlert(title: TR("DEVICE ID"), message: str ?? "")
+            }
+            
+        }, toDeviceName: config.deviceName)
+        
     }
     
     @IBAction func versionBtnClick(_ sender: Any) {
+        let sheet = UIAlertController(title: TR("CHOOSE TYPE"), message: nil, preferredStyle: .actionSheet)
+        let action1 = UIAlertAction(title: TR("WITH BUILD"), style: .default) { (action) in
+            self.getFirmwareVersion(type: 5)
+        }
+        let action2 = UIAlertAction(title: TR("NO BUILD"), style: .default) { (action) in
+            self.getFirmwareVersion(type: 1)
+        }
+        let action3 = UIAlertAction(title: TR("DATE FORMAT"), style: .default) { (action) in
+            self.getFirmwareVersion(type: 6)
+        }
+        let action4 = UIAlertAction(title: TR("CANCEL"), style: .destructive)
+        sheet.addAction(action1)
+        sheet.addAction(action2)
+        sheet.addAction(action3)
+        sheet.addAction(action4)
+        navigationController?.present(sheet, animated: true, completion: nil)
     }
     
+    func getFirmwareVersion(type: UInt8) {
+        startLoading(nil)
+        weak var weakSelf = self
+        _ = BLECenter.shared.getVersionStr(forType: type, stringCallback: { (str, err) in
+            weakSelf?.stopLoading()
+            if err != nil {
+                weakSelf?.handleBleError(error: err)
+            } else {
+                weakSelf?.showAlert(title: TR("DEVICE ID"), message: str ?? "")
+            }
+            
+        }, toDeviceName: config.deviceName)
+    }
+    
+    
+    
     @IBAction func resetBtnClick(_ sender: Any) {
+        
+        startLoading(nil)
+        weak var weakSelf = self
+        _ = BLECenter.shared.resetDevice(boolCallback: { (b, err) in
+            weakSelf?.stopLoading()
+            
+            if err != nil {
+                weakSelf?.handleBleError(error: err)
+            } else {
+                weakSelf?.showSuccess(TR("Success"))
+            }
+            
+        }, toDeviceName: config.deviceName)
     }
     
     @IBAction func startOrStopBtnClick(_ sender: Any) {
@@ -189,6 +248,7 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
         otaTask = OtaManager.shared.startOta(device: device, otaBleName: otaBleName, otaDatas: otaDatas, readyCallback: {
             weakSelf?.stopLoading()
         }, progressCallback: nil, finishCallback: nil)
+        otaTask?.config = config
     }
     
     @objc func backToHome() {
@@ -258,5 +318,19 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return firmwaresArr[section][kNameKey] as? String
+    }
+    
+    
+    // MARK: - 工具
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: TR("OK"), style: .cancel, handler: nil)
+        let csAction = UIAlertAction(title: TR("COPY"), style: .destructive) { (action) in
+            let pasteboard = UIPasteboard.general
+            pasteboard.string = message
+        }
+        alert.addAction(okAction)
+        alert.addAction(csAction)
+        navigationController?.present(alert, animated: true, completion: nil)
     }
 }

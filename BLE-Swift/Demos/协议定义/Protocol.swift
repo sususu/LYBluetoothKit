@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Protocol: NSObject {
+class Protocol: Codable {
     var name = ""
     var code = ""
     var summary = ""

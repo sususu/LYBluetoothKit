@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReturnFormat: NSObject {
+class ReturnFormat: Codable {
 
     var type = "bool"
     var length = 0

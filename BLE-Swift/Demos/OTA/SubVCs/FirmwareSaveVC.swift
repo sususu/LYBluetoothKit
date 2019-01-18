@@ -60,6 +60,7 @@ class FirmwareSaveVC: BaseViewController, FirmwareTypeVCDelegate {
             return
         }
         
+        self.view.endEditing(true)
         doSaveFirmware()
     }
     

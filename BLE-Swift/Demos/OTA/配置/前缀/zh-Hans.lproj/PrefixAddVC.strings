@@ -3,7 +3,7 @@
 "N7Z-iy-IKa.placeholder" = "设备名称";
 
 /* Class = "UITextField"; placeholder = "OTA name prefix"; ObjectID = "UWA-LO-iYV"; */
-"UWA-LO-iYV.placeholder" = "蓝牙名称前缀";
+"UWA-LO-iYV.placeholder" = "OTA前缀";
 
 /* Class = "UITextField"; placeholder = "Bluetooth name prefix"; ObjectID = "htt-DY-zHn"; */
-"htt-DY-zHn.placeholder" = "OTA前缀";
+"htt-DY-zHn.placeholder" = "蓝牙名称前缀";

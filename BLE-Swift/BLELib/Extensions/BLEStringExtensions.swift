@@ -30,4 +30,14 @@ extension String {
         return data
     }
     
+    static func dateString(withFormat format: String, timeInterval: TimeInterval) -> String {
+        let date = Date(timeIntervalSince1970: timeInterval)
+        let df = DateFormatter()
+        df.dateFormat = format
+        return df.string(from: date)
+    }
+    
+    static func timeString(fromTimeInterval timeInterval: TimeInterval) -> String {
+        return dateString(withFormat: "yyyy-MM-dd HH:mm:ss", timeInterval: timeInterval)
+    }
 }

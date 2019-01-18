@@ -30,7 +30,7 @@ class TaskSummaryCell: UICollectionViewCell {
     }
     
     private func updateUI() {
-        nameLbl.text = task.device.name
+        nameLbl.text = task.config?.deviceName
         if task.state == .otaing {
             setNormalTintColor()
             progressView.progress = task.progress

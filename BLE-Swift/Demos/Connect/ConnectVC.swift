@@ -20,6 +20,8 @@ class ConnectVC: BaseTableViewController, LeftDeviceCellDelegate {
 
         self.tableView.register(UINib(nibName: "LeftDeviceCell", bundle: nil), forCellReuseIdentifier: "cellId")
         
+        NotificationCenter.default.addObserver(self, selector: #selector(backClick), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        
         configNav()
         
         searchDevices()

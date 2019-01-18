@@ -44,8 +44,25 @@ class TaskDetailCell: UITableViewCell {
     
     func updateUI() {
         
-        nameLbl.text = task.device.name
+        let deviceName = task.config?.deviceName ?? ""
         
+        if deviceName == task.device.name {
+            nameLbl.attributedText = nil
+            nameLbl.text = task.device.name
+        } else {
+            nameLbl.text = nil
+            
+            let str2 = "(" + task.device.name + ")"
+            let attrStr = NSMutableAttributedString(string: deviceName + str2)
+            
+            attrStr.addAttribute(.foregroundColor, value: nameLbl.textColor, range: NSRange(location: 0, length: deviceName.count))
+            attrStr.addAttribute(.font, value: nameLbl.font, range: NSRange(location: 0, length: deviceName.count))
+            attrStr.addAttribute(.foregroundColor, value: rgb(180, 30, 30), range: NSRange(location: deviceName.count, length: str2.count))
+            let f = bFont(14)
+            attrStr.addAttribute(.font, value: f, range: NSRange(location: deviceName.count, length: str2.count))
+            nameLbl.attributedText = attrStr
+        }
+
         if task.state == .otaing {
             setNormalTintColor()
             progressView.progress = task.progress
