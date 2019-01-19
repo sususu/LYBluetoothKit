@@ -104,6 +104,7 @@ class ToolsViewController: BaseViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.searchBar.endEditing(true)
         tableView.deselectRow(at: indexPath, animated: true)
         let vc = DeviceTestVC()
         vc.product = products[indexPath.row]

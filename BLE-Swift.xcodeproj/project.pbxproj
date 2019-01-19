@@ -69,6 +69,9 @@
 		2B4AB46D21F1779100EF5327 /* TestGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4AB46B21F1779100EF5327 /* TestGroupCell.swift */; };
 		2B4AB46E21F1779100EF5327 /* TestGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B4AB46C21F1779100EF5327 /* TestGroupCell.xib */; };
 		2B4AB47021F1854000EF5327 /* TestGroupLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4AB46F21F1854000EF5327 /* TestGroupLayout.swift */; };
+		2B4AB47221F2BAFA00EF5327 /* NumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4AB47121F2BAFA00EF5327 /* NumberInputView.swift */; };
+		2B4AB47521F2C27D00EF5327 /* SplitLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4AB47421F2C27D00EF5327 /* SplitLineView.swift */; };
+		2B4AB47721F2D2E400EF5327 /* TlvLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4AB47621F2D2E400EF5327 /* TlvLineView.swift */; };
 		2B5832E0217573E000259593 /* UIDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5832DF217573E000259593 /* UIDefines.swift */; };
 		2B5832E22175832200259593 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5832E12175832200259593 /* StringExtensions.swift */; };
 		2B5832E421758ECA00259593 /* NumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5832E321758ECA00259593 /* NumberView.swift */; };
@@ -245,6 +248,9 @@
 		2B4AB46B21F1779100EF5327 /* TestGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestGroupCell.swift; sourceTree = "<group>"; };
 		2B4AB46C21F1779100EF5327 /* TestGroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestGroupCell.xib; sourceTree = "<group>"; };
 		2B4AB46F21F1854000EF5327 /* TestGroupLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestGroupLayout.swift; sourceTree = "<group>"; };
+		2B4AB47121F2BAFA00EF5327 /* NumberInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInputView.swift; sourceTree = "<group>"; };
+		2B4AB47421F2C27D00EF5327 /* SplitLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitLineView.swift; sourceTree = "<group>"; };
+		2B4AB47621F2D2E400EF5327 /* TlvLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TlvLineView.swift; sourceTree = "<group>"; };
 		2B5832DF217573E000259593 /* UIDefines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDefines.swift; sourceTree = "<group>"; };
 		2B5832E12175832200259593 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		2B5832E321758ECA00259593 /* NumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberView.swift; sourceTree = "<group>"; };
@@ -669,10 +675,20 @@
 		2B4AB46621F174AD00EF5327 /* ReturnParser */ = {
 			isa = PBXGroup;
 			children = (
+				2B4AB47321F2C26500EF5327 /* Views */,
 				2B4AB46721F174D200EF5327 /* ReturnFormatVC.swift */,
 				2B4AB46821F174D200EF5327 /* ReturnFormatVC.xib */,
 			);
 			path = ReturnParser;
+			sourceTree = "<group>";
+		};
+		2B4AB47321F2C26500EF5327 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2B4AB47421F2C27D00EF5327 /* SplitLineView.swift */,
+				2B4AB47621F2D2E400EF5327 /* TlvLineView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		2B5832DD2175712B00259593 /* Devices */ = {
@@ -751,6 +767,7 @@
 			children = (
 				2B62A55821DDD84D0051DD38 /* RefreshBtn.swift */,
 				2BE7701721E3207400FD6374 /* ConnectStateHeaderView.swift */,
+				2B4AB47121F2BAFA00EF5327 /* NumberInputView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1323,6 +1340,7 @@
 				2B5832EB2175CC4600259593 /* DevicesCell.swift in Sources */,
 				2B45B95221EDC18D0058E137 /* DeviceProductCell.swift in Sources */,
 				2B3657B021DCD54B0070E7AB /* SlideMenuController.swift in Sources */,
+				2B4AB47221F2BAFA00EF5327 /* NumberInputView.swift in Sources */,
 				2B7AB99021EECE5900D01E39 /* AddDeviceTestVC.swift in Sources */,
 				2B80C1EC21EC35D600FE7BF7 /* PrefixAddVC.swift in Sources */,
 				2B9DD96A21E717EA00C215E5 /* PrefixCell.swift in Sources */,
@@ -1331,6 +1349,7 @@
 				2B45B94E21EDABE90058E137 /* DeviceProduct.swift in Sources */,
 				2B4AB46121F01D0500EF5327 /* CmdTextField.swift in Sources */,
 				2BE7704221E48CB900FD6374 /* StorageUtils.swift in Sources */,
+				2B4AB47721F2D2E400EF5327 /* TlvLineView.swift in Sources */,
 				2B36579821DCC6290070E7AB /* OtaViewController.swift in Sources */,
 				2B62A56521DF28470051DD38 /* CharacteristicCellTableViewCell.swift in Sources */,
 				2BE7701421E2F9A600FD6374 /* ProtocolRunner.swift in Sources */,
@@ -1372,6 +1391,7 @@
 				2BB4B6E721E99B6C00F22268 /* TaskSummaryCell.swift in Sources */,
 				2B3657AB21DCD0140070E7AB /* LeftViewController.swift in Sources */,
 				2B5832E421758ECA00259593 /* NumberView.swift in Sources */,
+				2B4AB47521F2C27D00EF5327 /* SplitLineView.swift in Sources */,
 				2B45B95A21EDE6C70058E137 /* DeviceTestVC.swift in Sources */,
 				2BA23FA721E4B6D600EF1B77 /* FirmwareTypeCell.swift in Sources */,
 			);

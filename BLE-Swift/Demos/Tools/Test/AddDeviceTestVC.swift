@@ -10,7 +10,7 @@ import UIKit
 import YYKit
 import DLRadioButton
 
-class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
+class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, ReturnFormatVCDelegate {
 
     
     var product: DeviceProduct!
@@ -33,10 +33,22 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var selectedGroupIndex: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = TR("增加测试用例")
+        
+        let layout = TestGroupLayout()
+        layout.itemSize = CGSize(width: 80, height: 30)
+        layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(UINib(nibName: "TestGroupCell", bundle: nil), forCellWithReuseIdentifier: "cellId")
+        collectionView.setCollectionViewLayout(layout, animated: false)
         
         previewLbl = YYLabel(frame: preContainerView.bounds)
         previewLbl.isUserInteractionEnabled = true
@@ -105,13 +117,52 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
     
     // 事件处理
     @objc func saveBtnClick() {
+        if cmdInputView.units.count == 0 {
+            showError(TR("请输入指令"))
+            return
+        }
+        
+        guard let name = nameTF.text, name.count > 0 else {
+            showError(TR("请输入名称"))
+            return
+        }
+        
+        guard let selectedIndex = selectedGroupIndex else {
+            showError(TR("请选择分组"))
+            return
+        }
+        
+        let alert = UIAlertController(title: TR("保存测试单元"), message: TR("请确认\n分组：\(product.testGroups![selectedIndex])\n"), preferredStyle: .alert)
+        let ok = UIAlertAction(title: TR("OK"), style: .default) { (action) in
+            self.saveTestUnit(name: name, units: self.cmdInputView.units, groupIndex: selectedIndex)
+        }
+        let cancel = UIAlertAction(title: TR("Cancel"), style: .cancel, handler: nil)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        navigationController?.present(alert, animated: true, completion: nil)
+        
         
     }
+    func saveTestUnit(name: String, units: [CmdUnit], groupIndex: Int) {
+        showSuccess(TR("Success"))
+        
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
     
     @IBAction func splitBtnClick(_ sender: Any) {
+        let vc = ReturnFormatVC()
+        vc.returnFormat = splitReturnFormat()
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func tlvBtnClick(_ sender: Any) {
+        let vc = ReturnFormatVC()
+        vc.returnFormat = tlvReturnFormat()
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func addGroupBtnClick(_ sender: Any) {
@@ -137,6 +188,7 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
         product.testGroups!.append(group)
         ToolsService.shared.saveProduct(product)
         collectionView.reloadData()
+        showSuccess(TR("Success"))
     }
     
     
@@ -148,6 +200,25 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! TestGroupCell
         cell.updateUI(withGroup: product.testGroups![indexPath.row])
+        if let selectedIndex = selectedGroupIndex, selectedIndex == indexPath.row {
+            cell.updateSelected(selected: true)
+        } else {
+            cell.updateSelected(selected: false)
+        }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedGroupIndex = indexPath.row
+        collectionView.reloadData()
+    }
+    
+    // MARK: - 代理
+    func cancelEditReturnFormat() {
+        
+    }
+    
+    func didFinishEditReturnFormat(format: ReturnFormat) {
+        
     }
 }

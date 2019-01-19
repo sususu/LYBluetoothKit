@@ -17,8 +17,6 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var hideShowBtn: UIButton!
     var product: DeviceProduct!
     
-    var testGroups = [DeviceTestGroup]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,6 +47,7 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func addTestBtnClick(_ sender: Any) {
+        self.view.endEditing(true)
         let vc = AddDeviceTestVC()
         vc.product = product
         navigationController?.pushViewController(vc, animated: true)
@@ -56,22 +55,22 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: - tableView
     func numberOfSections(in tableView: UITableView) -> Int {
-        return testGroups.count
+        return product.testGroups?.count ?? 0
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let group = testGroups[section]
-        return group.testUnits?.count ?? 0
+        let group = product.testGroups?[section]
+        return group?.testUnits?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! DeviceTestCell
-        let group = testGroups[indexPath.section]
-        cell.updateUI(withTestUnit: group.testUnits![indexPath.row])
+        let group = product.testGroups?[indexPath.section]
+        cell.updateUI(withTestUnit: group!.testUnits![indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return testGroups[section].name
+        return product.testGroups![section].name
     }
     
     

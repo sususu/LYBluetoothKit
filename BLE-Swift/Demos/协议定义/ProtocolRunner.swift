@@ -37,12 +37,6 @@ class ProtocolRunner {
                         stringCallback?(str)
                     }
                 }
-                else if pcl.isDictionaryReturn {
-                    
-                }
-                else if pcl.isArrayReturn {
-                    
-                }
                 
             }, toDeviceName: nil)
         } else {

@@ -77,12 +77,12 @@ class ProtocolJsonParser: NSObject {
     
     func parserReturnFormat(dict: Dictionary<String, JSON>) -> ReturnFormat {
         
-        let type = dict["type"]!.stringValue
+        let type = dict["type"]!.intValue
         let length = dict["length"]!.intValue
         let byteFlag = dict["byteFlag"]!.intValue
         
         let rf = ReturnFormat()
-        rf.type = type
+        rf.type = ReturnFormatKind(rawValue: type) ?? .bool
         rf.length = length
         rf.byteFlag = byteFlag
         
