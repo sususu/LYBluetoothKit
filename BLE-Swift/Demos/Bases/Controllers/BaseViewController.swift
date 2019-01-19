@@ -18,7 +18,7 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
-        SVProgressHUD.setBackgroundColor(kMainColor)
+        SVProgressHUD.setBackgroundColor(rgb(80, 80, 80))
         SVProgressHUD.setForegroundColor(UIColor.white)
         
         if self.navigationController != nil && self.navigationController!.viewControllers.count > 1 &&
@@ -106,7 +106,7 @@ class BaseViewController: UIViewController {
         
         let btn = UIButton(type: .custom)
         btn.setTitle(text, for: .normal)
-        btn.setTitleColor(UIColor.red, for: .normal)
+        btn.setTitleColor(kMainColor, for: .normal)
         
         
         let f = font(14)
@@ -127,7 +127,7 @@ class BaseViewController: UIViewController {
         
         let btn = UIButton(type: .custom)
         btn.setTitle(text, for: .normal)
-        btn.setTitleColor(UIColor.red, for: .normal)
+        btn.setTitleColor(kMainColor, for: .normal)
         
         
         let f = font(14)

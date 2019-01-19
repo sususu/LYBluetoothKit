@@ -15,8 +15,10 @@
                 <outlet property="boolRadio" destination="bxO-61-yRq" id="9jo-4p-3zz"/>
                 <outlet property="cmdInputView" destination="MkC-Jp-Yif" id="DZM-DW-Uxf"/>
                 <outlet property="collectionView" destination="GJJ-3h-Syq" id="1Zh-rR-2TH"/>
+                <outlet property="expressionLbl" destination="TdC-OP-sje" id="eiU-fx-Kez"/>
                 <outlet property="nameTF" destination="jKq-7Z-fEM" id="ubc-54-yF6"/>
                 <outlet property="preContainerView" destination="Iwg-0y-yLp" id="UJ1-A7-rCO"/>
+                <outlet property="psLbl" destination="Tgk-Ka-eX1" id="675-SI-f3S"/>
                 <outlet property="splitRadio" destination="PS9-RJ-Qar" id="NtX-Eh-hGC"/>
                 <outlet property="stringRadio" destination="T1Z-sw-lqD" id="drs-4p-fZZ"/>
                 <outlet property="tlvRadio" destination="krP-hj-48P" id="BB0-eP-Rrp"/>
@@ -99,23 +101,23 @@
                     <rect key="frame" x="0.0" y="220" width="375" height="447"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="指令：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GmS-io-KVY">
-                            <rect key="frame" x="10" y="10" width="37" height="80"/>
+                            <rect key="frame" x="10" y="10" width="37" height="60"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="80" id="jld-0e-oyd"/>
+                                <constraint firstAttribute="height" constant="60" id="jld-0e-oyd"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MkC-Jp-Yif" customClass="CmdInputView" customModule="BLE_Swift" customModuleProvider="target">
-                            <rect key="frame" x="52" y="10" width="318" height="80"/>
+                            <rect key="frame" x="52" y="10" width="318" height="60"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="80" id="Spl-jM-5JN"/>
+                                <constraint firstAttribute="height" constant="60" id="Spl-jM-5JN"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名称：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yah-Lz-8WR">
-                            <rect key="frame" x="5" y="100" width="37" height="30"/>
+                            <rect key="frame" x="5" y="80" width="37" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="LPL-cS-yzm"/>
                             </constraints>
@@ -124,7 +126,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jKq-7Z-fEM" userLabel="nameTF">
-                            <rect key="frame" x="52" y="100" width="318" height="30"/>
+                            <rect key="frame" x="52" y="80" width="318" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="pbq-Hb-MVG"/>
                             </constraints>
@@ -133,7 +135,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预览：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJZ-nV-xzY" userLabel="preview">
-                            <rect key="frame" x="5" y="145" width="37" height="15"/>
+                            <rect key="frame" x="5" y="125" width="37" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="IOA-9t-gF8"/>
                             </constraints>
@@ -142,14 +144,14 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iwg-0y-yLp" userLabel="previewView">
-                            <rect key="frame" x="52" y="145" width="318" height="100"/>
+                            <rect key="frame" x="52" y="125" width="318" height="100"/>
                             <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="100" id="bYH-vX-pbi"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="返回：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X64-tB-Esn">
-                            <rect key="frame" x="5" y="260" width="37" height="15"/>
+                            <rect key="frame" x="5" y="240" width="37" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="xaW-Z9-axe"/>
                             </constraints>
@@ -158,7 +160,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bxO-61-yRq" customClass="DLRadioButton">
-                            <rect key="frame" x="47" y="255" width="50" height="30"/>
+                            <rect key="frame" x="47" y="235" width="50" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="K7O-6r-FyD"/>
                                 <constraint firstAttribute="width" constant="50" id="m58-bY-u3G"/>
@@ -181,9 +183,12 @@
                                     <real key="value" value="2"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="boolBtnClick:" destination="-1" eventType="touchUpInside" id="PpK-E3-j6x"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T1Z-sw-lqD" userLabel="String" customClass="DLRadioButton">
-                            <rect key="frame" x="107" y="255" width="60" height="30"/>
+                            <rect key="frame" x="107" y="235" width="60" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="1bF-xy-eg1"/>
                                 <constraint firstAttribute="height" constant="30" id="9pv-Ua-A8Y"/>
@@ -206,9 +211,12 @@
                                     <real key="value" value="2"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="stringBtnClick:" destination="-1" eventType="touchUpInside" id="bTh-IE-fI6"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PS9-RJ-Qar" customClass="DLRadioButton">
-                            <rect key="frame" x="177" y="255" width="50" height="30"/>
+                            <rect key="frame" x="177" y="235" width="50" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="Zng-vn-O4l"/>
                                 <constraint firstAttribute="height" constant="30" id="pxc-78-WoY"/>
@@ -236,7 +244,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krP-hj-48P" userLabel="tlv" customClass="DLRadioButton">
-                            <rect key="frame" x="237" y="255" width="45" height="30"/>
+                            <rect key="frame" x="237" y="235" width="45" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="hMx-Hl-bv8"/>
                                 <constraint firstAttribute="width" constant="45" id="hry-Dm-FRZ"/>
@@ -263,6 +271,22 @@
                                 <action selector="tlvBtnClick:" destination="-1" eventType="touchUpInside" id="obq-IG-yvF"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TdC-OP-sje" userLabel="expressionLbl">
+                            <rect key="frame" x="30" y="275" width="340" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tgk-Ka-eX1" userLabel="psLbl">
+                            <rect key="frame" x="30" y="280" width="340" height="15"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="2WI-xW-lAY"/>
+                                <constraint firstAttribute="height" constant="15" id="8vi-jI-abL"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="0.84705882349999995" green="0.1176470588" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -270,12 +294,16 @@
                         <constraint firstAttribute="trailing" secondItem="MkC-Jp-Yif" secondAttribute="trailing" constant="5" id="6ow-T9-Zzf"/>
                         <constraint firstItem="bxO-61-yRq" firstAttribute="top" secondItem="Iwg-0y-yLp" secondAttribute="bottom" constant="10" id="6xu-iu-TZe"/>
                         <constraint firstItem="X64-tB-Esn" firstAttribute="leading" secondItem="H8I-vD-12b" secondAttribute="leading" constant="5" id="72k-8W-EWm"/>
+                        <constraint firstItem="TdC-OP-sje" firstAttribute="leading" secondItem="H8I-vD-12b" secondAttribute="leading" constant="30" id="7Js-Dh-nYB"/>
+                        <constraint firstItem="TdC-OP-sje" firstAttribute="trailing" secondItem="H8I-vD-12b" secondAttribute="trailing" constant="-5" id="8RH-qh-JN8"/>
+                        <constraint firstItem="Tgk-Ka-eX1" firstAttribute="leading" secondItem="H8I-vD-12b" secondAttribute="leading" constant="30" id="9hv-uT-UEO"/>
                         <constraint firstItem="T1Z-sw-lqD" firstAttribute="top" secondItem="Iwg-0y-yLp" secondAttribute="bottom" constant="10" id="Cgd-pa-R6x"/>
                         <constraint firstItem="jKq-7Z-fEM" firstAttribute="top" secondItem="MkC-Jp-Yif" secondAttribute="bottom" constant="10" id="Fyb-Bu-iMZ"/>
                         <constraint firstItem="HJZ-nV-xzY" firstAttribute="top" secondItem="yah-Lz-8WR" secondAttribute="bottom" constant="15" id="IaJ-Jm-dxP"/>
                         <constraint firstItem="PS9-RJ-Qar" firstAttribute="leading" secondItem="T1Z-sw-lqD" secondAttribute="trailing" constant="10" id="Ivp-5u-b8d"/>
                         <constraint firstItem="HJZ-nV-xzY" firstAttribute="leading" secondItem="H8I-vD-12b" secondAttribute="leading" constant="5" id="MaJ-5g-9Y3"/>
                         <constraint firstItem="krP-hj-48P" firstAttribute="top" secondItem="Iwg-0y-yLp" secondAttribute="bottom" constant="10" id="ROb-bg-SAq"/>
+                        <constraint firstItem="Tgk-Ka-eX1" firstAttribute="top" secondItem="TdC-OP-sje" secondAttribute="bottom" constant="5" id="TcF-Tz-iQg"/>
                         <constraint firstItem="yah-Lz-8WR" firstAttribute="leading" secondItem="H8I-vD-12b" secondAttribute="leading" constant="5" id="Vba-rL-Prh"/>
                         <constraint firstItem="T1Z-sw-lqD" firstAttribute="leading" secondItem="bxO-61-yRq" secondAttribute="trailing" constant="10" id="Xvj-QZ-Tym"/>
                         <constraint firstItem="MkC-Jp-Yif" firstAttribute="top" secondItem="H8I-vD-12b" secondAttribute="top" constant="10" id="ZBK-xr-6Jf"/>
@@ -286,9 +314,11 @@
                         <constraint firstAttribute="trailing" secondItem="jKq-7Z-fEM" secondAttribute="trailing" constant="5" id="efV-Lx-UJl"/>
                         <constraint firstItem="PS9-RJ-Qar" firstAttribute="top" secondItem="Iwg-0y-yLp" secondAttribute="bottom" constant="10" id="g1D-rW-BBU"/>
                         <constraint firstItem="MkC-Jp-Yif" firstAttribute="leading" secondItem="GmS-io-KVY" secondAttribute="trailing" constant="5" id="heV-Hp-RCo"/>
+                        <constraint firstItem="TdC-OP-sje" firstAttribute="top" secondItem="bxO-61-yRq" secondAttribute="bottom" constant="10" id="hhx-qV-fIZ"/>
                         <constraint firstItem="Iwg-0y-yLp" firstAttribute="top" secondItem="jKq-7Z-fEM" secondAttribute="bottom" constant="15" id="jKA-m2-w1M"/>
                         <constraint firstItem="Iwg-0y-yLp" firstAttribute="leading" secondItem="HJZ-nV-xzY" secondAttribute="trailing" constant="10" id="k6o-iH-Gn3"/>
                         <constraint firstItem="jKq-7Z-fEM" firstAttribute="leading" secondItem="yah-Lz-8WR" secondAttribute="trailing" constant="10" id="pIx-gv-m7g"/>
+                        <constraint firstAttribute="trailing" secondItem="Tgk-Ka-eX1" secondAttribute="trailing" constant="5" id="tJN-1n-TbK"/>
                         <constraint firstItem="krP-hj-48P" firstAttribute="leading" secondItem="PS9-RJ-Qar" secondAttribute="trailing" constant="10" id="v8H-I8-Hzw"/>
                         <constraint firstItem="yah-Lz-8WR" firstAttribute="top" secondItem="GmS-io-KVY" secondAttribute="bottom" constant="10" id="yaf-yW-VEv"/>
                     </constraints>

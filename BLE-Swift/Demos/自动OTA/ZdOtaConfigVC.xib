@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZdOtaConfigVC" customModule="BLE_Swift" customModuleProvider="target">
+            <connections>
+                <outlet property="apolloRadio" destination="IF3-ds-ahi" id="Wy9-94-0S3"/>
+                <outlet property="bleNameTF" destination="syd-a4-eeH" id="jxm-kG-vh6"/>
+                <outlet property="nordicRadio" destination="9qL-23-5zd" id="Fgu-tL-VDe"/>
+                <outlet property="prefixTF" destination="KGy-4P-cv5" id="xnC-Vq-5KZ"/>
+                <outlet property="signalLbl" destination="IF1-fp-ZMW" id="Ibh-OC-fIy"/>
+                <outlet property="signalSlider" destination="hhE-hi-VWQ" id="qtn-WT-eiU"/>
+                <outlet property="tlsrRadio" destination="y1n-1K-eTQ" id="q5K-fn-ewx"/>
+                <outlet property="upgradeCountLbl" destination="RaN-bp-enJ" id="r3q-v5-nxt"/>
+                <outlet property="upgradeCountSlider" destination="sOj-H1-WNb" id="Uv6-OP-OCI"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="syd-a4-eeH">
+                    <rect key="frame" x="20" y="40" width="335" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Voa-4V-51p"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KGy-4P-cv5">
+                    <rect key="frame" x="20" y="90" width="335" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="N2r-az-pYg"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="信号强度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GjL-th-KGx">
+                    <rect key="frame" x="20" y="150" width="69.5" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="yXd-Gv-560"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最小信号强度：-100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IF1-fp-ZMW">
+                    <rect key="frame" x="20" y="176" width="130.5" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="gz1-Tp-Nep"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="hhE-hi-VWQ">
+                    <rect key="frame" x="18" y="202" width="339" height="31"/>
+                    <connections>
+                        <action selector="signalChanged:" destination="-1" eventType="valueChanged" id="Pw8-lp-uV1"/>
+                    </connections>
+                </slider>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="平台选择" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzl-Ig-ZeN">
+                    <rect key="frame" x="20" y="252" width="69.5" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="id5-3j-ekQ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IF3-ds-ahi" customClass="DLRadioButton">
+                    <rect key="frame" x="17" y="283" width="80" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="DWR-K0-ylh"/>
+                        <constraint firstAttribute="height" constant="40" id="dhp-ol-prS"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="Apollo">
+                        <color key="titleColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="iconSize">
+                            <real key="value" value="25"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="indicatorSize">
+                            <real key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="marginWidth">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9qL-23-5zd" userLabel="Nordic" customClass="DLRadioButton">
+                    <rect key="frame" x="107" y="283" width="85" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Z99-Ne-KOb"/>
+                        <constraint firstAttribute="width" constant="85" id="nLs-Xt-BKN"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="Nordic">
+                        <color key="titleColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="iconSize">
+                            <real key="value" value="25"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="indicatorSize">
+                            <real key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="marginWidth">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y1n-1K-eTQ" userLabel="TLSR" customClass="DLRadioButton">
+                    <rect key="frame" x="202" y="283" width="80" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="Bsb-ra-8KX"/>
+                        <constraint firstAttribute="height" constant="40" id="XDa-R7-c0J"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="TLSR">
+                        <color key="titleColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="iconSize">
+                            <real key="value" value="25"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="indicatorSize">
+                            <real key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="marginWidth">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最多同时升级：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PiP-Sk-cg3">
+                    <rect key="frame" x="20" y="343" width="121.5" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="H3M-RE-gqq"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5台" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RaN-bp-enJ">
+                    <rect key="frame" x="146.5" y="343" width="27.5" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="O7P-rL-IeI"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="sOj-H1-WNb">
+                    <rect key="frame" x="18" y="374" width="339" height="31"/>
+                    <connections>
+                        <action selector="upgradeCountChanged:" destination="-1" eventType="valueChanged" id="kh9-Z2-ZcL"/>
+                    </connections>
+                </slider>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="sOj-H1-WNb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="11J-xh-oUa"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="KGy-4P-cv5" secondAttribute="trailing" constant="20" id="1yf-fw-rma"/>
+                <constraint firstItem="hhE-hi-VWQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="4pI-GJ-6bq"/>
+                <constraint firstItem="GjL-th-KGx" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="5El-wE-ynB"/>
+                <constraint firstItem="IF3-ds-ahi" firstAttribute="top" secondItem="xzl-Ig-ZeN" secondAttribute="bottom" constant="10" id="71b-Uv-xBT"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sOj-H1-WNb" secondAttribute="trailing" constant="20" id="8bo-gW-C2f"/>
+                <constraint firstItem="IF1-fp-ZMW" firstAttribute="top" secondItem="GjL-th-KGx" secondAttribute="bottom" constant="5" id="Cwi-j2-T5c"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hhE-hi-VWQ" secondAttribute="trailing" constant="20" id="Eev-YI-S1k"/>
+                <constraint firstItem="y1n-1K-eTQ" firstAttribute="leading" secondItem="9qL-23-5zd" secondAttribute="trailing" constant="10" id="Gw4-qh-2jB"/>
+                <constraint firstItem="syd-a4-eeH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="LJc-mn-2bY"/>
+                <constraint firstItem="RaN-bp-enJ" firstAttribute="leading" secondItem="PiP-Sk-cg3" secondAttribute="trailing" constant="5" id="RYR-4r-ZFH"/>
+                <constraint firstItem="GjL-th-KGx" firstAttribute="top" secondItem="KGy-4P-cv5" secondAttribute="bottom" constant="20" id="VCf-dM-QT5"/>
+                <constraint firstItem="KGy-4P-cv5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="dZL-0T-Y8R"/>
+                <constraint firstItem="hhE-hi-VWQ" firstAttribute="top" secondItem="IF1-fp-ZMW" secondAttribute="bottom" constant="5" id="geA-Ql-0QR"/>
+                <constraint firstItem="xzl-Ig-ZeN" firstAttribute="top" secondItem="hhE-hi-VWQ" secondAttribute="bottom" constant="20" id="hMO-N7-ioT"/>
+                <constraint firstItem="sOj-H1-WNb" firstAttribute="top" secondItem="PiP-Sk-cg3" secondAttribute="bottom" constant="10" id="hi0-tg-Lvv"/>
+                <constraint firstItem="KGy-4P-cv5" firstAttribute="top" secondItem="syd-a4-eeH" secondAttribute="bottom" constant="10" id="hqm-jC-NRt"/>
+                <constraint firstItem="syd-a4-eeH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="l27-fW-2Kk"/>
+                <constraint firstItem="9qL-23-5zd" firstAttribute="top" secondItem="xzl-Ig-ZeN" secondAttribute="bottom" constant="10" id="lGo-6Q-mci"/>
+                <constraint firstItem="RaN-bp-enJ" firstAttribute="top" secondItem="9qL-23-5zd" secondAttribute="bottom" constant="20" id="lSZ-2A-2Io"/>
+                <constraint firstItem="y1n-1K-eTQ" firstAttribute="top" secondItem="xzl-Ig-ZeN" secondAttribute="bottom" constant="10" id="lZ0-xQ-TzI"/>
+                <constraint firstItem="9qL-23-5zd" firstAttribute="leading" secondItem="IF3-ds-ahi" secondAttribute="trailing" constant="10" id="oPJ-sz-0Is"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="syd-a4-eeH" secondAttribute="trailing" constant="20" id="qGT-IN-0Pl"/>
+                <constraint firstItem="IF1-fp-ZMW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="qUG-UO-a3a"/>
+                <constraint firstItem="xzl-Ig-ZeN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="tEi-Ge-6jS"/>
+                <constraint firstItem="IF3-ds-ahi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="17" id="wOd-uE-5zw"/>
+                <constraint firstItem="PiP-Sk-cg3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="zTV-kl-nai"/>
+                <constraint firstItem="PiP-Sk-cg3" firstAttribute="top" secondItem="IF3-ds-ahi" secondAttribute="bottom" constant="20" id="zcH-RV-0c2"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

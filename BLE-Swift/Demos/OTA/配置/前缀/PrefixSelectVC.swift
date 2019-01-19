@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PrefixSelectVCDelegate: NSObjectProtocol {
-    func didSelectPrefixStr(prefixStr: String);
+    func didSelectPrefixStr(prefixStr: String, bleName: String);
 }
 
 
@@ -73,7 +73,7 @@ class PrefixSelectVC: BaseViewController, UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        delegate?.didSelectPrefixStr(prefixStr: prefixs[indexPath.row].prefix)
+        delegate?.didSelectPrefixStr(prefixStr: prefixs[indexPath.row].prefix, bleName: prefixs[indexPath.row].bleName)
         navigationController?.popViewController(animated: true)
     }
     

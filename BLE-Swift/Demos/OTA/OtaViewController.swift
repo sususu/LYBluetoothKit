@@ -54,7 +54,9 @@ class OtaViewController: ConnectBaseVC, OtaTaskTipViewDelegate {
 
     // MARK: - 事件处理
     @IBAction func autoOtaBtnClick () {
-        
+        let vc = ZdOtaConfigVC()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     @IBAction func sdBtnClick() {

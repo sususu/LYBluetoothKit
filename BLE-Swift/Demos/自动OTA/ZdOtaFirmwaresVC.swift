@@ -1,63 +1,59 @@
 //
-//  OtaConfigVC.swift
+//  ZdOtaFirmwaresVC.swift
 //  BLE-Swift
 //
-//  Created by SuJiang on 2019/1/8.
+//  Created by SuJiang on 2019/1/19.
 //  Copyright © 2019 ss. All rights reserved.
 //
 
 import UIKit
+import DLRadioButton
 
-let kOtaConfigLastPrefixKey = "kOtaConfigLastPrefixKey"
+class ZdOtaFirmwaresVC: BaseViewController, UITableViewDataSource, UITableViewDelegate, FirmwareSelectVCDelegate {
 
-
-class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegate, FirmwareSelectVCDelegate, PrefixSelectVCDelegate {
-
-    @IBOutlet weak var platformSeg: UISegmentedControl!
-    @IBOutlet weak var prefixTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var fmRadio: DLRadioButton!
+    
+    @IBOutlet weak var fmVersionTF: UITextField!
+    
+    
+    @IBOutlet weak var picRadio: DLRadioButton!
+    
+    @IBOutlet weak var picVersionTF: UITextField!
+    
+    @IBOutlet weak var tpRadio: DLRadioButton!
+    
+    @IBOutlet weak var tpVersionTF: UITextField!
+    
+    @IBOutlet weak var hrRadio: DLRadioButton!
+    
+    @IBOutlet weak var hrVersionTF: UITextField!
+    
+    var config: OtaConfig!
     var firmwareStrs: [String] = ["", "", "", ""]
-    var config = OtaConfig()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        showConnectState()
-        // Do any additional setup after loading the view.
-        prefixTextField.leftViewMode = .always
-        let lbl = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: prefixTextField.bounds.height))
-        lbl.text = TR("  OTA prefix: ")
-        lbl.textColor = rgb(200, 30, 30)
-        lbl.font = font(14)
-        prefixTextField.leftView = lbl
+        self.title = TR("升级固件信息")
         
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib(nibName: "OtaDataSelectCell", bundle: nil), forCellReuseIdentifier: "cellId")
-        tableView.rowHeight = 80
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         setNavRightButton(text: TR("CONTINUE"), sel: #selector(continueBtnClick))
+
+        fmRadio.otherButtons = [picRadio, tpRadio, hrRadio]
+        fmRadio.isMultipleSelectionEnabled = true
         
+        fmRadio.addTarget(self, action: #selector(radioChanged(radio:)), for: .touchUpInside)
+        picRadio.addTarget(self, action: #selector(radioChanged(radio:)), for: .touchUpInside)
+        tpRadio.addTarget(self, action: #selector(radioChanged(radio:)), for: .touchUpInside)
+        hrRadio.addTarget(self, action: #selector(radioChanged(radio:)), for: .touchUpInside)
         
-        // 头部配置信息
-        platformSeg.selectedSegmentIndex = Int(config.platform.rawValue)
-        prefixTextField.text = config.prefix
-        
-        if prefixTextField.text?.count == 0 {
-            prefixTextField.text = StorageUtils.getString(forKey: kOtaConfigLastPrefixKey)
-        }
-        
-        // 如果还没有连接任何设备，则进行连接
-        if !BLECenter.shared.hasConnectedDevice {
-            let vc = ConnectVC()
-            let nav = UINavigationController(rootViewController: vc)
-            UIApplication.shared.keyWindow?.rootViewController?.present(nav, animated: true, completion: nil)
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        radioChanged(radio: nil)
     }
     
     // 业务逻辑
@@ -82,50 +78,70 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
         tableView.reloadData()
         
     }
-    
-    // MARK: - 业务逻辑
 
     // MARK: - 事件处理
-    @IBAction func platformChangedAction(_ sender: Any) {
-    }
     
-    @IBAction func prefixBtnClick(_ sender: Any) {
-        let vc = PrefixSelectVC()
-        vc.delegate = self
-        navigationController?.pushViewController(vc, animated: true)
+    @objc func radioChanged(radio: DLRadioButton?) {
+        fmVersionTF.isEnabled = fmRadio.isSelected
+        picVersionTF.isEnabled = picRadio.isSelected
+        tpVersionTF.isEnabled = tpRadio.isSelected
+        hrVersionTF.isEnabled = hrRadio.isSelected
+        
+        if !fmRadio.isSelected {
+            removeFirmwares(byType: .platform)
+        }
+        if !picRadio.isSelected {
+            removeFirmwares(byType: .picture)
+        }
+        if !tpRadio.isSelected {
+            removeFirmwares(byType: .touchPanel)
+        }
+        if !hrRadio.isSelected {
+            removeFirmwares(byType: .heartRate)
+        }
+        
+        tableView.reloadData()
     }
     
     @IBAction func continueBtnClick(_ sender: Any) {
-        guard let device = BLECenter.shared.connectedDevice else {
-            self.showError(TR("Please connect a device"))
-            return
-        }
-        
-        if !device.isApollo3 && prefixTextField.text?.count == 0 {
-            showError(TR("The connected device is not kind of Apollo3, please input OTA prefix"))
-            return
-        }
-        
         if config.firmwares.count == 0 {
             showError(TR("Please select firmwares"))
             return
         }
         
-        config.prefix = prefixTextField.text ?? ""
-        config.deviceName = device.name
-        
-        let vc = SDOtaVC()
-        vc.config = config
-        navigationController?.pushViewController(vc, animated: true)
-        
-        if prefixTextField.text != nil {
-            StorageUtils.saveString(prefixTextField.text!, forKey: kOtaConfigLastPrefixKey)
+        if fmVersionTF.isEnabled {
+            guard let version = fmVersionTF.text, version.count > 0 else {
+                showError(TR("请输入固件版本号"))
+                return
+            }
+            
         }
+        
+        if picVersionTF.isEnabled {
+            guard let version = picVersionTF.text, version.count > 0 else {
+                showError(TR("请输入字库版本号"))
+                return
+            }
+        }
+        
+        if tpVersionTF.isEnabled {
+            guard let version = tpVersionTF.text, version.count > 0 else {
+                showError(TR("请输入触摸版本号"))
+                return
+            }
+        }
+        
+        if hrVersionTF.isEnabled {
+            guard let version = hrVersionTF.text, version.count > 0 else {
+                showError(TR("请输入心率版本号"))
+                return
+            }
+        }
+        
     }
     
-    // MARK: - 代理
+    // 代理
     func didSelectFirmware(firmware: Firmware?, selectType: OtaDataType) {
-        
         // 先移除旧的
         removeFirmwares(byType: selectType)
         
@@ -138,14 +154,7 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func didSelectFirmwares(firmwares: [Firmware]?, selectType: OtaDataType) {
-        removeFirmwares(byType: selectType)
         
-        if let fms = firmwares, fms.count > 0 {
-            for fm in fms {
-                config.firmwares.append(fm)
-            }
-        }
-        updateUI()
     }
     
     private func removeFirmwares(byType type: OtaDataType) {
@@ -154,15 +163,9 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
         }
     }
     
-    func didSelectPrefixStr(prefixStr: String, bleName: String) {
-        prefixTextField.text = prefixStr
-    }
-    
-    
-    
     // MARK: - tableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return fmRadio.selectedButtons().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -195,7 +198,6 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
         }
         return 60
     }
-    
     
     func selectFirmware(byType type: OtaDataType) {
         let vc = FirmwareSelectVC()
@@ -234,5 +236,4 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
             return 3
         }
     }
-    
 }

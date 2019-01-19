@@ -22,6 +22,8 @@ class ReturnFormat: Codable {
     var length = 0
     var byteFlag = 0
     var label = ""
+    var expression: String?
+    var ps: String?
     
     var subFormat: ReturnFormat?
     

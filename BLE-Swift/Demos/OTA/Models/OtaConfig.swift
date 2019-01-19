@@ -11,6 +11,7 @@ import UIKit
 enum OtaPlatform: Int, Codable {
     case apollo
     case nordic
+    case tlsr
 }
 
 struct OtaConfig: Codable {
@@ -24,6 +25,9 @@ struct OtaConfig: Codable {
     var batchId = ""
     var prefix = ""
     var deviceName = ""
+    var deviceNamePrefix = ""
+    var signalMin = -100
+    var upgradeCountMax = 5
     var firmwares: [Firmware] = []
     
 }

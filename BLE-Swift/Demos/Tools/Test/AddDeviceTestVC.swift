@@ -32,8 +32,12 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
     @IBOutlet weak var tlvRadio: DLRadioButton!
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var expressionLbl: UILabel!
     
+    @IBOutlet weak var psLbl: UILabel!
     var selectedGroupIndex: Int?
+    
+    var returnFormat = boolReturnFormat()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -149,7 +153,15 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
         navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func boolBtnClick(_ sender: Any) {
+        returnFormat = boolReturnFormat()
+        cancelEditReturnFormat()
+    }
     
+    @IBAction func stringBtnClick(_ sender: Any) {
+        returnFormat = stringReturnFormat()
+        cancelEditReturnFormat()
+    }
     
     @IBAction func splitBtnClick(_ sender: Any) {
         let vc = ReturnFormatVC()
@@ -215,10 +227,26 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
     
     // MARK: - 代理
     func cancelEditReturnFormat() {
-        
+        switch returnFormat.type {
+        case .bool:
+            boolRadio.isSelected = true
+        case .string:
+            stringRadio.isSelected = true
+        case .split:
+            splitRadio.isSelected = true
+        case .tlv:
+            tlvRadio.isSelected = true
+        }
+        showExpressionAndPs(expression: returnFormat.expression, ps: returnFormat.ps)
     }
     
     func didFinishEditReturnFormat(format: ReturnFormat) {
-        
+        showExpressionAndPs(expression: format.expression, ps: format.ps)
     }
+        
+    func showExpressionAndPs(expression: String?, ps: String?) {
+        expressionLbl.text = expression
+        psLbl.text = ps
+    }
+    
 }
