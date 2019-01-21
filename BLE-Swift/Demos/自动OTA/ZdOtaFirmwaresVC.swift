@@ -32,6 +32,7 @@ class ZdOtaFirmwaresVC: BaseViewController, UITableViewDataSource, UITableViewDe
     
     var config: OtaConfig!
     var firmwareStrs: [String] = ["", "", "", ""]
+    var fmTypes = [OtaDataType]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +83,9 @@ class ZdOtaFirmwaresVC: BaseViewController, UITableViewDataSource, UITableViewDe
     // MARK: - 事件处理
     
     @objc func radioChanged(radio: DLRadioButton?) {
+        
+        fmTypes.removeAll()
+        
         fmVersionTF.isEnabled = fmRadio.isSelected
         picVersionTF.isEnabled = picRadio.isSelected
         tpVersionTF.isEnabled = tpRadio.isSelected
@@ -89,15 +93,26 @@ class ZdOtaFirmwaresVC: BaseViewController, UITableViewDataSource, UITableViewDe
         
         if !fmRadio.isSelected {
             removeFirmwares(byType: .platform)
+        } else {
+            fmTypes.append(.platform)
         }
+        
         if !picRadio.isSelected {
             removeFirmwares(byType: .picture)
+        } else {
+            fmTypes.append(.picture)
         }
+        
         if !tpRadio.isSelected {
             removeFirmwares(byType: .touchPanel)
+        } else {
+            fmTypes.append(.touchPanel)
         }
+        
         if !hrRadio.isSelected {
             removeFirmwares(byType: .heartRate)
+        } else {
+            fmTypes.append(.heartRate)
         }
         
         tableView.reloadData()
@@ -115,6 +130,16 @@ class ZdOtaFirmwaresVC: BaseViewController, UITableViewDataSource, UITableViewDe
                 return
             }
             
+            let arr = config.getFirmwares(byType: .platform)
+            if arr.count == 0 {
+                showError(TR("请选择要升级的固件"))
+                return
+            }
+            let fm = arr.first!
+            if fm.versionName != version {
+                showError(TR("所选择固件的版本号\(fm.versionName)和输入的固件版本号(\(version))不一致"))
+                return
+            }
         }
         
         if picVersionTF.isEnabled {
@@ -122,6 +147,46 @@ class ZdOtaFirmwaresVC: BaseViewController, UITableViewDataSource, UITableViewDe
                 showError(TR("请输入字库版本号"))
                 return
             }
+            
+            let arr = config.getFirmwares(byType: .picture)
+            if arr.count == 0 {
+                showError(TR("请选择要升级的字库"))
+                return
+            }
+            
+            // 如果仅仅输入一个版本号，那就判断一个，如果版本号相等就好了
+            // 如果输入的是一个范围，那要判断头尾相等
+            let fm = arr.first!
+            let last = arr.last!
+            if arr.count == 1 {
+                if fm.versionName != version {
+                    showError(TR("所选择字库的版本号(\(fm.versionName))和输入的字库版本号(\(version))不一致"))
+                    return
+                }
+            } else {
+                var strs = version.components(separatedBy: "-")
+                if strs.count == 1 {
+                    strs = version.components(separatedBy: "~")
+                    if strs.count == 1 {
+                        strs = version.components(separatedBy: ",")
+                    }
+                }
+                if strs.count == 1 {
+                    showError(TR("选择的固件不止一个，版本号应该输入一个范围，比如 1.3-1.5"))
+                    return
+                }
+                
+                if fm.versionName != strs[0] {
+                    showError(TR("所选择字库的版本号(\(fm.versionName))和输入的字库版本号(\(strs[0]))不一致"))
+                    return
+                }
+                
+                if last.versionName != strs[strs.count - 1] {
+                    showError(TR("所选择字库的版本号(\(last.versionName))和输入的字库版本号(\(strs[0]))不一致"))
+                    return
+                }
+            }
+            
         }
         
         if tpVersionTF.isEnabled {
@@ -129,6 +194,18 @@ class ZdOtaFirmwaresVC: BaseViewController, UITableViewDataSource, UITableViewDe
                 showError(TR("请输入触摸版本号"))
                 return
             }
+            
+            let arr = config.getFirmwares(byType: .touchPanel)
+            if arr.count == 0 {
+                showError(TR("请选择要升级的触摸"))
+                return
+            }
+            let fm = arr.first!
+            if fm.versionName != version {
+                showError(TR("所选择触摸的版本号\(fm.versionName)和输入的触摸版本号(\(version))不一致"))
+                return
+            }
+            
         }
         
         if hrVersionTF.isEnabled {
@@ -136,8 +213,23 @@ class ZdOtaFirmwaresVC: BaseViewController, UITableViewDataSource, UITableViewDe
                 showError(TR("请输入心率版本号"))
                 return
             }
+            
+            let arr = config.getFirmwares(byType: .touchPanel)
+            if arr.count == 0 {
+                showError(TR("请选择要升级的触摸"))
+                return
+            }
+            let fm = arr.first!
+            if fm.versionName != version {
+                showError(TR("所选择触摸的版本号\(fm.versionName)和输入的触摸版本号(\(version))不一致"))
+                return
+            }
+            
         }
         
+        let vc = ZdOtaDisplayVC()
+        vc.config = config
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     // 代理
@@ -165,12 +257,14 @@ class ZdOtaFirmwaresVC: BaseViewController, UITableViewDataSource, UITableViewDe
     
     // MARK: - tableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fmRadio.selectedButtons().count
+//        return fmRadio.selectedButtons().count
+        return fmTypes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! OtaDataSelectCell
-        cell.updateUI(withStr: firmwareStrs[indexPath.row], type: getDataType(forIndexPath: indexPath))
+        let str = firmwareStrs[getRow(forType: fmTypes[indexPath.row])]
+        cell.updateUI(withStr: str, type: fmTypes[indexPath.row])
         cell.accessoryType = .disclosureIndicator
         return cell
     }

@@ -177,6 +177,10 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    @IBAction func customBtnClick(_ sender: Any) {
+    }
+    
+    
     @IBAction func addGroupBtnClick(_ sender: Any) {
         let alert = UIAlertController(title: nil, message: TR("Please input name"), preferredStyle: .alert)
         let ok = UIAlertAction(title: TR("OK"), style: .default) { (action) in

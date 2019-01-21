@@ -30,4 +30,14 @@ struct OtaConfig: Codable {
     var upgradeCountMax = 5
     var firmwares: [Firmware] = []
     
+    
+    func getFirmwares(byType type: OtaDataType) -> [Firmware] {
+        var arr = [Firmware]()
+        for fm in firmwares {
+            if fm.type == type {
+                arr.append(fm)
+            }
+        }
+        return arr
+    }
 }

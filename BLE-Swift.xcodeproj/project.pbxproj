@@ -43,6 +43,11 @@
 		2B44C74B21EEE3170037F5C3 /* CmdInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B44C74A21EEE3170037F5C3 /* CmdInputCell.swift */; };
 		2B44C74D21EEE32D0037F5C3 /* CmdInputLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B44C74C21EEE32D0037F5C3 /* CmdInputLayout.swift */; };
 		2B44C74F21EEFAEE0037F5C3 /* CmdUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B44C74E21EEFAEE0037F5C3 /* CmdUnit.swift */; };
+		2B45441921F55AF100FC3E91 /* ZdOtaDisplayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45441721F55AF100FC3E91 /* ZdOtaDisplayVC.swift */; };
+		2B45441A21F55AF100FC3E91 /* ZdOtaDisplayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B45441821F55AF100FC3E91 /* ZdOtaDisplayVC.xib */; };
+		2B45441C21F5996A00FC3E91 /* ZdOtaTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45441B21F5996A00FC3E91 /* ZdOtaTask.swift */; };
+		2B45442021F59A1100FC3E91 /* ZdOtaTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45441E21F59A1100FC3E91 /* ZdOtaTaskCell.swift */; };
+		2B45442121F59A1100FC3E91 /* ZdOtaTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B45441F21F59A1100FC3E91 /* ZdOtaTaskCell.xib */; };
 		2B45B94E21EDABE90058E137 /* DeviceProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45B94D21EDABE90058E137 /* DeviceProduct.swift */; };
 		2B45B95221EDC18D0058E137 /* DeviceProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45B95021EDC18D0058E137 /* DeviceProductCell.swift */; };
 		2B45B95321EDC18D0058E137 /* DeviceProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B45B95121EDC18D0058E137 /* DeviceProductCell.xib */; };
@@ -220,6 +225,11 @@
 		2B44C74A21EEE3170037F5C3 /* CmdInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CmdInputCell.swift; sourceTree = "<group>"; };
 		2B44C74C21EEE32D0037F5C3 /* CmdInputLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CmdInputLayout.swift; sourceTree = "<group>"; };
 		2B44C74E21EEFAEE0037F5C3 /* CmdUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CmdUnit.swift; sourceTree = "<group>"; };
+		2B45441721F55AF100FC3E91 /* ZdOtaDisplayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZdOtaDisplayVC.swift; sourceTree = "<group>"; };
+		2B45441821F55AF100FC3E91 /* ZdOtaDisplayVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZdOtaDisplayVC.xib; sourceTree = "<group>"; };
+		2B45441B21F5996A00FC3E91 /* ZdOtaTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZdOtaTask.swift; sourceTree = "<group>"; };
+		2B45441E21F59A1100FC3E91 /* ZdOtaTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZdOtaTaskCell.swift; sourceTree = "<group>"; };
+		2B45441F21F59A1100FC3E91 /* ZdOtaTaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZdOtaTaskCell.xib; sourceTree = "<group>"; };
 		2B45B94D21EDABE90058E137 /* DeviceProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceProduct.swift; sourceTree = "<group>"; };
 		2B45B95021EDC18D0058E137 /* DeviceProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceProductCell.swift; sourceTree = "<group>"; };
 		2B45B95121EDC18D0058E137 /* DeviceProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceProductCell.xib; sourceTree = "<group>"; };
@@ -555,6 +565,14 @@
 			path = CMDInputView;
 			sourceTree = "<group>";
 		};
+		2B45441D21F5996E00FC3E91 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2B45441B21F5996A00FC3E91 /* ZdOtaTask.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		2B45B94C21EDABC90058E137 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -702,10 +720,15 @@
 		2B4AB47821F3032600EF5327 /* 自动OTA */ = {
 			isa = PBXGroup;
 			children = (
+				2B45441D21F5996E00FC3E91 /* Models */,
 				2B4AB47921F3035B00EF5327 /* ZdOtaConfigVC.swift */,
 				2B4AB47A21F3035B00EF5327 /* ZdOtaConfigVC.xib */,
 				2B76006521F30EDC006B4C63 /* ZdOtaFirmwaresVC.swift */,
 				2B76006621F30EDC006B4C63 /* ZdOtaFirmwaresVC.xib */,
+				2B45441721F55AF100FC3E91 /* ZdOtaDisplayVC.swift */,
+				2B45441821F55AF100FC3E91 /* ZdOtaDisplayVC.xib */,
+				2B45441E21F59A1100FC3E91 /* ZdOtaTaskCell.swift */,
+				2B45441F21F59A1100FC3E91 /* ZdOtaTaskCell.xib */,
 			);
 			path = "自动OTA";
 			sourceTree = "<group>";
@@ -1159,6 +1182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BA23FA621E4B6D600EF1B77 /* FirmwareTypeCell.xib in Resources */,
+				2B45442121F59A1100FC3E91 /* ZdOtaTaskCell.xib in Resources */,
 				2B4874A8214F763500AC5841 /* LaunchScreen.storyboard in Resources */,
 				2B36579D21DCC6330070E7AB /* SettingsViewController.xib in Resources */,
 				2BB4B6F221E9E6A600F22268 /* TaskDetailCell.xib in Resources */,
@@ -1170,6 +1194,7 @@
 				2BE7705521E4A65A00FD6374 /* FirmwareSelectCell.xib in Resources */,
 				2BE7705121E4A54C00FD6374 /* FirmwareSelectVC.xib in Resources */,
 				2B80C20921EC5B3F00FE7BF7 /* OtaConfigVC.xib in Resources */,
+				2B45441A21F55AF100FC3E91 /* ZdOtaDisplayVC.xib in Resources */,
 				2B80C21E21EC74EB00FE7BF7 /* FirmwareSaveVC.xib in Resources */,
 				2B45B95321EDC18D0058E137 /* DeviceProductCell.xib in Resources */,
 				2B80C1E021EC33B600FE7BF7 /* Localizable.strings in Resources */,
@@ -1362,7 +1387,9 @@
 				2B4AB46521F02AE500EF5327 /* UIImageExtensions.swift in Sources */,
 				2B5832EB2175CC4600259593 /* DevicesCell.swift in Sources */,
 				2B45B95221EDC18D0058E137 /* DeviceProductCell.swift in Sources */,
+				2B45442021F59A1100FC3E91 /* ZdOtaTaskCell.swift in Sources */,
 				2B3657B021DCD54B0070E7AB /* SlideMenuController.swift in Sources */,
+				2B45441921F55AF100FC3E91 /* ZdOtaDisplayVC.swift in Sources */,
 				2B4AB47221F2BAFA00EF5327 /* NumberInputView.swift in Sources */,
 				2B7AB99021EECE5900D01E39 /* AddDeviceTestVC.swift in Sources */,
 				2B80C1EC21EC35D600FE7BF7 /* PrefixAddVC.swift in Sources */,
@@ -1401,6 +1428,7 @@
 				2B9DD96521E7145B00C215E5 /* PrefixSelectVC.swift in Sources */,
 				2B5832E0217573E000259593 /* UIDefines.swift in Sources */,
 				2B9DD97421E729DD00C215E5 /* BLECenterExtensions.swift in Sources */,
+				2B45441C21F5996A00FC3E91 /* ZdOtaTask.swift in Sources */,
 				2B3657BC21DDB0FF0070E7AB /* SignalStrengthView.swift in Sources */,
 				2B62A57021DF68720051DD38 /* Protocol.swift in Sources */,
 				2BE7701121E2E3EF00FD6374 /* ReturnFormat.swift in Sources */,
