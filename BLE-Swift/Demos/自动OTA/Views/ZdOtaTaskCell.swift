@@ -26,6 +26,15 @@ class ZdOtaTaskCell: UITableViewCell {
     
     func updateUI(withTask task: ZdOtaTask) {
         nameLbl.text = task.name
+        weak var weakSelf = self
+        task.progressCallback = { (progress) in
+            weakSelf?.updateProgress(progress)
+        }
+    }
+    
+    func updateProgress(_ progress: Float) {
+        progressView.progress = progress
+        progressLbl.text = "\(Int(progress * 100))%"
     }
     
 }

@@ -48,6 +48,32 @@ public enum BLETaskState {
     }
 }
 
+public class BLEScanTask: BLETask {
+    var priority = 0
+    var isConnectScan = false
+    var scanCallback: ScanBlock?
+    var stopCallback: EmptyBlock?
+    var taskID: String
+    
+    public init(taskID: String, scanCallback: ScanBlock?, stopCallback: EmptyBlock?) {
+        self.taskID = taskID
+        self.scanCallback = scanCallback
+        self.stopCallback = stopCallback
+    }
+    
+    override public var hash: Int {
+        return self.taskID.hash
+    }
+    
+    override public func isEqual(_ object: Any?) -> Bool {
+        guard let other = object as? BLEScanTask else {
+            return false
+        }
+        return self.taskID == other.taskID
+    }
+}
+
+
 @objcMembers public class BLEConnectTask: BLETask {
     var deviceName:String?
     var device:BLEDevice?

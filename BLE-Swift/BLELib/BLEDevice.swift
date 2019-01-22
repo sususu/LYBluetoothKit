@@ -105,13 +105,13 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
         for i in 0..<lengthTimes {
             let subData = data.subdata(in: i * mtu ..< (i + 1) * mtu);
             self.peripheral.writeValue(subData, for: characteristic, type: type)
-            print("\(self.name)(\(characteristic.uuid.uuidString)) write: \(subData.hexEncodedString())")
+//            print("\(self.name)(\(characteristic.uuid.uuidString)) write: \(subData.hexEncodedString())")
         }
         
         if lengthLeft > 0 {
             let subData = data.subdata(in: lengthTimes * mtu ..< lengthTimes * mtu + lengthLeft)
             self.peripheral.writeValue(subData, for: characteristic, type: type)
-            print("\(self.name)(\(characteristic.uuid.uuidString)) write: \(subData.hexEncodedString())")
+//            print("\(self.name)(\(characteristic.uuid.uuidString)) write: \(subData.hexEncodedString())")
         }
         
     }
@@ -167,7 +167,7 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         
-        print("\(self.name)(\(characteristic.uuid.uuidString)) recv data:\(String(describing: characteristic.value?.hexEncodedString()))")
+//        print("\(self.name)(\(characteristic.uuid.uuidString)) recv data:\(String(describing: characteristic.value?.hexEncodedString()))")
         
         NotificationCenter.default.post(name: BLEInnerNotification.deviceDataUpdate, object: nil, userInfo: [BLEKey.data : characteristic.value ?? Data(), BLEKey.uuid : characteristic.uuid.uuidString, BLEKey.device: self])
     }
@@ -178,7 +178,7 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
     }
     
     public func peripheralIsReady(toSendWriteWithoutResponse peripheral: CBPeripheral) {
-        print("peripheralIsReady")
+//        print("peripheralIsReady")
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {

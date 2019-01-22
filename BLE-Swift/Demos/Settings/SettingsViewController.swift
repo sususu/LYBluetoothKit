@@ -8,23 +8,92 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var loginBtn: UIButton!
+    
+    @IBOutlet weak var nameLbl: UILabel!
+    
+    @IBOutlet weak var emailLbl: UILabel!
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    var sections: [MenuSection] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        createMenus()
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
+    }
+    
+    // MARK: - 业务逻辑
+    func createMenus() {
+        let fmSection = MenuSection(title: "")
+        sections.append(fmSection)
+        
+        let settingSection = MenuSection(title: "")
+        sections.append(settingSection)
+        
+        let fmRow = MenuRow(title: "固件管理", icon: nil, selector: nil, pushVC: "FirmwareManagerVC")
+        let xyRow = MenuRow(title: "协议配置", icon: nil, selector: nil, pushVC: "ProtocolManagerVC")
+        let gjRow = MenuRow(title: "工具配置", icon: nil, selector: nil, pushVC: "ToolManagerVC")
+        
+        fmSection.rows = [MenuRow]()
+        fmSection.rows?.append(fmRow)
+        fmSection.rows?.append(xyRow)
+        fmSection.rows?.append(gjRow)
+        
+        
+        let settingRow = MenuRow(title: "账号设置", icon: nil, selector: nil, pushVC: "AppSettingVC")
+        settingSection.rows = [MenuRow]()
+        settingSection.rows?.append(settingRow)
     }
 
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: - 事件处理
+    
+    @IBAction func loginBtnClick(_ sender: Any) {
+        
+        let vc = LoginVC()
+//        let nav = LYNavigationController(rootViewController: vc)
+//        navigationController?.present(nav, animated: true, completion: nil)
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
     }
-    */
-
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let rows = sections[section].rows else {
+            return 0
+        }
+        return rows.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
+        let row = sections[indexPath.section].rows![indexPath.row]
+        cell.textLabel?.text = row.title
+        cell.imageView?.image = UIImage(named: row.icon ?? "")
+        cell.accessoryType = .disclosureIndicator
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return sections[section].titleHeight
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return sections[section].footerHeight
+    }
 }

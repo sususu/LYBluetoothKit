@@ -198,7 +198,7 @@ public class OtaTask: Equatable {
         settingData.append(bytes: &numLength, count:1)
         
         
-        print("发送ota设置数据：\(settingData.hexEncodedString())")
+//        print("发送ota设置数据：\(settingData.hexEncodedString())")
         
         writeDataToNotify(settingData)
     }
@@ -208,7 +208,7 @@ public class OtaTask: Equatable {
     // 每次最多发送20个package，等带设备同步回调
     private func sendPackages() {
         addTimer(timeout: 15, action: 3)
-        print("sendPackages:")
+//        print("sendPackages:")
         guard otaDatas.count > 0, otaDatas[0].sections.count > 0 else {
             return
         }
@@ -219,7 +219,7 @@ public class OtaTask: Equatable {
         
         for i in section.currentPackageIndex ..< sendMaxCount {
             let data = section.packageList[i]
-            print("package(\(i))data: \(data.hexEncodedString())")
+//            print("package(\(i))data: \(data.hexEncodedString())")
             writeData(data)
             sendLength += data.count
             
@@ -351,10 +351,10 @@ public class OtaTask: Equatable {
             switch cmd {
             case 1:
                 // （发送ota长度成功之后回调这个）进入ota成功，开始发送ota设置信息
-                print("设备回传1，开始发送ota配置数据")
+//                print("设备回传1，开始发送ota配置数据")
                 sendOtaSettingData()
             case 2:
-                print("设备回传2，开始发送包数据")
+//                print("设备回传2，开始发送包数据")
                 sendPackages()
             case 3:
                 /*
@@ -367,22 +367,22 @@ public class OtaTask: Equatable {
                  */
                 let type = data.bytes[2]
                 if type == 4 {
-                    print("设备回传3-4，说明一包传输完成了，开始发送crc")
+//                    print("设备回传3-4，说明一包传输完成了，开始发送crc")
                     sendCheckCrc()
                 } else if type == 2 {
                     // 移除一个数据分区
-                    print("移除一个分区，开始下发下一个包")
+//                    print("移除一个分区，开始下发下一个包")
                     otaDatas[0].sections.remove(at: 0)
                     // 继续发送下一个数据分区
                     sendPackages()
                 } else {
-                    print("开始下发下一个回传包")
+//                    print("开始下发下一个回传包")
                     otaDatas[0].sections[0].currentPackageIndex += kPackageCountCallback
                     sendPackages()
                 }
             case 4:
                 // crc 校验成功
-                print("crc校验成功")
+//                print("crc校验成功")
                 if otaDatas.count > 0 {
                     otaDatas.remove(at: 0)
                 }

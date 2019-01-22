@@ -278,6 +278,7 @@ class ZdOtaFirmwaresVC: BaseViewController, UITableViewDataSource, UITableViewDe
         tableView.deselectRow(at: indexPath, animated: true)
         let type = getDataType(forIndexPath: indexPath)
         selectFirmware(byType: type)
+        self.view.endEditing(true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

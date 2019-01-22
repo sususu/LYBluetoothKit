@@ -38,7 +38,21 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         setNavLeftButton(text: "回到主页", sel: #selector(gotoHome))
         setNavRightButton(text: "查看配置", sel: #selector(gotoConfig))
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(otaTaskFailed(notification:)), name: kZdOtaTaskFailed, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(otaTaskSuccess(notification:)), name: kZdOtaTaskSuccess, object: nil)
+        
         startScan()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIApplication.shared.isIdleTimerDisabled = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        UIApplication.shared.isIdleTimerDisabled = false
     }
     
     // MARK: - 业务逻辑
@@ -99,7 +113,7 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
                     }
                     
                     // 如果成功，那就进行到下一步
-                    weakSelf?.deviceConnected(device: d)
+                    weakSelf?.deviceConnected(device: device!)
                     
                 }, timeout: 10)
             }
@@ -171,9 +185,14 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
 
     // MARK: - 事件处理
     @IBAction func stopBtnClick(_ sender: Any) {
+        
     }
     
     @IBAction func cktjBtnClick(_ sender: Any) {
+        let vc = ZdOtaResultVC()
+        vc.failList = failedList
+        vc.successList = successList
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func gotoHome() {
@@ -182,6 +201,55 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
     
     @objc func gotoConfig() {
         
+    }
+    
+    // MARK: - 通知
+    @objc func otaTaskFailed(notification: Notification) {
+        guard let dict = notification.userInfo as? Dictionary<String, Any> else {
+            return
+        }
+        guard let task = dict["task"] as? ZdOtaTask else {
+            return
+        }
+        failedList.append(task)
+        removeOtaTask(byName: task.name)
+        checkCountAndAlert()
+        
+        tableView.reloadData()
+    }
+    
+    @objc func otaTaskSuccess(notification: Notification) {
+        guard let dict = notification.userInfo as? Dictionary<String, Any> else {
+            return
+        }
+        guard let task = dict["task"] as? ZdOtaTask else {
+            return
+        }
+        successList.append(task)
+        removeOtaTask(byName: task.name)
+        checkCountAndAlert()
+        
+        tableView.reloadData()
+    }
+    
+    func checkCountAndAlert() {
+        if successList.count + failedList.count >= config.otaCount
+        {
+            // 增加停止ota代码
+            
+            VoiceSpeaker.shared.speak(text: "您好，您的 O T A 升级任务已完成", shouldLoop: true)
+            let alert = UIAlertController(title: "温馨提醒", message: "您的OTA升级任务已完成", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "好的", style: .cancel) { (action) in
+                VoiceSpeaker.shared.stopSpeaking()
+                
+                let vc = ZdOtaResultVC()
+                vc.failList = self.failedList
+                vc.successList = self.successList
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            alert.addAction(ok)
+            navigationController?.present(alert, animated: true, completion: nil)
+        }
     }
     
     

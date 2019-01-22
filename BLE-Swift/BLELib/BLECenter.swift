@@ -55,10 +55,14 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     }
     
     // 定时器
-    var searchTimer:Timer?
-    var connectTimer:Timer?
-    var otaConnectTimer:Timer?
-    var disconnectTimer:Timer?
+    private var searchTimer:Timer?
+    private var scanTaskTimer:Timer?
+    private var connectTimer:Timer?
+    private var otaConnectTimer:Timer?
+    private var disconnectTimer:Timer?
+    
+    // 扫描任务列表
+    private var scanTasks = [BLEScanTask]()
     
     // MARK: - 初始化
     override init() {
@@ -85,7 +89,7 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     /// Scan bluetooth peripherals.
     ///
     /// - Parameter callback: callback will be called once peripherals are found
-    public func scan(callback:ScanBlock?) {
+    private func scan(callback:ScanBlock?) {
         if self.state == .unknown {
             addToDo(cmd: ToDo.scan) {
                 [unowned self] in
@@ -128,10 +132,55 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     public func scan(callback:ScanBlock?,
                      stop:EmptyBlock?,
                      after:TimeInterval = kDefaultTimeout) {
+        // 如果当前有连接的扫描任务存在，那这个连接的扫描任务，是最优先的
+        if scanTasks.count > 0 {
+            var devices = Array(self.discoveredDevices)
+            // 按照信号量排序
+            devices.sort { (d1, d2) -> Bool in
+                let d1Rssi = d1.rssi ?? 0
+                let d2Rssi = d2.rssi ?? 0
+                return d1Rssi > d2Rssi
+            }
+            DispatchQueue.main.async {
+                self.block.scanBlock?(devices, nil)
+                stop?()
+            }
+            return
+        }
+        
         scan(callback: callback)
         self.block.scanStop = stop
         addSearchTimer(sel: #selector(stopScan), timeout: after)
     }
+    
+    private func beginConnectScan(task: BLEScanTask, after: TimeInterval = kDefaultTimeout) {
+        // 先停掉其他扫描任务
+        scanCallback()
+        stopScan()
+        
+        scanTasks.append(task)
+        discoveredDevices.removeAll()
+        let arr = getConnectedDevices(servicesUUIDs: [UUID.mainService])
+        if arr != nil && arr!.count > 0 {
+            for d in arr! {
+                discoveredDevices.insert(d)
+            }
+        }
+        scanCallback()
+        center?.scanForPeripherals(withServices: nil, options: nil)
+        addScanTaskTimer(taskID: task.taskID, sel: #selector(stopScanTask(timer:)))
+    }
+    
+    private func removeScanTask(byTaskID: String) {
+        for i in 0 ..< scanTasks.count {
+            let task = scanTasks[i]
+            if task.taskID == byTaskID {
+                scanTasks.remove(at: i)
+                return
+            }
+        }
+    }
+    
     
     private func scanCallback() {
         var devices = Array(self.discoveredDevices)
@@ -143,11 +192,16 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
         }
         DispatchQueue.main.async {
             self.block.scanBlock?(devices, nil)
+            
+            // 连接扫描任务里面的，都要回调一次
+            for task in self.scanTasks {
+                task.scanCallback?(devices, nil)
+            }
         }
     }
     
     /// Stop scanning bluetooth peripherals
-    @objc public func stopScan() {
+    @objc func stopScan() {
         removeSearchTimer()
         if self.state == .poweredOn {
             self.center?.stopScan()
@@ -155,6 +209,19 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
         self.block.scanStop?()
         self.block.scanBlock = nil
         self.block.scanStop = nil
+    }
+    
+    @objc func stopScanTask(timer: Timer) {
+        if self.state == .poweredOn && scanTasks.count == 0 {
+            self.center?.stopScan()
+        }
+        guard let dict = timer.userInfo as? Dictionary<String, Any> else {
+            removeScanTaskTimer()
+            return
+        }
+        let taskID = dict["taskID"] as! String
+        removeScanTask(byTaskID: taskID)
+        removeScanTaskTimer()
     }
     
     
@@ -167,7 +234,7 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
         if devicesManager.connectDevice(withName: deviceName, callback: callback, timeout: timeout) {
             // 先扫描，再连接
             weak var weakSelf = self
-            scan(callback: { (devices, err) in
+            let scanTask = BLEScanTask(taskID: deviceName, scanCallback: { (devices, err) in
                 if devices != nil && devices!.count > 0 {
                     for device in devices! {
                         // 名字相同则进行连接
@@ -177,9 +244,25 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
                         }
                     }
                 }
-            }, stop: {
-                
-            }, after: timeout)
+            }, stopCallback: nil)
+            beginConnectScan(task: scanTask, after: timeout)
+//            scan(callback: { (devices, err) in
+//                if devices != nil && devices!.count > 0 {
+//                    for device in devices! {
+//                        // 名字相同则进行连接
+//                        if deviceName == device.name {
+//                            weakSelf?.stopScan()
+//                            weakSelf?.center?.connect(device.peripheral, options: nil)
+//                        }
+//                    }
+//                }
+//            }, stop: {
+//                
+//            }, after: timeout)
+        } else {
+            DispatchQueue.main.async {
+                callback?(nil, BLEError.taskError(reason: .repeatTask))
+            }
         }
     }
     
@@ -270,7 +353,7 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     }
     
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        print("name:\(peripheral.name ?? "nil"), rssi:\(RSSI)")
+//        print("name:\(peripheral.name ?? "nil"), rssi:\(RSSI)")
         let device = BLEDevice(peripheral, rssi: RSSI, advertisementData: advertisementData)
         discoveredDevices.insert(device)
         DispatchQueue.main.async {
@@ -302,6 +385,11 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
         searchTimer = nil
     }
     
+    private func removeScanTaskTimer() {
+        scanTaskTimer?.invalidate()
+        scanTaskTimer = nil
+    }
+    
     private func removeConnectTimer() {
         connectTimer?.invalidate()
         connectTimer = nil
@@ -322,6 +410,13 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
         searchTimer = Timer(timeInterval: timeout, target: self, selector: sel, userInfo: nil, repeats: false)
         searchTimer!.fireDate = Date(timeIntervalSinceNow: timeout)
         RunLoop.main.add(self.searchTimer!, forMode: .common)
+    }
+    
+    private func addScanTaskTimer(taskID: String, sel:Selector, timeout: TimeInterval = kDefaultTimeout) {
+        removeScanTaskTimer()
+        scanTaskTimer = Timer(timeInterval: timeout, target: self, selector: sel, userInfo: ["taskID": taskID], repeats: false)
+        scanTaskTimer!.fireDate = Date(timeIntervalSinceNow: timeout)
+        RunLoop.main.add(self.scanTaskTimer!, forMode: .common)
     }
     
     private func addDisconnectTimer(timeout:TimeInterval = kDefaultTimeout) {

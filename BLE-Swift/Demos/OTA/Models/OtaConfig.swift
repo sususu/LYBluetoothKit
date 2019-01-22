@@ -28,6 +28,7 @@ struct OtaConfig: Codable {
     var deviceNamePrefix = ""
     var signalMin = -100
     var upgradeCountMax = 5
+    var otaCount = 0
     var firmwares: [Firmware] = []
     
     

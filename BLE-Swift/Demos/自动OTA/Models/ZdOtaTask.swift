@@ -42,9 +42,16 @@ class ZdOtaTask: Equatable {
     init(name: String, config: OtaConfig) {
         self.name = name
         self.config = config
+        
+        startTime = Date().timeIntervalSince1970
     }
     
+    var startTime: TimeInterval = 0
+    var endTime: TimeInterval = 0
+    var hadResetDevice: Bool = false
+    
     func startOTA(withDevice device: BLEDevice) {
+        
         self.device = device
         state = .start
         
@@ -86,6 +93,7 @@ class ZdOtaTask: Equatable {
             if error != nil {
                 weakSelf?.state = .fail
                 weakSelf?.error = error
+                weakSelf?.endTime = Date().timeIntervalSince1970
                 
                 weakSelf?.finishCallback?(bool, error)
                 
@@ -100,6 +108,7 @@ class ZdOtaTask: Equatable {
     private var connectTimer: Timer?
     private var connectCount = 0
     private func startResetDevice() {
+        print("ota(\(name))成功了，开始等待连接，并重置设备")
         DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
             self.connectDevice()
         }
@@ -109,6 +118,7 @@ class ZdOtaTask: Equatable {
         
         if connectCount > 8 {
             state = .success
+            self.endTime = Date().timeIntervalSince1970
             self.finishCallback?(true, nil)
             NotificationCenter.default.post(name: kZdOtaTaskSuccess, object: nil, userInfo: ["task": self])
             return
@@ -128,8 +138,11 @@ class ZdOtaTask: Equatable {
     }
     
     private func resetDevice() {
+        print("连接设备(\(name))成功，开始重置设备")
         _ = BLECenter.shared.resetDevice(boolCallback: { (bool, error) in
             self.state = .success
+            self.endTime = Date().timeIntervalSince1970
+            self.hadResetDevice = true
             self.finishCallback?(true, nil)
             NotificationCenter.default.post(name: kZdOtaTaskSuccess, object: nil, userInfo: ["task": self])
         }, toDeviceName: name)
