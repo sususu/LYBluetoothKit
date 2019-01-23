@@ -81,7 +81,7 @@ public class OtaTask: Equatable {
         var tmpArr = [OtaDataModel]()
         for var dm in otaDatas
         {
-            if !dm.getDataReady() {
+            if !dm.getApolloDataReady() {
                 let err = BLEError.taskError(reason: .paramsError)
                 self.otaFailed(error: err)
                 return
@@ -96,7 +96,8 @@ public class OtaTask: Equatable {
     func cancel() {
         state = .cancel
     }
-    private func checkIsCancel() -> Bool {
+    
+    func checkIsCancel() -> Bool {
         if state == .cancel {
             let error = BLEError.taskError(reason: .cancel)
             otaFailed(error: error)
@@ -249,7 +250,7 @@ public class OtaTask: Equatable {
         }
     }
     
-    private func otaProgressUpdate() {
+    func otaProgressUpdate() {
         // 进度回调
         DispatchQueue.main.async {
             self.progressCallback?(self.progress)
@@ -257,7 +258,7 @@ public class OtaTask: Equatable {
         }
     }
     
-    private func otaFailed(error: BLEError) {
+    func otaFailed(error: BLEError) {
         DispatchQueue.main.async {
             self.error = error
             self.state = .failed
@@ -268,7 +269,7 @@ public class OtaTask: Equatable {
         }
     }
     
-    private func otaFinish() {
+    func otaFinish() {
         DispatchQueue.main.async {
             self.state = .finish
             self.device.isOTAing = false
@@ -297,7 +298,7 @@ public class OtaTask: Equatable {
     
     
     // MARK: - 定时器
-    private func addTimer(timeout: TimeInterval, action: Int) {
+    func addTimer(timeout: TimeInterval, action: Int) {
         removeTimer()
         otaTimer = Timer(timeInterval: timeout, target: self, selector: #selector(handleTimeout(timer:)), userInfo: ["action": action], repeats: false)
         otaTimer!.fireDate = Date(timeIntervalSinceNow: timeout)

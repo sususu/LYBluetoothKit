@@ -91,10 +91,10 @@ class FirmwareSelectVC: BaseViewController, UITableViewDataSource, UITableViewDe
             return TR("HeartRate List")
         case .picture:
             return TR("Picture List")
-        case .language:
-            return TR("Language List")
         case .freeScale:
             return TR("FressScale List")
+        case .agps:
+            return TR("Agps")
         }
     }
     

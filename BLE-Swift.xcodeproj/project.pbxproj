@@ -141,6 +141,7 @@
 		2B80C21021EC612E00FE7BF7 /* PrefixSelectVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B80C21221EC612E00FE7BF7 /* PrefixSelectVC.xib */; };
 		2B80C21721EC685B00FE7BF7 /* SDOtaVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B80C21921EC685B00FE7BF7 /* SDOtaVC.xib */; };
 		2B80C21E21EC74EB00FE7BF7 /* FirmwareSaveVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B80C22021EC74EB00FE7BF7 /* FirmwareSaveVC.xib */; };
+		2B8272FF21F7FA0700F6CC9E /* OtaNordicTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8272FE21F7FA0700F6CC9E /* OtaNordicTask.swift */; };
 		2B918D932153365A00B0B5DE /* ConnectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B918D922153365A00B0B5DE /* ConnectVC.swift */; };
 		2B9DD96521E7145B00C215E5 /* PrefixSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9DD96321E7145B00C215E5 /* PrefixSelectVC.swift */; };
 		2B9DD96A21E717EA00C215E5 /* PrefixCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9DD96821E717EA00C215E5 /* PrefixCell.swift */; };
@@ -363,6 +364,7 @@
 		2B80C21F21EC74EB00FE7BF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FirmwareSaveVC.xib; sourceTree = "<group>"; };
 		2B80C22221EC74ED00FE7BF7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FirmwareSaveVC.strings; sourceTree = "<group>"; };
 		2B80C22421EC74EE00FE7BF7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/FirmwareSaveVC.strings"; sourceTree = "<group>"; };
+		2B8272FE21F7FA0700F6CC9E /* OtaNordicTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtaNordicTask.swift; sourceTree = "<group>"; };
 		2B918D922153365A00B0B5DE /* ConnectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectVC.swift; sourceTree = "<group>"; };
 		2B9DD96321E7145B00C215E5 /* PrefixSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefixSelectVC.swift; sourceTree = "<group>"; };
 		2B9DD96821E717EA00C215E5 /* PrefixCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefixCell.swift; sourceTree = "<group>"; };
@@ -1119,6 +1121,7 @@
 				2B9DD97C21E7476A00C215E5 /* OtaManager.swift */,
 				2B9DD97E21E74D6100C215E5 /* OtaDataSection.swift */,
 				2B9DD98021E82A1100C215E5 /* OtaTask.swift */,
+				2B8272FE21F7FA0700F6CC9E /* OtaNordicTask.swift */,
 			);
 			path = OTA;
 			sourceTree = "<group>";
@@ -1452,6 +1455,7 @@
 				2BE7705021E4A54C00FD6374 /* FirmwareSelectVC.swift in Sources */,
 				2B56A16A21F708A90073E2A7 /* ZdOtaResultCell.swift in Sources */,
 				2B3657A521DCCD600070E7AB /* Functions.swift in Sources */,
+				2B8272FF21F7FA0700F6CC9E /* OtaNordicTask.swift in Sources */,
 				2B2E273E2172D9B400726FC7 /* BLEConfig.swift in Sources */,
 				2B62A58B21E087E60051DD38 /* ResultDisplayCell.swift in Sources */,
 				2B62A57221DF68840051DD38 /* Param.swift in Sources */,

@@ -71,6 +71,12 @@ public struct UUID {
     static let otaService = "1530"
     static let otaNotifyC = "1531"
     static let otaWriteC = "1532"
+    
+    static let nordicDFUService = "00001530-1212-EFDE-1523-785FEABCD123"
+    static let nordicOtaBat = "00001531-1212-EFDE-1523-785FEABCD123"
+    static let nordicOtaBin = "00001532-1212-EFDE-1523-785FEABCD123"
+    static let nordicVersion = "00001534-1212-EFDE-1523-785FEABCD123"
+    
 }
 
 // MARK: - 常量定义

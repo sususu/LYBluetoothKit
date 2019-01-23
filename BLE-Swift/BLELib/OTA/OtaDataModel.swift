@@ -13,8 +13,8 @@ public enum OtaDataType: Int, Codable {
     case touchPanel
     case heartRate
     case picture
-    case language
     case freeScale
+    case agps
 }
 
 public struct OtaDataModel {
@@ -26,12 +26,15 @@ public struct OtaDataModel {
     var crcData: Data!
     var sections = [OtaDataSection]()
     
+    var datData: Data!
+    var typeData: Data!
+    
     init(type: OtaDataType, data: Data) {
         self.type = type
         self.data = data
     }
     
-    mutating func getDataReady() -> Bool {
+    mutating func getApolloDataReady() -> Bool {
         
         guard let otaData = getOtaData(for: data) else {
             return false
@@ -54,7 +57,36 @@ public struct OtaDataModel {
     }
     
     
-    
+    mutating func getNordicDataReady() -> Bool {
+        
+        if type == .platform{
+            self.otaData = data
+            self.crcData = datData
+            self.typeData = getNordicTypeData()
+            self.sections = splitDataToSections(otaData)
+            return true
+        }
+        
+        guard let otaData = getNordicOtaData(for: data) else {
+            return false
+        }
+        
+        guard let addressData = getNordicOtaAddressData(for: data) else {
+            return false
+        }
+        
+        guard let crcData = getNordicCrcData(for: otaData) else {
+            return false
+        }
+        
+        self.otaData = otaData
+        self.otaAddressData = addressData
+        self.crcData = crcData
+        self.typeData = getNordicTypeData()
+        self.sections = splitDataToSections(otaData)
+        
+        return true
+    }
     
     
     private func splitDataToSections(_ data: Data) -> [OtaDataSection] {
@@ -120,4 +152,58 @@ public struct OtaDataModel {
         }
         return data.subdata(in: 0 ..< 4)
     }
+    
+    func getNordicOtaData(for data: Data) -> Data? {
+        
+        if type == .platform {
+            return data
+        }
+        
+        var offset = 5
+        if type == .picture {
+            offset = 4
+        }
+        if data.count <= offset {
+            return nil
+        }
+        return data.subdata(in: offset ..< data.count)
+    }
+    
+    func getNordicOtaAddressData(for data: Data) -> Data? {
+        var offset = 5
+        if type == .picture {
+            offset = 4
+        }
+        if data.count < offset {
+            return nil
+        }
+        return data.subdata(in: 0 ..< offset)
+    }
+    
+    func getNordicTypeData() -> Data {
+        switch type {
+        case .platform:
+            return Data(bytes: [0x01, 0x04])
+        case .touchPanel:
+            return Data(bytes: [0x01, 0x10])
+        case .heartRate:
+            return Data(bytes: [0x01, 0x20])
+        case .picture:
+            return Data(bytes: [0x01, 0x40])
+        case .agps:
+            return Data(bytes: [0x00, 0x00])
+        case .freeScale:
+            return Data(bytes: [0x01, 0x08])
+        }
+    }
+    
+    func getNordicCrcData(for data: Data) -> Data? {
+        guard let crc = getCrcData(for: data) else {
+            return nil
+        }
+        var tmpData = Data(bytes: [0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00])
+        tmpData.append(crc)
+        return tmpData
+    }
+    
 }
