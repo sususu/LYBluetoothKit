@@ -34,7 +34,7 @@ class FirmwareTypeVC: BaseViewController, UITableViewDataSource, UITableViewDele
 
     // MARK: - tableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -62,8 +62,14 @@ class FirmwareTypeVC: BaseViewController, UITableViewDataSource, UITableViewDele
         else if indexPath.row == 2 {
             return .touchPanel
         }
-        else {
+        else if indexPath.row == 3 {
             return .heartRate
+        }
+        else if indexPath.row == 4 {
+            return .freeScale
+        }
+        else {
+            return .agps
         }
     }
     
@@ -77,8 +83,14 @@ class FirmwareTypeVC: BaseViewController, UITableViewDataSource, UITableViewDele
         else if type == .touchPanel {
             return 2
         }
-        else {
+        else if type == .heartRate {
             return 3
+        }
+        else if type == .freeScale {
+            return 4
+        }
+        else {
+            return 5
         }
     }
     

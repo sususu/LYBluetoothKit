@@ -42,7 +42,7 @@ class OtaNordicTask: OtaTask {
     
     
     private func enterUpgradeMode() {
-        let kl17Data = Data(bytes: [0, 0, 0, 0, 0])
+        var kl17Data = Data(bytes: [0, 0, 0, 0, 0])
         var hrData = Data(bytes: [0, 0, 0, 0, 0])
         var tpData = Data(bytes: [0, 0, 0, 0, 0])
         
@@ -52,6 +52,9 @@ class OtaNordicTask: OtaTask {
             }
             else if dm.type == .touchPanel {
                 tpData = dm.data
+            }
+            else if dm.type == .freeScale {
+                kl17Data = dm.data
             }
         }
         // 因为现在已经没有kl17 这个玩意了
@@ -98,6 +101,8 @@ class OtaNordicTask: OtaTask {
         sendLength = 0
         totalLength = length
         
+        
+        addTimer(timeout: 10, action: 1)
         // 发送0x09
         // 设置OTA复位，每一次升级流程只发一次，
         // 09后的数据包 ，如果有字库升级，后4个字节直接使用字库bin前4字节
@@ -120,7 +125,7 @@ class OtaNordicTask: OtaTask {
     }
     
     private func sendTypeData() {
-        addTimer(timeout: 10, action: 3)
+        addTimer(timeout: 10, action: 2)
         
         let dm = otaDatas[0]
         
@@ -134,6 +139,7 @@ class OtaNordicTask: OtaTask {
     }
     
     private func sendInitData() {
+        addTimer(timeout: 10, action: 2)
         
         let dm = otaDatas[0]
         

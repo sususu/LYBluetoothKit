@@ -150,6 +150,8 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
     func saveTestUnit(name: String, units: [CmdUnit], groupIndex: Int) {
         showSuccess(TR("Success"))
         
+        
+        
         navigationController?.popViewController(animated: true)
     }
     

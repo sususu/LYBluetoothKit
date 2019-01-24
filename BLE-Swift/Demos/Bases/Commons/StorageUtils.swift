@@ -61,6 +61,12 @@ class StorageUtils {
         return urls[0].path
     }
     
+    public static func getCahcePath() -> String {
+        let manager = FileManager.default
+        let urls = manager.urls(for: .cachesDirectory, in: .userDomainMask)
+        return urls[0].path
+    }
+    
     public static func isFileExits(atPath path: String) -> Bool {
         let manager = FileManager.default
         return manager.fileExists(atPath: path)

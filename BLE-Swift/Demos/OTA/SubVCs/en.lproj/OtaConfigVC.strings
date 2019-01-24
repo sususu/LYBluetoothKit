@@ -9,7 +9,7 @@
 "HfN-v2-uBN.text" = "Apollo3-based watch and bracelet don't need to be filled in, otherwise, please click 'Selection' to view the details";
 
 /* Class = "UIButton"; normalTitle = "前缀选择"; ObjectID = "c3F-iH-UAu"; */
-"c3F-iH-UAu.normalTitle" = "Selection";
+"c3F-iH-UAu.normalTitle" = "SELECT";
 
 /* Class = "UIButton"; normalTitle = "继续"; ObjectID = "jiP-RM-0xI"; */
 "jiP-RM-0xI.normalTitle" = "CONTINUE";

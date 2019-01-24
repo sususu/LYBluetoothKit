@@ -39,9 +39,12 @@ class OtaDataSelectCell: UITableViewCell {
         case .touchPanel:
             nameLbl.text = TR("TP")
             nameLbl.backgroundColor = rgb(30, 200, 30)
-        default:
-            nameLbl.text = TR("UK")
-            nameLbl.backgroundColor = rgb(150, 150, 150)
+        case .freeScale:
+            nameLbl.text = TR("KL")
+            nameLbl.backgroundColor = UIColor.purple
+        case .agps:
+            nameLbl.text = TR("GP")
+            nameLbl.backgroundColor = UIColor.blue
         }
     }
     

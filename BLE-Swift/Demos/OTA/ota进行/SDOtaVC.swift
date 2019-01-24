@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SSZipArchive
 
 class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -188,6 +189,7 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
         OtaManager.shared.cancelTask(task)
     }
     
+    // MARK: - 开始ota
     func startOTA() {
         
         resetOtaUI()
@@ -216,11 +218,24 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
             otaBleName = device.name
         }
         
+        switch config.platform {
+        case .apollo:
+            startApolloOTA(device: device, otaBleName: otaBleName)
+        case .nordic:
+            startNordicOTA(device: device, otaBleName: otaBleName)
+        case .tlsr:
+            startTlsrOTA(device: device, otaBleName: otaBleName)
+        }
+        
+    }
+    
+    // MARK: - 开始Apollo OTA
+    func startApolloOTA(device: BLEDevice, otaBleName: String) {
         var otaDatas = [OtaDataModel]()
         for fm in config.firmwares {
             
             let path = StorageUtils.getDocPath().stringByAppending(pathComponent: fm.path)
-
+            
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path))
                 let dm = OtaDataModel(type: fm.type, data: data)
@@ -249,6 +264,81 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
             weakSelf?.stopLoading()
         }, progressCallback: nil, finishCallback: nil)
         otaTask?.config = config
+    }
+    
+    // MARK: - 开始Nordic OTA
+    func startNordicOTA(device: BLEDevice, otaBleName: String) {
+        var otaDatas = [OtaDataModel]()
+        for fm in config.firmwares {
+            
+            let path = StorageUtils.getDocPath().stringByAppending(pathComponent: fm.path)
+            
+            // 如果是平台升级
+            if fm.type == .platform {
+                let cachePath = StorageUtils.getCahcePath()
+                let unzipPath = cachePath.stringByAppending(pathComponent: "ota")
+                StorageUtils.deleteFiles(atPath: unzipPath)
+                
+                if SSZipArchive.unzipFile(atPath: path, toDestination: unzipPath) {
+                    let manager = FileManager.default
+                    do {
+                        let fileNames = try manager.contentsOfDirectory(atPath: unzipPath)
+                        for name in fileNames {
+                            var tmpPath = unzipPath.stringByAppending(pathComponent: name)
+                            // 先找到bin
+                            if name.hasSuffix(".bin") {
+                                let data = try Data(contentsOf: URL(fileURLWithPath: tmpPath))
+                                var dm = OtaDataModel(type: fm.type, data: data)
+                                // 再找dat
+                                for name in fileNames {
+                                    tmpPath = unzipPath.stringByAppending(pathComponent: name)
+                                    if name.hasSuffix(".dat") {
+                                        let datData = try Data(contentsOf: URL(fileURLWithPath: tmpPath))
+                                        dm.datData = datData
+                                    }
+                                }
+                                otaDatas.append(dm)
+                                break
+                            }
+                        }
+                    } catch {}
+                }
+                else {
+                    print("解压失败")
+                }
+            }
+            // 否则是其他升级
+            else {
+                do {
+                    let data = try Data(contentsOf: URL(fileURLWithPath: path))
+                    let dm = OtaDataModel(type: fm.type, data: data)
+                    otaDatas.append(dm)
+                }
+                catch {}
+            }
+        }
+        
+        if otaDatas.count == 0 {
+            showError(TR("OtaDatas parse failed"))
+            stopLoading()
+            startStopBtn.isSelected = false
+            return
+        }
+        
+        BLEConfig.shared.mtu = 20;
+    
+        weak var weakSelf = self
+        otaNameLbl.text = otaBleName
+        startLoading(nil)
+        otaTask = OtaManager.shared.startNordicOta(device: device, otaBleName: otaBleName, otaDatas: otaDatas, readyCallback: {
+        weakSelf?.stopLoading()
+        }, progressCallback: nil, finishCallback: nil)
+        otaTask?.config = config
+    }
+    
+    // MARK: - 开始泰心OTA
+    func startTlsrOTA(device: BLEDevice, otaBleName: String) {
+        
     }
     
     @objc func backToHome() {

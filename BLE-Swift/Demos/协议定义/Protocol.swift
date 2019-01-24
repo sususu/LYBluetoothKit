@@ -14,6 +14,14 @@ class Protocol: Codable {
     var summary = ""
     var cmd = ""
     var returnFormat = ReturnFormat()
+    
+    static func cmdFrom(units: [CmdUnit]) -> String {
+        var string = ""
+        for unit in units {
+            string = string + (unit.valueStr ?? "") + "  "
+        }
+        return string
+    }
 }
 
 extension Protocol {

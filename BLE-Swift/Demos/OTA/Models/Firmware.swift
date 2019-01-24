@@ -47,6 +47,12 @@ struct Firmware: Codable {
         else if tmp.hasPrefix("touchpanel") {
             return .touchPanel
         }
+        else if tmp.hasPrefix("kl17") {
+            return .freeScale
+        }
+        else if tmp.hasPrefix("mg") {
+            return .agps
+        }
         else {
             return .platform
         }
@@ -62,8 +68,10 @@ struct Firmware: Codable {
             return TR("HR")
         case .touchPanel:
             return TR("TP")
-        default:
-            return TR("UK")
+        case .freeScale:
+            return TR("FS")
+        case .agps:
+            return TR("GPS")
         }
     }
     

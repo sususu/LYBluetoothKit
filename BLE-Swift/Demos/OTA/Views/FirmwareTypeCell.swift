@@ -37,10 +37,14 @@ class FirmwareTypeCell: UITableViewCell {
             nameLbl.text = "触摸"
             typeLbl.text = TR("触")
             typeLbl.backgroundColor = rgb(30, 200, 30)
-        default:
-            nameLbl.text = "不支持"
-            typeLbl.text = TR("未知")
-            typeLbl.backgroundColor = rgb(150, 150, 150)
+        case .freeScale:
+            nameLbl.text = "kl17"
+            typeLbl.text = TR("FS")
+            typeLbl.backgroundColor = UIColor.purple
+        case .agps:
+            nameLbl.text = "GPS"
+            typeLbl.text = TR("GP")
+            typeLbl.backgroundColor = UIColor.blue
         }
         
     }

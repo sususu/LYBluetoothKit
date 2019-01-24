@@ -17,7 +17,7 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var prefixTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
-    var firmwareStrs: [String] = ["", "", "", ""]
+    var firmwareStrs: [String] = ["", "", "", "", ""]
     var config = OtaConfig()
     
     override func viewDidLoad() {
@@ -63,7 +63,7 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
     // 业务逻辑
     func updateUI() {
         
-        firmwareStrs = ["", "", "", ""]
+        firmwareStrs = ["", "", "", "", ""]
         
         // 设置固件配置信息
         for fm in config.firmwares {
@@ -87,6 +87,7 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
 
     // MARK: - 事件处理
     @IBAction func platformChangedAction(_ sender: Any) {
+        tableView.reloadData()
     }
     
     @IBAction func prefixBtnClick(_ sender: Any) {
@@ -162,7 +163,7 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
     
     // MARK: - tableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -215,8 +216,15 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
         else if indexPath.row == 2 {
             return .touchPanel
         }
-        else {
+        else if indexPath.row == 3 {
             return .heartRate
+        }
+        else {
+            if platformSeg.selectedSegmentIndex == 0 {
+                return .agps
+            } else {
+                return .freeScale
+            }
         }
     }
     
@@ -230,8 +238,10 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
         else if type == .touchPanel {
             return 2
         }
-        else {
+        else if type == .heartRate {
             return 3
+        } else {
+            return 4
         }
     }
     
