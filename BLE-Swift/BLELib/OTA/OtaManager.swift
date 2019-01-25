@@ -24,6 +24,9 @@ public class OtaManager {
     public func startOta(device: BLEDevice, otaBleName: String, otaDatas: [OtaDataModel], readyCallback: EmptyBlock?, progressCallback: FloatCallback?, finishCallback: BoolCallback?) -> OtaTask?{
         
         if device.isOTAing {
+            DispatchQueue.main.async {
+                finishCallback?(false, BLEError.taskError(reason: .repeatTask))
+            }
             return nil
         }
         

@@ -37,6 +37,7 @@
                                 <segments>
                                     <segment title="Apollo平台"/>
                                     <segment title="Nordic平台"/>
+                                    <segment title="TLSR平台"/>
                                 </segments>
                                 <color key="tintColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>

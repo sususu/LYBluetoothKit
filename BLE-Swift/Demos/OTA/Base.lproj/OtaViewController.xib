@@ -22,11 +22,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eao-gx-pIQ">
-                    <rect key="frame" x="67.5" y="176" width="240" height="50"/>
+                    <rect key="frame" x="20" y="176" width="335" height="50"/>
                     <color key="backgroundColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="EnR-Z6-44R"/>
-                        <constraint firstAttribute="width" constant="240" id="VEa-5d-11g" userLabel="width = 240"/>
                     </constraints>
                     <state key="normal" title="自动升级模式">
                         <color key="titleColor" red="0.97339111566543579" green="0.94479674100875854" blue="0.90124291181564331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -47,10 +46,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IuM-Qe-ycD">
-                    <rect key="frame" x="67.5" y="301" width="240" height="50"/>
+                    <rect key="frame" x="20" y="301" width="335" height="50"/>
                     <color key="backgroundColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="240" id="W25-uS-0ah"/>
                         <constraint firstAttribute="height" constant="50" id="r9V-hB-BPr"/>
                     </constraints>
                     <state key="normal" title="手动升级模式">
@@ -86,8 +84,10 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="e6d-QY-I50" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="80" id="5kB-kG-sbh"/>
+                <constraint firstItem="IuM-Qe-ycD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="9po-kh-pQo"/>
                 <constraint firstItem="eao-gx-pIQ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="GSt-a3-GU1"/>
                 <constraint firstItem="IuM-Qe-ycD" firstAttribute="top" secondItem="ZAR-Ve-RgQ" secondAttribute="bottom" constant="15" id="GTg-jS-tsd"/>
+                <constraint firstItem="eao-gx-pIQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Kyd-Wp-Li0"/>
                 <constraint firstItem="IuM-Qe-ycD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="LQd-GO-adM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="a1j-fp-o9N" secondAttribute="trailing" id="PNr-xQ-flg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="e6d-QY-I50" secondAttribute="trailing" constant="15" id="Tyh-Uv-qlz"/>
@@ -95,7 +95,9 @@
                 <constraint firstItem="ZAR-Ve-RgQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="ZUx-xu-Cmd"/>
                 <constraint firstItem="a1j-fp-o9N" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="cPy-cT-J0V"/>
                 <constraint firstItem="a1j-fp-o9N" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="caf-9g-0DG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="eao-gx-pIQ" secondAttribute="trailing" constant="20" id="chs-VA-VCf"/>
                 <constraint firstItem="e6d-QY-I50" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="hCI-o5-8nx"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="IuM-Qe-ycD" secondAttribute="trailing" constant="20" id="qlr-rK-TNo"/>
                 <constraint firstItem="eao-gx-pIQ" firstAttribute="top" secondItem="e6d-QY-I50" secondAttribute="bottom" constant="15" id="y0u-dk-04z"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>

@@ -43,10 +43,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myG-gw-e6T">
-                                <rect key="frame" x="20" y="50" width="90" height="35"/>
+                                <rect key="frame" x="20" y="50" width="105" height="35"/>
                                 <color key="backgroundColor" red="0.84705882349999995" green="0.1176470588" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="90" id="Ja1-VL-NAj"/>
                                     <constraint firstAttribute="height" constant="35" id="orr-iU-Zl8"/>
                                 </constraints>
                                 <state key="normal" title="获取设备ID">
@@ -62,10 +61,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQo-Rn-Xw5" userLabel="获取固件版本">
-                                <rect key="frame" x="142.5" y="50" width="90" height="35"/>
+                                <rect key="frame" x="135" y="50" width="105" height="35"/>
                                 <color key="backgroundColor" red="0.84705882349999995" green="0.1176470588" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="90" id="BAq-3U-JgB"/>
                                     <constraint firstAttribute="height" constant="35" id="NDR-Aw-uYu"/>
                                 </constraints>
                                 <state key="normal" title="获取版本">
@@ -81,11 +79,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d8L-Zs-O8P" userLabel="重置设备">
-                                <rect key="frame" x="265" y="50" width="90" height="35"/>
+                                <rect key="frame" x="250" y="50" width="105" height="35"/>
                                 <color key="backgroundColor" red="0.84705882349999995" green="0.1176470588" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="KFf-oT-IUY"/>
-                                    <constraint firstAttribute="width" constant="90" id="Vu3-vd-AX7"/>
                                 </constraints>
                                 <state key="normal" title="重置设备">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -103,9 +100,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="myG-gw-e6T" firstAttribute="top" secondItem="yAv-zx-4eG" secondAttribute="bottom" constant="10" id="8o1-1y-aHF"/>
+                            <constraint firstItem="myG-gw-e6T" firstAttribute="width" secondItem="yJp-qw-rGa" secondAttribute="width" multiplier="0.28" id="BgL-Ng-cJV"/>
                             <constraint firstItem="dQo-Rn-Xw5" firstAttribute="centerX" secondItem="yJp-qw-rGa" secondAttribute="centerX" id="DGs-VW-geP"/>
                             <constraint firstItem="myG-gw-e6T" firstAttribute="leading" secondItem="yJp-qw-rGa" secondAttribute="leading" constant="20" id="RTX-ZA-4aJ"/>
                             <constraint firstItem="dQo-Rn-Xw5" firstAttribute="top" secondItem="yAv-zx-4eG" secondAttribute="bottom" constant="10" id="Ts9-49-eri"/>
+                            <constraint firstItem="d8L-Zs-O8P" firstAttribute="width" secondItem="yJp-qw-rGa" secondAttribute="width" multiplier="0.28" id="d6x-vA-x2v"/>
+                            <constraint firstItem="dQo-Rn-Xw5" firstAttribute="width" secondItem="yJp-qw-rGa" secondAttribute="width" multiplier="0.28" id="dYF-5c-0PU"/>
                             <constraint firstItem="yAv-zx-4eG" firstAttribute="top" secondItem="yJp-qw-rGa" secondAttribute="top" constant="10" id="e8l-2Q-kLu"/>
                             <constraint firstAttribute="trailing" secondItem="yAv-zx-4eG" secondAttribute="trailing" constant="15" id="gIg-zu-a7J"/>
                             <constraint firstAttribute="trailing" secondItem="d8L-Zs-O8P" secondAttribute="trailing" constant="20" id="hE2-uc-eCp"/>

@@ -241,7 +241,7 @@ public class OtaTask: Equatable {
         addTimer(timeout: 10, action: 5)
     }
     
-    private func otaReady() {
+    func otaReady() {
         DispatchQueue.main.async {
             self.device.isOTAing = true
             self.state = .otaing
@@ -318,7 +318,7 @@ public class OtaTask: Equatable {
         otaFailed(error: err)
     }
     
-    private func cleanUp() {
+    func cleanUp() {
         readyCallback = nil
         progressCallback = nil
         finishCallback = nil

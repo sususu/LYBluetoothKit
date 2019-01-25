@@ -32,9 +32,11 @@ class BLEDataParser: NSObject {
         
         // 目前只支持新协议
         // 如果开头是 0x6f，可能是开头，如果是 0x6f + 指令码 + 0x80 那就是开头了
+        // 还有一些不规范的，返回的是 0x6f + 0x01 + 0x81
         if recvBytes[0] == 0x6f && recvBytes.count > 2 {
             
-            if recvBytes[1] == sendBytes[1] {
+            if recvBytes[1] == sendBytes[1] ||
+                (recvBytes[1] == 0x01 && recvBytes[2] == 0x81) {
                 // 模版：0x6f 0x02 0x80 0x00 0x00 0x8f
                 // 具体含义，请查看appscomm蓝牙协议文档
                 if (recvBytes[2] == 0x80 || recvBytes[2] == 0x81) && recvBytes.count >= 6 {

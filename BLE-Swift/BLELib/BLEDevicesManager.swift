@@ -27,6 +27,14 @@ class BLEDevicesManager: NSObject {
     }
     
     // MARK: - 通知处理
+    func deviceConnectTimeout(withTask task: BLEConnectTask) {
+        DispatchQueue.main.async {
+            // 回调连接的block
+            task.connectBlock?(task.device, task.error)
+            self.removeConnectTask(task: task)
+        }
+    }
+    
     func deviceConnected(withTask task: BLEConnectTask) {
         
     }
@@ -107,15 +115,10 @@ class BLEDevicesManager: NSObject {
         task.device!.scanServices { (err) in
 
             if err != nil {
-                task.error = err
-                task.device = nil
-                task.state = .failed
+                task.connectFailed(err: err!)
             } else {
-                task.error = nil
-                task.device!.state = .ready
-                task.state = .success
+                task.connectSuccess()
             }
-            
             weakSelf?.deviceReady(withTask: task)
         }
     }

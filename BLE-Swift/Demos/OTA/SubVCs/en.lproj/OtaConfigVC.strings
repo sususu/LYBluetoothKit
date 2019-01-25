@@ -1,9 +1,11 @@
 
 /* Class = "UISegmentedControl"; DFX-uY-SXU.segmentTitles[0] = "Apollo平台"; ObjectID = "DFX-uY-SXU"; */
-"DFX-uY-SXU.segmentTitles[0]" = "Apollo Architecture";
+"DFX-uY-SXU.segmentTitles[0]" = "Apollo";
 
 /* Class = "UISegmentedControl"; DFX-uY-SXU.segmentTitles[1] = "Nordic平台"; ObjectID = "DFX-uY-SXU"; */
-"DFX-uY-SXU.segmentTitles[1]" = "Nordic Architecture";
+"DFX-uY-SXU.segmentTitles[1]" = "Nordic";
+
+"DFX-uY-SXU.segmentTitles[2]" = "TLSR";
 
 /* Class = "UILabel"; text = "Apollo3平台的手表手环不需要填写，其他的需要填写，详情点击前缀选择查看"; ObjectID = "HfN-v2-uBN"; */
 "HfN-v2-uBN.text" = "Apollo3-based watch and bracelet don't need to be filled in, otherwise, please click 'Selection' to view the details";

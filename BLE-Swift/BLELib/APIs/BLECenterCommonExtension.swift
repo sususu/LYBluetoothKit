@@ -33,16 +33,22 @@ extension BLECenter {
                 boolCallback?(false, err)
             } else {
                 var bool = false
+                var err: BLEError? = nil
                 if let recvData = recv as? BLEData, let bytes = recvData.recvData?.bytes {
                     
-                    if bytes.count == 2 && recvData.sendData.bytes[2] == bytes[0] {
+                    let cmd = recvData.sendData.bytes[1]
+                    let code = recvData.sendData.bytes[2]
+                    
+                    if bytes.count == 2 &&
+                        (code == bytes[0] || cmd == bytes[0]) {
                         bool = (bytes[1] == 0)
                     } else {
+                        err = BLEError.taskError(reason: .dataError)
                         print("send data is invalid")
                     }
             
                 }
-                boolCallback?(bool, nil)
+                boolCallback?(bool, err)
             }
         }, toDeviceName: toDeviceName)
     }

@@ -20,7 +20,7 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     
     public var state: CBManagerState = .unknown
     
-    public var discoveredDevices: Set<BLEDevice> = Set()
+    public var discoveredDevices: [BLEDevice] = []
     
     public var connectedDevices: [BLEDevice] {
         return BLEDevicesManager.shared.connectedDevices
@@ -109,7 +109,7 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
                 let arr = getConnectedDevices(servicesUUIDs: [UUID.mainService])
                 if arr != nil && arr!.count > 0 {
                     for d in arr! {
-                        discoveredDevices.insert(d)
+                        discoveredDevices.append(d)
                     }
                 }
                 
@@ -134,15 +134,15 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
                      after:TimeInterval = kDefaultTimeout) {
         // 如果当前有连接的扫描任务存在，那这个连接的扫描任务，是最优先的
         if scanTasks.count > 0 {
-            var devices = Array(self.discoveredDevices)
-            // 按照信号量排序
-            devices.sort { (d1, d2) -> Bool in
-                let d1Rssi = d1.rssi ?? 0
-                let d2Rssi = d2.rssi ?? 0
-                return d1Rssi > d2Rssi
-            }
+//            var devices = Array(self.discoveredDevices)
+            // 按照信号量排序，不应该这里排序
+//            devices.sort { (d1, d2) -> Bool in
+//                let d1Rssi = d1.rssi ?? 0
+//                let d2Rssi = d2.rssi ?? 0
+//                return d1Rssi > d2Rssi
+//            }
             DispatchQueue.main.async {
-                self.block.scanBlock?(devices, nil)
+                self.block.scanBlock?(self.discoveredDevices, nil)
                 stop?()
             }
             return
@@ -163,7 +163,7 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
         let arr = getConnectedDevices(servicesUUIDs: [UUID.mainService])
         if arr != nil && arr!.count > 0 {
             for d in arr! {
-                discoveredDevices.insert(d)
+                discoveredDevices.append(d)
             }
         }
         scanCallback()
@@ -183,19 +183,19 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     
     
     private func scanCallback() {
-        var devices = Array(self.discoveredDevices)
-        // 按照信号量排序
-        devices.sort { (d1, d2) -> Bool in
-            let d1Rssi = d1.rssi ?? 0
-            let d2Rssi = d2.rssi ?? 0
-            return d1Rssi > d2Rssi
-        }
+//        var devices = Array(self.discoveredDevices)
+//        // 按照信号量排序
+//        devices.sort { (d1, d2) -> Bool in
+//            let d1Rssi = d1.rssi ?? 0
+//            let d2Rssi = d2.rssi ?? 0
+//            return d1Rssi > d2Rssi
+//        }
         DispatchQueue.main.async {
-            self.block.scanBlock?(devices, nil)
+            self.block.scanBlock?(self.discoveredDevices, nil)
             
             // 连接扫描任务里面的，都要回调一次
             for task in self.scanTasks {
-                task.scanCallback?(devices, nil)
+                task.scanCallback?(self.discoveredDevices, nil)
             }
         }
     }
@@ -270,9 +270,11 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
         timeout:TimeInterval = kDefaultTimeout) {
         if devicesManager.connectDevice(withBLEDevice: device, callback: callback, timeout: timeout) {
             center?.connect(device.peripheral, options: nil)
-        } else {
-            callback?(device, BLEError.taskError(reason: .repeatTask))
         }
+        // 由添加任务里面操作，去处理没有添加任务成功的回调
+//        else {
+//            callback?(device, BLEError.taskError(reason: .repeatTask))
+//        }
     }
     
     public func disconnect(device:BLEDevice, callback:ConnectBlock?, timeout:TimeInterval = kDefaultTimeout) {
@@ -355,7 +357,10 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
 //        print("name:\(peripheral.name ?? "nil"), rssi:\(RSSI)")
         let device = BLEDevice(peripheral, rssi: RSSI, advertisementData: advertisementData)
-        discoveredDevices.insert(device)
+        if !discoveredDevices.contains(device) {
+            discoveredDevices.append(device)
+        }
+        
         DispatchQueue.main.async {
             self.scanCallback()
         }

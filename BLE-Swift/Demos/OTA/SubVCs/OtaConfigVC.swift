@@ -87,6 +87,7 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
 
     // MARK: - 事件处理
     @IBAction func platformChangedAction(_ sender: Any) {
+        config.platform = OtaPlatform(rawValue: platformSeg.selectedSegmentIndex)!
         tableView.reloadData()
     }
     

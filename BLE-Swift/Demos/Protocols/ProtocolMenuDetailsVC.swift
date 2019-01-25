@@ -33,15 +33,19 @@ class ProtocolMenuDetailsVC: BaseViewController, UITableViewDataSource, UITableV
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib(nibName: "ProtocolMenuDetailCell", bundle: nil), forCellReuseIdentifier: "cellId")
-        tableView.rowHeight = 50
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 80))
+        tableView.rowHeight = 45
+//        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 80))
         
         showConnectState()
+        
+        setNavRightButton(text: TR("添加"), sel: #selector(addBtnClick(_:)))
     }
 
 
     // MARK: - 事件处理
     @IBAction func addBtnClick(_ sender: Any) {
+        let vc = AddProtocolVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     

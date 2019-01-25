@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProtocolViewController: ConnectBaseVC, UITableViewDataSource, UITableViewDelegate {
+class ProtocolViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -21,9 +21,12 @@ class ProtocolViewController: ConnectBaseVC, UITableViewDataSource, UITableViewD
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib(nibName: "ProtocolMenuCell", bundle: nil), forCellReuseIdentifier: "cellId")
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 80))
-        tableView.rowHeight = 60
+//        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 80))
+        tableView.rowHeight = 45
         // Do any additional setup after loading the view.
+        
+        setNavLeftButton(text: TR("导出"), sel: #selector(exportBtnClick))
+        setNavRightButton(text: TR("添加"), sel: #selector(addBtnClick(_:)))
     }
     
     func loadDataAndRefresUI() {
@@ -36,6 +39,9 @@ class ProtocolViewController: ConnectBaseVC, UITableViewDataSource, UITableViewD
     @IBAction func addBtnClick(_ sender: Any) {
     }
     
+    @objc func exportBtnClick() {
+        
+    }
     
     // MARK: - tableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -53,10 +59,9 @@ class ProtocolViewController: ConnectBaseVC, UITableViewDataSource, UITableViewD
     {
         tableView.deselectRow(at: indexPath, animated: true)
         let menu = self.protocolMenus[indexPath.row]
-        if menu.protocols.count > 0 {
-            let vc = ProtocolMenuDetailsVC(protocols: menu.protocols)
-            navigationController?.pushViewController(vc, animated: true)
-        }
+        let vc = ProtocolMenuDetailsVC(protocols: menu.protocols)
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
     }
 
 }

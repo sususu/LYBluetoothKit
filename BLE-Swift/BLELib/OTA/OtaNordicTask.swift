@@ -11,7 +11,6 @@ import UIKit
 let kOtaNordicTaskOneDataSize = 20
 let kOtaNordicTaskResponseNum = 20
 
-
 class OtaNordicTask: OtaTask {
     
     override func start() {
@@ -28,7 +27,7 @@ class OtaNordicTask: OtaTask {
         var tmpArr = [OtaDataModel]()
         for var dm in otaDatas
         {
-            if !dm.getApolloDataReady() {
+            if !dm.getNordicDataReady() {
                 let err = BLEError.taskError(reason: .paramsError)
                 self.otaFailed(error: err)
                 return
@@ -94,6 +93,8 @@ class OtaNordicTask: OtaTask {
     
     private func startOta() {
 
+        otaReady()
+        
         var length = 0
         for dm in otaDatas {
             length += dm.otaData.count
@@ -129,6 +130,7 @@ class OtaNordicTask: OtaTask {
         
         let dm = otaDatas[0]
         
+        // 发送类型数据
         writeDatData(dm.typeData)
         
         var data = Data(bytes: [0x00, 0x00, 0x00, 0x00,
@@ -171,12 +173,15 @@ class OtaNordicTask: OtaTask {
     private func sendPackages() {
         addTimer(timeout: 15, action: 3)
         
-        let section = otaDatas[0].sections[0]
+        if otaDatas.count <= 0 ||
+           otaDatas[0].sections.count < 0 {
+            return
+        }
         
-        let sendMaxCount = min(section.totalPackageCount, section.currentPackageIndex + kPackageCountCallback)
+        let packages = otaDatas[0].sections[0].packageList
         
-        for i in section.currentPackageIndex ..< sendMaxCount {
-            let data = section.packageList[i]
+        for i in 0 ..< packages.count {
+            let data = packages[i]
             //            print("package(\(i))data: \(data.hexEncodedString())")
             writeBinData(data)
             sendLength += data.count
@@ -192,38 +197,31 @@ class OtaNordicTask: OtaTask {
     }
     
     private func sendOtaEnd() {
-        addTimer(timeout: 5, action: 5)
+//        addTimer(timeout: 10, action: 5)
         let data = Data(bytes: [0x05])
         writeDatData(data)
+        
+        otaFinish()
     }
     
-    private func cleanUp() {
-        readyCallback = nil
-        progressCallback = nil
-        finishCallback = nil
-        removeTimer()
-    }
-    
-    private func removeTimer() {
-        otaTimer?.invalidate()
-        otaTimer = nil
-    }
-    
-    
+    private var line = 0
     // MARK: - 写数据
     func writeBinData(_ data: Data) {
         if checkIsCancel() {
             return
         }
+        print("写数据BinData(\(line))：\(data.hexEncodedString())")
         _ = device.write(data, characteristicUUID: UUID.nordicOtaBin)
-        //        print("写数据：\(b)")
+        line += 1;
     }
     
     func writeDatData(_ data: Data) {
         if checkIsCancel() {
             return
         }
+        print("写数据DatData：\(data.hexEncodedString())")
         _ = device.write(data, characteristicUUID: UUID.nordicOtaBat)
+        
     }
     
     // MARK: - 接收数据
@@ -240,6 +238,8 @@ class OtaNordicTask: OtaTask {
         guard let data = notification?.userInfo?[BLEKey.data] as? Data, data.count >= 2 else {
             return
         }
+        
+        print("设备回传：\(data.hexEncodedString())")
         
         let bytes = data.bytes
         
@@ -261,11 +261,7 @@ class OtaNordicTask: OtaTask {
             sendOtaBinData()
         }
         else if i == 0x11 {
-            var section = otaDatas[0].sections[0]
-            section.currentPackageIndex += kPackageCountCallback
-            if section.currentPackageIndex >= section.totalPackageCount - 1 {
-                otaDatas[0].sections.remove(at: 0)
-            }
+            otaDatas[0].sections.remove(at: 0)
             
             sendPackages()
         }

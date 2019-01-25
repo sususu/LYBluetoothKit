@@ -79,6 +79,8 @@
 		2B4AB47721F2D2E400EF5327 /* TlvLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4AB47621F2D2E400EF5327 /* TlvLineView.swift */; };
 		2B4AB47B21F3035B00EF5327 /* ZdOtaConfigVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4AB47921F3035B00EF5327 /* ZdOtaConfigVC.swift */; };
 		2B4AB47C21F3035B00EF5327 /* ZdOtaConfigVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B4AB47A21F3035B00EF5327 /* ZdOtaConfigVC.xib */; };
+		2B55B56D21FAA01300CAE637 /* AddProtocolVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B55B56B21FAA01300CAE637 /* AddProtocolVC.swift */; };
+		2B55B56E21FAA01300CAE637 /* AddProtocolVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B55B56C21FAA01300CAE637 /* AddProtocolVC.xib */; };
 		2B56A14221F6EBA50073E2A7 /* MenuSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B56A14121F6EBA50073E2A7 /* MenuSection.swift */; };
 		2B56A14421F6EBAF0073E2A7 /* MenuRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B56A14321F6EBAF0073E2A7 /* MenuRow.swift */; };
 		2B56A14721F6ED490073E2A7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B56A14621F6ED490073E2A7 /* User.swift */; };
@@ -288,6 +290,8 @@
 		2B4AB47621F2D2E400EF5327 /* TlvLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TlvLineView.swift; sourceTree = "<group>"; };
 		2B4AB47921F3035B00EF5327 /* ZdOtaConfigVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZdOtaConfigVC.swift; sourceTree = "<group>"; };
 		2B4AB47A21F3035B00EF5327 /* ZdOtaConfigVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZdOtaConfigVC.xib; sourceTree = "<group>"; };
+		2B55B56B21FAA01300CAE637 /* AddProtocolVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProtocolVC.swift; sourceTree = "<group>"; };
+		2B55B56C21FAA01300CAE637 /* AddProtocolVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddProtocolVC.xib; sourceTree = "<group>"; };
 		2B56A14121F6EBA50073E2A7 /* MenuSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSection.swift; sourceTree = "<group>"; };
 		2B56A14321F6EBAF0073E2A7 /* MenuRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRow.swift; sourceTree = "<group>"; };
 		2B56A14621F6ED490073E2A7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -788,6 +792,15 @@
 			path = "自动OTA";
 			sourceTree = "<group>";
 		};
+		2B55B56A21FA9FFA00CAE637 /* 协议编辑 */ = {
+			isa = PBXGroup;
+			children = (
+				2B55B56B21FAA01300CAE637 /* AddProtocolVC.swift */,
+				2B55B56C21FAA01300CAE637 /* AddProtocolVC.xib */,
+			);
+			path = "协议编辑";
+			sourceTree = "<group>";
+		};
 		2B56A14021F6EB1C0073E2A7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -858,6 +871,7 @@
 		2B5832EC2176E05B00259593 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				2B55B56A21FA9FFA00CAE637 /* 协议编辑 */,
 				2B4AB46621F174AD00EF5327 /* ReturnParser */,
 				2B62A58821E057660051DD38 /* ResultDisplay */,
 				2B62A57921E042490051DD38 /* Views */,
@@ -1279,6 +1293,7 @@
 				2BA23FA621E4B6D600EF1B77 /* FirmwareTypeCell.xib in Resources */,
 				2B56A16221F6F1E20073E2A7 /* RegisterVC.xib in Resources */,
 				2B45442121F59A1100FC3E91 /* ZdOtaTaskCell.xib in Resources */,
+				2B55B56E21FAA01300CAE637 /* AddProtocolVC.xib in Resources */,
 				2B4874A8214F763500AC5841 /* LaunchScreen.storyboard in Resources */,
 				2B36579D21DCC6330070E7AB /* SettingsViewController.xib in Resources */,
 				2BB4B6F221E9E6A600F22268 /* TaskDetailCell.xib in Resources */,
@@ -1539,6 +1554,7 @@
 				2B56A14221F6EBA50073E2A7 /* MenuSection.swift in Sources */,
 				2B2E27472173265800726FC7 /* BaseViewController.swift in Sources */,
 				2BFAF610216F2089003AEAD6 /* BLEDataCenter.swift in Sources */,
+				2B55B56D21FAA01300CAE637 /* AddProtocolVC.swift in Sources */,
 				2B9DD98121E82A1100C215E5 /* OtaTask.swift in Sources */,
 				2B56A16D21F70FB90073E2A7 /* VoiceSpeaker.swift in Sources */,
 				2B62A58721E0564C0051DD38 /* ProtocolResultDisplayView.swift in Sources */,
@@ -1805,7 +1821,10 @@
 				DEVELOPMENT_TEAM = W74YV9GZDZ;
 				INFOPLIST_FILE = "BLE-Swift/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ss.BLE-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1822,7 +1841,10 @@
 				DEVELOPMENT_TEAM = W74YV9GZDZ;
 				INFOPLIST_FILE = "BLE-Swift/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ss.BLE-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1839,7 +1861,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W74YV9GZDZ;
 				INFOPLIST_FILE = "BLE-SwiftTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ss.BLE-SwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1857,7 +1883,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W74YV9GZDZ;
 				INFOPLIST_FILE = "BLE-SwiftTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ss.BLE-SwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1874,7 +1904,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W74YV9GZDZ;
 				INFOPLIST_FILE = "BLE-SwiftUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ss.BLE-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1891,7 +1925,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W74YV9GZDZ;
 				INFOPLIST_FILE = "BLE-SwiftUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ss.BLE-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

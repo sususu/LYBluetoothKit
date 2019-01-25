@@ -196,7 +196,16 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
     }
     
     @objc func gotoHome() {
-        navigationController?.setViewControllers([navigationController!.viewControllers[0]], animated: true)
+       
+        let alert = UIAlertController(title: "温馨提醒", message: "如果返回首页，会停止当前所有正在进行的任务，您确定要返回吗？", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "返回", style: .default) { (action) in
+            OtaManager.shared.cancelAllTask()
+        self.navigationController?.setViewControllers([self.navigationController!.viewControllers[0]], animated: true)
+        }
+        let cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        navigationController?.present(alert, animated: true, completion: nil)
     }
     
     @objc func gotoConfig() {

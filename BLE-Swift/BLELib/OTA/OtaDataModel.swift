@@ -13,7 +13,7 @@ public enum OtaDataType: Int, Codable {
     case touchPanel
     case heartRate
     case picture
-    case freeScale
+    case freeScale      // 只有Nordic平台才有 kl17
     case agps
 }
 
@@ -26,6 +26,7 @@ public struct OtaDataModel {
     var crcData: Data!
     var sections = [OtaDataSection]()
     
+    // 这两个也是为了兼容Nordic平台ota
     var datData: Data!
     var typeData: Data!
     
@@ -63,7 +64,7 @@ public struct OtaDataModel {
             self.otaData = data
             self.crcData = datData
             self.typeData = getNordicTypeData()
-            self.sections = splitDataToSections(otaData)
+            self.sections = splitNordicDataToSections(otaData)
             return true
         }
         
@@ -83,18 +84,38 @@ public struct OtaDataModel {
         self.otaAddressData = addressData
         self.crcData = crcData
         self.typeData = getNordicTypeData()
-        self.sections = splitDataToSections(otaData)
+        self.sections = splitNordicDataToSections(otaData)
         
         return true
     }
     
-    
+    // apollo平台，ota 拆分数据是已 2048 为一块
     private func splitDataToSections(_ data: Data) -> [OtaDataSection] {
         var sections = [OtaDataSection]()
         let num = data.count / kSizeOfPieceData
         let left = data.count % kSizeOfPieceData
         for i in 0..<num {
             let data = data.subdata(in: i * kSizeOfPieceData ..< (i + 1) * kSizeOfPieceData)
+            let section = OtaDataSection(data: data)
+            sections.append(section)
+        }
+        if left > 0 {
+            let data = data.subdata(in: data.count - left ..< data.count)
+            let section = OtaDataSection(data: data)
+            sections.append(section)
+        }
+        
+        return sections
+    }
+    
+    // nordic 没有分块的设计，只是设计成20的packages回传一次
+    private func splitNordicDataToSections(_ data: Data) -> [OtaDataSection] {
+        var sections = [OtaDataSection]()
+        let sectionSize = kPackageCountCallback * BLEConfig.shared.mtu
+        let num = data.count / sectionSize
+        let left = data.count % sectionSize
+        for i in 0..<num {
+            let data = data.subdata(in: i * sectionSize ..< (i + 1) * sectionSize)
             let section = OtaDataSection(data: data)
             sections.append(section)
         }

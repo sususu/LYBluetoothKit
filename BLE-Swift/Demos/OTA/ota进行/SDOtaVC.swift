@@ -59,6 +59,16 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(otaProgressNotification(notification:)), name: kOtaTaskProgressUpdateNotification, object: nil)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIApplication.shared.isIdleTimerDisabled = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        UIApplication.shared.isIdleTimerDisabled = false
+    }
+    
     // MARK: - 业务逻辑
     // 解析ota配置模型 OtaConfig
     func parseConfigAndUpdateUI() {
@@ -396,14 +406,14 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let arr = firmwaresArr[indexPath.section][kFirmwaresKey] as! Array<Firmware>
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
-        cell.textLabel?.font = font(12)
+        cell.textLabel?.font = font(16)
         cell.textLabel?.textColor = rgb(80, 80, 80)
         cell.textLabel?.text = arr[indexPath.row].name + "(\(arr[indexPath.row].versionName.count == 0 ? "--" : arr[indexPath.row].versionName))"
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 30
+        return 45
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

@@ -103,11 +103,24 @@ public class BLEScanTask: BLETask {
         self.connectBlock = connectBlock
     }
     
+    func connectFailed(err: BLEError) {
+        error = err
+        device = nil
+        state = .failed
+        stopTimer()
+    }
+    
+    func connectSuccess() {
+        error = nil
+        device!.state = .ready
+        state = .success
+        stopTimer()
+    }
+    
     override func timeoutHandler() {
         super.timeoutHandler()
-        self.error = BLEError.taskError(reason: .timeout)
-        self.device = nil
-        self.state = .failed
+        connectFailed(err: BLEError.taskError(reason: .timeout))
+        BLEDevicesManager.shared.deviceConnectTimeout(withTask: self)
     }
     
     override public var hash: Int {
