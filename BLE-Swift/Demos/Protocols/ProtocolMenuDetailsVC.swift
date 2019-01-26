@@ -8,17 +8,17 @@
 
 import UIKit
 
-class ProtocolMenuDetailsVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+class ProtocolMenuDetailsVC: BaseViewController, UITableViewDataSource, UITableViewDelegate, AddProtocolVCDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var protocols: Array<Protocol>
+    var menu: ProtocolMenu
     
     var runner = ProtocolRunner()
     
     
-    init(protocols: Array<Protocol>) {
-        self.protocols = protocols
+    init(menu: ProtocolMenu) {
+        self.menu = menu
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -45,18 +45,25 @@ class ProtocolMenuDetailsVC: BaseViewController, UITableViewDataSource, UITableV
     // MARK: - 事件处理
     @IBAction func addBtnClick(_ sender: Any) {
         let vc = AddProtocolVC()
+        vc.menu = menu
+        vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    // MARK: - 代理
+    func didAddNewProtocol(protocol: Protocol) {
+        tableView.reloadData()
     }
     
     
     // MARK: - tableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return protocols.count
+        return self.menu.protocols.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! ProtocolMenuDetailCell
-        cell.updateUI(withProtocol: self.protocols[indexPath.row])
+        cell.updateUI(withProtocol: self.menu.protocols[indexPath.row])
         cell.accessoryType = .disclosureIndicator
         return cell
     }
@@ -64,8 +71,9 @@ class ProtocolMenuDetailsVC: BaseViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         tableView.deselectRow(at: indexPath, animated: true)
+        /*
         weak var weakSelf = self
-        runner.run(self.protocols[indexPath.row], boolCallback: { (bool) in
+        runner.run(self.menu.protocols[indexPath.row], boolCallback: { (bool) in
             
         }, stringCallback: { (str) in
             weakSelf?.alert(msg: (str ?? ""), confirmSel: nil, cancelText: nil, cancelSel: nil)
@@ -76,5 +84,30 @@ class ProtocolMenuDetailsVC: BaseViewController, UITableViewDataSource, UITableV
         }) { (err) in
             weakSelf?.handleBleError(error: err)
         }
+ */
+        let vc = ProtocolExcuteVC()
+        vc.proto = menu.protocols[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        let alert = UIAlertController(title: nil, message: TR("Are you to delete ?"), preferredStyle: .alert)
+        let ok = UIAlertAction(title: TR("OK"), style: .default) { (action) in
+            self.menu.protocols.remove(at: indexPath.row)
+            ProtocolService.shared.saveMenus()
+            self.tableView.reloadData()
+            self.showSuccess(TR("Success"))
+        }
+        let cancel = UIAlertAction(title: TR("CANCEL"), style: .cancel, handler: nil)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        navigationController?.present(alert, animated: true, completion: nil)
+        
+    }
+    
 }

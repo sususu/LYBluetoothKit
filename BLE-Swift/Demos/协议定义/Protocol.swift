@@ -12,7 +12,7 @@ class Protocol: Codable {
     var name = ""
     var code = ""
     var summary = ""
-    var cmd = ""
+    var cmdUnits = [CmdUnit]()
     var returnFormat = ReturnFormat()
     
     static func cmdFrom(units: [CmdUnit]) -> String {

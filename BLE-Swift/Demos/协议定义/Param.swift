@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum ParamType {
+enum ParamType: Int, Codable {
     case int
     case string
     case bool
@@ -16,8 +16,11 @@ enum ParamType {
     case object
 }
 
-class Param: NSObject {
+class Param: Codable {
     var type: ParamType = .int
-    var value: Any?
+    var value: String?
     
+    init(type: ParamType) {
+        self.type = type
+    }
 }

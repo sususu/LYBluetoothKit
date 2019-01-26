@@ -22,7 +22,7 @@ class ProtocolViewController: BaseViewController, UITableViewDataSource, UITable
         tableView.delegate = self
         tableView.register(UINib(nibName: "ProtocolMenuCell", bundle: nil), forCellReuseIdentifier: "cellId")
 //        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 80))
-        tableView.rowHeight = 45
+        tableView.rowHeight = 55
         // Do any additional setup after loading the view.
         
         setNavLeftButton(text: TR("导出"), sel: #selector(exportBtnClick))
@@ -30,14 +30,37 @@ class ProtocolViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     func loadDataAndRefresUI() {
-        protocolMenus = ProtocolJsonParser.shared.parser(jsonFileName: "Protocol.json")
+        protocolMenus = ProtocolService.shared.protocolMenus
         tableView.reloadData()
     }
     
 
     // MARK: - 事件处理
     @IBAction func addBtnClick(_ sender: Any) {
+        
+        let alert = UIAlertController(title: nil, message: TR("Please input name"), preferredStyle: .alert)
+        let ok = UIAlertAction(title: TR("OK"), style: .default) { (action) in
+            self.createNewMenu(withName: alert.textFields![0].text ?? "")
+        }
+        let cancel = UIAlertAction(title: TR("NO"), style: .cancel, handler: nil)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        alert.addTextField { (tf) in
+            tf.placeholder = TR("协议分组名称")
+            tf.becomeFirstResponder()
+        }
+        navigationController?.present(alert, animated: true, completion: nil)
+        
     }
+    
+    func createNewMenu(withName name: String) {
+        let menu = ProtocolMenu(name: name, createTime: Date().timeIntervalSince1970)
+        protocolMenus.insert(menu, at: 0)
+        ProtocolService.shared.addMenu(menu: menu)
+        tableView.reloadData()
+        showSuccess(TR("Success"))
+    }
+    
     
     @objc func exportBtnClick() {
         
@@ -59,7 +82,7 @@ class ProtocolViewController: BaseViewController, UITableViewDataSource, UITable
     {
         tableView.deselectRow(at: indexPath, animated: true)
         let menu = self.protocolMenus[indexPath.row]
-        let vc = ProtocolMenuDetailsVC(protocols: menu.protocols)
+        let vc = ProtocolMenuDetailsVC(menu: menu)
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }

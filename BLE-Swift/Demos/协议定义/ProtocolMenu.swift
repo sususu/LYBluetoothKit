@@ -8,13 +8,15 @@
 
 import UIKit
 
-class ProtocolMenu: NSObject {
+class ProtocolMenu: Codable {
     var name = ""
     var icon = ""
     var summary = ""
+    var createTime: TimeInterval
     var protocols = Array<Protocol>()
-    
-    init(name: String) {
+
+    init(name: String, createTime: TimeInterval) {
         self.name = name
+        self.createTime = createTime
     }
 }

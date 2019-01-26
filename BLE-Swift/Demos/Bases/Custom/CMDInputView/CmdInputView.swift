@@ -133,6 +133,7 @@ class CmdInputView: UIView, UICollectionViewDataSource, UICollectionViewDelegate
                 let sub = String(text[startIndex ..< endIndex])
                 unit.type = .variable
                 unit.valueStr = sub
+                unit.param = Param(type: .int)
                 
                 i += 4
             }
@@ -142,6 +143,16 @@ class CmdInputView: UIView, UICollectionViewDataSource, UICollectionViewDelegate
                 let sub = String(text[startIndex ..< endIndex])
                 unit.type = .variable
                 unit.valueStr = sub
+                unit.param = Param(type: .string)
+                
+                i += 3
+            }
+            else if text[startIndex] == "L" {
+                let endIndex = text.index(text.startIndex, offsetBy: i + 3)
+                let sub = String(text[startIndex ..< endIndex])
+                unit.type = .variable
+                unit.valueStr = sub
+                unit.param = Param(type: .int)
                 
                 i += 3
             }
@@ -211,7 +222,8 @@ class CmdInputView: UIView, UICollectionViewDataSource, UICollectionViewDelegate
     
     func didEnterStr(str: String) {
         if (str.hasPrefix("Str") ||
-            str.hasPrefix("Int")) && !checkCanAddParams() {
+            str.hasPrefix("Int") ||
+            str.hasPrefix("Len")) && !checkCanAddParams() {
             return
         }
         textField.text = (textField.text ?? "") + str

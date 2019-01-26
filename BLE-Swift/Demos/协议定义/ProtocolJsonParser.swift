@@ -29,7 +29,7 @@ class ProtocolJsonParser: NSObject {
             
             for j in jsonArr {
                 let name = j["name"].string ?? ""
-                let pm = ProtocolMenu(name: name)
+                let pm = ProtocolMenu(name: name, createTime: Date().timeIntervalSince1970)
                 arr.append(pm)
                 
                 guard let parr = j["protocols"].array else {
@@ -61,7 +61,7 @@ class ProtocolJsonParser: NSObject {
             p.name = name
             p.code = code
             p.summary = summary
-            p.cmd = cmd
+//            p.cmd = cmd
             
             if let rfDict = j["returnFormat"].dictionary {
                 p.returnFormat = parserReturnFormat(dict: rfDict)

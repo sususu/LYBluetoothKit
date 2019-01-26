@@ -46,7 +46,8 @@ class ProtocolRunner {
     }
     
     func getCmdData(pcl: Protocol) -> Data? {
-        return pcl.cmd.hexadecimal
+//        return pcl.cmd.hexadecimal
+        return nil
     }
     
 }

@@ -22,8 +22,8 @@ class CmdKeyBoardView: UIView {
     
     var isSelectingLength = false
     
-    let ds = ["D", "E", "F", "DONE",
-              "A", "B", "C", "X",
+    let ds = ["D", "E", "F", "X",
+              "A", "B", "C", "Len",
               "7", "8", "9", "Str",
               "4", "5", "6", "Int",
               "1", "2", "3", "0"]
@@ -60,7 +60,11 @@ class CmdKeyBoardView: UIView {
             
             let btn = UIButton(type: .custom)
             btn.frame = CGRect(x: x, y: y, width: itemWidth, height: itemHeight)
-            btn.setTitle(ds[i], for: .normal)
+            var title = ds[i]
+            if title == "X" {
+                title = "回退"
+            }
+            btn.setTitle(title, for: .normal)
             btn.titleLabel?.font = font(16)
             if i < 7 && i != 3 {
                 btn.setTitleColor(kMainColor, for: .normal)

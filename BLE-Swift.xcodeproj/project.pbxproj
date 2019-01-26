@@ -120,7 +120,7 @@
 		2B62A57221DF68840051DD38 /* Param.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A57121DF68840051DD38 /* Param.swift */; };
 		2B62A57421DF6B070051DD38 /* ProtocolMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A57321DF6B070051DD38 /* ProtocolMenu.swift */; };
 		2B62A57621DF6B730051DD38 /* ProtocolJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A57521DF6B730051DD38 /* ProtocolJsonParser.swift */; };
-		2B62A57821E03D3E0051DD38 /* Protocol.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B62A57721E03D3E0051DD38 /* Protocol.json */; };
+		2B62A57821E03D3E0051DD38 /* Protocol111.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B62A57721E03D3E0051DD38 /* Protocol111.json */; };
 		2B62A57C21E042680051DD38 /* ProtocolMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A57A21E042680051DD38 /* ProtocolMenuCell.swift */; };
 		2B62A57D21E042680051DD38 /* ProtocolMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B62A57B21E042680051DD38 /* ProtocolMenuCell.xib */; };
 		2B62A58021E0488A0051DD38 /* ProtocolMenuDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A57E21E0488A0051DD38 /* ProtocolMenuDetailsVC.swift */; };
@@ -163,6 +163,9 @@
 		2BA23FA621E4B6D600EF1B77 /* FirmwareTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BA23FA421E4B6D600EF1B77 /* FirmwareTypeCell.xib */; };
 		2BA23FA721E4B6D600EF1B77 /* FirmwareTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA23FA521E4B6D600EF1B77 /* FirmwareTypeCell.swift */; };
 		2BA23FAA21E58ABB00EF1B77 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA23FA921E58ABB00EF1B77 /* File.swift */; };
+		2BA3B58221FC29070084E291 /* ProtocolService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA3B58121FC29070084E291 /* ProtocolService.swift */; };
+		2BA3B58721FC35340084E291 /* ProtocolExcuteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA3B58521FC35340084E291 /* ProtocolExcuteVC.swift */; };
+		2BA3B58821FC35340084E291 /* ProtocolExcuteVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BA3B58621FC35340084E291 /* ProtocolExcuteVC.xib */; };
 		2BB4B6E721E99B6C00F22268 /* TaskSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4B6E521E99B6C00F22268 /* TaskSummaryCell.swift */; };
 		2BB4B6E821E99B6C00F22268 /* TaskSummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BB4B6E621E99B6C00F22268 /* TaskSummaryCell.xib */; };
 		2BB4B6ED21E9C21C00F22268 /* OtaTaskDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4B6EB21E9C21C00F22268 /* OtaTaskDetailVC.swift */; };
@@ -331,7 +334,7 @@
 		2B62A57121DF68840051DD38 /* Param.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Param.swift; sourceTree = "<group>"; };
 		2B62A57321DF6B070051DD38 /* ProtocolMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolMenu.swift; sourceTree = "<group>"; };
 		2B62A57521DF6B730051DD38 /* ProtocolJsonParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolJsonParser.swift; sourceTree = "<group>"; };
-		2B62A57721E03D3E0051DD38 /* Protocol.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Protocol.json; sourceTree = "<group>"; };
+		2B62A57721E03D3E0051DD38 /* Protocol111.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Protocol111.json; sourceTree = "<group>"; };
 		2B62A57A21E042680051DD38 /* ProtocolMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolMenuCell.swift; sourceTree = "<group>"; };
 		2B62A57B21E042680051DD38 /* ProtocolMenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProtocolMenuCell.xib; sourceTree = "<group>"; };
 		2B62A57E21E0488A0051DD38 /* ProtocolMenuDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolMenuDetailsVC.swift; sourceTree = "<group>"; };
@@ -388,6 +391,9 @@
 		2BA23FA421E4B6D600EF1B77 /* FirmwareTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirmwareTypeCell.xib; sourceTree = "<group>"; };
 		2BA23FA521E4B6D600EF1B77 /* FirmwareTypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirmwareTypeCell.swift; sourceTree = "<group>"; };
 		2BA23FA921E58ABB00EF1B77 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		2BA3B58121FC29070084E291 /* ProtocolService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolService.swift; sourceTree = "<group>"; };
+		2BA3B58521FC35340084E291 /* ProtocolExcuteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolExcuteVC.swift; sourceTree = "<group>"; };
+		2BA3B58621FC35340084E291 /* ProtocolExcuteVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProtocolExcuteVC.xib; sourceTree = "<group>"; };
 		2BB4B6E521E99B6C00F22268 /* TaskSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSummaryCell.swift; sourceTree = "<group>"; };
 		2BB4B6E621E99B6C00F22268 /* TaskSummaryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskSummaryCell.xib; sourceTree = "<group>"; };
 		2BB4B6EB21E9C21C00F22268 /* OtaTaskDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtaTaskDetailVC.swift; sourceTree = "<group>"; };
@@ -871,6 +877,8 @@
 		2B5832EC2176E05B00259593 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				2BA3B58021FC28F40084E291 /* Services */,
+				2BA3B58421FC350D0084E291 /* 协议执行 */,
 				2B55B56A21FA9FFA00CAE637 /* 协议编辑 */,
 				2B4AB46621F174AD00EF5327 /* ReturnParser */,
 				2B62A58821E057660051DD38 /* ResultDisplay */,
@@ -948,7 +956,7 @@
 			isa = PBXGroup;
 			children = (
 				2B9DD96F21E7205E00C215E5 /* otaPrefix.json */,
-				2B62A57721E03D3E0051DD38 /* Protocol.json */,
+				2B62A57721E03D3E0051DD38 /* Protocol111.json */,
 			);
 			path = Jsons;
 			sourceTree = "<group>";
@@ -1082,6 +1090,23 @@
 				2B4AB46421F02AE500EF5327 /* UIImageExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2BA3B58021FC28F40084E291 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2BA3B58121FC29070084E291 /* ProtocolService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		2BA3B58421FC350D0084E291 /* 协议执行 */ = {
+			isa = PBXGroup;
+			children = (
+				2BA3B58521FC35340084E291 /* ProtocolExcuteVC.swift */,
+				2BA3B58621FC35340084E291 /* ProtocolExcuteVC.xib */,
+			);
+			path = "协议执行";
 			sourceTree = "<group>";
 		};
 		2BB4B6E421E9976100F22268 /* Views */ = {
@@ -1322,12 +1347,13 @@
 				2B62A56621DF28470051DD38 /* CharacteristicCellTableViewCell.xib in Resources */,
 				2B4AB46E21F1779100EF5327 /* TestGroupCell.xib in Resources */,
 				2B56A15121F6F0780073E2A7 /* ProtocolManagerVC.xib in Resources */,
-				2B62A57821E03D3E0051DD38 /* Protocol.json in Resources */,
+				2B62A57821E03D3E0051DD38 /* Protocol111.json in Resources */,
 				2B80C1FC21EC583200FE7BF7 /* OtaViewController.xib in Resources */,
 				2B56A14D21F6F0210073E2A7 /* FirmwareManagerVC.xib in Resources */,
 				2B4874A5214F763500AC5841 /* Assets.xcassets in Resources */,
 				2B3657A721DCCF5C0070E7AB /* Icons.xcassets in Resources */,
 				2B80C1EE21EC35E700FE7BF7 /* PrefixAddVC.xib in Resources */,
+				2BA3B58821FC35340084E291 /* ProtocolExcuteVC.xib in Resources */,
 				2B5832F12176E46C00259593 /* DevicesVC.xib in Resources */,
 				2B9DD96B21E717EA00C215E5 /* PrefixCell.xib in Resources */,
 				2B62A55E21DEF2700051DD38 /* DeviceInfoViewController.xib in Resources */,
@@ -1486,6 +1512,7 @@
 				2B3C1C40218FEB37007F7DC6 /* DeviceCell.swift in Sources */,
 				2B40433A216C9AF100C6837B /* BLEDevicesManager.swift in Sources */,
 				2B36579C21DCC6330070E7AB /* SettingsViewController.swift in Sources */,
+				2BA3B58721FC35340084E291 /* ProtocolExcuteVC.swift in Sources */,
 				2B5832F02176E46C00259593 /* DevicesVC.swift in Sources */,
 				2B5832F6217705D400259593 /* TableSection.swift in Sources */,
 				2BA23F9E21E4B05700EF1B77 /* FirmwareSaveVC.swift in Sources */,
@@ -1549,6 +1576,7 @@
 				2B44C74921EEDE7D0037F5C3 /* CmdInputView.swift in Sources */,
 				2B4874D12150C83B00AC5841 /* BLEDefines.swift in Sources */,
 				2B9DD97F21E74D6100C215E5 /* OtaDataSection.swift in Sources */,
+				2BA3B58221FC29070084E291 /* ProtocolService.swift in Sources */,
 				2B40433C216C9BF500C6837B /* BLETask.swift in Sources */,
 				2B56A14421F6EBAF0073E2A7 /* MenuRow.swift in Sources */,
 				2B56A14221F6EBA50073E2A7 /* MenuSection.swift in Sources */,

@@ -8,14 +8,14 @@
 
 import UIKit
 
-public enum CmdUnitType {
+public enum CmdUnitType: Int, Codable {
     case cmd
     case constant
     case variable
     case placeHolder
 }
 
-public class CmdUnit: NSObject {
+public class CmdUnit: Codable {
     var type: CmdUnitType = .cmd
     var name = ""
     var valueStr: String?
