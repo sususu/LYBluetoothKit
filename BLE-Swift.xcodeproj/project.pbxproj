@@ -166,6 +166,7 @@
 		2BA3B58221FC29070084E291 /* ProtocolService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA3B58121FC29070084E291 /* ProtocolService.swift */; };
 		2BA3B58721FC35340084E291 /* ProtocolExcuteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA3B58521FC35340084E291 /* ProtocolExcuteVC.swift */; };
 		2BA3B58821FC35340084E291 /* ProtocolExcuteVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BA3B58621FC35340084E291 /* ProtocolExcuteVC.xib */; };
+		2BA3B58A21FC4AFE0084E291 /* DeviceResponseLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA3B58921FC4AFE0084E291 /* DeviceResponseLogView.swift */; };
 		2BB4B6E721E99B6C00F22268 /* TaskSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4B6E521E99B6C00F22268 /* TaskSummaryCell.swift */; };
 		2BB4B6E821E99B6C00F22268 /* TaskSummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BB4B6E621E99B6C00F22268 /* TaskSummaryCell.xib */; };
 		2BB4B6ED21E9C21C00F22268 /* OtaTaskDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4B6EB21E9C21C00F22268 /* OtaTaskDetailVC.swift */; };
@@ -394,6 +395,7 @@
 		2BA3B58121FC29070084E291 /* ProtocolService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolService.swift; sourceTree = "<group>"; };
 		2BA3B58521FC35340084E291 /* ProtocolExcuteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolExcuteVC.swift; sourceTree = "<group>"; };
 		2BA3B58621FC35340084E291 /* ProtocolExcuteVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProtocolExcuteVC.xib; sourceTree = "<group>"; };
+		2BA3B58921FC4AFE0084E291 /* DeviceResponseLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceResponseLogView.swift; sourceTree = "<group>"; };
 		2BB4B6E521E99B6C00F22268 /* TaskSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSummaryCell.swift; sourceTree = "<group>"; };
 		2BB4B6E621E99B6C00F22268 /* TaskSummaryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskSummaryCell.xib; sourceTree = "<group>"; };
 		2BB4B6EB21E9C21C00F22268 /* OtaTaskDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtaTaskDetailVC.swift; sourceTree = "<group>"; };
@@ -603,6 +605,7 @@
 				2B3657B721DDB05C0070E7AB /* LeftDeviceCell.swift */,
 				2B3657B821DDB05C0070E7AB /* LeftDeviceCell.xib */,
 				2B3657BB21DDB0FF0070E7AB /* SignalStrengthView.swift */,
+				2BA3B58921FC4AFE0084E291 /* DeviceResponseLogView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1592,6 +1595,7 @@
 				2B9DD97421E729DD00C215E5 /* BLECenterExtensions.swift in Sources */,
 				2B45441C21F5996A00FC3E91 /* ZdOtaTask.swift in Sources */,
 				2B3657BC21DDB0FF0070E7AB /* SignalStrengthView.swift in Sources */,
+				2BA3B58A21FC4AFE0084E291 /* DeviceResponseLogView.swift in Sources */,
 				2B62A57021DF68720051DD38 /* Protocol.swift in Sources */,
 				2BE7701121E2E3EF00FD6374 /* ReturnFormat.swift in Sources */,
 				2BB4B6ED21E9C21C00F22268 /* OtaTaskDetailVC.swift in Sources */,

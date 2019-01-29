@@ -36,7 +36,7 @@ class NumberInputView: UIControl {
         addSubview(jianBtn)
         
         textField = UITextField(frame: CGRect(x: btnWidth, y: 0, width: self.bounds.width - btnWidth * 2, height: btnHeight))
-        textField.keyboardType = .numberPad
+//        textField.keyboardType = .numberPad
         textField.text = "0"
 //        textField.borderStyle = .line
         textField.font = font(16)

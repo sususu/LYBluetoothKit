@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DeviceInfoViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, CharacteristicCellTableViewCellDelegate {
+class DeviceInfoViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, CharacteristicCellTableViewCellDelegate, CmdKeyBoardViewDelegate {
     
     var device: BLEDevice
     
@@ -41,11 +41,27 @@ class DeviceInfoViewController: BaseViewController, UITableViewDelegate, UITable
         
         configNav()
         createView()
+        
+        reloadData()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(deviceDataUpdate), name: BLEInnerNotification.deviceDataUpdate, object: nil)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DeviceResponseLogView.create()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        DeviceResponseLogView.destroy()
+    }
+    
     
     func configNav() {
         self.title = TR("Device Information")
         setNavLeftButton(withIcon: "fanhui", sel: #selector(backClick))
+        setNavRightButton(text: TR("日志"), sel: #selector(showLogBtnClick))
     }
 
     func createView() {
@@ -159,6 +175,10 @@ class DeviceInfoViewController: BaseViewController, UITableViewDelegate, UITable
         })
     }
     
+    @objc func showLogBtnClick() {
+        DeviceResponseLogView.show()
+    }
+    
     
     // MARK: - 代理
     func numberOfSections(in tableView: UITableView) -> Int
@@ -199,7 +219,69 @@ class DeviceInfoViewController: BaseViewController, UITableViewDelegate, UITable
         }
     }
     
+    private var keyboard = CmdKeyBoardView()
+    private var textField: UITextField?
     func didClickSendBtn(cell: UITableViewCell) {
+        keyboard.delegate = self
+        let alert = UIAlertController(title: nil, message: "输入要发送的数据（16进制）", preferredStyle: .alert)
+        let ok = UIAlertAction(title: TR("OK"), style: .default) { (action) in
+            
+        }
+        let cancel = UIAlertAction(title: TR("CANCEL"), style: .cancel, handler: nil)
+        alert.addTextField { (textField) in
+            textField.font = font(12)
+            textField.inputView = self.keyboard
+            self.textField = textField
+        }
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        
+        navigationController?.present(alert, animated: true, completion: nil)
+    }
+    
+    func didEnterStr(str: String) {
+        if str.hasPrefix("Str") ||
+            str.hasPrefix("Int") ||
+            str.hasPrefix("Len") {
+            return
+        }
+        textField?.text = (textField?.text ?? "") + str
+    }
+    
+    func didFinishInput() {
+        
+    }
+    func didFallback() {
+        
+        guard let text = textField?.text, text.count > 0 else {
+            return
+        }
+        
+        textField?.text = String(text.prefix(text.count - 1))
+    }
+    
+    
+    
+    @objc func deviceDataUpdate(notification: Notification) {
+        guard let uuid = notification.userInfo?[BLEKey.uuid] as? String else {
+            return
+        }
+        guard let data = notification.userInfo?[BLEKey.data] as? Data else {
+            return
+        }
+        
+        guard let device = notification.userInfo?[BLEKey.device] as? BLEDevice else {
+            return
+        }
+        
+        if device == self.device {
+            DeviceResponseLogView.printLog(log: "(\(uuid)) recv data:\(data.hexEncodedString())")
+            DeviceResponseLogView.show()
+        }
+        
+//        if uuid == self.data.recvFromUuid && device == self.device {
+//            parser.standardParse(data: data, sendData: self.data.sendData, recvCount: self.data.recvDataCount)
+//        }
         
     }
 }

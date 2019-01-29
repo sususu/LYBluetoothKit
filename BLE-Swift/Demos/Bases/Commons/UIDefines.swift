@@ -22,7 +22,7 @@ let kiPhoneXsMax = (kScreenWidth == 414 && kScreenHeight >= 896)
 // 是否全屏手机
 let kiFullScreen = kiPhoneX_S
 // 状态栏高度
-let kStatusBarHeight = (kiFullScreen ? 24 : 20)
+let kStatusBarHeight: CGFloat = (kiFullScreen ? 44 : 20)
 
 // MARK: - 方法
 func rgb(_ r:CGFloat, _ g:CGFloat, _ b:CGFloat, _ a:CGFloat = 1) -> UIColor {

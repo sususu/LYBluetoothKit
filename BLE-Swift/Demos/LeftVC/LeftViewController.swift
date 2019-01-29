@@ -79,10 +79,11 @@ class LeftViewController: BaseViewController, UITableViewDataSource, UITableView
             if err != nil {
                 weakSelf?.handleBleError(error: err)
             } else {
-                weakSelf?.showSuccess(TR("Connected"))
-                weakSelf?.devices.remove(at: atIndex)
-                weakSelf?.devices.insert(d!, at: atIndex)
-                weakSelf?.tableView.reloadData()
+//                weakSelf?.showSuccess(TR("Connected"))
+                weakSelf?.stopLoading()
+                let vc = DeviceInfoViewController(device: d!)
+                let nav = LYNavigationController(rootViewController: vc)
+                self.present(nav, animated: true, completion: nil)
             }
         });
     }
@@ -112,9 +113,9 @@ class LeftViewController: BaseViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         tableView.deselectRow(at: indexPath, animated: true)
-        if self.refreshBtn.isLoading {
-            return
-        }
+//        if self.refreshBtn.isLoading {
+//            return
+//        }
         
         let device = self.devices[indexPath.row]
         connect(device: device, atIndex: indexPath.row)

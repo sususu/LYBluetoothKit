@@ -78,6 +78,13 @@ class CmdKeyBoardView: UIView {
             btn.setTitleColor(rgb(200, 200, 200), for: .disabled)
             btn.setBackgroundImage(UIImage.color(color: rgb(200, 200, 200), size: btn.bounds.size), for: .disabled)
             btn.tag = i
+//            if title == "X" {
+//                btn.addTarget(self, action: #selector(fallBackDownClick), for: .touchDown)
+//                btn.addTarget(self, action: #selector(fallBackUpClick), for: .touchUpInside)
+//                btn.addTarget(self, action: #selector(fallBackUpClick), for: .touchUpOutside)
+//            } else {
+//                btn.addTarget(self, action: #selector(btnClick(button:)), for: .touchUpInside)
+//            }
             btn.addTarget(self, action: #selector(btnClick(button:)), for: .touchUpInside)
             
             addSubview(btn)
@@ -144,6 +151,40 @@ class CmdKeyBoardView: UIView {
                 enableAllKey()
             } else {
                 delegate?.didEnterStr(str: str)
+            }
+        }
+    }
+    
+    private var fastestFallbackRate: TimeInterval = 0.1
+    private var startFallbackRate: TimeInterval = 1
+    private var upRate: TimeInterval = 0.02
+    
+    private var fallBackIsDown = false
+    
+    @objc func fallBackDownClick(button: UIButton) {
+        if isSelectingLength {
+            return
+        } else {
+            fallBackIsDown = true
+            doFallback(next: startFallbackRate)
+        }
+    }
+    
+    @objc func fallBackUpClick(button: UIButton) {
+        if isSelectingLength {
+            enableAllKey()
+            isSelectingLength = false
+        } else {
+            fallBackIsDown = false
+        }
+    }
+    
+    private func doFallback(next: TimeInterval) {
+        delegate?.didFallback()
+        DispatchQueue.main.asyncAfter(deadline: .now() + next) {
+            if self.fallBackIsDown {
+                let next = (next - self.upRate) < self.fastestFallbackRate ? self.fastestFallbackRate : (next - self.upRate)
+                self.doFallback(next: next)
             }
         }
     }

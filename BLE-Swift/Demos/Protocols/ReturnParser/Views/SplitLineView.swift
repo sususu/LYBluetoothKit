@@ -10,8 +10,11 @@ import UIKit
 
 class SplitLineView: UIView {
     
+    var typeLbl: UILabel!
     var nameTF: UITextField!
     var numberInput: NumberInputView!
+    
+    var type: ParamType = .int
     
     var name: String? {
         get {
@@ -22,6 +25,17 @@ class SplitLineView: UIView {
     var number: Int {
         get {
             return Int(numberInput.textField.text ?? "0") ?? 0
+        }
+    }
+    
+    convenience init(frame: CGRect, type: ParamType) {
+        self.init(frame: frame)
+        self.type = type
+        
+        if type == .int {
+            typeLbl.text = "Int"
+        } else {
+            typeLbl.text = "Str"
         }
     }
 
@@ -36,6 +50,19 @@ class SplitLineView: UIView {
     }
     
     func initViews() {
+        
+        typeLbl = UILabel()
+        typeLbl.font = font(10)
+        typeLbl.backgroundColor = kMainColor
+        typeLbl.textAlignment = .center
+        typeLbl.textColor = UIColor.white
+        if type == .int {
+            typeLbl.text = "Int"
+        } else {
+            typeLbl.text = "Str"
+        }
+        addSubview(typeLbl)
+        
         nameTF = UITextField()
         nameTF.placeholder = TR("名称")
         nameTF.font = font(16)
@@ -48,8 +75,24 @@ class SplitLineView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        nameTF.frame = CGRect(x: 0, y: 0, width: 140, height: self.bounds.height)
-        numberInput.frame = CGRect(x: nameTF.bounds.width + 10, y: 0, width: self.bounds.width - nameTF.bounds.width - 10, height: self.bounds.height)
+        
+        var typeWidth: CGFloat = 25
+        var nameWidth: CGFloat = 80
+        
+        if kScreenWidth > 320 {
+            typeWidth = 35
+            nameWidth = 100
+        }
+        
+        if kScreenWidth > 375 {
+            typeWidth = 40
+            nameWidth = 120
+        }
+        
+        typeLbl.frame = CGRect(x: 0, y: 0, width: typeWidth, height: self.bounds.height)
+        
+        nameTF.frame = CGRect(x: typeLbl.right + 5, y: 0, width: nameWidth, height: self.bounds.height)
+        numberInput.frame = CGRect(x: nameTF.right + 5, y: 0, width: self.width - nameTF.width - typeLbl.width - 10, height: self.bounds.height)
     }
     
 }

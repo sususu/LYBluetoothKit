@@ -22,7 +22,8 @@ class ReturnFormatVC: BaseViewController {
     var tlvInputs = [TlvLineView]()
     var delBtns = [UIButton]()
     
-    var addLintBtn: UIButton!
+    var addIntBtn: UIButton!
+    var addStringBtn: UIButton!
     var scrollView: UIScrollView!
     
     override func viewDidLoad() {
@@ -36,21 +37,33 @@ class ReturnFormatVC: BaseViewController {
     }
 
     func createViews() {
-        addLintBtn = UIButton(type: .custom)
-        addLintBtn.setTitle(TR("加一行"), for: .normal)
-        addLintBtn.backgroundColor = kMainColor
-        addLintBtn.titleLabel?.font = font(16)
-        addLintBtn.frame = CGRect(x: 0, y: navigationBarHeight, width: kScreenWidth, height: 50)
-        self.view.addSubview(addLintBtn)
         
-        scrollView = UIScrollView(frame: CGRect(x: 0, y: addLintBtn.bottom, width: kScreenWidth, height: kScreenHeight - addLintBtn.bottom))
+        let width = (kScreenWidth - 30) / 2
+        
+        addStringBtn = UIButton(type: .custom)
+        addStringBtn.setTitle(TR("加一行(string)"), for: .normal)
+        addStringBtn.backgroundColor = kMainColor
+        addStringBtn.titleLabel?.font = font(16)
+        addStringBtn.frame = CGRect(x: 10, y: navigationBarHeight + 5, width: width, height: 45)
+        self.view.addSubview(addStringBtn)
+        
+        addIntBtn = UIButton(type: .custom)
+        addIntBtn.setTitle(TR("加一行(int)"), for: .normal)
+        addIntBtn.backgroundColor = kMainColor
+        addIntBtn.titleLabel?.font = font(16)
+        addIntBtn.frame = CGRect(x: addStringBtn.right + 10, y: navigationBarHeight + 5, width: width, height: 45)
+        self.view.addSubview(addIntBtn)
+        
+        scrollView = UIScrollView(frame: CGRect(x: 0, y: addIntBtn.bottom + 10, width: kScreenWidth, height: kScreenHeight - addIntBtn.bottom))
         self.view.addSubview(scrollView)
         
         if returnFormat.type == .split {
-            addLintBtn.addTarget(self, action: #selector(createSplitLine), for: .touchUpInside)
-            createSplitLine()
+            addIntBtn.addTarget(self, action: #selector(createSplitLine), for: .touchUpInside)
+            addStringBtn.addTarget(self, action: #selector(createSplitLine), for: .touchUpInside)
+            createSplitLine(button: addIntBtn)
         } else {
-            addLintBtn.addTarget(self, action: #selector(createTlvLine), for: .touchUpInside)
+            addIntBtn.addTarget(self, action: #selector(createTlvLine), for: .touchUpInside)
+            addStringBtn.addTarget(self, action: #selector(createTlvLine), for: .touchUpInside)
             createTlvLine()
         }
     }
@@ -107,16 +120,22 @@ class ReturnFormatVC: BaseViewController {
         
     }
     
-    @objc func createSplitLine() {
-        var y: CGFloat = 20
+    @objc func createSplitLine(button: UIButton) {
+        var y: CGFloat = 0
         if lineInputs.count > 0 {
             let line = lineInputs.last!
             y = line.bottom + 10
         }
+        
+        var type: ParamType = .int
+        if button == addStringBtn {
+            type = .string
+        }
+        
         let x: CGFloat = 10
         let height: CGFloat = 40
         let width = kScreenWidth - 20 - 10 - height
-        let line = SplitLineView(frame: CGRect(x: x, y: y, width: width, height: height))
+        let line = SplitLineView(frame: CGRect(x: x, y: y, width: width, height: height), type: type)
         self.scrollView.addSubview(line)
         lineInputs.append(line)
         
