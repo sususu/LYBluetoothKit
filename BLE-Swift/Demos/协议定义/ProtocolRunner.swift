@@ -14,14 +14,14 @@ import UIKit
 class ProtocolRunner {
 
     func run(_ pcl: Protocol,
-             boolCallback: ((Bool?)->Void)?,
-             stringCallback: ((String?)->Void)?,
-             dictCallback: ((Dictionary<String, Any>?)->Void)?,
-             dictArrayCallback: ((Array<Dictionary<String, Any>>?)->Void)?,
+             boolCallback: ((Bool)->Void)?,
+             stringCallback: ((String)->Void)?,
+             dictCallback: ((Dictionary<String, Any>)->Void)?,
+             dictArrayCallback: ((Array<Dictionary<String, Any>>)->Void)?,
              errorCallback: ((BLEError)->Void)?) {
         
         if let sendData = getCmdData(pcl: pcl) {
-            BLECenter.shared.send(data: sendData, dataArrayCallback: { (datas, err) in
+            BLECenter.shared.send(data: sendData, recvCount: pcl.returnCount, dataArrayCallback: { (datas, err) in
                 
                 if err != nil {
                     errorCallback?(err!)
@@ -29,13 +29,21 @@ class ProtocolRunner {
                 }
                 
                 if pcl.isBoolReturn {
-                    
+                    var bool = false
+                    if let arr = datas, arr.count > 0, arr[0].count >= 2 {
+                        bool = (arr[0].bytes[1] == 0)
+                    }
+                    boolCallback?(bool)
                 }
                 else if pcl.isStringReturn {
+                    var str = ""
                     if let arr = datas, arr.count > 0 {
-                        let str = String(bytes: arr[0], encoding: String.Encoding.utf8)
-                        stringCallback?(str)
+                        str = String(bytes: arr[0], encoding: String.Encoding.utf8) ?? ""
                     }
+                    stringCallback?(str)
+                }
+                else if pcl.isSplitReturn {
+                    
                 }
                 
             }, toDeviceName: nil)
@@ -46,8 +54,25 @@ class ProtocolRunner {
     }
     
     func getCmdData(pcl: Protocol) -> Data? {
-//        return pcl.cmd.hexadecimal
-        return nil
+
+        var data = Data()
+        for unit in pcl.cmdUnits {
+            if unit.type == .cmd {
+                guard let ud = unit.valueStr?.hexadecimal else {
+                    continue
+                }
+                data.append(ud)
+            }
+            else if unit.type == .variable {
+                guard let param = unit.param else {
+                    continue
+                }
+                if let pd = param.value?.hexadecimal {
+                    data.append(pd)
+                }
+            }
+        }
+        return data
     }
     
 }

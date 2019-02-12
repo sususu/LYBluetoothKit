@@ -167,7 +167,7 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         
-//        print("\(self.name)(\(characteristic.uuid.uuidString)) recv data:\(String(describing: characteristic.value?.hexEncodedString()))")
+        print("\(self.name)(\(characteristic.uuid.uuidString)) recv data:\(String(describing: characteristic.value?.hexEncodedString()))")
         
         NotificationCenter.default.post(name: BLEInnerNotification.deviceDataUpdate, object: nil, userInfo: [BLEKey.data : characteristic.value ?? Data(), BLEKey.uuid : characteristic.uuid.uuidString, BLEKey.device: self])
     }

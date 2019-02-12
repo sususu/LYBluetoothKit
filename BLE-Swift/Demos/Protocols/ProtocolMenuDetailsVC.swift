@@ -36,7 +36,7 @@ class ProtocolMenuDetailsVC: BaseViewController, UITableViewDataSource, UITableV
         tableView.rowHeight = 45
 //        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 80))
         
-        showConnectState()
+        self.title = menu.name
         
         setNavRightButton(text: TR("添加"), sel: #selector(addBtnClick(_:)))
     }

@@ -28,6 +28,8 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
+        
+        reloadData()
     }
     
     // MARK: - 业务逻辑
@@ -53,6 +55,11 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
         settingSection.rows?.append(settingRow)
     }
 
+    func reloadData() {
+        nameLbl.isHidden = true
+        emailLbl.isHidden = true
+    }
+    
 
     // MARK: - 事件处理
     

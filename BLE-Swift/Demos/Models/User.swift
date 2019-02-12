@@ -8,7 +8,18 @@
 
 import UIKit
 
-class User {
+class User: Codable {
+    var id: String = ""
     var name: String!
     var email: String!
+    
+    var jwt: String!
+    
+    var isLogin: Bool {
+        get {
+            return id.count > 0
+        }
+    }
+    
+    
 }

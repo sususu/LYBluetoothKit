@@ -134,10 +134,11 @@ class AddProtocolVC: BaseViewController, ReturnFormatVCDelegate, CmdInputViewDel
         for unit in cmdInputView.units {
             startIndexs.append(string.count)
             var str = ""
+            let label = unit.param?.label ?? (unit.valueStr ?? "")
             if unit.param?.value != nil {
-                str = "\(unit.valueStr ?? "")(\(unit.param!.value!))" + "  "
+                str = "\(label)(\(unit.param!.value!))" + "  "
             } else {
-                str = (unit.valueStr ?? "") + "  "
+                str = (label) + "  "
             }
             string += str
         }
@@ -153,10 +154,11 @@ class AddProtocolVC: BaseViewController, ReturnFormatVCDelegate, CmdInputViewDel
             let unit = cmdInputView.units[i]
             
             var str = ""
+            let label = unit.param?.label ?? (unit.valueStr ?? "")
             if unit.param?.value != nil {
-                str = "\(unit.valueStr ?? "")(\(unit.param!.value!))"
+                str = "\(label)(\(unit.param!.value!))"
             } else {
-                str = (unit.valueStr ?? "")
+                str = (label)
             }
             let range = NSRange(location: startIndexs[i], length: str.count)
             
@@ -190,14 +192,19 @@ class AddProtocolVC: BaseViewController, ReturnFormatVCDelegate, CmdInputViewDel
         }
         
         print("hello:\(unit.valueStr ?? "--")")
-        let alert = UIAlertController(title: nil, message: "请输入默认值", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: "请输入参数信息", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.placeholder = "参数名（选填）"
+        }
         alert.addTextField { (textField) in
             if param.type == .int {
                 textField.keyboardType = .numberPad
             }
+            textField.placeholder = "默认值"
         }
         let ok = UIAlertAction(title: "确定", style: .default) { (action) in
-            unit.param?.value = alert.textFields![0].text
+            unit.param?.label = alert.textFields![0].text
+            unit.param?.value = alert.textFields![1].text
             self.didFinishEditing()
         }
         let cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)

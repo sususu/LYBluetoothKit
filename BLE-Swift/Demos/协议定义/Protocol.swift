@@ -13,6 +13,7 @@ class Protocol: Codable {
     var code = ""
     var summary = ""
     var cmdUnits = [CmdUnit]()
+    var returnCount = 1
     var returnFormat = ReturnFormat()
     
     static func cmdFrom(units: [CmdUnit]) -> String {
@@ -27,21 +28,19 @@ class Protocol: Codable {
 extension Protocol {
     var isBoolReturn: Bool {
         get {
-            if returnFormat.type == .bool {
-                return true
-            } else {
-                return false
-            }
+            return returnFormat.type == .bool
         }
     }
     
     var isStringReturn: Bool {
         get {
-            if returnFormat.type == .string {
-                return true
-            } else {
-                return false
-            }
+            return returnFormat.type == .string
+        }
+    }
+    
+    var isSplitReturn: Bool {
+        get {
+            return returnFormat.type == .split
         }
     }
 }

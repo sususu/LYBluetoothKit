@@ -18,6 +18,7 @@ enum ParamType: Int, Codable {
 
 class Param: Codable {
     var type: ParamType = .int
+    var label: String?
     var value: String?
     
     init(type: ParamType) {

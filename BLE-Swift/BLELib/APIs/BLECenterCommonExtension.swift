@@ -10,8 +10,9 @@ import Foundation
 
 extension BLECenter {
     
-    public func send(data:Data, dataArrayCallback: DataArrayCallback?, toDeviceName:String?)->BLETask? {
+    public func send(data:Data, recvCount: Int = 1, dataArrayCallback: DataArrayCallback?, toDeviceName:String?)->BLETask? {
         let d = BLEData(sendData: data, type: .normal)
+        d.recvDataCount = recvCount
         return send(data: d, callback: { (recv, err) in
             if err != nil {
                 dataArrayCallback?(nil, err)
