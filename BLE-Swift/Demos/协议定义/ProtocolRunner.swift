@@ -44,6 +44,23 @@ class ProtocolRunner {
                 }
                 else if pcl.isSplitReturn {
                     
+                    guard let expression = pcl.returnFormat.expression, let arr = datas, arr.count > 0 else {
+                        dictCallback?(Dictionary<String, Any>())
+                        return
+                    }
+                    
+                    var resultArr = Array<Dictionary<String, Any>>()
+                    
+                    for i in 0 ..< pcl.returnCount {
+                        resultArr.append(self.parseDataToDict(data: arr[i], expression: expression))
+                    }
+                    
+                    if resultArr.count > 1 {
+                        dictArrayCallback?(resultArr)
+                    } else {
+                        dictCallback?(resultArr[0])
+                    }
+                    
                 }
                 
             }, toDeviceName: nil)
@@ -64,15 +81,92 @@ class ProtocolRunner {
                 data.append(ud)
             }
             else if unit.type == .variable {
-                guard let param = unit.param else {
-                    continue
-                }
-                if let pd = param.value?.hexadecimal {
-                    data.append(pd)
+                data.append(getUnitData(unit: unit))
+//                guard let param = unit.param else {
+//                    continue
+//                }
+//
+//
+//                if let pd = param.value?.hexadecimal {
+//                    data.append(pd)
+//                }
+            }
+        }
+        
+        var len = data.count - 6
+        if len > 0 {
+            let lenData = Data(bytes: &len, count: 2)
+            data.replaceSubrange(3 ..< 5, with: lenData)
+        }
+        
+        return data
+    }
+    
+    func getUnitData(unit: CmdUnit) -> Data {
+        guard let str = unit.valueStr else {
+            return Data()
+        }
+        
+        if str.hasPrefix("Int") {
+            guard let len = Int(str.suffix(1)), var intValue = Int(unit.param?.value ?? "") else {
+                return Data()
+            }
+            return Data(bytes: &intValue, count: len)
+        }
+        else if str.hasPrefix("Str") {
+            guard let strValue = unit.param?.value else {
+                return Data()
+            }
+            return (strValue.data(using: .utf8) ?? Data())
+        }
+        else if str.hasPrefix("Len") {
+            return Data(bytes: [0x00, 0x00])
+        }
+        else {
+            return Data()
+        }
+    }
+    
+    
+    func parseDataToDict(data: Data, expression: String) -> Dictionary<String, Any> {
+        
+        var dict = Dictionary<String, Any>()
+        var index = 0
+        
+        let comps = expression.components(separatedBy: ",")
+        for c in comps {
+            let tmp = c.components(separatedBy: "-")
+            if tmp.count > 2 {
+                let len = Int(tmp[0]) ?? 0
+                let name = tmp[1]
+                let type = tmp[2]
+                if data.count > index + len {
+                    
+                    if type == "Int" {
+                        var intValue = 0
+                        for i in 0 ..< len {
+                            intValue += Int(data[index + i]) << (8 * i)
+                        }
+                        dict[name] = intValue
+                        index += len
+                        
+                    } else {
+                        if len == 0 {
+                            let strData = data.subdata(in: index ..< data.count)
+                            let str = String(bytes: strData, encoding: .utf8)
+                            dict[name] = (str ?? "")
+                            break
+                        } else {
+                            let strData = data.subdata(in: index ..< len + index)
+                            let str = String(bytes: strData, encoding: .utf8)
+                            dict[name] = (str ?? "")
+                        }
+                    }
                 }
             }
         }
-        return data
+        
+        return dict
     }
     
 }

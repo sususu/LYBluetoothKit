@@ -79,6 +79,7 @@
 		2B4AB47721F2D2E400EF5327 /* TlvLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4AB47621F2D2E400EF5327 /* TlvLineView.swift */; };
 		2B4AB47B21F3035B00EF5327 /* ZdOtaConfigVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4AB47921F3035B00EF5327 /* ZdOtaConfigVC.swift */; };
 		2B4AB47C21F3035B00EF5327 /* ZdOtaConfigVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B4AB47A21F3035B00EF5327 /* ZdOtaConfigVC.xib */; };
+		2B5188F122141C08003E2EF5 /* OtaTlsrTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5188F022141C08003E2EF5 /* OtaTlsrTask.swift */; };
 		2B55B56D21FAA01300CAE637 /* AddProtocolVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B55B56B21FAA01300CAE637 /* AddProtocolVC.swift */; };
 		2B55B56E21FAA01300CAE637 /* AddProtocolVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B55B56C21FAA01300CAE637 /* AddProtocolVC.xib */; };
 		2B56A14221F6EBA50073E2A7 /* MenuSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B56A14121F6EBA50073E2A7 /* MenuSection.swift */; };
@@ -294,6 +295,7 @@
 		2B4AB47621F2D2E400EF5327 /* TlvLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TlvLineView.swift; sourceTree = "<group>"; };
 		2B4AB47921F3035B00EF5327 /* ZdOtaConfigVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZdOtaConfigVC.swift; sourceTree = "<group>"; };
 		2B4AB47A21F3035B00EF5327 /* ZdOtaConfigVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZdOtaConfigVC.xib; sourceTree = "<group>"; };
+		2B5188F022141C08003E2EF5 /* OtaTlsrTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtaTlsrTask.swift; sourceTree = "<group>"; };
 		2B55B56B21FAA01300CAE637 /* AddProtocolVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProtocolVC.swift; sourceTree = "<group>"; };
 		2B55B56C21FAA01300CAE637 /* AddProtocolVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddProtocolVC.xib; sourceTree = "<group>"; };
 		2B56A14121F6EBA50073E2A7 /* MenuSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSection.swift; sourceTree = "<group>"; };
@@ -1164,6 +1166,7 @@
 				2B9DD97E21E74D6100C215E5 /* OtaDataSection.swift */,
 				2B9DD98021E82A1100C215E5 /* OtaTask.swift */,
 				2B8272FE21F7FA0700F6CC9E /* OtaNordicTask.swift */,
+				2B5188F022141C08003E2EF5 /* OtaTlsrTask.swift */,
 			);
 			path = OTA;
 			sourceTree = "<group>";
@@ -1557,6 +1560,7 @@
 				2B4AB46121F01D0500EF5327 /* CmdTextField.swift in Sources */,
 				2BE7704221E48CB900FD6374 /* StorageUtils.swift in Sources */,
 				2B56A14C21F6F0210073E2A7 /* FirmwareManagerVC.swift in Sources */,
+				2B5188F122141C08003E2EF5 /* OtaTlsrTask.swift in Sources */,
 				2B4AB47721F2D2E400EF5327 /* TlvLineView.swift in Sources */,
 				2B36579821DCC6290070E7AB /* OtaViewController.swift in Sources */,
 				2B62A56521DF28470051DD38 /* CharacteristicCellTableViewCell.swift in Sources */,

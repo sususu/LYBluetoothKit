@@ -18,13 +18,21 @@ class SplitLineView: UIView {
     
     var name: String? {
         get {
-            return nameTF.text
+            return nameTF.text?.filter({ (c) -> Bool in
+                return c != "-"
+            })
         }
     }
     
     var number: Int {
         get {
             return Int(numberInput.textField.text ?? "0") ?? 0
+        }
+    }
+    
+    var typeStr: String {
+        get {
+            return type == .int ? "Int" : "Str"
         }
     }
     

@@ -33,11 +33,11 @@
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <view key="tableHeaderView" contentMode="scaleToFill" id="cqJ-KL-ci1" userLabel="headerView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N01-g0-wDc" userLabel="固件">
-                                <rect key="frame" x="0.0" y="0.0" width="94" height="110"/>
+                                <rect key="frame" x="0.0" y="0.0" width="94" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7P-7o-wX7" customClass="DLRadioButton">
                                         <rect key="frame" x="5" y="10" width="84" height="30"/>
@@ -61,10 +61,9 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="版本" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U6a-vq-Bsu" userLabel="versionTF">
-                                        <rect key="frame" x="5" y="55" width="84" height="30"/>
+                                        <rect key="frame" x="5" y="55" width="84" height="0.0"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="b1t-0z-Saa"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="dDf-I9-sjp"/>
+                                            <constraint firstAttribute="height" id="b1t-0z-Saa"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -83,7 +82,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z86-x6-xM6" userLabel="字库">
-                                <rect key="frame" x="94" y="0.0" width="93.5" height="110"/>
+                                <rect key="frame" x="94" y="0.0" width="93.5" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zuO-dv-Uo6" customClass="DLRadioButton">
                                         <rect key="frame" x="5" y="10" width="83.5" height="30"/>
@@ -107,9 +106,9 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="版本" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5dB-ar-zCE" userLabel="picturesTF">
-                                        <rect key="frame" x="5" y="55" width="83.5" height="30"/>
+                                        <rect key="frame" x="5" y="55" width="83.5" height="0.0"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="3ga-9x-jeE"/>
+                                            <constraint firstAttribute="height" id="3ga-9x-jeE"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -127,7 +126,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nqv-l2-kOF" userLabel="触摸">
-                                <rect key="frame" x="187.5" y="0.0" width="94" height="110"/>
+                                <rect key="frame" x="187.5" y="0.0" width="94" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3aI-cd-oNp" userLabel="触摸" customClass="DLRadioButton">
                                         <rect key="frame" x="5" y="10" width="84" height="30"/>
@@ -152,10 +151,9 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="版本" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pTh-xd-unO" userLabel="tpTF">
-                                        <rect key="frame" x="5" y="55" width="84" height="30"/>
+                                        <rect key="frame" x="5" y="55" width="84" height="0.0"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="OjL-jZ-Heh"/>
-                                            <constraint firstAttribute="height" constant="30" id="mvm-FW-oBk"/>
+                                            <constraint firstAttribute="height" id="mvm-FW-oBk"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -173,7 +171,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="70t-NZ-kuU" userLabel="心率">
-                                <rect key="frame" x="281.5" y="0.0" width="93.5" height="110"/>
+                                <rect key="frame" x="281.5" y="0.0" width="93.5" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBj-Nr-HoS" userLabel="心率" customClass="DLRadioButton">
                                         <rect key="frame" x="5" y="10" width="83.5" height="30"/>
@@ -199,11 +197,9 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="版本" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MU9-lv-v1H" userLabel="hrTF">
-                                        <rect key="frame" x="5" y="55" width="83.5" height="30"/>
+                                        <rect key="frame" x="5" y="55" width="83.5" height="0.0"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="30" id="3QZ-2K-MmY"/>
-                                            <constraint firstAttribute="height" constant="30" id="DN0-Qa-Cbm"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="QvB-FB-m8Q"/>
+                                            <constraint firstAttribute="height" id="DN0-Qa-Cbm"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>

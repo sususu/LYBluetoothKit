@@ -21,6 +21,8 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
     var successList = [ZdOtaTask]()
     var failedList = [ZdOtaTask]()
     
+    var isStop: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,17 +61,26 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
     // 扫描
     private var scanDevices: [BLEDevice]?
     func startScan() {
+        
+        if isStop {
+            return
+        }
+        
         printLog("开始扫描设备")
         weak var weakSelf = self
         BLECenter.shared.scan(callback: { (devices, err) in
             weakSelf?.scanDevices = devices
         }, stop: {
             weakSelf?.startConnect()
-        }, after: 5)
+        }, after: 8)
     }
 
     // 开始连接设备
     func startConnect() {
+        
+        if isStop {
+            return
+        }
         
         let count = getOtaingCount()
         if count >= config.upgradeCountMax {
@@ -78,7 +89,8 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         }
         else
         {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            printLog("30秒后，重新搜索")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 30) {
                 self.startScan()
             }
         }
@@ -121,6 +133,11 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
     }
     
     func deviceConnected(device: BLEDevice) {
+        
+        if isStop {
+            return
+        }
+        
         guard let task = getOtaTask(byName: device.name) else {
             return
         }
@@ -184,8 +201,11 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
     }
 
     // MARK: - 事件处理
-    @IBAction func stopBtnClick(_ sender: Any) {
-        
+    @IBAction func stopBtnClick(_ sender: Any?) {
+        isStop = true
+        taskList.removeAll()
+        OtaManager.shared.cancelAllTask()
+        tableView.reloadData()
     }
     
     @IBAction func cktjBtnClick(_ sender: Any) {
@@ -214,6 +234,7 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
     
     // MARK: - 通知
     @objc func otaTaskFailed(notification: Notification) {
+        tableView.reloadData()
         guard let dict = notification.userInfo as? Dictionary<String, Any> else {
             return
         }
@@ -223,11 +244,10 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         failedList.append(task)
         removeOtaTask(byName: task.name)
         checkCountAndAlert()
-        
-        tableView.reloadData()
     }
     
     @objc func otaTaskSuccess(notification: Notification) {
+        tableView.reloadData()
         guard let dict = notification.userInfo as? Dictionary<String, Any> else {
             return
         }
@@ -237,14 +257,13 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         successList.append(task)
         removeOtaTask(byName: task.name)
         checkCountAndAlert()
-        
-        tableView.reloadData()
     }
     
     func checkCountAndAlert() {
-        if successList.count + failedList.count >= config.otaCount
+        if config.otaCount > 0, successList.count + failedList.count >= config.otaCount
         {
             // 增加停止ota代码
+            stopBtnClick(nil)
             
             VoiceSpeaker.shared.speak(text: "您好，您的 O T A 升级任务已完成", shouldLoop: true)
             let alert = UIAlertController(title: "温馨提醒", message: "您的OTA升级任务已完成", preferredStyle: .alert)

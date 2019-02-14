@@ -132,6 +132,7 @@ public class OtaTask: Equatable {
     
     private func connectOtaDevice() {
         weak var weakSelf = self
+        print("ota 设备名称：\(otaBleName)")
         BLECenter.shared.connect(deviceName: otaBleName, callback: { (bd, err) in
             if err != nil {
                 self.otaFailed(error: err!)

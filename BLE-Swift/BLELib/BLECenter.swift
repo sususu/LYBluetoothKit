@@ -155,21 +155,57 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     
     private func beginConnectScan(task: BLEScanTask, after: TimeInterval = kDefaultTimeout) {
         // 先停掉其他扫描任务
-        scanCallback()
-        stopScan()
+//        scanCallback()
+//        stopScan()
         
         scanTasks.append(task)
-        discoveredDevices.removeAll()
-        let arr = getConnectedDevices(servicesUUIDs: [UUID.mainService])
-        if arr != nil && arr!.count > 0 {
-            for d in arr! {
-                discoveredDevices.append(d)
-            }
-        }
-        scanCallback()
-        center?.scanForPeripherals(withServices: nil, options: nil)
+//        discoveredDevices.removeAll()
+//        let arr = getConnectedDevices(servicesUUIDs: [UUID.mainService])
+//        if arr != nil && arr!.count > 0 {
+//            for d in arr! {
+//                discoveredDevices.append(d)
+//            }
+//        }
+//        scanCallback()
+//        center?.scanForPeripherals(withServices: nil, options: nil)
         addScanTaskTimer(taskID: task.taskID, sel: #selector(stopScanTask(timer:)))
+        
+        beginLoopScan(interval: 10)
     }
+    
+    // 循环扫描
+    private var lastScanTime: TimeInterval = 0
+    private func beginLoopScan(interval: TimeInterval) {
+        if scanTasks.count == 0 {
+            return
+        }
+        
+        if self.state != .poweredOn {
+            return
+        }
+        
+        let now = Date().timeIntervalSince1970
+        if now - lastScanTime > interval {
+            discoveredDevices.removeAll()
+            center?.stopScan()
+            
+            let arr = getConnectedDevices(servicesUUIDs: [UUID.mainService])
+            if arr != nil && arr!.count > 0 {
+                for d in arr! {
+                    discoveredDevices.append(d)
+                }
+            }
+            scanCallback()
+            
+            center?.scanForPeripherals(withServices: nil, options: nil)
+            lastScanTime = now
+        }
+        // 一秒钟重复一次
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.beginLoopScan(interval: interval)
+        }
+    }
+    
     
     private func removeScanTask(byTaskID: String) {
         for i in 0 ..< scanTasks.count {
@@ -239,26 +275,14 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
                     for device in devices! {
                         // 名字相同则进行连接
                         if deviceName == device.name {
-                            weakSelf?.stopScan()
+//                            weakSelf?.stopScan()
+                            weakSelf?.removeScanTask(byTaskID: deviceName)
                             weakSelf?.center?.connect(device.peripheral, options: nil)
                         }
                     }
                 }
             }, stopCallback: nil)
             beginConnectScan(task: scanTask, after: timeout)
-//            scan(callback: { (devices, err) in
-//                if devices != nil && devices!.count > 0 {
-//                    for device in devices! {
-//                        // 名字相同则进行连接
-//                        if deviceName == device.name {
-//                            weakSelf?.stopScan()
-//                            weakSelf?.center?.connect(device.peripheral, options: nil)
-//                        }
-//                    }
-//                }
-//            }, stop: {
-//                
-//            }, after: timeout)
         } else {
             DispatchQueue.main.async {
                 callback?(nil, BLEError.taskError(reason: .repeatTask))

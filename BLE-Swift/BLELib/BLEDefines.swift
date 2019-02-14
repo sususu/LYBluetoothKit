@@ -8,8 +8,8 @@
 import Foundation
 
 // MARK: - 常量定义
-public let kDefaultTimeout:TimeInterval = 10
-public let kConnectTimeout:TimeInterval = 10
+public let kDefaultTimeout:TimeInterval = 15
+public let kConnectTimeout:TimeInterval = 15
 public let kScanTimeout:TimeInterval = 10
 
 

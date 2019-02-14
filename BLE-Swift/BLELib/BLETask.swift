@@ -79,6 +79,7 @@ public class BLEScanTask: BLETask {
     var device:BLEDevice?
     var connectBlock:ConnectBlock?
     var isDisconnect = false
+    var isConnecting = false
     
     var name:String? {
         return self.device?.name ?? self.deviceName;
@@ -107,6 +108,7 @@ public class BLEScanTask: BLETask {
         error = err
         device = nil
         state = .failed
+        isConnecting = false
         stopTimer()
     }
     
@@ -114,6 +116,7 @@ public class BLEScanTask: BLETask {
         error = nil
         device!.state = .ready
         state = .success
+        isConnecting = false
         stopTimer()
     }
     

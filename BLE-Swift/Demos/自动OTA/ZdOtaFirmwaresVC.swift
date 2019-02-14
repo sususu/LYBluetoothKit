@@ -54,6 +54,11 @@ class ZdOtaFirmwaresVC: BaseViewController, UITableViewDataSource, UITableViewDe
         tpRadio.addTarget(self, action: #selector(radioChanged(radio:)), for: .touchUpInside)
         hrRadio.addTarget(self, action: #selector(radioChanged(radio:)), for: .touchUpInside)
         
+        fmRadio.isSelected = true
+        picRadio.isSelected = true
+        tpRadio.isSelected = true
+        hrRadio.isSelected = true
+        
         radioChanged(radio: nil)
     }
     
@@ -86,10 +91,10 @@ class ZdOtaFirmwaresVC: BaseViewController, UITableViewDataSource, UITableViewDe
         
         fmTypes.removeAll()
         
-        fmVersionTF.isEnabled = fmRadio.isSelected
-        picVersionTF.isEnabled = picRadio.isSelected
-        tpVersionTF.isEnabled = tpRadio.isSelected
-        hrVersionTF.isEnabled = hrRadio.isSelected
+//        fmVersionTF.isEnabled = fmRadio.isSelected
+//        picVersionTF.isEnabled = picRadio.isSelected
+//        tpVersionTF.isEnabled = tpRadio.isSelected
+//        hrVersionTF.isEnabled = hrRadio.isSelected
         
         if !fmRadio.isSelected {
             removeFirmwares(byType: .platform)
@@ -124,6 +129,7 @@ class ZdOtaFirmwaresVC: BaseViewController, UITableViewDataSource, UITableViewDe
             return
         }
         
+        /*
         if fmVersionTF.isEnabled {
             guard let version = fmVersionTF.text, version.count > 0 else {
                 showError(TR("请输入固件版本号"))
@@ -226,6 +232,7 @@ class ZdOtaFirmwaresVC: BaseViewController, UITableViewDataSource, UITableViewDe
             }
             
         }
+ */
         
         let vc = ZdOtaDisplayVC()
         vc.config = config

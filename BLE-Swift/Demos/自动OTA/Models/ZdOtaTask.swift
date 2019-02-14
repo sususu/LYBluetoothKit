@@ -56,7 +56,7 @@ class ZdOtaTask: Equatable {
         state = .start
         
         
-        var otaBleName = config.prefix + config.deviceName.suffix(5)
+        var otaBleName = config.prefix + device.name.suffix(5)
         if config.prefix.count == 0 || device.isApollo3 {
             otaBleName = device.name
         }

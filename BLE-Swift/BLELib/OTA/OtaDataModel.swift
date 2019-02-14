@@ -30,6 +30,9 @@ public struct OtaDataModel {
     var datData: Data!
     var typeData: Data!
     
+    // TLSR ota数据
+    var tlsrOtaDataPackages: [Data]!
+    
     init(type: OtaDataType, data: Data) {
         self.type = type
         self.data = data
@@ -88,6 +91,11 @@ public struct OtaDataModel {
         
         return true
     }
+    
+//    mutating func getTlsrDataReady() -> Bool {
+//        
+//    }
+    
     
     // apollo平台，ota 拆分数据是已 2048 为一块
     private func splitDataToSections(_ data: Data) -> [OtaDataSection] {

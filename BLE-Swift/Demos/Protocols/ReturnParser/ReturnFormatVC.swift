@@ -100,7 +100,7 @@ class ReturnFormatVC: BaseViewController {
                 continue
             }
             // length-name,
-            expression += "\(line.number)-\(name),"
+            expression += "\(line.number)-\(name)-\(line.typeStr),"
             
         }
         
