@@ -17,6 +17,8 @@ class OtaViewController: ConnectBaseVC, OtaTaskTipViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        AssistiveDelegate.sharedInstance.showAssistance();
+
         otaTipView.delegate = self
         
         let btn = UIButton(type: .custom)

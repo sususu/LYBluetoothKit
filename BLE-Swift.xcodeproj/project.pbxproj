@@ -198,6 +198,22 @@
 		2BEC5D702174870100E0902B /* BLECenterDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6F2174870100E0902B /* BLECenterDeviceExtension.swift */; };
 		2BFAF610216F2089003AEAD6 /* BLEDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFAF60F216F2089003AEAD6 /* BLEDataCenter.swift */; };
 		76C8C7ABC4084DA92023482F /* Pods_BLE_SwiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A9D2E2F02B2CC16DA69B09 /* Pods_BLE_SwiftUITests.framework */; };
+		E21CB527221539AD00BC05D5 /* TableViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21CB516221539AD00BC05D5 /* TableViewCellExtension.swift */; };
+		E21CB528221539AD00BC05D5 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21CB517221539AD00BC05D5 /* Log.swift */; };
+		E21CB529221539AD00BC05D5 /* LogRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21CB518221539AD00BC05D5 /* LogRecordTableViewCell.swift */; };
+		E21CB52A221539AD00BC05D5 /* LogRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E21CB519221539AD00BC05D5 /* LogRecordViewController.xib */; };
+		E21CB52B221539AD00BC05D5 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21CB51A221539AD00BC05D5 /* Logger.swift */; };
+		E21CB52C221539AD00BC05D5 /* LogRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21CB51B221539AD00BC05D5 /* LogRecordViewController.swift */; };
+		E21CB52D221539AD00BC05D5 /* CopiableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21CB51C221539AD00BC05D5 /* CopiableLabel.swift */; };
+		E21CB52E221539AD00BC05D5 /* LogRecordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E21CB51D221539AD00BC05D5 /* LogRecordTableViewCell.xib */; };
+		E21CB52F221539AD00BC05D5 /* XFATItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21CB51F221539AD00BC05D5 /* XFATItemView.swift */; };
+		E21CB530221539AD00BC05D5 /* XFAssistiveTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21CB520221539AD00BC05D5 /* XFAssistiveTouch.swift */; };
+		E21CB531221539AD00BC05D5 /* XFATViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21CB521221539AD00BC05D5 /* XFATViewController.swift */; };
+		E21CB532221539AD00BC05D5 /* XFATLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21CB522221539AD00BC05D5 /* XFATLayoutAttributes.swift */; };
+		E21CB533221539AD00BC05D5 /* XFATNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21CB523221539AD00BC05D5 /* XFATNavigationController.swift */; };
+		E21CB534221539AD00BC05D5 /* XFATRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21CB524221539AD00BC05D5 /* XFATRootViewController.swift */; };
+		E21CB535221539AD00BC05D5 /* XFATPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21CB525221539AD00BC05D5 /* XFATPosition.swift */; };
+		E21CB536221539AD00BC05D5 /* AssistiveDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21CB526221539AD00BC05D5 /* AssistiveDelegate.swift */; };
 		F5B483AB661D4095000C7ED7 /* Pods_BLE_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFED2B6D2ED38A974E68B62 /* Pods_BLE_Swift.framework */; };
 /* End PBXBuildFile section */
 
@@ -436,6 +452,22 @@
 		8A5DE497842DC3B0E35F73E2 /* Pods_BLE_SwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLE_SwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CC6235056F957FE37653119 /* Pods-BLE-SwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLE-SwiftTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BLE-SwiftTests/Pods-BLE-SwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		9BFEBD92D7DAADC7E15C65D6 /* Pods-BLE-SwiftUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLE-SwiftUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BLE-SwiftUITests/Pods-BLE-SwiftUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E21CB516221539AD00BC05D5 /* TableViewCellExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellExtension.swift; sourceTree = "<group>"; };
+		E21CB517221539AD00BC05D5 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		E21CB518221539AD00BC05D5 /* LogRecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogRecordTableViewCell.swift; sourceTree = "<group>"; };
+		E21CB519221539AD00BC05D5 /* LogRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogRecordViewController.xib; sourceTree = "<group>"; };
+		E21CB51A221539AD00BC05D5 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		E21CB51B221539AD00BC05D5 /* LogRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogRecordViewController.swift; sourceTree = "<group>"; };
+		E21CB51C221539AD00BC05D5 /* CopiableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopiableLabel.swift; sourceTree = "<group>"; };
+		E21CB51D221539AD00BC05D5 /* LogRecordTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogRecordTableViewCell.xib; sourceTree = "<group>"; };
+		E21CB51F221539AD00BC05D5 /* XFATItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XFATItemView.swift; sourceTree = "<group>"; };
+		E21CB520221539AD00BC05D5 /* XFAssistiveTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XFAssistiveTouch.swift; sourceTree = "<group>"; };
+		E21CB521221539AD00BC05D5 /* XFATViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XFATViewController.swift; sourceTree = "<group>"; };
+		E21CB522221539AD00BC05D5 /* XFATLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XFATLayoutAttributes.swift; sourceTree = "<group>"; };
+		E21CB523221539AD00BC05D5 /* XFATNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XFATNavigationController.swift; sourceTree = "<group>"; };
+		E21CB524221539AD00BC05D5 /* XFATRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XFATRootViewController.swift; sourceTree = "<group>"; };
+		E21CB525221539AD00BC05D5 /* XFATPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XFATPosition.swift; sourceTree = "<group>"; };
+		E21CB526221539AD00BC05D5 /* AssistiveDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistiveDelegate.swift; sourceTree = "<group>"; };
 		EB1BF05F632A1B4FC85B5AEE /* Pods-BLE-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLE-Swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BLE-Swift/Pods-BLE-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1029,6 +1061,7 @@
 		2B918D912153363900B0B5DE /* Demos */ = {
 			isa = PBXGroup;
 			children = (
+				E21CB514221539AD00BC05D5 /* Assistives */,
 				2B45B94C21EDABC90058E137 /* Models */,
 				2B62A56E21DF68630051DD38 /* 协议定义 */,
 				2B2E27442173263500726FC7 /* Bases */,
@@ -1229,6 +1262,45 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E21CB514221539AD00BC05D5 /* Assistives */ = {
+			isa = PBXGroup;
+			children = (
+				E21CB515221539AD00BC05D5 /* Logger */,
+				E21CB51E221539AD00BC05D5 /* AssistiveTouch */,
+				E21CB526221539AD00BC05D5 /* AssistiveDelegate.swift */,
+			);
+			path = Assistives;
+			sourceTree = "<group>";
+		};
+		E21CB515221539AD00BC05D5 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				E21CB516221539AD00BC05D5 /* TableViewCellExtension.swift */,
+				E21CB517221539AD00BC05D5 /* Log.swift */,
+				E21CB518221539AD00BC05D5 /* LogRecordTableViewCell.swift */,
+				E21CB519221539AD00BC05D5 /* LogRecordViewController.xib */,
+				E21CB51A221539AD00BC05D5 /* Logger.swift */,
+				E21CB51B221539AD00BC05D5 /* LogRecordViewController.swift */,
+				E21CB51C221539AD00BC05D5 /* CopiableLabel.swift */,
+				E21CB51D221539AD00BC05D5 /* LogRecordTableViewCell.xib */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
+		E21CB51E221539AD00BC05D5 /* AssistiveTouch */ = {
+			isa = PBXGroup;
+			children = (
+				E21CB51F221539AD00BC05D5 /* XFATItemView.swift */,
+				E21CB520221539AD00BC05D5 /* XFAssistiveTouch.swift */,
+				E21CB521221539AD00BC05D5 /* XFATViewController.swift */,
+				E21CB522221539AD00BC05D5 /* XFATLayoutAttributes.swift */,
+				E21CB523221539AD00BC05D5 /* XFATNavigationController.swift */,
+				E21CB524221539AD00BC05D5 /* XFATRootViewController.swift */,
+				E21CB525221539AD00BC05D5 /* XFATPosition.swift */,
+			);
+			path = AssistiveTouch;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1353,6 +1425,7 @@
 				2B4874A8214F763500AC5841 /* LaunchScreen.storyboard in Resources */,
 				2B36579D21DCC6330070E7AB /* SettingsViewController.xib in Resources */,
 				2BB4B6F221E9E6A600F22268 /* TaskDetailCell.xib in Resources */,
+				E21CB52A221539AD00BC05D5 /* LogRecordViewController.xib in Resources */,
 				2BE7704D21E49A3600FD6374 /* OtaDataSelectCell.xib in Resources */,
 				2B56A15E21F6F1D40073E2A7 /* LoginVC.xib in Resources */,
 				2BB4B6EE21E9C21C00F22268 /* OtaTaskDetailVC.xib in Resources */,
@@ -1368,6 +1441,7 @@
 				2B80C1E021EC33B600FE7BF7 /* Localizable.strings in Resources */,
 				2B62A58C21E087E60051DD38 /* ResultDisplayCell.xib in Resources */,
 				2B76006821F30EDC006B4C63 /* ZdOtaFirmwaresVC.xib in Resources */,
+				E21CB52E221539AD00BC05D5 /* LogRecordTableViewCell.xib in Resources */,
 				2BA23FA321E4B5FF00EF1B77 /* FirmwareTypeVC.xib in Resources */,
 				2B62A58521E04DB70051DD38 /* ProtocolMenuDetailCell.xib in Resources */,
 				2B45B95B21EDE6C70058E137 /* DeviceTestVC.xib in Resources */,
@@ -1541,6 +1615,7 @@
 				2B62A57221DF68840051DD38 /* Param.swift in Sources */,
 				2B3657B621DDA83E0070E7AB /* ConnectBaseVC.swift in Sources */,
 				2B62A56021DEF3DB0051DD38 /* DeviceInfo.swift in Sources */,
+				E21CB530221539AD00BC05D5 /* XFAssistiveTouch.swift in Sources */,
 				2BEC5D6C21746A5A00E0902B /* BLECenterCommonExtension.swift in Sources */,
 				2B4AB46321F0215A00EF5327 /* CmdKeyBoardView.swift in Sources */,
 				2B44C74D21EEE32D0037F5C3 /* CmdInputLayout.swift in Sources */,
@@ -1559,15 +1634,18 @@
 				2BD12FF2221A8B1D00EDC488 /* NetworkAPIs.swift in Sources */,
 				2B4AB47021F1854000EF5327 /* TestGroupLayout.swift in Sources */,
 				2B4874CD214F766300AC5841 /* BLECenter.swift in Sources */,
+				E21CB532221539AD00BC05D5 /* XFATLayoutAttributes.swift in Sources */,
 				2B3657A321DCC7020070E7AB /* LYNavigationController.swift in Sources */,
 				2B62A58021E0488A0051DD38 /* ProtocolMenuDetailsVC.swift in Sources */,
 				2B56A15D21F6F1D40073E2A7 /* LoginVC.swift in Sources */,
 				2B2E273C2172D13A00726FC7 /* BLEData.swift in Sources */,
 				2B918D932153365A00B0B5DE /* ConnectVC.swift in Sources */,
+				E21CB528221539AD00BC05D5 /* Log.swift in Sources */,
 				2BE7701621E2FBA700FD6374 /* BLEStringExtensions.swift in Sources */,
 				2B50C4DF221A9AC000D699D3 /* NetworkCode.swift in Sources */,
 				2B4874CF214F911300AC5841 /* BLEDevice.swift in Sources */,
 				2BEC5D6E217470C300E0902B /* BLEDataExtensions.swift in Sources */,
+				E21CB536221539AD00BC05D5 /* AssistiveDelegate.swift in Sources */,
 				2B9DD97821E72C7600C215E5 /* SDOtaVC.swift in Sources */,
 				2B5832E22175832200259593 /* StringExtensions.swift in Sources */,
 				2B4AB46921F174D200EF5327 /* ReturnFormatVC.swift in Sources */,
@@ -1576,6 +1654,7 @@
 				2B62A57C21E042680051DD38 /* ProtocolMenuCell.swift in Sources */,
 				2B36578721DCA42E0070E7AB /* BLEDataParser.swift in Sources */,
 				2B62A55921DDD84D0051DD38 /* RefreshBtn.swift in Sources */,
+				E21CB527221539AD00BC05D5 /* TableViewCellExtension.swift in Sources */,
 				2B4AB46521F02AE500EF5327 /* UIImageExtensions.swift in Sources */,
 				2B5832EB2175CC4600259593 /* DevicesCell.swift in Sources */,
 				2B45B95221EDC18D0058E137 /* DeviceProductCell.swift in Sources */,
@@ -1603,27 +1682,35 @@
 				2B36579421DCC6190070E7AB /* ToolsViewController.swift in Sources */,
 				2B44C74F21EEFAEE0037F5C3 /* CmdUnit.swift in Sources */,
 				2B3657B921DDB05C0070E7AB /* LeftDeviceCell.swift in Sources */,
+				E21CB529221539AD00BC05D5 /* LogRecordTableViewCell.swift in Sources */,
 				2BB4B6F121E9E6A600F22268 /* TaskDetailCell.swift in Sources */,
 				2B3657A021DCC6AA0070E7AB /* ProtocolViewController.swift in Sources */,
 				2BD12FEF221A8AAF00EDC488 /* NetworkManager.swift in Sources */,
 				2B56A14721F6ED490073E2A7 /* User.swift in Sources */,
 				2B36578C21DCBFC90070E7AB /* HomeViewController.swift in Sources */,
+				E21CB52C221539AD00BC05D5 /* LogRecordViewController.swift in Sources */,
 				2B45B95621EDC6E60058E137 /* ToolsService.swift in Sources */,
 				2BE7703A21E4453B00FD6374 /* OtaConfigVC.swift in Sources */,
 				2B4AB46D21F1779100EF5327 /* TestGroupCell.swift in Sources */,
+				E21CB531221539AD00BC05D5 /* XFATViewController.swift in Sources */,
 				2B44C74B21EEE3170037F5C3 /* CmdInputCell.swift in Sources */,
 				2BE7704C21E49A3600FD6374 /* OtaDataSelectCell.swift in Sources */,
 				2B45B96321EDFC3C0058E137 /* DeviceTestCell.swift in Sources */,
 				2B44C74921EEDE7D0037F5C3 /* CmdInputView.swift in Sources */,
 				2B4874D12150C83B00AC5841 /* BLEDefines.swift in Sources */,
 				2B9DD97F21E74D6100C215E5 /* OtaDataSection.swift in Sources */,
+				E21CB535221539AD00BC05D5 /* XFATPosition.swift in Sources */,
+				E21CB52B221539AD00BC05D5 /* Logger.swift in Sources */,
+				E21CB534221539AD00BC05D5 /* XFATRootViewController.swift in Sources */,
 				2BA3B58221FC29070084E291 /* ProtocolService.swift in Sources */,
 				2B40433C216C9BF500C6837B /* BLETask.swift in Sources */,
 				2B56A14421F6EBAF0073E2A7 /* MenuRow.swift in Sources */,
 				2B56A14221F6EBA50073E2A7 /* MenuSection.swift in Sources */,
 				2B2E27472173265800726FC7 /* BaseViewController.swift in Sources */,
+				E21CB52D221539AD00BC05D5 /* CopiableLabel.swift in Sources */,
 				2BFAF610216F2089003AEAD6 /* BLEDataCenter.swift in Sources */,
 				2B55B56D21FAA01300CAE637 /* AddProtocolVC.swift in Sources */,
+				E21CB533221539AD00BC05D5 /* XFATNavigationController.swift in Sources */,
 				2B9DD98121E82A1100C215E5 /* OtaTask.swift in Sources */,
 				2B56A16D21F70FB90073E2A7 /* VoiceSpeaker.swift in Sources */,
 				2B62A58721E0564C0051DD38 /* ProtocolResultDisplayView.swift in Sources */,
@@ -1647,6 +1734,7 @@
 				2B3657AB21DCD0140070E7AB /* LeftViewController.swift in Sources */,
 				2B4AB47B21F3035B00EF5327 /* ZdOtaConfigVC.swift in Sources */,
 				2B5832E421758ECA00259593 /* NumberView.swift in Sources */,
+				E21CB52F221539AD00BC05D5 /* XFATItemView.swift in Sources */,
 				2B4AB47521F2C27D00EF5327 /* SplitLineView.swift in Sources */,
 				2B45B95A21EDE6C70058E137 /* DeviceTestVC.swift in Sources */,
 				2BA23FA721E4B6D600EF1B77 /* FirmwareTypeCell.swift in Sources */,
