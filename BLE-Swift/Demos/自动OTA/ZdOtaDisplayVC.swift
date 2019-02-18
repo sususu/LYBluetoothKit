@@ -111,8 +111,6 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
             }
             
             if d.name.hasPrefix(config.deviceNamePrefix), d.rssi >= config.signalMin {
-                let task = ZdOtaTask(name: d.name, config: config)
-                taskList.append(task)
                 weak var weakSelf = self
                 BLECenter.shared.connect(device: d, callback: { (device, err) in
                     
@@ -123,11 +121,11 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
                         weakSelf?.removeOtaTask(byName: d.name)
                         return
                     }
-                    
                     // 如果成功，那就进行到下一步
                     weakSelf?.deviceConnected(device: device!)
                     
                 }, timeout: 10)
+                sleep(1)
             }
         }
     }
@@ -138,9 +136,8 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
             return
         }
         
-        guard let task = getOtaTask(byName: device.name) else {
-            return
-        }
+        let task = ZdOtaTask(name: device.name, config: config)
+        taskList.append(task)
         
         printLog("开始OTA(\(device.name))")
         task.startOTA(withDevice: device)
@@ -234,7 +231,6 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
     
     // MARK: - 通知
     @objc func otaTaskFailed(notification: Notification) {
-        tableView.reloadData()
         guard let dict = notification.userInfo as? Dictionary<String, Any> else {
             return
         }
@@ -243,11 +239,11 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         }
         failedList.append(task)
         removeOtaTask(byName: task.name)
+        tableView.reloadData()
         checkCountAndAlert()
     }
     
     @objc func otaTaskSuccess(notification: Notification) {
-        tableView.reloadData()
         guard let dict = notification.userInfo as? Dictionary<String, Any> else {
             return
         }
@@ -257,6 +253,7 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         successList.append(task)
         removeOtaTask(byName: task.name)
         checkCountAndAlert()
+        tableView.reloadData()
     }
     
     func checkCountAndAlert() {

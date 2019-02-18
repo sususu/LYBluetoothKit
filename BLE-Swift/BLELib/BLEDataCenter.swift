@@ -59,6 +59,7 @@ class BLEDataCenter: NSObject {
     @objc func taskFinishNotification(notification:Notification) {
         
         guard let task = notification.userInfo![BLEKey.task] as? BLEDataTask else {
+            beginTask()
             return
         }
         DispatchQueue.main.async {
@@ -66,6 +67,7 @@ class BLEDataCenter: NSObject {
             task.callback = nil
         }
         self.removeTask(task: task)
+        beginTask()
     }
     
     // MARK: - 任务开始

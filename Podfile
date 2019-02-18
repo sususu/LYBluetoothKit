@@ -9,6 +9,8 @@ target 'BLE-Swift' do
   pod 'YYKit'
   pod 'DLRadioButton'
   pod 'SSZipArchive'
+  pod 'LYNetwork', :git => 'https://gitee.com/leyuankeji/LYNetwork.git'
+  pod 'Alamofire'
 #  pod 'SlideMenuControllerSwift'
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!

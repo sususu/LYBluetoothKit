@@ -79,6 +79,7 @@
 		2B4AB47721F2D2E400EF5327 /* TlvLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4AB47621F2D2E400EF5327 /* TlvLineView.swift */; };
 		2B4AB47B21F3035B00EF5327 /* ZdOtaConfigVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4AB47921F3035B00EF5327 /* ZdOtaConfigVC.swift */; };
 		2B4AB47C21F3035B00EF5327 /* ZdOtaConfigVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B4AB47A21F3035B00EF5327 /* ZdOtaConfigVC.xib */; };
+		2B50C4DF221A9AC000D699D3 /* NetworkCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B50C4DE221A9AC000D699D3 /* NetworkCode.swift */; };
 		2B5188F122141C08003E2EF5 /* OtaTlsrTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5188F022141C08003E2EF5 /* OtaTlsrTask.swift */; };
 		2B55B56D21FAA01300CAE637 /* AddProtocolVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B55B56B21FAA01300CAE637 /* AddProtocolVC.swift */; };
 		2B55B56E21FAA01300CAE637 /* AddProtocolVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B55B56C21FAA01300CAE637 /* AddProtocolVC.xib */; };
@@ -174,6 +175,8 @@
 		2BB4B6EE21E9C21C00F22268 /* OtaTaskDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BB4B6EC21E9C21C00F22268 /* OtaTaskDetailVC.xib */; };
 		2BB4B6F121E9E6A600F22268 /* TaskDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4B6EF21E9E6A600F22268 /* TaskDetailCell.swift */; };
 		2BB4B6F221E9E6A600F22268 /* TaskDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BB4B6F021E9E6A600F22268 /* TaskDetailCell.xib */; };
+		2BD12FEF221A8AAF00EDC488 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD12FEE221A8AAF00EDC488 /* NetworkManager.swift */; };
+		2BD12FF2221A8B1D00EDC488 /* NetworkAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD12FF1221A8B1D00EDC488 /* NetworkAPIs.swift */; };
 		2BE7701121E2E3EF00FD6374 /* ReturnFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE7701021E2E3EF00FD6374 /* ReturnFormat.swift */; };
 		2BE7701421E2F9A600FD6374 /* ProtocolRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE7701321E2F9A600FD6374 /* ProtocolRunner.swift */; };
 		2BE7701621E2FBA700FD6374 /* BLEStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE7701521E2FBA700FD6374 /* BLEStringExtensions.swift */; };
@@ -295,6 +298,7 @@
 		2B4AB47621F2D2E400EF5327 /* TlvLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TlvLineView.swift; sourceTree = "<group>"; };
 		2B4AB47921F3035B00EF5327 /* ZdOtaConfigVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZdOtaConfigVC.swift; sourceTree = "<group>"; };
 		2B4AB47A21F3035B00EF5327 /* ZdOtaConfigVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZdOtaConfigVC.xib; sourceTree = "<group>"; };
+		2B50C4DE221A9AC000D699D3 /* NetworkCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCode.swift; sourceTree = "<group>"; };
 		2B5188F022141C08003E2EF5 /* OtaTlsrTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtaTlsrTask.swift; sourceTree = "<group>"; };
 		2B55B56B21FAA01300CAE637 /* AddProtocolVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProtocolVC.swift; sourceTree = "<group>"; };
 		2B55B56C21FAA01300CAE637 /* AddProtocolVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddProtocolVC.xib; sourceTree = "<group>"; };
@@ -404,6 +408,8 @@
 		2BB4B6EC21E9C21C00F22268 /* OtaTaskDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OtaTaskDetailVC.xib; sourceTree = "<group>"; };
 		2BB4B6EF21E9E6A600F22268 /* TaskDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailCell.swift; sourceTree = "<group>"; };
 		2BB4B6F021E9E6A600F22268 /* TaskDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskDetailCell.xib; sourceTree = "<group>"; };
+		2BD12FEE221A8AAF00EDC488 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		2BD12FF1221A8B1D00EDC488 /* NetworkAPIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPIs.swift; sourceTree = "<group>"; };
 		2BE7701021E2E3EF00FD6374 /* ReturnFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnFormat.swift; sourceTree = "<group>"; };
 		2BE7701321E2F9A600FD6374 /* ProtocolRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolRunner.swift; sourceTree = "<group>"; };
 		2BE7701521E2FBA700FD6374 /* BLEStringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEStringExtensions.swift; sourceTree = "<group>"; };
@@ -831,6 +837,8 @@
 		2B56A15A21F6F1940073E2A7 /* Users */ = {
 			isa = PBXGroup;
 			children = (
+				2BD12FF0221A8ABF00EDC488 /* Network */,
+				2BD12FE9221A819600EDC488 /* Services */,
 				2B56A15B21F6F1D40073E2A7 /* LoginVC.swift */,
 				2B56A15C21F6F1D40073E2A7 /* LoginVC.xib */,
 				2B56A15F21F6F1E20073E2A7 /* RegisterVC.swift */,
@@ -1124,6 +1132,23 @@
 				2BB4B6F021E9E6A600F22268 /* TaskDetailCell.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		2BD12FE9221A819600EDC488 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		2BD12FF0221A8ABF00EDC488 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				2BD12FEE221A8AAF00EDC488 /* NetworkManager.swift */,
+				2BD12FF1221A8B1D00EDC488 /* NetworkAPIs.swift */,
+				2B50C4DE221A9AC000D699D3 /* NetworkCode.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		2BE7703721E4451E00FD6374 /* SubVCs */ = {
@@ -1422,8 +1447,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BLE-Swift/Pods-BLE-Swift-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/DLRadioButton/DLRadioButton.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/LYNetwork/LYNetwork.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
@@ -1432,8 +1460,11 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DLRadioButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LYNetwork.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SSZipArchive.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
@@ -1525,6 +1556,7 @@
 				2B9DD97221E727D500C215E5 /* BLEDeviceExtensions.swift in Sources */,
 				2B62A58F21E0A0880051DD38 /* BLEDataError.swift in Sources */,
 				2B2E27492173266500726FC7 /* BaseTableViewController.swift in Sources */,
+				2BD12FF2221A8B1D00EDC488 /* NetworkAPIs.swift in Sources */,
 				2B4AB47021F1854000EF5327 /* TestGroupLayout.swift in Sources */,
 				2B4874CD214F766300AC5841 /* BLECenter.swift in Sources */,
 				2B3657A321DCC7020070E7AB /* LYNavigationController.swift in Sources */,
@@ -1533,6 +1565,7 @@
 				2B2E273C2172D13A00726FC7 /* BLEData.swift in Sources */,
 				2B918D932153365A00B0B5DE /* ConnectVC.swift in Sources */,
 				2BE7701621E2FBA700FD6374 /* BLEStringExtensions.swift in Sources */,
+				2B50C4DF221A9AC000D699D3 /* NetworkCode.swift in Sources */,
 				2B4874CF214F911300AC5841 /* BLEDevice.swift in Sources */,
 				2BEC5D6E217470C300E0902B /* BLEDataExtensions.swift in Sources */,
 				2B9DD97821E72C7600C215E5 /* SDOtaVC.swift in Sources */,
@@ -1572,6 +1605,7 @@
 				2B3657B921DDB05C0070E7AB /* LeftDeviceCell.swift in Sources */,
 				2BB4B6F121E9E6A600F22268 /* TaskDetailCell.swift in Sources */,
 				2B3657A021DCC6AA0070E7AB /* ProtocolViewController.swift in Sources */,
+				2BD12FEF221A8AAF00EDC488 /* NetworkManager.swift in Sources */,
 				2B56A14721F6ED490073E2A7 /* User.swift in Sources */,
 				2B36578C21DCBFC90070E7AB /* HomeViewController.swift in Sources */,
 				2B45B95621EDC6E60058E137 /* ToolsService.swift in Sources */,

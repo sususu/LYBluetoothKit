@@ -26,6 +26,32 @@ class LoginVC: BaseViewController {
     // MARK: - 事件处理
     
     @IBAction func loginBtnClick(_ sender: Any) {
+     
+        let email = emailTF.text ?? ""
+        let password = passwordTF.text ?? ""
+        
+        if !email.isEmail() {
+            showError("请输入正确的邮箱地址")
+            return
+        }
+        
+        if password.hasIllegalCharacters() || password.count < 6 || password.count > 20 {
+            showError("请输入6-20位正确密码")
+            return
+        }
+        
+        let params = ["email": email, "password": password]
+        
+        startLoading(nil)
+        NetworkManager.shared.post(API_USER_LOGIN, params: params) { (resp) in
+            self.stopLoading()
+            if resp.code != 0 {
+                self.showError(resp.msg)
+                return
+            }
+            
+            self.showSuccess("登录成功")
+        }
         
     }
     

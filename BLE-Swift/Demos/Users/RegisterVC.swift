@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LYNetwork
 
 class RegisterVC: BaseViewController {
 
@@ -26,8 +27,40 @@ class RegisterVC: BaseViewController {
     
     
     // MARK: - 事件处理
-    
     @IBAction func registBtnClick(_ sender: Any) {
+        
+        let email = emailTF.text ?? ""
+        let password = passwordTF.text ?? ""
+        let name = nameTF.text ?? ""
+        
+        if !email.isEmail() {
+            showError("请输入正确的邮箱地址")
+            return
+        }
+        
+        if password.hasIllegalCharacters() || password.count < 6 || password.count > 20 {
+            showError("请输入6-20位正确密码")
+            return
+        }
+        
+        if name.count == 0 {
+            showError("请输入名称")
+            return
+        }
+        
+        let params = ["email": email, "password": password, "name": name]
+        
+        startLoading(nil)
+        NetworkManager.shared.post(API_USER_REGISTER, params: params) { (resp) in
+            self.stopLoading()
+            if resp.code != 0 {
+                self.showError(resp.msg)
+                return
+            }
+            
+            self.showSuccess("注册成功")
+        }
+        
     }
     
 }

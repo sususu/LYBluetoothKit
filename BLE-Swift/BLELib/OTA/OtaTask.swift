@@ -117,11 +117,13 @@ public class OtaTask: Equatable {
     }
     
     private func sendOtaAddress(addressData: Data) {
+        print("开始发送地址：\(device.name)")
         var data = Data(bytes: [0x6F,0x0E,0x71,5,0x00,0x00])
         data.append(addressData)
         data.append([0x8f], count: 1)
         weak var weakSelf = self
         _ = BLECenter.shared.send(data: data, boolCallback: { (b, err) in
+            print("发送地址信息之后回调：\(self.device.name)")
             if err != nil {
                 self.otaFailed(error: err!)
                 return
@@ -260,6 +262,9 @@ public class OtaTask: Equatable {
     }
     
     func otaFailed(error: BLEError) {
+        
+        print("ota failed:\(device.name), reason:\(error)")
+        
         DispatchQueue.main.async {
             self.error = error
             self.state = .failed
