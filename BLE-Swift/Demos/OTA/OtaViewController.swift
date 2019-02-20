@@ -17,7 +17,7 @@ class OtaViewController: ConnectBaseVC, OtaTaskTipViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        AssistiveDelegate.sharedInstance.showAssistance();
+//        AssistiveDelegate.sharedInstance.showAssistance();
 
         otaTipView.delegate = self
         

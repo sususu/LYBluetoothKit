@@ -13,7 +13,6 @@ enum ReturnFormatKind: Int, Codable {
     case bool = 0
     case string
     case split
-    case tlv
 }
 
 class ReturnFormat: Codable {
@@ -37,8 +36,6 @@ class ReturnFormat: Codable {
                 return "String"
             case .split:
                 return "按字节拆分"
-            case .tlv:
-                return "类型-长度-值"
             }
         }
     }
@@ -57,11 +54,5 @@ func stringReturnFormat() -> ReturnFormat {
 func splitReturnFormat() -> ReturnFormat {
     let rf = ReturnFormat()
     rf.type = .split
-    return rf
-}
-
-func tlvReturnFormat() -> ReturnFormat {
-    let rf = ReturnFormat()
-    rf.type = .tlv
     return rf
 }

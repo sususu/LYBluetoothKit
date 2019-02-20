@@ -53,6 +53,12 @@
                                 <state key="normal" title="自动连接">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="autoConnectBtnClick:" destination="-1" eventType="touchUpInside" id="czN-Kt-v5d"/>
                                 </connections>
@@ -67,6 +73,12 @@
                                 <state key="normal" title="手动连接">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="sdConnectBtnClick:" destination="-1" eventType="touchUpInside" id="p9B-fj-ckj"/>
                                 </connections>
@@ -81,6 +93,12 @@
                                 <state key="normal" title="屏蔽箱自测">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="pbTestBtnClick:" destination="-1" eventType="touchUpInside" id="hem-fB-mtO"/>
                                 </connections>
@@ -95,6 +113,12 @@
                                 <state key="normal" title="自动测试">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="zdTestBtnClick:" destination="-1" eventType="touchUpInside" id="1p9-fq-Bv0"/>
                                 </connections>
@@ -109,6 +133,12 @@
                                 <state key="normal" title="添加用例">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="addTestBtnClick:" destination="-1" eventType="touchUpInside" id="XRw-RI-2JE"/>
                                 </connections>
@@ -147,6 +177,12 @@
                             <state key="normal" title="隐藏">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="hideShowBtnClick:" destination="-1" eventType="touchUpInside" id="0qc-9v-f9S"/>
                             </connections>
@@ -162,14 +198,21 @@
                             <state key="normal" title="导出测试报告">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="exportBtnClick:" destination="-1" eventType="touchUpInside" id="VyL-XN-MU7"/>
                             </connections>
                         </button>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8A6-cN-1OS">
                             <rect key="frame" x="5" y="40" width="365" height="155"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" red="0.059337763639999999" green="0.95321363209999999" blue="0.13438536240000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                     </subviews>

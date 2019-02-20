@@ -11,7 +11,7 @@ import UIKit
 class DeviceTestUnit: Codable {
     var name: String
     var createTime: TimeInterval
-    var prol: [Protocol]?
+    var prol: [Protocol]!
     
     init(name: String, createTime: TimeInterval) {
         self.name = name

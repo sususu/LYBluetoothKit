@@ -110,20 +110,6 @@ class AddProtocolVC: BaseViewController, ReturnFormatVCDelegate, CmdInputViewDel
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    
-    @IBAction func tlvBtnClick(_ sender: Any) {
-        let vc = ReturnFormatVC()
-        vc.returnFormat = tlvReturnFormat()
-        vc.delegate = self
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    
-    
-    @IBAction func customBtnClick(_ sender: Any) {
-    }
-    
-    
     // MARK: - Delegate
     func didFinishEditing() {
         
@@ -180,7 +166,6 @@ class AddProtocolVC: BaseViewController, ReturnFormatVCDelegate, CmdInputViewDel
             }
         }
         
-        //        attrStr.setKern(NSNumber(value: 5), range: NSRange(location: 0, length: string.count))
         previewLbl.attributedText = attrStr
     }
     
@@ -226,8 +211,6 @@ class AddProtocolVC: BaseViewController, ReturnFormatVCDelegate, CmdInputViewDel
             stringRadio.isSelected = true
         case .split:
             splitRadio.isSelected = true
-        case .tlv:
-            tlvRadio.isSelected = true
         }
         showExpressionAndPs(expression: returnFormat.expression, ps: returnFormat.ps)
     }

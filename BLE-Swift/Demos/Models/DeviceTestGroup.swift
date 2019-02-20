@@ -12,7 +12,8 @@ class DeviceTestGroup: Codable {
     var Id: String = ""
     var name: String
     var createTime: TimeInterval
-    var testUnits: [DeviceTestUnit]?
+    var protocols: [Protocol] = []
+    var testUnits: [DeviceTestUnit] = []
     
     init(name: String, createTime: TimeInterval) {
         self.name = name

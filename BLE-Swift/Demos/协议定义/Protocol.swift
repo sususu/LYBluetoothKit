@@ -43,4 +43,14 @@ extension Protocol {
             return returnFormat.type == .split
         }
     }
+    
+    var paramUnits: [CmdUnit]? {
+        var units = [CmdUnit]()
+        for unit in cmdUnits {
+            if unit.type == .variable && unit.param != nil {
+                units.append(unit)
+            }
+        }
+        return units;
+    }
 }

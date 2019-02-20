@@ -21,7 +21,6 @@
                 <outlet property="psLbl" destination="Tgk-Ka-eX1" id="675-SI-f3S"/>
                 <outlet property="splitRadio" destination="PS9-RJ-Qar" id="NtX-Eh-hGC"/>
                 <outlet property="stringRadio" destination="T1Z-sw-lqD" id="drs-4p-fZZ"/>
-                <outlet property="tlvRadio" destination="krP-hj-48P" id="BB0-eP-Rrp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -243,34 +242,6 @@
                                 <action selector="splitBtnClick:" destination="-1" eventType="touchUpInside" id="ABe-50-6Vk"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krP-hj-48P" userLabel="tlv" customClass="DLRadioButton">
-                            <rect key="frame" x="215" y="230" width="43" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="hMx-Hl-bv8"/>
-                                <constraint firstAttribute="width" constant="43" id="hry-Dm-FRZ"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <state key="normal" title="TLV">
-                                <color key="titleColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="iconSize">
-                                    <real key="value" value="15"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="indicatorSize">
-                                    <real key="value" value="10"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="marginWidth">
-                                    <real key="value" value="5"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="iconStrokeWidth">
-                                    <real key="value" value="2"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="tlvBtnClick:" destination="-1" eventType="touchUpInside" id="obq-IG-yvF"/>
-                            </connections>
-                        </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TdC-OP-sje" userLabel="expressionLbl">
                             <rect key="frame" x="30" y="270" width="340" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -287,34 +258,6 @@
                             <color key="textColor" red="0.84705882349999995" green="0.1176470588" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4dg-M7-VA9" userLabel="自定义" customClass="DLRadioButton">
-                            <rect key="frame" x="263" y="230" width="60" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="bTZ-f7-ppD"/>
-                                <constraint firstAttribute="width" constant="60" id="oKE-2c-dxF"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <state key="normal" title="自定义">
-                                <color key="titleColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="iconSize">
-                                    <real key="value" value="15"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="indicatorSize">
-                                    <real key="value" value="10"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="marginWidth">
-                                    <real key="value" value="8"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="iconStrokeWidth">
-                                    <real key="value" value="2"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="customBtnClick:" destination="-1" eventType="touchUpInside" id="Yud-I8-BHl"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -330,7 +273,6 @@
                         <constraint firstItem="HJZ-nV-xzY" firstAttribute="top" secondItem="yah-Lz-8WR" secondAttribute="bottom" constant="10" id="IaJ-Jm-dxP"/>
                         <constraint firstItem="PS9-RJ-Qar" firstAttribute="leading" secondItem="T1Z-sw-lqD" secondAttribute="trailing" constant="5" id="Ivp-5u-b8d"/>
                         <constraint firstItem="HJZ-nV-xzY" firstAttribute="leading" secondItem="H8I-vD-12b" secondAttribute="leading" constant="5" id="MaJ-5g-9Y3"/>
-                        <constraint firstItem="krP-hj-48P" firstAttribute="top" secondItem="Iwg-0y-yLp" secondAttribute="bottom" constant="10" id="ROb-bg-SAq"/>
                         <constraint firstItem="Tgk-Ka-eX1" firstAttribute="top" secondItem="TdC-OP-sje" secondAttribute="bottom" constant="5" id="TcF-Tz-iQg"/>
                         <constraint firstItem="yah-Lz-8WR" firstAttribute="leading" secondItem="H8I-vD-12b" secondAttribute="leading" constant="5" id="Vba-rL-Prh"/>
                         <constraint firstItem="T1Z-sw-lqD" firstAttribute="leading" secondItem="bxO-61-yRq" secondAttribute="trailing" constant="5" id="Xvj-QZ-Tym"/>
@@ -345,11 +287,8 @@
                         <constraint firstItem="TdC-OP-sje" firstAttribute="top" secondItem="bxO-61-yRq" secondAttribute="bottom" constant="10" id="hhx-qV-fIZ"/>
                         <constraint firstItem="Iwg-0y-yLp" firstAttribute="top" secondItem="jKq-7Z-fEM" secondAttribute="bottom" constant="10" id="jKA-m2-w1M"/>
                         <constraint firstItem="Iwg-0y-yLp" firstAttribute="leading" secondItem="HJZ-nV-xzY" secondAttribute="trailing" constant="10" id="k6o-iH-Gn3"/>
-                        <constraint firstItem="4dg-M7-VA9" firstAttribute="leading" secondItem="krP-hj-48P" secondAttribute="trailing" constant="5" id="mXB-gm-g6K"/>
                         <constraint firstItem="jKq-7Z-fEM" firstAttribute="leading" secondItem="yah-Lz-8WR" secondAttribute="trailing" constant="10" id="pIx-gv-m7g"/>
                         <constraint firstAttribute="trailing" secondItem="Tgk-Ka-eX1" secondAttribute="trailing" constant="5" id="tJN-1n-TbK"/>
-                        <constraint firstItem="krP-hj-48P" firstAttribute="leading" secondItem="PS9-RJ-Qar" secondAttribute="trailing" constant="5" id="v8H-I8-Hzw"/>
-                        <constraint firstItem="4dg-M7-VA9" firstAttribute="top" secondItem="Iwg-0y-yLp" secondAttribute="bottom" constant="10" id="wQQ-0M-rLF"/>
                         <constraint firstItem="yah-Lz-8WR" firstAttribute="top" secondItem="GmS-io-KVY" secondAttribute="bottom" constant="10" id="yaf-yW-VEv"/>
                     </constraints>
                 </view>
