@@ -141,6 +141,7 @@ class ReturnFormatVC: BaseViewController {
         let width = kScreenWidth - 20 - 10 - height
         let line = SplitLineView(frame: CGRect(x: x, y: y, width: width, height: height), type: type)
         self.scrollView.addSubview(line)
+        line.nameTF.becomeFirstResponder()
         lineInputs.append(line)
         
         let delBtn = UIButton(type: .custom)

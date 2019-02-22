@@ -136,7 +136,12 @@ class ProtocolExcuteVC: BaseViewController {
         
     }
     
+    private var isRunning: Bool = false
     @IBAction func excuteBtnClick(_ sender: Any) {
+        
+        if isRunning {
+            printLog("正在执行，请耐心等待")
+        }
         
         let countStr = countTF.text ?? "1"
         // 默认0
@@ -157,13 +162,13 @@ class ProtocolExcuteVC: BaseViewController {
             weakSelf?.resultStr = str
             weakSelf?.excuteFinish(resultStr: result)
         }, dictCallback: { (dict) in
-            let result = weakSelf?.getJSONStringFromDictionary(dictionary: dict)
-            weakSelf?.resultStr = result
-            weakSelf?.excuteFinish(resultStr: result)
+            let str = weakSelf?.getJSONStringFromDictionary(dictionary: dict)
+            weakSelf?.resultStr = str
+            weakSelf?.excuteFinish(resultStr: "返回：\(str ?? "")")
         }, dictArrayCallback: { (dictArr) in
             let result = weakSelf?.getJSONStringFromArray(array: dictArr)
             weakSelf?.resultStr = result
-            weakSelf?.excuteFinish(resultStr: result)
+            weakSelf?.excuteFinish(resultStr: "返回：\(result ?? "")")
         }) { (error) in
             weakSelf?.excuteFinish(resultStr: "错误：" + (weakSelf?.errorMsgFromBleError(error) ?? ""))
         }
@@ -175,7 +180,7 @@ class ProtocolExcuteVC: BaseViewController {
             print("无法解析出JSONString")
             return ""
         }
-        let data = try? JSONSerialization.data(withJSONObject: dictionary, options: [])
+        let data = try? JSONSerialization.data(withJSONObject: dictionary, options: [.prettyPrinted])
         
         return String(bytes: data ?? Data(), encoding: .utf8) ?? "";
     }
@@ -188,7 +193,7 @@ class ProtocolExcuteVC: BaseViewController {
             return ""
         }
         
-        let data = try? JSONSerialization.data(withJSONObject: array, options: [])
+        let data = try? JSONSerialization.data(withJSONObject: array, options: [.prettyPrinted])
         let JSONString = String(bytes:data ?? Data(), encoding: .utf8) ?? ""
         return JSONString
         
@@ -197,6 +202,7 @@ class ProtocolExcuteVC: BaseViewController {
     
     func excuteFinish(resultStr: String?) {
         excuteBtn.isEnabled = true
+        self.isRunning = false
         guard let msg = resultStr else {
             return
         }

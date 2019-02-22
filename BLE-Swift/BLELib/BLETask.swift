@@ -274,6 +274,7 @@ public class BLEScanTask: BLETask {
         
         if uuid == self.data.recvFromUuid && device == self.device {
             parser.standardParse(data: data, sendData: self.data.sendData, recvCount: self.data.recvDataCount)
+            startTimer()
         }
         
     }
