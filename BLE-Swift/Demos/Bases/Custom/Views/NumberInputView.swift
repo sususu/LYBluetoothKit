@@ -31,6 +31,8 @@ class NumberInputView: UIControl {
         jianBtn = UIButton(type: .custom)
         jianBtn.frame = CGRect(x: 0, y: 0, width: btnWidth, height: btnHeight)
         jianBtn.setTitle(TR("-"), for: .normal)
+        jianBtn.layer.cornerRadius = 4
+        jianBtn.layer.masksToBounds = true
         
         jianBtn.addTarget(self, action: #selector(jianBtnClick), for: .touchUpInside)
         addSubview(jianBtn)
@@ -39,9 +41,10 @@ class NumberInputView: UIControl {
 //        textField.keyboardType = .numberPad
         textField.text = "0"
 //        textField.borderStyle = .line
-        textField.font = font(16)
-        textField.layer.borderColor = rgb(200, 200, 200).cgColor
-        textField.layer.borderWidth = 1
+        textField.font = font(14)
+        textField.borderStyle = .roundedRect
+//        textField.layer.borderColor = rgb(200, 200, 200).cgColor
+//        textField.layer.borderWidth = 1
         textField.textAlignment = .center
         addSubview(textField)
         
@@ -49,6 +52,8 @@ class NumberInputView: UIControl {
         jiaBtn.frame = CGRect(x: 0, y: 0, width: btnWidth, height: btnHeight)
         jiaBtn.setTitle(TR("+"), for: .normal)
         jiaBtn.addTarget(self, action: #selector(jiaBtnClick), for: .touchUpInside)
+        jiaBtn.layer.cornerRadius = 4
+        jiaBtn.layer.masksToBounds = true
         addSubview(jiaBtn)
         
     }

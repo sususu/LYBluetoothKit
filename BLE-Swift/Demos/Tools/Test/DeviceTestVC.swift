@@ -28,6 +28,8 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
         tableView.allowsSelection = false
         tableView.register(UINib(nibName: "DeviceTestCell", bundle: nil), forCellReuseIdentifier: "cellId")
         
+        setNavRightButton(text: "添加测试", sel: #selector(addTestBtnClick(_:)))
+        
         showConnectState()
     }
     
@@ -99,6 +101,15 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    @IBAction func resetBtnClick(_ sender: Any) {
+    }
+    
+    
+    @IBAction func disconnectBtnClick(_ sender: Any) {
+    }
+    
+    
+    
     // MARK: - tableView
     func numberOfSections(in tableView: UITableView) -> Int {
         return product.testGroups.count
@@ -116,12 +127,39 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return product.testGroups[section].name
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return product.testGroups[section].name
+//    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    {
+        if product.testGroups[section].protocols.count == 0 {
+            return 0
+        }
+        return 15
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
+    {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
+        if product.testGroups[section].protocols.count == 0 {
+            return nil
+        }
+        
+        let lbl = UILabel(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 15))
+        lbl.font = font(10)
+        lbl.textColor = rgb(120, 120, 120)
+        lbl.text = "    " + product.testGroups[section].name
+        lbl.backgroundColor = UIColor.white
+        return lbl
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 40
     }
     
     // MARK: - 代理
@@ -147,13 +185,13 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func hideShowBtnClick(_ sender: Any) {
         if hideShowBtn.isSelected {
-            logViewHeight.constant = 200
-            exportBtn.isHidden = false
+            logViewHeight.constant = 240
+//            exportBtn.isHidden = false
             textViewRight.constant = 5
             textViewTop.constant = 5
         } else {
             logViewHeight.constant = 40
-            exportBtn.isHidden = true
+//            exportBtn.isHidden = true
             textViewRight.constant = 50
             textViewTop.constant = -30
         }

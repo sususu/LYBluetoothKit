@@ -47,7 +47,7 @@ class ToolsViewController: BaseViewController, UITableViewDataSource, UITableVie
     @objc func addBtnClick() {
         let alert = UIAlertController(title: nil, message: TR("Please input name"), preferredStyle: .alert)
         let ok = UIAlertAction(title: TR("OK"), style: .default) { (action) in
-            self.createProduct(name: alert.textFields![0].text ?? "")
+            self.createProduct(name: alert.textFields![0].text ?? "", bleName: alert.textFields![1].text ?? "")
         }
         let cancel = UIAlertAction(title: TR("NO"), style: .cancel, handler: nil)
         alert.addAction(ok)
@@ -56,16 +56,20 @@ class ToolsViewController: BaseViewController, UITableViewDataSource, UITableVie
             tf.placeholder = TR("Product Name")
             tf.becomeFirstResponder()
         }
+        alert.addTextField { (tf) in
+            tf.placeholder = TR("蓝牙名称")
+        }
         navigationController?.present(alert, animated: true, completion: nil)
     }
 
-    func createProduct(name: String) {
+    func createProduct(name: String, bleName: String) {
         if name.count == 0 {
             showError(TR("Please input name"))
             addBtnClick()
         } else {
             let ti = Date().timeIntervalSince1970
             let p = DeviceProduct(name: name, createTime: ti)
+            p.bleName = bleName
             ToolsService.shared.saveProduct(p)
             showSuccess(TR("Success"))
             products.insert(p, at: 0)

@@ -31,15 +31,15 @@ class DeviceTestCell: UITableViewCell {
     
     func createViews() {
         nameBtn = UIButton(type: .custom)
-        nameBtn.frame = CGRect(x: 20, y: 5, width: 100, height: 40)
+        nameBtn.frame = CGRect(x: 20, y: 5, width: 100, height: 30)
         nameBtn.backgroundColor = kMainColor
         nameBtn.addTarget(self, action: #selector(nameBtnClick), for: .touchUpInside)
-        nameBtn.titleLabel?.font = bFont(14)
+        nameBtn.titleLabel?.font = bFont(12)
         nameBtn.layer.cornerRadius = 3
         nameBtn.layer.masksToBounds = true
         contentView.addSubview(nameBtn)
         
-        paramViews = UIView(frame: CGRect(x: nameBtn.right + 10, y: 5, width: kScreenWidth - nameBtn.right - 10 - 20, height: 40))
+        paramViews = UIView(frame: CGRect(x: nameBtn.right + 10, y: 5, width: kScreenWidth - nameBtn.right - 10 - 20, height: 30))
         contentView.addSubview(paramViews)
     }
     
@@ -49,6 +49,12 @@ class DeviceTestCell: UITableViewCell {
         
         paramViews.removeAllSubviews()
         nameBtn.setTitle(proto.name, for: .normal)
+        let nameSize = proto.name.size(withFont: nameBtn.titleLabel!.font)
+        if (nameSize.width + 20) > 100 {
+            nameBtn.width = nameSize.width + 20
+            
+            paramViews.frame = CGRect(x: nameBtn.right + 10, y: 5, width: kScreenWidth - nameBtn.right - 10 - 20, height: 30)
+        }
         
         guard let units = proto.paramUnits else {
             return
@@ -57,6 +63,8 @@ class DeviceTestCell: UITableViewCell {
         let w:CGFloat = 100, h = paramViews.height
         for unit in units {
             let tf = UITextField(frame: CGRect(x: x, y: 0, width: w, height: h))
+            tf.font = bFont(13)
+            tf.borderStyle = .roundedRect
             tf.text = unit.param!.value
             if unit.param!.type == .int {
                 tf.keyboardType = .namePhonePad
@@ -69,10 +77,10 @@ class DeviceTestCell: UITableViewCell {
     @objc func nameBtnClick() {
         if let units = proto.paramUnits {
             
-            let subViews = paramViews.subviews
-            if subviews.count == units.count {
-                for i in 0 ..< subviews.count {
-                    let tf = subViews[i] as! UITextField
+            let svs = paramViews.subviews
+            if svs.count == units.count {
+                for i in 0 ..< svs.count {
+                    let tf = svs[i] as! UITextField
                     let unit = units[i]
                     unit.param!.value = tf.text
                 }

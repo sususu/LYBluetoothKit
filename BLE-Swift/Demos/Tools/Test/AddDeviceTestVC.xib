@@ -33,11 +33,11 @@
                     <rect key="frame" x="0.0" y="20" width="375" height="35"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择分组" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBo-9h-n3G">
-                            <rect key="frame" x="15" y="7.5" width="71.5" height="20"/>
+                            <rect key="frame" x="15" y="7.5" width="66.5" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="jFb-kK-U7c"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -80,11 +80,11 @@
                     <rect key="frame" x="0.0" y="140" width="375" height="30"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入指令" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bt7-86-9ZH">
-                            <rect key="frame" x="15" y="5" width="71.5" height="20"/>
+                            <rect key="frame" x="15" y="5" width="66.5" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="4aJ-Mv-eCb"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>

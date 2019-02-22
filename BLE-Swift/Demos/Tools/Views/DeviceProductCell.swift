@@ -18,7 +18,8 @@ class DeviceProductCell: UITableViewCell {
     }
     
     func updateUI(withProduct product: DeviceProduct) {
-        nameLbl.text = product.name
+        nameLbl.text = product.name + " - "
+        + product.bleName
         timeLbl.text = String.timeString(fromTimeInterval: product.createTime)
     }
     

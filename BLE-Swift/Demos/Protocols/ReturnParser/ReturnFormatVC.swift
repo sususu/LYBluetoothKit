@@ -43,15 +43,19 @@ class ReturnFormatVC: BaseViewController {
         addStringBtn = UIButton(type: .custom)
         addStringBtn.setTitle(TR("加一行(string)"), for: .normal)
         addStringBtn.backgroundColor = kMainColor
-        addStringBtn.titleLabel?.font = font(16)
-        addStringBtn.frame = CGRect(x: 10, y: navigationBarHeight + 5, width: width, height: 45)
+        addStringBtn.titleLabel?.font = font(14)
+        addStringBtn.frame = CGRect(x: 10, y: navigationBarHeight + 5, width: width, height: 40)
+        addStringBtn.layer.cornerRadius = 4
+        addStringBtn.layer.masksToBounds = true
         self.view.addSubview(addStringBtn)
         
         addIntBtn = UIButton(type: .custom)
         addIntBtn.setTitle(TR("加一行(int)"), for: .normal)
         addIntBtn.backgroundColor = kMainColor
-        addIntBtn.titleLabel?.font = font(16)
-        addIntBtn.frame = CGRect(x: addStringBtn.right + 10, y: navigationBarHeight + 5, width: width, height: 45)
+        addIntBtn.titleLabel?.font = font(14)
+        addIntBtn.frame = CGRect(x: addStringBtn.right + 10, y: navigationBarHeight + 5, width: width, height: 40)
+        addIntBtn.layer.cornerRadius = 4
+        addIntBtn.layer.masksToBounds = true
         self.view.addSubview(addIntBtn)
         
         scrollView = UIScrollView(frame: CGRect(x: 0, y: addIntBtn.bottom + 10, width: kScreenWidth, height: kScreenHeight - addIntBtn.bottom))

@@ -32,6 +32,22 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
         reloadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let user = User.current
+        if user.isLogin {
+            loginBtn.isHidden = true
+            nameLbl.isHidden = false
+            emailLbl.isHidden = false
+            nameLbl.text = user.name
+            emailLbl.text = user.email
+        } else {
+            loginBtn.isHidden = false
+            nameLbl.isHidden = true
+            emailLbl.isHidden = true
+        }
+    }
+    
     // MARK: - 业务逻辑
     func createMenus() {
         let fmSection = MenuSection(title: "")
@@ -102,5 +118,16 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return sections[section].footerHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let row = sections[indexPath.section].rows![indexPath.row]
+        var nameSpace = Bundle.main.infoDictionary!["CFBundleExecutable"] as! String
+        nameSpace = nameSpace.replacingOccurrences(of: "-", with: "_")
+        let cls = NSClassFromString(nameSpace + "." + row.pushVC!) as! UIViewController.Type
+        let vc = cls.init()
+        vc.title = row.title
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

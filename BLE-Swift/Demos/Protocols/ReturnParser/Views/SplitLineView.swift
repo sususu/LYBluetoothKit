@@ -64,6 +64,8 @@ class SplitLineView: UIView {
         typeLbl.backgroundColor = kMainColor
         typeLbl.textAlignment = .center
         typeLbl.textColor = UIColor.white
+        typeLbl.layer.cornerRadius = 4
+        typeLbl.layer.masksToBounds = true
         if type == .int {
             typeLbl.text = "Int"
         } else {
@@ -73,7 +75,7 @@ class SplitLineView: UIView {
         
         nameTF = UITextField()
         nameTF.placeholder = TR("名称")
-        nameTF.font = font(16)
+        nameTF.font = font(14)
         nameTF.borderStyle = .roundedRect
         addSubview(nameTF)
         

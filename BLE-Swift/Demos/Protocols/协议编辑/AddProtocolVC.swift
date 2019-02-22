@@ -217,6 +217,7 @@ class AddProtocolVC: BaseViewController, ReturnFormatVCDelegate, CmdInputViewDel
     
     
     func didFinishEditReturnFormat(format: ReturnFormat) {
+        self.returnFormat = format
         showExpressionAndPs(expression: format.expression, ps: format.ps)
     }
     

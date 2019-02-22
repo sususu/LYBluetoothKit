@@ -11,6 +11,7 @@ import UIKit
 class DeviceProduct: Codable {
     var Id: String = ""
     var name: String
+    var bleName: String = ""
     var createTime: TimeInterval
     var testGroups: [DeviceTestGroup] = []
     

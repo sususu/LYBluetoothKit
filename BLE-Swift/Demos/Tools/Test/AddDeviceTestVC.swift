@@ -43,8 +43,8 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
         title = TR("增加测试用例")
         
         let layout = TestGroupLayout()
-        layout.itemSize = CGSize(width: 80, height: 30)
-        layout.minimumLineSpacing = 8
+        layout.itemSize = CGSize(width: 60, height: 28)
+        layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 0
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         collectionView.dataSource = self

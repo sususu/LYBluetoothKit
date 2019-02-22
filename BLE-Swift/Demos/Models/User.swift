@@ -8,12 +8,46 @@
 
 import UIKit
 
+let kCurrentUserIDKey = "kCurrentUserIDKey"
+let kCurrentUserNameKey = "kCurrentUserNameKey"
+let kCurrentUserEmailKey = "kCurrentUserEmailKey"
+let kCurrentUserJwtKey = "kCurrentUserJwtKey"
+
 class User: Codable {
-    var id: String = ""
-    var name: String!
-    var email: String!
     
-    var jwt: String!
+    static let current = User()
+    
+    private init() {
+        self.id = StorageUtils.getString(forKey: kCurrentUserIDKey) ?? ""
+        self.name = StorageUtils.getString(forKey: kCurrentUserNameKey) ?? ""
+        self.email = StorageUtils.getString(forKey: kCurrentUserEmailKey) ?? ""
+        self.jwt = StorageUtils.getString(forKey: kCurrentUserJwtKey) ?? ""
+    }
+    
+    func save() {
+        StorageUtils.saveString(self.id, forKey: kCurrentUserIDKey)
+        StorageUtils.saveString(self.name, forKey: kCurrentUserNameKey)
+        StorageUtils.saveString(self.email, forKey: kCurrentUserEmailKey)
+        StorageUtils.saveString(self.jwt, forKey: kCurrentUserJwtKey)
+    }
+    
+    init(id: String, name: String, email: String) {
+        self.id = id
+        self.name = name
+        self.email = email
+    }
+    
+    init(name: String, email: String) {
+        self.name = name
+        self.email = email
+    }
+    
+    var id: String = ""
+    var name: String = ""
+    var email: String = ""
+    var isadmin: Bool = false
+    
+    var jwt: String = ""
     
     var isLogin: Bool {
         get {

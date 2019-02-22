@@ -157,14 +157,43 @@ class ProtocolExcuteVC: BaseViewController {
             weakSelf?.resultStr = str
             weakSelf?.excuteFinish(resultStr: result)
         }, dictCallback: { (dict) in
-            
+            let result = weakSelf?.getJSONStringFromDictionary(dictionary: dict)
+            weakSelf?.resultStr = result
+            weakSelf?.excuteFinish(resultStr: result)
         }, dictArrayCallback: { (dictArr) in
-            
+            let result = weakSelf?.getJSONStringFromArray(array: dictArr)
+            weakSelf?.resultStr = result
+            weakSelf?.excuteFinish(resultStr: result)
         }) { (error) in
             weakSelf?.excuteFinish(resultStr: "错误：" + (weakSelf?.errorMsgFromBleError(error) ?? ""))
         }
         
     }
+    
+    func getJSONStringFromDictionary(dictionary:Dictionary<String, Any>) -> String {
+        if (!JSONSerialization.isValidJSONObject(dictionary)) {
+            print("无法解析出JSONString")
+            return ""
+        }
+        let data = try? JSONSerialization.data(withJSONObject: dictionary, options: [])
+        
+        return String(bytes: data ?? Data(), encoding: .utf8) ?? "";
+    }
+    
+    //数组转json
+    func getJSONStringFromArray(array:Array<Dictionary<String, Any>>) -> String {
+        
+        if (!JSONSerialization.isValidJSONObject(array)) {
+            print("无法解析出JSONString")
+            return ""
+        }
+        
+        let data = try? JSONSerialization.data(withJSONObject: array, options: [])
+        let JSONString = String(bytes:data ?? Data(), encoding: .utf8) ?? ""
+        return JSONString
+        
+    }
+    
     
     func excuteFinish(resultStr: String?) {
         excuteBtn.isEnabled = true

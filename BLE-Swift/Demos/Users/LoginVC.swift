@@ -50,6 +50,19 @@ class LoginVC: BaseViewController {
                 return
             }
             
+            guard let dict = resp.data as? Dictionary<String, Any> else {
+                self.showError("登录异常，返回数据为空")
+                return
+            }
+            
+            let user = User.current
+            user.id = "\(dict["id"] ?? "")"
+            user.name = "\(dict["name"] ?? "")"
+            user.email = "\(dict["email"] ?? "")"
+            user.jwt = "\(dict["jwt"] ?? "")"
+            user.isadmin = (dict["isadmin"] as? Bool) ?? false
+            user.save()
+            self.navigationController?.popViewController(animated: true)
             self.showSuccess("登录成功")
         }
         

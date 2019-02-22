@@ -26,7 +26,9 @@ class NetworkManager {
         
         let p = params ?? [:]
         
-        let request = LYRequest(url: url, parameters: p, method: .GET)
+        let pUrl = addParamsToUrl(url: url, params: p)
+        
+        let request = LYRequest(url: pUrl, parameters: p, method: .GET)
         request?.send(callback: { (resp) in
             var r = resp
             if r == nil {
@@ -44,7 +46,9 @@ class NetworkManager {
         
         let p = params ?? [:]
         
-        let request = LYRequest(url: url, parameters: p, method: .POST)
+        let pUrl = addParamsToUrl(url: url, params: p)
+        
+        let request = LYRequest(url: pUrl, parameters: p, method: .POST)
         request?.send(callback: { (resp) in
             var r = resp
             if r == nil {
@@ -55,6 +59,17 @@ class NetworkManager {
             callback(r!)
         })
         
+    }
+    
+    func addParamsToUrl(url: String, params:Dictionary<String, Any>) -> String {
+        var pUrl = url + "?"
+        for (key, value) in params {
+            pUrl += "\(key)=\(value)&"
+        }
+        if params.keys.count > 0 {
+            pUrl = String(pUrl.prefix(pUrl.count - 1))
+        }
+        return pUrl
     }
     
 }

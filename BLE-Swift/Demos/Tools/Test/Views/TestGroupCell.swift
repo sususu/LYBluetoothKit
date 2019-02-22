@@ -38,7 +38,7 @@ class TestGroupCell: UICollectionViewCell {
         nameLbl = UILabel()
         nameLbl.textColor = UIColor.white
         nameLbl.textAlignment = .center
-        nameLbl.font = font(14)
+        nameLbl.font = font(12)
         
         cView = UIView()
         cView.layer.cornerRadius = 5
