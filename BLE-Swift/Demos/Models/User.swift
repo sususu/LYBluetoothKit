@@ -55,5 +55,12 @@ class User: Codable {
         }
     }
     
-    
+    func logout() {
+        id = ""
+        name = ""
+        email = ""
+        isadmin = false
+        jwt = ""
+        save()
+    }
 }

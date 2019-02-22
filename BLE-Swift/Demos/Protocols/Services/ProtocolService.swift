@@ -49,6 +49,11 @@ class ProtocolService {
         saveMenus()
     }
     
+    func deleteMenu(menu: ProtocolMenu) {
+        protocolMenus.remove(menu)
+        saveMenus()
+    }
+    
     func saveMenus() {
         do {
             let data = try JSONEncoder().encode(protocolMenus)

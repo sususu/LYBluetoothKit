@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ProtocolMenu: Codable {
+class ProtocolMenu: Codable, Equatable {
+    static func == (lhs: ProtocolMenu, rhs: ProtocolMenu) -> Bool {
+        return lhs.name == rhs.name
+    }
+    
     var name = ""
     var icon = ""
     var summary = ""

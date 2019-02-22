@@ -128,6 +128,7 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
         let cls = NSClassFromString(nameSpace + "." + row.pushVC!) as! UIViewController.Type
         let vc = cls.init()
         vc.title = row.title
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
 }

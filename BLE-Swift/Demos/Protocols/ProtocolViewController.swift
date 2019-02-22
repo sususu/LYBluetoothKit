@@ -55,6 +55,10 @@ class ProtocolViewController: BaseViewController, UITableViewDataSource, UITable
     
     func createNewMenu(withName name: String) {
         let menu = ProtocolMenu(name: name, createTime: Date().timeIntervalSince1970)
+        if protocolMenus.contains(menu) {
+            showError("这个名称已经存在了")
+            return
+        }
         protocolMenus.insert(menu, at: 0)
         ProtocolService.shared.addMenu(menu: menu)
         tableView.reloadData()
@@ -87,4 +91,23 @@ class ProtocolViewController: BaseViewController, UITableViewDataSource, UITable
         navigationController?.pushViewController(vc, animated: true)
     }
 
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let alert = UIAlertController(title: nil, message: TR("Are you to delete ?"), preferredStyle: .alert)
+        let ok = UIAlertAction(title: TR("OK"), style: .default) { (action) in
+            let menu = self.protocolMenus[indexPath.row]
+            self.protocolMenus.remove(menu)
+            ProtocolService.shared.deleteMenu(menu: menu)
+            self.showSuccess(TR("Success"))
+            self.tableView.reloadData()
+        }
+        let cancel = UIAlertAction(title: TR("CANCEL"), style: .cancel, handler: nil)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        navigationController?.present(alert, animated: true, completion: nil)
+    }
 }

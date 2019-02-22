@@ -128,4 +128,8 @@ class OtaService {
         saveFmsToDisk()
     }
     
+    func deleteFirmware(_ fm: Firmware) {
+        firmwares.remove(fm)
+        saveFmsToDisk()
+    }
 }

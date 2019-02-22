@@ -8,7 +8,8 @@
 
 import UIKit
 
-struct Firmware: Codable {
+class Firmware: Codable, Equatable {
+    
     var id = 0
     var name = "" {
         didSet {
@@ -75,4 +76,8 @@ struct Firmware: Codable {
         }
     }
     
+    
+    static func == (lhs: Firmware, rhs: Firmware) -> Bool {
+        return lhs.name == rhs.name
+    }
 }
