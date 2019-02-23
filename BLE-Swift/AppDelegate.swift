@@ -75,6 +75,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let fileName = url.absoluteString.lastPathComponent
         
+        // 如果是协议导入
+        if fileName.hasPrefix("ProtocolMenus") {
+            let alert = UIAlertController(title: "非常重要", message: "是否要覆盖本地的协议配置信息？", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "确定", style: .default) { (letion) in
+                let data = (try? Data(contentsOf: url)) ?? Data()
+                _ = StorageUtils.save(data, forKey: ProtocolService.kMenusCacheKey)
+                ProtocolService.shared.refreshMenusFromDisk()
+            }
+            let cancel = UIAlertAction(title: "取消", style: .cancel) { (action) in
+                _ = StorageUtils.deleteFile(atPath: url.absoluteString)
+            }
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+            return true
+        }
+        
+        // 如果是工具导入
+        if fileName.hasPrefix("DeviceProducts") {
+            let alert = UIAlertController(title: "非常重要", message: "是否要覆盖本地的工具配置信息？", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "确定", style: .default) { (action) in
+                
+            }
+            let cancel = UIAlertAction(title: "取消", style: .cancel) { (action) in
+                _ = StorageUtils.deleteFile(atPath: url.absoluteString)
+            }
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+            return true
+        }
+        
         let filePath = "Inbox".stringByAppending(pathComponent: fileName)
         
         let absolutePath = StorageUtils.getDocPath().stringByAppending(pathComponent: filePath)
@@ -83,7 +115,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return false
         }
         
-        var fm = Firmware()
+        let fm = Firmware()
         fm.name = fileName
         fm.path = filePath
         fm.id = Int(Date().timeIntervalSince1970)

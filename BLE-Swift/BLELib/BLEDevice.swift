@@ -74,6 +74,8 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
     
     public func write(_ data:Data, characteristicUUID:String) -> Bool {
         
+        print("发送数据：\(data.hexEncodedString())")
+        
         if peripheral.state != .connected {
             return false
         }

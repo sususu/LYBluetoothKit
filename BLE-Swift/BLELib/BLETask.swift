@@ -24,27 +24,32 @@ public enum BLETaskState {
     var ob:NSKeyValueObservation?
     
     func start() {
+        self.state = .start
         startTimer()
     }
     
     func cancel() {
-        
+        self.state = .cancel
     }
     
     func startTimer() {
-        stopTimer()
-        timer = Timer(timeInterval: timeout, target: self, selector: #selector(timeoutHandler), userInfo: nil, repeats: false)
-        timer!.fireDate = Date(timeIntervalSinceNow: timeout)
-        RunLoop.main.add(timer!, forMode: .common)
+        DispatchQueue.main.async {
+            self.stopTimer()
+            self.timer = Timer(timeInterval: self.timeout, target: self, selector: #selector(self.timeoutHandler), userInfo: nil, repeats: false)
+            self.timer!.fireDate = Date(timeIntervalSinceNow: self.timeout)
+            RunLoop.main.add(self.timer!, forMode: .common)
+        }
     }
     
     func stopTimer() {
-        timer?.invalidate()
-        timer = nil;
+        DispatchQueue.main.async {
+            self.timer?.invalidate()
+            self.timer = nil;
+        }
     }
     
     @objc func timeoutHandler() {
-        
+        self.state = .failed
     }
 }
 

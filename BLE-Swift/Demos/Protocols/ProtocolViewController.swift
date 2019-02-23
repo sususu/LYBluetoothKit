@@ -8,10 +8,12 @@
 
 import UIKit
 
-class ProtocolViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+class ProtocolViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UIDocumentInteractionControllerDelegate {
     
     @IBOutlet weak var seg: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
+    
+    var docController: UIDocumentInteractionController?
     
     var protocolMenus: Array<ProtocolMenu>!
     
@@ -28,11 +30,18 @@ class ProtocolViewController: BaseViewController, UITableViewDataSource, UITable
         
         setNavLeftButton(text: TR("导出"), sel: #selector(exportBtnClick))
         setNavRightButton(text: TR("添加"), sel: #selector(addBtnClick(_:)))
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(menusChangedNotification), name: kProtocolMenusChangedNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         seg.selectedSegmentIndex = BLEConfig.shared.shouldSend03End ? 0 : 1
+    }
+    
+    @objc func menusChangedNotification() {
+        protocolMenus = ProtocolService.shared.protocolMenus
+        tableView.reloadData()
     }
     
     func loadDataAndRefresUI() {
@@ -73,6 +82,28 @@ class ProtocolViewController: BaseViewController, UITableViewDataSource, UITable
     
     
     @objc func exportBtnClick() {
+        
+        guard let data = ProtocolService.shared.getMenusJsonData() else {
+            showError("获取数据失败")
+            return
+        }
+        
+        guard let url = StorageUtils.saveAsFile(forData: data, fileName: "ProtocolMenus.json") else {
+            showError("保存协议菜单文件失败")
+            return
+        }
+        
+        if docController == nil {
+            docController = UIDocumentInteractionController(url: url)
+        }
+        docController!.delegate = self
+        docController?.name = "ProtocolMenus.json"
+        
+        docController!.presentOpenInMenu(from: CGRect.zero, in: self.view, animated: true)
+        
+    }
+    
+    func documentInteractionControllerWillBeginPreview(_ controller: UIDocumentInteractionController) {
         
     }
     

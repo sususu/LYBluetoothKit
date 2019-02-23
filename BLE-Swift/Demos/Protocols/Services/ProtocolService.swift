@@ -8,9 +8,11 @@
 
 import UIKit
 
+let kProtocolMenusChangedNotification = NSNotification.Name(rawValue: "ProtocolService.menusChangedNotification")
+
 class ProtocolService {
 
-    private var kMenusCacheKey = "kMenusCacheKey"
+    static var kMenusCacheKey = "kMenusCacheKey"
     
     static let shared = ProtocolService()
     
@@ -21,8 +23,13 @@ class ProtocolService {
         protocolMenus = readMenusFromDisk()
     }
     
+    func refreshMenusFromDisk() {
+        protocolMenus = readMenusFromDisk()
+        NotificationCenter.default.post(name: kProtocolMenusChangedNotification, object: nil)
+    }
+    
     private func readMenusFromDisk() -> [ProtocolMenu] {
-        var configJsonData = StorageUtils.getData(forKey: kMenusCacheKey)
+        var configJsonData = StorageUtils.getData(forKey: ProtocolService.kMenusCacheKey)
         if configJsonData == nil {
             if let path = Bundle.main.path(forResource: "Protocol", ofType: "json") {
                 do {
@@ -57,9 +64,13 @@ class ProtocolService {
     func saveMenus() {
         do {
             let data = try JSONEncoder().encode(protocolMenus)
-            StorageUtils.save(data, forKey: kMenusCacheKey)
+            StorageUtils.save(data, forKey: ProtocolService.kMenusCacheKey)
         } catch let err {
             print("protocolMenus json encode error: \(err)")
         }
+    }
+    
+    func getMenusJsonData() -> Data? {
+        return try? JSONEncoder().encode(protocolMenus)
     }
 }
