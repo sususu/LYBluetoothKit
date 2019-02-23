@@ -102,13 +102,18 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func resetBtnClick(_ sender: Any) {
+        printLog("重置设置...")
+        
+        _ = BLECenter.shared.resetDevice(boolCallback: { (bool, error) in
+            
+        }, toDeviceName: nil)
     }
     
     
     @IBAction func disconnectBtnClick(_ sender: Any) {
+        BLECenter.shared.disconnectAllConnectedDevices()
+        printLog("已断开全部连接设备")
     }
-    
-    
     
     // MARK: - tableView
     func numberOfSections(in tableView: UITableView) -> Int {

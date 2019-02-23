@@ -12,6 +12,7 @@ let kCurrentUserIDKey = "kCurrentUserIDKey"
 let kCurrentUserNameKey = "kCurrentUserNameKey"
 let kCurrentUserEmailKey = "kCurrentUserEmailKey"
 let kCurrentUserJwtKey = "kCurrentUserJwtKey"
+let kCurrentUserPwdKey = "kCurrentUserPwdKey"
 
 class User: Codable {
     
@@ -22,6 +23,7 @@ class User: Codable {
         self.name = StorageUtils.getString(forKey: kCurrentUserNameKey) ?? ""
         self.email = StorageUtils.getString(forKey: kCurrentUserEmailKey) ?? ""
         self.jwt = StorageUtils.getString(forKey: kCurrentUserJwtKey) ?? ""
+        self.password = StorageUtils.getString(forKey: kCurrentUserPwdKey) ?? ""
     }
     
     func save() {
@@ -29,6 +31,7 @@ class User: Codable {
         StorageUtils.saveString(self.name, forKey: kCurrentUserNameKey)
         StorageUtils.saveString(self.email, forKey: kCurrentUserEmailKey)
         StorageUtils.saveString(self.jwt, forKey: kCurrentUserJwtKey)
+        StorageUtils.saveString(self.password, forKey: kCurrentUserPwdKey)
     }
     
     init(id: String, name: String, email: String) {
@@ -46,7 +49,7 @@ class User: Codable {
     var name: String = ""
     var email: String = ""
     var isadmin: Bool = false
-    
+    var password: String = ""
     var jwt: String = ""
     
     var isLogin: Bool {

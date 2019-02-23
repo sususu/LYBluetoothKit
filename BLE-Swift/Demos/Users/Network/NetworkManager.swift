@@ -20,6 +20,10 @@ class NetworkManager {
         LYNetworking.setDebugLoggerSwitch(true)
         LYNetworking.setTimeoutInterval(30)
 
+        
+        LYErrorCodeManager.shared()?.setMsg("无法连接服务器", forCode: -1004)
+        //-1009
+        LYErrorCodeManager.shared()?.setMsg("无法连接服务器", forCode: -1009)
     }
     
     func get(_ url: String, params: Dictionary<String, Any>?, callback:@escaping NetworkCallback) {
@@ -27,6 +31,8 @@ class NetworkManager {
         let p = params ?? [:]
         
         let pUrl = addParamsToUrl(url: url, params: p)
+        
+        LYNetworking.shared()?.setHTTPHeader(User.current.jwt, forKey: "jwt")
         
         let request = LYRequest(url: pUrl, parameters: p, method: .GET)
         request?.send(callback: { (resp) in
@@ -48,6 +54,8 @@ class NetworkManager {
         
         let pUrl = addParamsToUrl(url: url, params: p)
         
+        LYNetworking.shared()?.setHTTPHeader(User.current.jwt, forKey: "jwt")
+        
         let request = LYRequest(url: pUrl, parameters: p, method: .POST)
         request?.send(callback: { (resp) in
             var r = resp
@@ -64,7 +72,8 @@ class NetworkManager {
     func addParamsToUrl(url: String, params:Dictionary<String, Any>) -> String {
         var pUrl = url + "?"
         for (key, value) in params {
-            pUrl += "\(key)=\(value)&"
+            let valStr = "\(value)".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+            pUrl += "\(key)=\(valStr)&"
         }
         if params.keys.count > 0 {
             pUrl = String(pUrl.prefix(pUrl.count - 1))

@@ -20,6 +20,9 @@ class LoginVC: BaseViewController {
         super.viewDidLoad()
 
         self.title = "登录"
+        
+        emailTF.text = "sujiang@appscomm.cn";
+        passwordTF.text = "qwerty";
     }
 
 

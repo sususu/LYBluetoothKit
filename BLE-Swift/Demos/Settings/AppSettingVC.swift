@@ -33,14 +33,14 @@ class AppSettingVC: BaseViewController, UITableViewDataSource, UITableViewDelega
         let settingSection = MenuSection(title: "")
         sections.append(settingSection)
         
-        let fmRow = MenuRow(title: "修改名称", icon: nil, selector: nil, pushVC: "FirmwareManagerVC")
-        let xyRow = MenuRow(title: "修改密码", icon: nil, selector: nil, pushVC: "ProtocolManagerVC")
-        let gjRow = MenuRow(title: "忘记密码", icon: nil, selector: nil, pushVC: "ToolManagerVC")
+        let fmRow = MenuRow(title: "修改名称", icon: nil, selector: nil, pushVC: "ModifyNameVC")
+        let xyRow = MenuRow(title: "修改密码", icon: nil, selector: nil, pushVC: "ModifyPwdVC")
+//        let gjRow = MenuRow(title: "忘记密码", icon: nil, selector: nil, pushVC: "ForgetPwdVC")
         
         fmSection.rows = [MenuRow]()
         fmSection.rows?.append(fmRow)
         fmSection.rows?.append(xyRow)
-        fmSection.rows?.append(gjRow)
+//        fmSection.rows?.append(gjRow)
         
         
         let settingRow = MenuRow(title: "退出登录", icon: nil, selector: "Logout", pushVC: nil)

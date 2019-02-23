@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = slideVC
         window?.makeKeyAndVisible()
         
+//        BLEConfig.shared.shouldSend03End = false
         
         return true
     }

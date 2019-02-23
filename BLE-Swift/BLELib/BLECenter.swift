@@ -309,6 +309,12 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
         }
     }
     
+    public func disconnectAllConnectedDevices() {
+        for device in self.connectedDevices {
+            self.disconnect(device: device, callback: nil)
+        }
+    }
+    
     
     func send(data:BLEData, callback:CommonCallback?, toDeviceName:String? = nil, timeout:TimeInterval = kDefaultTimeout) -> BLETask? {
         

@@ -8,8 +8,10 @@
 
 import Foundation
 
-let kTestBaseUrl = "http://127.0.0.1:8080/app/"
+let kTestBaseUrl = "http://172.16.2.24:8080/app/"
 
 
 let API_USER_LOGIN = "user/login"
 let API_USER_REGISTER = "user/regist"
+let API_USER_MODIFY_NAME = "user/modifyName"
+let API_USER_MODIFY_PASSWORD = "user/modifyPwd"

@@ -10,6 +10,7 @@ import UIKit
 
 class ProtocolViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var seg: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
     var protocolMenus: Array<ProtocolMenu>!
@@ -27,6 +28,11 @@ class ProtocolViewController: BaseViewController, UITableViewDataSource, UITable
         
         setNavLeftButton(text: TR("导出"), sel: #selector(exportBtnClick))
         setNavRightButton(text: TR("添加"), sel: #selector(addBtnClick(_:)))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        seg.selectedSegmentIndex = BLEConfig.shared.shouldSend03End ? 0 : 1
     }
     
     func loadDataAndRefresUI() {
@@ -68,6 +74,10 @@ class ProtocolViewController: BaseViewController, UITableViewDataSource, UITable
     
     @objc func exportBtnClick() {
         
+    }
+    
+    @IBAction func send03OrNotChanged(_ sender: UISegmentedControl) {
+        BLEConfig.shared.shouldSend03End = (sender.selectedSegmentIndex == 0)
     }
     
     // MARK: - tableView

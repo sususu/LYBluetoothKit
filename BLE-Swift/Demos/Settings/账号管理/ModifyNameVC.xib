@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ModifyNameVC" customModule="BLE_Swift" customModuleProvider="target">
+            <connections>
+                <outlet property="nNameTF" destination="FrY-7v-fSv" id="OCj-Lt-7G3"/>
+                <outlet property="nameLbl" destination="txT-4x-o3i" id="AJo-Gn-tLh"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="old name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="txT-4x-o3i">
+                    <rect key="frame" x="20" y="40" width="335" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="2JY-bU-WJI"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="新名称" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FrY-7v-fSv">
+                    <rect key="frame" x="20" y="95" width="335" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="zOR-KL-ClC"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="30j-dA-lUN">
+                    <rect key="frame" x="20" y="155" width="335" height="44"/>
+                    <color key="backgroundColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="OFR-bU-jaa"/>
+                    </constraints>
+                    <state key="normal" title="保存">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="btnClick:" destination="-1" eventType="touchUpInside" id="S4s-4c-iWY"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="FrY-7v-fSv" firstAttribute="top" secondItem="txT-4x-o3i" secondAttribute="bottom" constant="15" id="1h1-MV-GAu"/>
+                <constraint firstItem="txT-4x-o3i" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="3d6-r7-ZXb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="30j-dA-lUN" secondAttribute="trailing" constant="20" id="4Ra-HC-6cD"/>
+                <constraint firstItem="FrY-7v-fSv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="BSX-l1-kTN"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="FrY-7v-fSv" secondAttribute="trailing" constant="20" id="DIF-hO-JXq"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="txT-4x-o3i" secondAttribute="trailing" constant="20" id="Ltl-hH-XM5"/>
+                <constraint firstItem="30j-dA-lUN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="VIp-hl-aCh"/>
+                <constraint firstItem="30j-dA-lUN" firstAttribute="top" secondItem="FrY-7v-fSv" secondAttribute="bottom" constant="20" id="g0j-RP-ccu"/>
+                <constraint firstItem="txT-4x-o3i" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="ynF-46-7LX"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

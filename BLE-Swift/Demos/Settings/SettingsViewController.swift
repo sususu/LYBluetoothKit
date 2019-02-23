@@ -123,9 +123,18 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let row = sections[indexPath.section].rows![indexPath.row]
+        let vcName = row.pushVC ?? ""
+        if vcName == "AppSettingVC" {
+            if !User.current.isLogin {
+                showError("请先登录")
+                return
+            }
+        }
+        
+        
         var nameSpace = Bundle.main.infoDictionary!["CFBundleExecutable"] as! String
         nameSpace = nameSpace.replacingOccurrences(of: "-", with: "_")
-        let cls = NSClassFromString(nameSpace + "." + row.pushVC!) as! UIViewController.Type
+        let cls = NSClassFromString(nameSpace + "." + vcName) as! UIViewController.Type
         let vc = cls.init()
         vc.title = row.title
         vc.hidesBottomBarWhenPushed = true
