@@ -16,7 +16,7 @@ protocol CmdKeyBoardViewDelegate: NSObjectProtocol {
 
 class CmdKeyBoardView: UIView {
 
-    var delegate: CmdKeyBoardViewDelegate?
+    weak var delegate: CmdKeyBoardViewDelegate?
     let keyboardHeight: CGFloat = 200
     
     

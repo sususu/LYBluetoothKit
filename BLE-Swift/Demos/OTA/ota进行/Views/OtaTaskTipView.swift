@@ -19,7 +19,7 @@ class OtaTaskTipView: UIView, UICollectionViewDataSource, UICollectionViewDelega
     var showDetailBtn: UIButton!
     var placeLbl: UILabel!
     
-    var delegate: OtaTaskTipViewDelegate?
+    weak var delegate: OtaTaskTipViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1DA6F8CA946DA6E806A47013 /* Pods_BLE_SwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A5DE497842DC3B0E35F73E2 /* Pods_BLE_SwiftTests.framework */; };
+		2B06DDEA222393B80062E7CB /* ProtocolObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B06DDE9222393B80062E7CB /* ProtocolObj.swift */; };
+		2B06DDED222397180062E7CB /* ProtocolObjCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B06DDEB222397180062E7CB /* ProtocolObjCell.swift */; };
+		2B06DDEE222397180062E7CB /* ProtocolObjCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B06DDEC222397180062E7CB /* ProtocolObjCell.xib */; };
 		2B2E273C2172D13A00726FC7 /* BLEData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2E273B2172D13A00726FC7 /* BLEData.swift */; };
 		2B2E273E2172D9B400726FC7 /* BLEConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2E273D2172D9B400726FC7 /* BLEConfig.swift */; };
 		2B2E27412172E76500726FC7 /* BLEArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2E27402172E76400726FC7 /* BLEArrayExtensions.swift */; };
@@ -229,6 +232,9 @@
 /* Begin PBXFileReference section */
 		1063DC8BBF918EB7DACE2E1F /* Pods-BLE-SwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLE-SwiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BLE-SwiftTests/Pods-BLE-SwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		29A9D2E2F02B2CC16DA69B09 /* Pods_BLE_SwiftUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLE_SwiftUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B06DDE9222393B80062E7CB /* ProtocolObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolObj.swift; sourceTree = "<group>"; };
+		2B06DDEB222397180062E7CB /* ProtocolObjCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolObjCell.swift; sourceTree = "<group>"; };
+		2B06DDEC222397180062E7CB /* ProtocolObjCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProtocolObjCell.xib; sourceTree = "<group>"; };
 		2B2E273B2172D13A00726FC7 /* BLEData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEData.swift; sourceTree = "<group>"; };
 		2B2E273D2172D9B400726FC7 /* BLEConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEConfig.swift; sourceTree = "<group>"; };
 		2B2E27402172E76400726FC7 /* BLEArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEArrayExtensions.swift; sourceTree = "<group>"; };
@@ -841,6 +847,9 @@
 			children = (
 				2B56A14121F6EBA50073E2A7 /* MenuSection.swift */,
 				2B56A14321F6EBAF0073E2A7 /* MenuRow.swift */,
+				2B06DDE9222393B80062E7CB /* ProtocolObj.swift */,
+				2B06DDEB222397180062E7CB /* ProtocolObjCell.swift */,
+				2B06DDEC222397180062E7CB /* ProtocolObjCell.xib */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1412,6 +1421,7 @@
 				2BA23FA321E4B5FF00EF1B77 /* FirmwareTypeVC.xib in Resources */,
 				2B62A58521E04DB70051DD38 /* ProtocolMenuDetailCell.xib in Resources */,
 				2B45B95B21EDE6C70058E137 /* DeviceTestVC.xib in Resources */,
+				2B06DDEE222397180062E7CB /* ProtocolObjCell.xib in Resources */,
 				2B7C9233221FE6DB005C905A /* ModifyNameVC.xib in Resources */,
 				2B9DD97021E7205E00C215E5 /* otaPrefix.json in Resources */,
 				2B4AB47C21F3035B00EF5327 /* ZdOtaConfigVC.xib in Resources */,
@@ -1613,6 +1623,7 @@
 				2B4874CF214F911300AC5841 /* BLEDevice.swift in Sources */,
 				2BEC5D6E217470C300E0902B /* BLEDataExtensions.swift in Sources */,
 				2B9DD97821E72C7600C215E5 /* SDOtaVC.swift in Sources */,
+				2B06DDED222397180062E7CB /* ProtocolObjCell.swift in Sources */,
 				2B5832E22175832200259593 /* StringExtensions.swift in Sources */,
 				2B4AB46921F174D200EF5327 /* ReturnFormatVC.swift in Sources */,
 				2B56A15421F6F0B50073E2A7 /* ToolManagerVC.swift in Sources */,
@@ -1636,6 +1647,7 @@
 				2B45B94E21EDABE90058E137 /* DeviceProduct.swift in Sources */,
 				2B4AB46121F01D0500EF5327 /* CmdTextField.swift in Sources */,
 				2B7C9232221FE6DB005C905A /* ModifyNameVC.swift in Sources */,
+				2B06DDEA222393B80062E7CB /* ProtocolObj.swift in Sources */,
 				2BE7704221E48CB900FD6374 /* StorageUtils.swift in Sources */,
 				2B56A14C21F6F0210073E2A7 /* FirmwareManagerVC.swift in Sources */,
 				2B5188F122141C08003E2EF5 /* OtaTlsrTask.swift in Sources */,

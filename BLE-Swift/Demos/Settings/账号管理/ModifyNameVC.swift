@@ -32,7 +32,7 @@ class ModifyNameVC: BaseViewController {
         let params = ["name": name]
         
         startLoading(nil)
-        NetworkManager.shared.post(API_USER_MODIFY_NAME, params: params) { (resp) in
+        NetworkManager.shared.post(API_USER_MODIFY_NAME, params: params, callback: { (resp) in
             self.stopLoading()
             if resp.code != 0 {
                 self.showError(resp.msg)
@@ -50,7 +50,7 @@ class ModifyNameVC: BaseViewController {
             self.navigationController?.popViewController(animated: true)
             self.showSuccess("修改成功")
             
-        }
+        })
         
     }
     

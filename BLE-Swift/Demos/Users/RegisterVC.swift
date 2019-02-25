@@ -51,7 +51,7 @@ class RegisterVC: BaseViewController {
         let params = ["email": email, "password": password, "name": name]
         
         startLoading(nil)
-        NetworkManager.shared.post(API_USER_REGISTER, params: params) { (resp) in
+        NetworkManager.shared.post(API_USER_REGISTER, params: params, callback: { (resp) in
             self.stopLoading()
             if resp.code != 0 {
                 self.showError(resp.msg)
@@ -59,7 +59,7 @@ class RegisterVC: BaseViewController {
             }
             
             self.showSuccess("注册成功")
-        }
+        })
         
     }
     

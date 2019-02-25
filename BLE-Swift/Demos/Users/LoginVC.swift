@@ -46,7 +46,7 @@ class LoginVC: BaseViewController {
         let params = ["email": email, "password": password]
         
         startLoading(nil)
-        NetworkManager.shared.post(API_USER_LOGIN, params: params) { (resp) in
+        NetworkManager.shared.post(API_USER_LOGIN, params: params, callback: { (resp) in
             self.stopLoading()
             if resp.code != 0 {
                 self.showError(resp.msg)
@@ -67,7 +67,7 @@ class LoginVC: BaseViewController {
             user.save()
             self.navigationController?.popViewController(animated: true)
             self.showSuccess("登录成功")
-        }
+        })
         
     }
     

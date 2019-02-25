@@ -33,8 +33,8 @@ public enum BLETaskState {
     }
     
     func startTimer() {
+        self.stopTimer()
         DispatchQueue.main.async {
-            self.stopTimer()
             self.timer = Timer(timeInterval: self.timeout, target: self, selector: #selector(self.timeoutHandler), userInfo: nil, repeats: false)
             self.timer!.fireDate = Date(timeIntervalSinceNow: self.timeout)
             RunLoop.main.add(self.timer!, forMode: .common)
@@ -278,8 +278,8 @@ public class BLEScanTask: BLETask {
         }
         
         if uuid == self.data.recvFromUuid && device == self.device {
-            parser.standardParse(data: data, sendData: self.data.sendData, recvCount: self.data.recvDataCount)
             startTimer()
+            parser.standardParse(data: data, sendData: self.data.sendData, recvCount: self.data.recvDataCount)
         }
         
     }

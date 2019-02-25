@@ -39,7 +39,7 @@ class ModifyPwdVC: BaseViewController {
         let params = ["oldPassword": oldPwd, "newPassword": newPwd]
         
         startLoading(nil)
-        NetworkManager.shared.post(API_USER_MODIFY_PASSWORD, params: params) { (resp) in
+        NetworkManager.shared.post(API_USER_MODIFY_PASSWORD, params: params, callback:{ (resp) in
             self.stopLoading()
             if resp.code != 0 {
                 self.showError(resp.msg)
@@ -52,7 +52,7 @@ class ModifyPwdVC: BaseViewController {
             self.navigationController?.popViewController(animated: true)
             self.showSuccess("修改成功")
             
-        }
+        })
         
     }
     

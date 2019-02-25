@@ -48,11 +48,14 @@ class NetworkManager {
     }
     
     
-    func post(_ url: String, params: Dictionary<String, Any>?, callback:@escaping NetworkCallback) {
+    func post(_ url: String, params: Dictionary<String, Any>?, callback:@escaping NetworkCallback, addParamToURL: Bool = true) {
         
         let p = params ?? [:]
         
-        let pUrl = addParamsToUrl(url: url, params: p)
+        var pUrl = url
+        if addParamToURL {
+            pUrl = addParamsToUrl(url: url, params: p)
+        }
         
         LYNetworking.shared()?.setHTTPHeader(User.current.jwt, forKey: "jwt")
         

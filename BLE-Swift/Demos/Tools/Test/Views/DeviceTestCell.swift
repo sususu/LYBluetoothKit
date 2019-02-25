@@ -22,7 +22,7 @@ class DeviceTestCell: UITableViewCell {
     
     var proto: Protocol!
     
-    var delegate: DeviceTestCellDelegate?
+    weak var delegate: DeviceTestCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()

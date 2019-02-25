@@ -27,7 +27,7 @@ class CmdInputView: UIView, UICollectionViewDataSource, UICollectionViewDelegate
     var numCount = 0
     var units: [CmdUnit] = []
     
-    var delegate: CmdInputViewDelegate?
+    weak var delegate: CmdInputViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

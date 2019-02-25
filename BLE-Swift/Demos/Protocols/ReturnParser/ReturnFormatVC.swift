@@ -16,7 +16,7 @@ protocol ReturnFormatVCDelegate: NSObjectProtocol {
 class ReturnFormatVC: BaseViewController {
 
     var returnFormat: ReturnFormat!
-    var delegate: ReturnFormatVCDelegate?
+    weak var delegate: ReturnFormatVCDelegate?
     
     var lineInputs = [SplitLineView]()
     var tlvInputs = [TlvLineView]()
