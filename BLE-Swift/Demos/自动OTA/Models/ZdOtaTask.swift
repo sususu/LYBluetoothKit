@@ -16,17 +16,22 @@ enum ZdOtaTaskState: Int {
     case fail
 }
 
+let kZdOtaTaskReady = Notification.Name("kZdOtaTaskReady")
 // error: BLEError, task: ZdOtaTask
 let kZdOtaTaskFailed = Notification.Name("kZdOtaTaskFailed")
 let kZdOtaTaskSuccess = Notification.Name("kZdOtaTaskSuccess")
 // progress: Float, task: ZdOtaTask
 let kZdOtaTaskProgressUpdate = Notification.Name("kZdOtaTaskProgressUpdate")
 
+let kZdOtaTaskMaxTryCount = 3
+
 class ZdOtaTask: Equatable {
     
     var state: ZdOtaTaskState = .plain
     var error: BLEError?
     var progress: Float = 0
+    
+    var tryCount: Int = 0
     
     var name: String
     
@@ -82,7 +87,7 @@ class ZdOtaTask: Equatable {
         
         weak var weakSelf = self
         otaTask = OtaManager.shared.startOta(device: device, otaBleName: otaBleName, otaDatas: otaDatas, readyCallback: {
-            
+            NotificationCenter.default.post(name: kZdOtaTaskReady, object: nil, userInfo: nil)
         }, progressCallback: { (progress) in
             
             weakSelf?.progressCallback?(progress)

@@ -34,7 +34,7 @@ class PrefixSelectVC: BaseViewController, UITableViewDataSource, UITableViewDele
         tableView.dataSource = self
         tableView.register(UINib(nibName: "PrefixCell", bundle: nil), forCellReuseIdentifier: "cellId")
         
-        title = TR("OTA prefix")
+        title = TR("OTA蓝牙前缀")
         
         setNavRightButton(text: TR("EDIT"), sel: #selector(editBtnClick))
     }

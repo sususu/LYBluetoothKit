@@ -56,8 +56,8 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最小信号强度：-100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IF1-fp-ZMW">
-                    <rect key="frame" x="20" y="176" width="130.5" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最小信号强度：-70" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IF1-fp-ZMW">
+                    <rect key="frame" x="20" y="176" width="123" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="gz1-Tp-Nep"/>
                     </constraints>
@@ -65,7 +65,7 @@
                     <color key="textColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="hhE-hi-VWQ">
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="70" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="hhE-hi-VWQ">
                     <rect key="frame" x="18" y="202" width="339" height="31"/>
                     <connections>
                         <action selector="signalChanged:" destination="-1" eventType="valueChanged" id="Pw8-lp-uV1"/>
@@ -146,7 +146,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最多同时升级：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PiP-Sk-cg3">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="最多同时升级：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PiP-Sk-cg3">
                     <rect key="frame" x="20" y="343" width="121.5" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="H3M-RE-gqq"/>
@@ -155,7 +155,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3台" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RaN-bp-enJ">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="2台" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RaN-bp-enJ">
                     <rect key="frame" x="146.5" y="343" width="28" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="O7P-rL-IeI"/>
@@ -164,7 +164,16 @@
                     <color key="textColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="1" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="sOj-H1-WNb">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="由于iPhone蓝牙芯片限制，最多选择2台" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jvm-OJ-Jwn">
+                    <rect key="frame" x="182" y="343" width="183" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="s4m-vi-IKz"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <color key="textColor" red="0.84705882349999995" green="0.1176470588" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minValue="1" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="sOj-H1-WNb">
                     <rect key="frame" x="18" y="374" width="339" height="31"/>
                     <connections>
                         <action selector="upgradeCountChanged:" destination="-1" eventType="valueChanged" id="kh9-Z2-ZcL"/>
@@ -193,6 +202,7 @@
             <constraints>
                 <constraint firstItem="sOj-H1-WNb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="11J-xh-oUa"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="KGy-4P-cv5" secondAttribute="trailing" constant="20" id="1yf-fw-rma"/>
+                <constraint firstItem="Jvm-OJ-Jwn" firstAttribute="top" secondItem="RaN-bp-enJ" secondAttribute="top" id="2Bi-oX-LLi"/>
                 <constraint firstItem="hhE-hi-VWQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="4pI-GJ-6bq"/>
                 <constraint firstItem="GjL-th-KGx" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="5El-wE-ynB"/>
                 <constraint firstItem="qNf-ng-gma" firstAttribute="leading" secondItem="ZZ1-St-SxK" secondAttribute="trailing" constant="15" id="65r-4G-Bed"/>
@@ -201,6 +211,7 @@
                 <constraint firstItem="IF1-fp-ZMW" firstAttribute="top" secondItem="GjL-th-KGx" secondAttribute="bottom" constant="5" id="Cwi-j2-T5c"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hhE-hi-VWQ" secondAttribute="trailing" constant="20" id="Eev-YI-S1k"/>
                 <constraint firstItem="y1n-1K-eTQ" firstAttribute="leading" secondItem="9qL-23-5zd" secondAttribute="trailing" constant="10" id="Gw4-qh-2jB"/>
+                <constraint firstItem="Jvm-OJ-Jwn" firstAttribute="leading" secondItem="RaN-bp-enJ" secondAttribute="trailing" constant="5" id="H9G-OQ-WCJ"/>
                 <constraint firstItem="syd-a4-eeH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="LJc-mn-2bY"/>
                 <constraint firstItem="RaN-bp-enJ" firstAttribute="leading" secondItem="PiP-Sk-cg3" secondAttribute="trailing" constant="5" id="RYR-4r-ZFH"/>
                 <constraint firstItem="GjL-th-KGx" firstAttribute="top" secondItem="KGy-4P-cv5" secondAttribute="bottom" constant="20" id="VCf-dM-QT5"/>
@@ -218,6 +229,7 @@
                 <constraint firstItem="RaN-bp-enJ" firstAttribute="top" secondItem="9qL-23-5zd" secondAttribute="bottom" constant="20" id="lSZ-2A-2Io"/>
                 <constraint firstItem="y1n-1K-eTQ" firstAttribute="top" secondItem="xzl-Ig-ZeN" secondAttribute="bottom" constant="10" id="lZ0-xQ-TzI"/>
                 <constraint firstItem="9qL-23-5zd" firstAttribute="leading" secondItem="IF3-ds-ahi" secondAttribute="trailing" constant="10" id="oPJ-sz-0Is"/>
+                <constraint firstItem="Jvm-OJ-Jwn" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="15" id="ov9-vK-ULW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="syd-a4-eeH" secondAttribute="trailing" constant="20" id="qGT-IN-0Pl"/>
                 <constraint firstItem="IF1-fp-ZMW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="qUG-UO-a3a"/>
                 <constraint firstItem="xzl-Ig-ZeN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="tEi-Ge-6jS"/>

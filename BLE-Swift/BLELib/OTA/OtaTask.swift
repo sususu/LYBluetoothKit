@@ -22,7 +22,7 @@ public enum OtaTaskState: Int, Codable {
     case finish
 }
 
-public class OtaTask: Equatable {
+public class OtaTask: NSObject, BLEDeviceDelegate {
     
     var device: BLEDevice
     var otaBleName: String
@@ -64,7 +64,10 @@ public class OtaTask: Equatable {
         self.progressCallback = progressCallback
         self.finishCallback = finishCallback
         
-        NotificationCenter.default.addObserver(self, selector: #selector(deviceDataUpdate(notification:)), name: BLEInnerNotification.deviceDataUpdate, object: nil)
+        super.init()
+        self.device.delegate = self
+        
+//        NotificationCenter.default.addObserver(self, selector: #selector(deviceDataUpdate(notification:)), name: BLEInnerNotification.deviceDataUpdate, object: nil)
     }
     
     func start() {
@@ -133,15 +136,15 @@ public class OtaTask: Equatable {
     }
     
     private func connectOtaDevice() {
-        weak var weakSelf = self
         print("ota 设备名称：\(otaBleName)")
         BLECenter.shared.connect(deviceName: otaBleName, callback: { (bd, err) in
             if err != nil {
                 self.otaFailed(error: err!)
                 return
             }
-            weakSelf?.device = bd!
-            weakSelf?.startOta()
+            self.device = bd!
+            self.device.delegate = self
+            self.startOta()
         })
     }
     
@@ -292,7 +295,9 @@ public class OtaTask: Equatable {
             return
         }
         _ = device.write(data, characteristicUUID: UUID.otaWriteC)
-//        print("写数据：\(b)")
+        if self.device.name.hasSuffix("0002") {
+            print("写数据-\(self.device.name)：\(data.hexEncodedString())")
+        }
     }
     
     private func writeDataToNotify(_ data: Data) {
@@ -332,20 +337,33 @@ public class OtaTask: Equatable {
     }
     
     // MARK: - 接收数据
-    @objc func deviceDataUpdate(notification: Notification?) {
-//        print("deviceUpdate: \(String(describing: notification?.userInfo))")
-        guard let de = notification?.userInfo?[BLEKey.device] as? BLEDevice, de == self.device else {
+    func deviceDidUpdateData(data: Data, deviceName: String, uuid: String) {
+        if deviceName != self.device.name || uuid != UUID.otaNotifyC || data.count < 2 {
             return
         }
-        
-        guard let uuid = notification?.userInfo?[BLEKey.uuid] as? String, uuid == UUID.otaNotifyC else {
-            return
+        if self.device.name.hasSuffix("0002") {
+            print("接收数据-\(deviceName)：\(data.hexEncodedString())")
         }
-        
-        guard let data = notification?.userInfo?[BLEKey.data] as? Data, data.count >= 2 else {
-            return
-        }
-        
+        otaDeviceDataComes(data: data)
+    }
+    
+//    @objc func deviceDataUpdate(notification: Notification?) {
+////        print("deviceUpdate: \(String(describing: notification?.userInfo))")
+//        guard let de = notification?.userInfo?[BLEKey.device] as? BLEDevice, de == self.device else {
+//            return
+//        }
+//
+//        guard let uuid = notification?.userInfo?[BLEKey.uuid] as? String, uuid == UUID.otaNotifyC else {
+//            return
+//        }
+//
+//        guard let data = notification?.userInfo?[BLEKey.data] as? Data, data.count >= 2 else {
+//            return
+//        }
+//        otaDeviceDataComes(data: data)
+//    }
+    
+    private func otaDeviceDataComes(data: Data) {
         // 命令
         let cmd = data.bytes[0]
         // 成功与否：1成功、0失败
@@ -358,10 +376,10 @@ public class OtaTask: Equatable {
             switch cmd {
             case 1:
                 // （发送ota长度成功之后回调这个）进入ota成功，开始发送ota设置信息
-//                print("设备回传1，开始发送ota配置数据")
+                //                print("设备回传1，开始发送ota配置数据")
                 sendOtaSettingData()
             case 2:
-//                print("设备回传2，开始发送包数据")
+                //                print("设备回传2，开始发送包数据")
                 sendPackages()
             case 3:
                 /*
@@ -374,22 +392,22 @@ public class OtaTask: Equatable {
                  */
                 let type = data.bytes[2]
                 if type == 4 {
-//                    print("设备回传3-4，说明一包传输完成了，开始发送crc")
+                    //                    print("设备回传3-4，说明一包传输完成了，开始发送crc")
                     sendCheckCrc()
                 } else if type == 2 {
                     // 移除一个数据分区
-//                    print("移除一个分区，开始下发下一个包")
+                    //                    print("移除一个分区，开始下发下一个包")
                     otaDatas[0].sections.remove(at: 0)
                     // 继续发送下一个数据分区
                     sendPackages()
                 } else {
-//                    print("开始下发下一个回传包")
+                    //                    print("开始下发下一个回传包")
                     otaDatas[0].sections[0].currentPackageIndex += kPackageCountCallback
                     sendPackages()
                 }
             case 4:
                 // crc 校验成功
-//                print("crc校验成功")
+                //                print("crc校验成功")
                 if otaDatas.count > 0 {
                     otaDatas.remove(at: 0)
                 }
@@ -405,12 +423,18 @@ public class OtaTask: Equatable {
                 print("ota callback unknown cmd")
             }
         }
-        
     }
     
     
     public static func == (lhs: OtaTask, rhs: OtaTask) -> Bool {
         return lhs.device.name == rhs.device.name
+    }
+    
+    public override func isEqual(_ object: Any?) -> Bool {
+        guard let other = object as? OtaTask else {
+            return false
+        }
+        return self.device.name == other.device.name
     }
     
 }

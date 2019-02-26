@@ -11,6 +11,8 @@ target 'BLE-Swift' do
   pod 'SSZipArchive'
   pod 'LYNetwork', :git => 'https://gitee.com/leyuankeji/LYNetwork.git'
   pod 'Alamofire'
+#  pod 'MLeaksFinder'
+  pod 'MJRefresh'
 #  pod 'SlideMenuControllerSwift'
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!

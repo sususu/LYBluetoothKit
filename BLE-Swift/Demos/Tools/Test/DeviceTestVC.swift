@@ -115,6 +115,11 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
         printLog("已断开全部连接设备")
     }
     
+    
+    @IBAction func zeceConfig(_ sender: Any) {
+        
+    }
+    
     // MARK: - tableView
     func numberOfSections(in tableView: UITableView) -> Int {
         return product.testGroups.count
@@ -190,7 +195,7 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func hideShowBtnClick(_ sender: Any) {
         if hideShowBtn.isSelected {
-            logViewHeight.constant = 240
+            logViewHeight.constant = 220
 //            exportBtn.isHidden = false
             textViewRight.constant = 5
             textViewTop.constant = 5

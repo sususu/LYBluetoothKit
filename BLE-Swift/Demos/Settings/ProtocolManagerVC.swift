@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MJRefresh
 
 class ProtocolManagerVC: BaseViewController, UITableViewDataSource, UITableViewDelegate, ProtocolObjCellDelegate {
 
@@ -24,7 +25,14 @@ class ProtocolManagerVC: BaseViewController, UITableViewDataSource, UITableViewD
         
         setNavRightButton(text: "上传", sel: #selector(uploadAction))
         
-        loadProtocolList()
+        let header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(loadProtocolList))
+        header?.activityIndicatorViewStyle = .gray
+        header?.lastUpdatedTimeLabel.isHidden = true
+        header?.stateLabel.isHidden = true
+        self.tableView.mj_header = header
+        
+//        loadProtocolList()
+        self.tableView.mj_header.beginRefreshing()
     }
     
     @objc func uploadAction() {
@@ -73,10 +81,13 @@ class ProtocolManagerVC: BaseViewController, UITableViewDataSource, UITableViewD
         }, addParamToURL: false)
     }
     
-    func loadProtocolList() {
-        startLoading(nil)
+    @objc func loadProtocolList() {
+//        if !self.tableView.mj_header.isRefreshing {
+//            self.tableView.mj_header.beginRefreshing()
+//        }
         NetworkManager.shared.get(API_PROTOCOL_LIST, params: nil) { (resp) in
             self.stopLoading()
+            self.tableView.mj_header.endRefreshing()
             if resp.code != 0 {
                 self.showError(resp.msg)
                 return
@@ -142,13 +153,32 @@ class ProtocolManagerVC: BaseViewController, UITableViewDataSource, UITableViewD
     
     func loadDetailAndMerget(po: ProtocolObj) {
         
-        /*
-         let data = (try? Data(contentsOf: url)) ?? Data()
-         _ = StorageUtils.save(data, forKey: ProtocolService.kMenusCacheKey)
-         ProtocolService.shared.refreshMenusFromDisk()
- */
-        
-        
+        startLoading(nil)
+        NetworkManager.shared.get(API_PROTOCOL_UPLOAD + "/\(po.id)", params: nil) { (resp) in
+            self.stopLoading()
+            if resp.code != 0 {
+                self.showError(resp.msg)
+                return
+            }
+            
+            guard let dict = resp.data as? Dictionary<String, Any> else {
+                self.showError("无法解析数据")
+                return
+            }
+            
+            guard let proto = (dict["protocol"] as? String), proto.count > 0 else {
+                self.showError("协议数据为空，无法合并")
+                return
+            }
+            
+            guard let data = proto.data(using: String.Encoding.utf8) else {
+                self.showError("协议数据为空，无法合并!")
+                return
+            }
+            _ = StorageUtils.save(data, forKey: ProtocolService.kMenusCacheKey)
+            ProtocolService.shared.refreshMenusFromDisk()
+            self.showSuccess("合并成功")
+        }
     }
     
 }

@@ -225,21 +225,12 @@ class OtaNordicTask: OtaTask {
     }
     
     // MARK: - 接收数据
-    @objc override func deviceDataUpdate(notification: Notification?) {
-        //nordicOtaBat
-        guard let de = notification?.userInfo?[BLEKey.device] as? BLEDevice, de == self.device else {
-            return
-        }
-        
-        guard let uuid = notification?.userInfo?[BLEKey.uuid] as? String, uuid == UUID.nordicOtaBat else {
-            return
-        }
-        
-        guard let data = notification?.userInfo?[BLEKey.data] as? Data, data.count >= 2 else {
-            return
-        }
-        
+    override func deviceDidUpdateData(data: Data, deviceName: String, uuid: String) {
         print("设备回传：\(data.hexEncodedString())")
+        
+        if deviceName != self.device.name || uuid != UUID.nordicOtaBat || data.count < 1 {
+            return
+        }
         
         let bytes = data.bytes
         

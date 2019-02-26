@@ -19,6 +19,11 @@ public enum BLEDeviceState {
     case ready
 }
 
+
+protocol BLEDeviceDelegate: NSObjectProtocol {
+    func deviceDidUpdateData(data: Data, deviceName: String, uuid: String)
+}
+
 public class BLEDevice: NSObject, CBPeripheralDelegate {
 
     /// peripheral's state
@@ -39,6 +44,8 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
     var peripheral:CBPeripheral
     
     var getReadyCallback:GetReadyBlock?
+    
+    weak var delegate: BLEDeviceDelegate?
     
     // MARK: - 初始化
     deinit {
@@ -74,7 +81,7 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
     
     public func write(_ data:Data, characteristicUUID:String) -> Bool {
         
-        print("发送数据：\(data.hexEncodedString())")
+//        print("发送数据（\(characteristicUUID)）：\(data.hexEncodedString())")
         
         if peripheral.state != .connected {
             return false
@@ -169,9 +176,15 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         
-        print("\(self.name)(\(characteristic.uuid.uuidString)) recv data:\(String(describing: characteristic.value?.hexEncodedString()))")
+        guard let data = characteristic.value else {
+            return
+        }
         
-        NotificationCenter.default.post(name: BLEInnerNotification.deviceDataUpdate, object: nil, userInfo: [BLEKey.data : characteristic.value ?? Data(), BLEKey.uuid : characteristic.uuid.uuidString, BLEKey.device: self])
+        print("\(self.name)(\(characteristic.uuid.uuidString)) recv data:\(data.hexEncodedString()))")
+        
+        delegate?.deviceDidUpdateData(data: data, deviceName: self.name, uuid: characteristic.uuid.uuidString)
+        
+        NotificationCenter.default.post(name: BLEInnerNotification.deviceDataUpdate, object: nil, userInfo: [BLEKey.data : data, BLEKey.uuid : characteristic.uuid.uuidString, BLEKey.device: self])
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {

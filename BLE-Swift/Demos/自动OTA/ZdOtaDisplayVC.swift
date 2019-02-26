@@ -20,8 +20,12 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
     
     var successList = [ZdOtaTask]()
     var failedList = [ZdOtaTask]()
+    var unusedList = [ZdOtaTask]()
     
     var isStop: Bool = false
+    var isConnecting: Bool = false
+    var connectingName: String = ""
+    var isScanning: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +42,9 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         tableView.allowsSelection = false
 
         setNavLeftButton(text: "回到主页", sel: #selector(gotoHome))
-        setNavRightButton(text: "查看配置", sel: #selector(gotoConfig))
+        setNavRightButton(text: "查看结果", sel: #selector(gotoConfig))
         
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(otaTaskReady(notification:)), name: kZdOtaTaskReady, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(otaTaskFailed(notification:)), name: kZdOtaTaskFailed, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(otaTaskSuccess(notification:)), name: kZdOtaTaskSuccess, object: nil)
         
@@ -67,50 +71,63 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         }
         
         printLog("开始扫描设备")
+        self.isScanning = true
         weak var weakSelf = self
         BLECenter.shared.scan(callback: { (devices, err) in
             weakSelf?.scanDevices = devices
         }, stop: {
+            weakSelf?.isScanning = false
             weakSelf?.startConnect()
-        }, after: 8)
+        }, after: 5)
     }
 
     // 开始连接设备
     func startConnect() {
         
+        // 如果已经停止了
         if isStop {
             return
         }
+        
+        // 如果正在连接
+        if isConnecting {
+            return
+        }
+        
         
         let count = getOtaingCount()
         if count >= config.upgradeCountMax {
             printLog("当前正在进行ota的个数(\(count))，已经最大了")
             return
         }
-        else
-        {
-            printLog("30秒后，重新搜索")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 30) {
-                self.startScan()
-            }
-        }
+//        else
+//        {
+//            printLog("15秒后，重新搜索")
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
+//                self.startScan()
+//            }
+//        }
         
         guard let devices = scanDevices, devices.count > 0 else {
-            printLog("扫描到设备个数为0")
+            printLog("扫描到设备个数为0，5秒之后重新扫描")
+            reScan(afterSecond: 5)
             return
         }
         printLog("开始挑选满足条件的，并连接设备")
+        // 本次扫描是否有合适的设备
+        var hasFitOne = false
         for d in devices {
-            
-            if getOtaingCount() >= config.upgradeCountMax {
-                return
-            }
             
             if !isDeviceAvaiable(name: d.name) {
                 continue
             }
             
             if d.name.hasPrefix(config.deviceNamePrefix), d.rssi >= config.signalMin {
+                hasFitOne = true
+                // 只有ota准备好之后，这个值才会变成false
+                // 在通知 otaTaskReady 处理方法里面
+                self.isConnecting = true
+                self.connectingName = d.name
                 weak var weakSelf = self
                 BLECenter.shared.connect(device: d, callback: { (device, err) in
                     
@@ -119,20 +136,38 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
                         let msg = weakSelf?.errorMsgFromBleError(err)
                         weakSelf?.printLog("连接(\(d.name))出错：\(msg ?? "")")
                         weakSelf?.removeOtaTask(byName: d.name)
+                        weakSelf?.reScan(afterSecond: 5)
                         return
                     }
                     // 如果成功，那就进行到下一步
                     weakSelf?.deviceConnected(device: device!)
                     
                 }, timeout: 10)
-                sleep(1)
+                // 一次只连接一个
+                break
             }
         }
+        
+        // 如果没有合适的，那5秒之后再重新扫描
+        if !hasFitOne {
+            printLog("扫描到合适的设备个数为0，5秒之后重新扫描")
+            reScan(afterSecond: 5)
+        }
+        
+        
     }
+    
+    func reScan(afterSecond second: TimeInterval) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + second) {
+            self.startScan()
+        }
+    }
+    
     
     func deviceConnected(device: BLEDevice) {
         
         if isStop {
+            isConnecting = false
             return
         }
         
@@ -169,7 +204,7 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
             }
         }
         
-        for task in failedList {
+        for task in unusedList {
             if task.name == name {
                 return false
             }
@@ -207,7 +242,7 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
     
     @IBAction func cktjBtnClick(_ sender: Any) {
         let vc = ZdOtaResultVC()
-        vc.failList = failedList
+        vc.failList = unusedList
         vc.successList = successList
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -226,10 +261,19 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
     }
     
     @objc func gotoConfig() {
-        
+        let vc = ZdOtaResultVC()
+        vc.failList = unusedList
+        vc.successList = successList
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     // MARK: - 通知
+    @objc func otaTaskReady(notification: Notification) {
+        printLog("设备\(connectingName)准备ota成功，2秒之后，重新扫描连接其他设备")
+        self.isConnecting = false
+        reScan(afterSecond: 2)
+    }
+    
     @objc func otaTaskFailed(notification: Notification) {
         guard let dict = notification.userInfo as? Dictionary<String, Any> else {
             return
@@ -237,10 +281,33 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         guard let task = dict["task"] as? ZdOtaTask else {
             return
         }
-        failedList.append(task)
+        // 如果是准备失败的，那isConnecting也会复位成 false
+        if task.name == connectingName && isConnecting {
+            printLog("准备ota失败，1秒之后重新扫描")
+            reScan(afterSecond: 2)
+            isConnecting = false
+            return
+        }
+        
+        if failedList.contains(task)
+        {
+            task.tryCount += 1
+            if task.tryCount >= kZdOtaTaskMaxTryCount {
+                unusedList.append(task)
+                if checkCountAndAlert() {
+                    return
+                }
+            }
+        }
+        else
+        {
+            task.tryCount = 1
+            failedList.append(task)
+        }
         removeOtaTask(byName: task.name)
         tableView.reloadData()
-        checkCountAndAlert()
+        printLog("2秒后重新扫描")
+        reScan(afterSecond: 2)
     }
     
     @objc func otaTaskSuccess(notification: Notification) {
@@ -252,12 +319,15 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         }
         successList.append(task)
         removeOtaTask(byName: task.name)
-        checkCountAndAlert()
+        if !checkCountAndAlert() {
+            printLog("设备：\(task.name) OTA成功，2秒后搜索连接ota下一个设备")
+            reScan(afterSecond: 2)
+        }
         tableView.reloadData()
     }
     
-    func checkCountAndAlert() {
-        if config.otaCount > 0, successList.count + failedList.count >= config.otaCount
+    func checkCountAndAlert() -> Bool {
+        if config.otaCount > 0, successList.count + unusedList.count >= config.otaCount
         {
             // 增加停止ota代码
             stopBtnClick(nil)
@@ -274,7 +344,9 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
             }
             alert.addAction(ok)
             navigationController?.present(alert, animated: true, completion: nil)
+            return true
         }
+        return false
     }
     
     
