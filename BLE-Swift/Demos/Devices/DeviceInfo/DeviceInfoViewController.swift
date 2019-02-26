@@ -222,10 +222,24 @@ class DeviceInfoViewController: BaseViewController, UITableViewDelegate, UITable
     private var keyboard = CmdKeyBoardView()
     private var textField: UITextField?
     func didClickSendBtn(cell: UITableViewCell) {
+        
+        let indexPath = tableView.indexPath(for: cell)!
+        let dInfo = deviceInfos[indexPath.section]
+        let cInfo = dInfo.subItems[indexPath.row]
+        
         keyboard.delegate = self
         let alert = UIAlertController(title: nil, message: "输入要发送的数据（16进制）", preferredStyle: .alert)
         let ok = UIAlertAction(title: TR("OK"), style: .default) { (action) in
-            
+            if self.device.state == .ready {
+                guard let sendStr = alert.textFields![0].text, sendStr.count > 0 else {
+                    self.showError("不能发送空的")
+                    return
+                }
+                self.printLog(log: "向 \(cInfo.uuid) 发送数据：\(sendStr)")
+                _ = self.device.write(sendStr.hexadecimal ?? Data(), characteristicUUID: cInfo.uuid)
+            } else {
+                self.printLog(log: "设备断连了，无法发送数据")
+            }
         }
         let cancel = UIAlertAction(title: TR("CANCEL"), style: .cancel, handler: nil)
         alert.addTextField { (textField) in
@@ -283,5 +297,9 @@ class DeviceInfoViewController: BaseViewController, UITableViewDelegate, UITable
 //            parser.standardParse(data: data, sendData: self.data.sendData, recvCount: self.data.recvDataCount)
 //        }
         
+    }
+    
+    func printLog(log: String) {
+        DeviceResponseLogView.printLog(log: log)
     }
 }

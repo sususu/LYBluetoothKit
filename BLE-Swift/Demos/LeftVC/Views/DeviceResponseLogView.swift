@@ -19,6 +19,7 @@ class DeviceResponseLogView: UIView {
     var contentView: UIView!
     
     var dragView: UILabel!
+    var copyBtn: UIButton!
     var clearBtn: UIButton!
     var hiddenBtn: UIButton!
     var fullBtn: UIButton!
@@ -56,11 +57,19 @@ class DeviceResponseLogView: UIView {
         dragView = UILabel(frame: CGRect.zero)
         dragView.font = font(12)
         dragView.text = "拖我"
+        dragView.textAlignment = .center
         dragView.textColor = UIColor.white
+        dragView.backgroundColor = rgb(255, 40, 40)
         dragView.isUserInteractionEnabled = true
         let pan = UIPanGestureRecognizer(target: self, action: #selector(drag(gesture:)))
         dragView.addGestureRecognizer(pan)
         headerView.addSubview(dragView)
+        
+        copyBtn = UIButton(type: .custom)
+        copyBtn.setTitle("复制", for: .normal)
+        copyBtn.addTarget(self, action: #selector(copyBtnClick), for: .touchUpInside)
+        copyBtn.titleLabel?.font = font(12)
+        headerView.addSubview(copyBtn)
         
         clearBtn = UIButton(type: .custom)
         clearBtn.setTitle("清除", for: .normal)
@@ -99,13 +108,17 @@ class DeviceResponseLogView: UIView {
         let headerHeight: CGFloat = 40
         
         headerView.frame = CGRect(x: 0, y: 0, width: self.width, height: 40)
-        dragView.frame = CGRect(x: 5, y: 0, width: btnWidth, height: headerView.height)
+        dragView.frame = CGRect(x: 0, y: 5, width: btnWidth, height: headerView.height - 10)
+        dragView.layer.cornerRadius = 3
+        dragView.layer.masksToBounds = true
         
         fullBtn.frame = CGRect(x: headerView.width - btnWidth - 5, y: 0, width: btnWidth, height: headerHeight)
         
         hiddenBtn.frame = CGRect(x: fullBtn.left - btnWidth - 5, y: 0, width: btnWidth, height: headerHeight)
         
         clearBtn.frame = CGRect(x: hiddenBtn.left - btnWidth - 5, y: 0, width: btnWidth, height: headerHeight)
+        
+        copyBtn.frame = CGRect(x: clearBtn.left - btnWidth - 5, y: 0, width: btnWidth, height: headerHeight)
         
         contentView.frame = CGRect(x: 0, y: headerView.bottom, width: self.width, height: self.height - headerView.bottom)
         textView.frame = contentView.bounds
@@ -135,7 +148,12 @@ class DeviceResponseLogView: UIView {
     }
     
     @objc func drag(gesture: UIGestureRecognizer) {
-        
+        let point = gesture.location(in: UIApplication.shared.keyWindow)
+        self.top = point.y > kScreenHeight - 60 ? kScreenHeight - 60 : point.y
+    }
+    
+    @objc func copyBtnClick() {
+        UIPasteboard.general.string = logText
     }
     
     @objc func clearBtnClick() {

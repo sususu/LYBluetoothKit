@@ -17,7 +17,7 @@ public enum OtaDataType: Int, Codable {
     case agps
 }
 
-public struct OtaDataModel {
+public class OtaDataModel {
     var type: OtaDataType
     var data: Data
     
@@ -31,6 +31,7 @@ public struct OtaDataModel {
     var typeData: Data!
     
     // TLSR ota数据
+    var tlsrOtaDataIndex = 0
     var tlsrOtaDataPackages: [Data]!
     
     init(type: OtaDataType, data: Data) {
@@ -38,7 +39,7 @@ public struct OtaDataModel {
         self.data = data
     }
     
-    mutating func getApolloDataReady() -> Bool {
+    func getApolloDataReady() -> Bool {
         
         guard let otaData = getOtaData(for: data) else {
             return false
@@ -61,7 +62,7 @@ public struct OtaDataModel {
     }
     
     
-    mutating func getNordicDataReady() -> Bool {
+    func getNordicDataReady() -> Bool {
         
         if type == .platform{
             self.otaData = data
@@ -92,9 +93,67 @@ public struct OtaDataModel {
         return true
     }
     
-//    mutating func getTlsrDataReady() -> Bool {
-//        
-//    }
+    func getTlsrDataReady() -> Bool {
+        
+        tlsrOtaDataIndex = 0
+        
+        if data.count == 0 {
+            return false
+        }
+        
+        let offset = 16
+        
+        var count = data.count / offset
+        if data.count % offset > 0 {
+            count += 1
+        }
+        
+        for i in 0 ..< count {
+            let start = i * offset
+            let end = (i + 1) * offset > data.count ? data.count : (i + 1) * offset
+            
+            let subData = data.subdata(in: start ..< end)
+            let subBytes = subData.bytes
+            
+            var pack_head = [UInt8](repeating: 0, count: 2)
+            pack_head[0] = UInt8(i & 0xff)
+            pack_head[1] = UInt8((i >> 8) & 0xff)
+            
+            var otaBuffer = [UInt8](repeating: 0, count: offset + 4)
+            var otaCmd = [UInt8](repeating: 0, count: offset + 2)
+            
+            otaBuffer[0] = pack_head[0]
+            otaBuffer[1] = pack_head[1]
+            
+            for j in 0 ..< offset {
+                if j < subData.count {
+                    otaBuffer[j + 2] = subBytes[j]
+                } else {
+                    otaBuffer[j + 2] = 0xff
+                }
+            }
+            
+            for j in 0 ..< offset + 2 {
+                otaCmd[j] = otaBuffer[j]
+            }
+            
+            let crc_t = getTlsrCrcData(for: otaCmd)
+//            var crc = [UInt8](repeating: 0, count: 2)
+//
+//            crc[0] = UInt8(crc_t & 0xff)
+//            crc[1] = UInt8((crc_t >> 8) & 0xff)
+            
+            otaBuffer[offset + 2] = UInt8(crc_t & 0xff)
+            otaBuffer[offset + 3] = UInt8((crc_t >> 8) & 0xff)
+            
+            let pack = Data(bytes: otaBuffer, count: offset + 4)
+            self.tlsrOtaDataPackages.append(pack)
+            
+        }
+        
+        return true
+        
+    }
     
     
     // apollo平台，ota 拆分数据是已 2048 为一块
@@ -233,6 +292,44 @@ public struct OtaDataModel {
         var tmpData = Data(bytes: [0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00])
         tmpData.append(crc)
         return tmpData
+    }
+    
+    /*
+    let crc16Poly = [0, 0xa001] //0x8005 <==> 0xa001
+    
+    func crc16(pD: UInt8, len: Int) -> UInt16 {
+        var crc: UInt16 = 0xffff
+        var i: Int
+        var j: Int
+        j = len
+        while j > 0 {
+            var ds: UInt8 = pD += 1
+            for i in 0..<8 {
+                crc = (crc >> 1) ^ crc16Poly[(UInt(crc) ^ UInt(ds)) & 1]
+                ds = ds >> 1
+            }
+            j -= 1
+        }
+        return crc
+    }
+ */
+    
+    func getTlsrCrcData(for bytes: [UInt8]) -> UInt16 {
+        let crc16Poly: [UInt16] = [0, 0xa001]
+        var crc: UInt16 = 0xffff
+        
+        var j = bytes.count
+        while j > 0 {
+            
+            var ds = bytes[j]
+            for _ in 0..<8 {
+                crc = (crc >> 1) ^ crc16Poly[Int((crc ^ UInt16(ds)) & 1)]
+                ds = ds >> 1
+            }
+            
+            j -= 1
+        }
+        return crc
     }
     
 }

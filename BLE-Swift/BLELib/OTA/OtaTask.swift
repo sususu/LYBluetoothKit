@@ -82,7 +82,7 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
         }
         
         var tmpArr = [OtaDataModel]()
-        for var dm in otaDatas
+        for dm in otaDatas
         {
             if !dm.getApolloDataReady() {
                 let err = BLEError.taskError(reason: .paramsError)

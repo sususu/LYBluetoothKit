@@ -53,22 +53,32 @@ class LeftViewController: BaseViewController, UITableViewDataSource, UITableView
     }
     
     // MARK: - 业务逻辑
-    func scanDevices() {
+    func scanDevices(needSort: Bool) {
         // 说明已经正在扫描
         if (refreshBtn.isLoading) {
             return
         }
-        weak var weakSelf = self;
+
         BLECenter.shared.scan(callback: { (devices, error) in
-            weakSelf?.refreshBtn.startLoading()
+            self.refreshBtn.startLoading()
             if error != nil {
-                weakSelf?.handleBleError(error: error)
+                self.handleBleError(error: error)
                 return
             }
-            weakSelf?.devices = devices ?? Array<BLEDevice>();
-            weakSelf?.tableView.reloadData()
+            self.devices = devices ?? Array<BLEDevice>();
+            
+            if needSort {
+                // 按照信号量排序，不应该这里排序
+                self.devices.sort { (d1, d2) -> Bool in
+                    let d1Rssi = d1.rssi ?? 0
+                    let d2Rssi = d2.rssi ?? 0
+                    return d1Rssi > d2Rssi
+                }
+            }
+            
+            self.tableView.reloadData()
         }, stop: {
-            weakSelf?.refreshBtn.stopLoading()
+            self.refreshBtn.stopLoading()
         }, after: 10);
     }
     
@@ -91,11 +101,11 @@ class LeftViewController: BaseViewController, UITableViewDataSource, UITableView
     
     // MARK: - 事件处理
     @IBAction func disconnectBtnClick(_ sender: Any) {
-        
+        scanDevices(needSort: true)
     }
     
     @IBAction func refreshBtnClick(_ sender: Any) {
-        scanDevices()
+        scanDevices(needSort: false)
     }
     
     // MARK: - tableView

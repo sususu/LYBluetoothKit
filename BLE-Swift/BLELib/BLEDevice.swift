@@ -95,6 +95,20 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
         return true
     }
     
+    public func read(characteristicUUID:String) -> Bool {
+        if peripheral.state != .connected {
+            return false
+        }
+        
+        guard let characteristic = self.characteristics[characteristicUUID]  else {
+            return false
+        }
+        
+        self.peripheral.readValue(for: characteristic)
+        return true
+    }
+    
+    
     /// 分包发送，按照mtu（单次发送数据包大小）分多次发送到手表，mtu默认大小是20
     ///
     /// - Parameters:

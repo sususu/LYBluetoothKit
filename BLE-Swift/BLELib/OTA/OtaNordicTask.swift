@@ -25,7 +25,7 @@ class OtaNordicTask: OtaTask {
         }
         
         var tmpArr = [OtaDataModel]()
-        for var dm in otaDatas
+        for dm in otaDatas
         {
             if !dm.getNordicDataReady() {
                 let err = BLEError.taskError(reason: .paramsError)

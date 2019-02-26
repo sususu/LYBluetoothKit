@@ -57,6 +57,20 @@ public class OtaManager {
         return task
     }
     
+    public func startTlsrOta(device: BLEDevice, otaBleName: String, otaDatas: [OtaDataModel], readyCallback: EmptyBlock?, progressCallback: FloatCallback?, finishCallback: BoolCallback?) -> OtaTask? {
+        if device.isOTAing {
+            return nil
+        }
+        let task = OtaTlsrTask(device: device, otaBleName: otaBleName, otaDatas: otaDatas, readyCallback: readyCallback, progressCallback: progressCallback, finishCallback: finishCallback)
+        task.start()
+        taskList.append(task)
+        
+        NotificationCenter.default.post(name: kOtaManagerAddTaskNotification, object: nil, userInfo: [BLEKey.task: task])
+        
+        return task
+    }
+    
+    
     
     public func removeTask(_ task: OtaTask) {
         taskList.remove(task)

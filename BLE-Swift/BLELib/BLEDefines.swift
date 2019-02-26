@@ -77,6 +77,8 @@ public struct UUID {
     static let nordicOtaBin = "00001532-1212-EFDE-1523-785FEABCD123"
     static let nordicVersion = "00001534-1212-EFDE-1523-785FEABCD123"
     
+    static let tlsrOtaUuid = "00010203-0405-0607-0809-0A0B0C0D2B12"
+    
 }
 
 // MARK: - 常量定义
