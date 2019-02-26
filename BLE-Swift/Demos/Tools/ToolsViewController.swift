@@ -45,15 +45,15 @@ class ToolsViewController: BaseViewController, UITableViewDataSource, UITableVie
     
     
     @objc func addBtnClick() {
-        let alert = UIAlertController(title: nil, message: TR("Please input name"), preferredStyle: .alert)
-        let ok = UIAlertAction(title: TR("OK"), style: .default) { (action) in
+        let alert = UIAlertController(title: nil, message: TR("请输入名称和蓝牙"), preferredStyle: .alert)
+        let ok = UIAlertAction(title: TR("确定"), style: .default) { (action) in
             self.createProduct(name: alert.textFields![0].text ?? "", bleName: alert.textFields![1].text ?? "")
         }
-        let cancel = UIAlertAction(title: TR("NO"), style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: TR("取消"), style: .cancel, handler: nil)
         alert.addAction(ok)
         alert.addAction(cancel)
         alert.addTextField { (tf) in
-            tf.placeholder = TR("Product Name")
+            tf.placeholder = TR("产品名称")
             tf.becomeFirstResponder()
         }
         alert.addTextField { (tf) in
@@ -64,7 +64,7 @@ class ToolsViewController: BaseViewController, UITableViewDataSource, UITableVie
 
     func createProduct(name: String, bleName: String) {
         if name.count == 0 {
-            showError(TR("Please input name"))
+            showError(TR("请输入名称"))
             addBtnClick()
         } else {
             let ti = Date().timeIntervalSince1970
@@ -95,7 +95,74 @@ class ToolsViewController: BaseViewController, UITableViewDataSource, UITableVie
         return true
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    private var rowActions: [UITableViewRowAction] = []
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        if rowActions.count == 0 {
+            let row1 = UITableViewRowAction(style: .default, title: "复制") { (rowAction, ip) in
+                self.copyRow(atIndexPath: ip)
+            }
+            let row2 = UITableViewRowAction(style: .normal, title: "编辑") { (rowAction, ip) in
+                self.editRow(atIndexPath: ip)
+            }
+            let row3 = UITableViewRowAction(style: .destructive, title: "删除") { (rowAction, ip) in
+                self.deleteRow(atIndexPath: ip)
+            }
+            rowActions.append(row1)
+            rowActions.append(row2)
+            rowActions.append(row3)
+        }
+        return rowActions
+    }
+    // MARK: - 编辑菜单项
+    func editRow(atIndexPath indexPath: IndexPath) {
+        let pm = products[indexPath.row]
+        let alert = UIAlertController(title: nil, message: "编辑 - \(pm.name)", preferredStyle: .alert)
+        let ok = UIAlertAction(title: TR("确定"), style: .default) { (action) in
+            pm.name = alert.textFields![0].text ?? "Null"
+            pm.bleName = alert.textFields![1].text ?? "Null"
+            ToolsService.shared.saveProductsToDisk()
+            self.tableView.reloadData()
+            self.showSuccess("编辑成功")
+        }
+        let cancel = UIAlertAction(title: TR("取消"), style: .cancel, handler: nil)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        alert.addTextField { (tf) in
+            tf.placeholder = TR("产品名称")
+            tf.text = pm.name
+            tf.becomeFirstResponder()
+        }
+        alert.addTextField { (tf) in
+            tf.placeholder = TR("蓝牙名称")
+            tf.text = pm.bleName
+        }
+        navigationController?.present(alert, animated: true, completion: nil)
+    }
+    func copyRow(atIndexPath indexPath: IndexPath) {
+        let pm = (products[indexPath.row].copy() as! DeviceProduct)
+        
+        let alert = UIAlertController(title: nil, message: "起个新名字吧", preferredStyle: .alert)
+        let ok = UIAlertAction(title: TR("确定"), style: .default) { (action) in
+            pm.name = alert.textFields![0].text ?? "Null"
+            pm.bleName = alert.textFields![1].text ?? "Null"
+            self.products.insert(pm, at: 0)
+            ToolsService.shared.saveProduct(pm)
+            self.tableView.reloadData()
+            self.showSuccess("复制成功")
+        }
+        let cancel = UIAlertAction(title: TR("取消"), style: .cancel, handler: nil)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        alert.addTextField { (tf) in
+            tf.placeholder = TR("产品名称")
+            tf.becomeFirstResponder()
+        }
+        alert.addTextField { (tf) in
+            tf.placeholder = TR("蓝牙名称")
+        }
+        navigationController?.present(alert, animated: true, completion: nil)
+    }
+    func deleteRow(atIndexPath indexPath: IndexPath) {
         let alert = UIAlertController(title: nil, message: TR("Are you to delete ?"), preferredStyle: .alert)
         let ok = UIAlertAction(title: TR("OK"), style: .default) { (action) in
             ToolsService.shared.deleteProduct(self.products[indexPath.row])
@@ -105,6 +172,11 @@ class ToolsViewController: BaseViewController, UITableViewDataSource, UITableVie
         alert.addAction(ok)
         alert.addAction(cancel)
         navigationController?.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

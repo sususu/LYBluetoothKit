@@ -11,6 +11,12 @@ import UIKit
 class DeviceTestUnit: Codable {
     var name: String
     var createTime: TimeInterval
+    // 是不是自测
+    var isZiCe: Bool = false
+    // 测试结果
+    var ceshiResult: String = ""
+    // 测试时间
+    var ceshiTime: TimeInterval = 0
     var prol: [Protocol]!
     
     init(name: String, createTime: TimeInterval) {

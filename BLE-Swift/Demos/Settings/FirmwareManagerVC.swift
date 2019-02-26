@@ -50,6 +50,8 @@ class FirmwareManagerVC: BaseViewController, UITableViewDataSource, UITableViewD
             let fm = self.firmwares[indexPath.row]
             self.firmwares.remove(fm)
             OtaService.shared.deleteFirmware(fm)
+            let path = StorageUtils.getDocPath().stringByAppending(pathComponent: fm.path)
+            _ = StorageUtils.deleteFile(atPath: path)
             self.showSuccess(TR("Success"))
             self.tableView.reloadData()
         }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ToolManagerVC: UIViewController {
+class ToolManagerVC: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

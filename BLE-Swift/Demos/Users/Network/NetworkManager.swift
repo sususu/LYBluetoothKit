@@ -26,6 +26,8 @@ class NetworkManager {
         LYErrorCodeManager.shared()?.setMsg("无法连接服务器", forCode: -1009)
         //-1011
         LYErrorCodeManager.shared()?.setMsg("无法连接服务器", forCode: -1011)
+        //-1001
+        LYErrorCodeManager.shared()?.setMsg("无法连接服务器", forCode: -1001)
     }
     
     func get(_ url: String, params: Dictionary<String, Any>?, callback:@escaping NetworkCallback) {

@@ -52,7 +52,37 @@ class PrefixSelectVC: BaseViewController, UITableViewDataSource, UITableViewDele
     }
     
     @objc func editBtnClick() {
-        
+        if self.tableView.isEditing {
+            self.tableView.setEditing(false, animated: true)
+            setNavRightButton(text: TR("EDIT"), sel: #selector(editBtnClick))
+            OtaService.shared.prefixs = prefixs
+            OtaService.shared.savePrefixsToDisk()
+        } else {
+            self.tableView.setEditing(true, animated: true)
+            setNavRightButton(text: "完成", sel: #selector(editBtnClick))
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let tmp = prefixs[sourceIndexPath.row]
+        prefixs[sourceIndexPath.row] = prefixs[destinationIndexPath.row]
+        prefixs[destinationIndexPath.row] = tmp
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle != .delete {
+            return
+        }
+        prefixs.remove(at: indexPath.row)
+        tableView.beginUpdates()
+        tableView.deleteRow(at: indexPath, with: .automatic)
+        tableView.endUpdates()
+        OtaService.shared.prefixs = prefixs
+        OtaService.shared.savePrefixsToDisk()
     }
     
     // MARK: - tableView

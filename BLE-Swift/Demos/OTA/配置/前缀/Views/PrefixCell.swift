@@ -18,8 +18,8 @@ class PrefixCell: UITableViewCell {
     
     func updateUI(withPrefix prefix: OtaPrefix) {
         nameLbl.text = prefix.deviceName
-        bleLbl.text = TR("Bluetooth name: ") + prefix.bleName
-        prefixLbl.text = TR("OTA prefix: ") + prefix.prefix
+        bleLbl.text = TR("蓝牙名称: ") + prefix.bleName
+        prefixLbl.text = TR("OTA前缀: ") + prefix.prefix
     }
     
     override func awakeFromNib() {

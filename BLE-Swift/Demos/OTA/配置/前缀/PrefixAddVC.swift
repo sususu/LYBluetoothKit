@@ -29,7 +29,7 @@ class PrefixAddVC: BaseViewController {
         
         setNavRightButton(text: TR("SAVE"), sel: #selector(saveBtnClick))
         
-        
+        nameTF.becomeFirstResponder()
     }
 
     

@@ -8,15 +8,25 @@
 
 import UIKit
 
-class DeviceProduct: Codable {
+class DeviceProduct: NSObject, Codable, NSCopying {
+    
     var Id: String = ""
     var name: String
     var bleName: String = ""
     var createTime: TimeInterval
     var testGroups: [DeviceTestGroup] = []
+    //自测单元
+    var ziceUnits: [DeviceTestUnit] = []
     
     init(name: String, createTime: TimeInterval) {
         self.name = name
         self.createTime = createTime
+    }
+    
+    func copy(with zone: NSZone? = nil) -> Any {
+        let ndp = DeviceProduct(name: self.name, createTime: self.createTime)
+        ndp.bleName = self.bleName
+        ndp.testGroups = self.testGroups
+        return ndp
     }
 }
