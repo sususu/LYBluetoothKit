@@ -96,6 +96,7 @@ public class OtaDataModel {
     func getTlsrDataReady() -> Bool {
         
         tlsrOtaDataIndex = 0
+        tlsrOtaDataPackages = [Data]()
         
         if data.count == 0 {
             return false
@@ -321,7 +322,7 @@ public class OtaDataModel {
         var j = bytes.count
         while j > 0 {
             
-            var ds = bytes[j]
+            var ds = bytes[bytes.count - j]
             for _ in 0..<8 {
                 crc = (crc >> 1) ^ crc16Poly[Int((crc ^ UInt16(ds)) & 1)]
                 ds = ds >> 1

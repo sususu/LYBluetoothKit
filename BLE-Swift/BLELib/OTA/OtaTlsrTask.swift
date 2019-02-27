@@ -66,14 +66,30 @@ class OtaTlsrTask: OtaTask {
         for i in 0 ..< onceSendCount
         {
             if i == dataModel.tlsrOtaDataPackages.count - 1 {
+                isSingleOTAFinish = true
                 endOta()
+                // 进度回调
+                DispatchQueue.main.async {
+                    self.progressCallback?(1)
+                    NotificationCenter.default.post(name: kOtaTaskProgressUpdateNotification, object: nil, userInfo: [BLEKey.task: self])
+                }
                 return
             }
             
             let sd = dataModel.tlsrOtaDataPackages[dataModel.tlsrOtaDataIndex + i]
             writeData(data: sd)
+            
+            // 进度回调
+            let progress:Float = Float(dataModel.tlsrOtaDataIndex + i) / Float(dataModel.tlsrOtaDataPackages.count);
+            DispatchQueue.main.async {
+                self.progressCallback?(progress)
+                NotificationCenter.default.post(name: kOtaTaskProgressUpdateNotification, object: nil, userInfo: [BLEKey.task: self])
+            }
+            // 必须睡眠，否则ota失败，设备蓝牙速度慢
+            Thread.sleep(forTimeInterval: 0.002)
         }
         dataModel.tlsrOtaDataIndex += onceSendCount
+        print("index:\(dataModel.tlsrOtaDataIndex), count:\(dataModel.tlsrOtaDataPackages.count)")
         addTimer(timeout: 10, action: 2)
         readData()
     }
@@ -87,6 +103,7 @@ class OtaTlsrTask: OtaTask {
     
     
     func writeData(data: Data) {
+        print("发送数据：\(data.hexEncodedString())")
         _ = self.device.write(data, characteristicUUID: UUID.tlsrOtaUuid)
     }
     

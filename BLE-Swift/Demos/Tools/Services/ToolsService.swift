@@ -10,6 +10,8 @@ import UIKit
 
 let kDeviceProductListKey = "kDeviceProductListKey"
 
+let kDeviceProductListChangedNotification = NSNotification.Name(rawValue: "kDeviceProductListChangedNotification")
+
 class ToolsService {
     
     static let shared = ToolsService()
@@ -18,6 +20,11 @@ class ToolsService {
     
     private init() {
         products = readProductsFromDisk()
+    }
+    
+    func refreshToolsFromDisk() {
+        products = readProductsFromDisk()
+        NotificationCenter.default.post(name: kDeviceProductListChangedNotification, object: nil)
     }
     
     func saveProduct(_ product: DeviceProduct) {

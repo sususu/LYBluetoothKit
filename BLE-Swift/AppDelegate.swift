@@ -92,6 +92,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         
+        //DeviceProducts
+        if fileName.hasPrefix("DeviceProducts") {
+            let alert = UIAlertController(title: "非常重要", message: "是否要覆盖本地的工具配置信息？", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "确定", style: .default) { (letion) in
+                let data = (try? Data(contentsOf: url)) ?? Data()
+                _ = StorageUtils.save(data, forKey: kDeviceProductListKey)
+                ToolsService.shared.refreshToolsFromDisk()
+            }
+            let cancel = UIAlertAction(title: "取消", style: .cancel) { (action) in
+                _ = StorageUtils.deleteFile(atPath: url.absoluteString)
+            }
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+            return true
+        }
+        
         // 如果是工具导入
         if fileName.hasPrefix("DeviceProducts") {
             let alert = UIAlertController(title: "非常重要", message: "是否要覆盖本地的工具配置信息？", preferredStyle: .alert)

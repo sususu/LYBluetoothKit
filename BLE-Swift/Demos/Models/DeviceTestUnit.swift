@@ -17,7 +17,7 @@ class DeviceTestUnit: Codable {
     var ceshiResult: String = ""
     // 测试时间
     var ceshiTime: TimeInterval = 0
-    var prol: [Protocol]!
+    var prol: Protocol!
     
     init(name: String, createTime: TimeInterval) {
         self.name = name

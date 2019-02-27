@@ -224,7 +224,7 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
         }
         
         var otaBleName = config.prefix + config.deviceName.suffix(5)
-        if config.prefix.count == 0 || device.isApollo3 {
+        if config.prefix.count == 0 || device.isApollo3 || config.platform == .tlsr {
             otaBleName = device.name
         }
         
@@ -262,9 +262,9 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
         }
         
         if device.isApollo3 {
-            BLEConfig.shared.mtu = 128;
+            BLEConfig.shared.mtu = 128
         } else {
-            BLEConfig.shared.mtu = 20;
+            BLEConfig.shared.mtu = 20
         }
         
         weak var weakSelf = self
@@ -298,7 +298,7 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
                             // 先找到bin
                             if name.hasSuffix(".bin") {
                                 let data = try Data(contentsOf: URL(fileURLWithPath: tmpPath))
-                                var dm = OtaDataModel(type: fm.type, data: data)
+                                let dm = OtaDataModel(type: fm.type, data: data)
                                 // 再找dat
                                 for name in fileNames {
                                     tmpPath = unzipPath.stringByAppending(pathComponent: name)
@@ -335,7 +335,7 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
             return
         }
         
-        BLEConfig.shared.mtu = 20;
+        BLEConfig.shared.mtu = 20
     
         weak var weakSelf = self
         otaNameLbl.text = otaBleName
@@ -348,7 +348,35 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - 开始泰心OTA
     func startTlsrOTA(device: BLEDevice, otaBleName: String) {
+        var otaDatas = [OtaDataModel]()
+        for fm in config.firmwares {
+            
+            let path = StorageUtils.getDocPath().stringByAppending(pathComponent: fm.path)
+            
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path))
+                let dm = OtaDataModel(type: fm.type, data: data)
+                otaDatas.append(dm)
+            }
+            catch {}
+        }
         
+        if otaDatas.count == 0 {
+            showError(TR("OtaDatas parse failed"))
+            stopLoading()
+            startStopBtn.isSelected = false
+            return
+        }
+        
+        BLEConfig.shared.mtu = 20
+        
+        weak var weakSelf = self
+        otaNameLbl.text = otaBleName
+        startLoading(nil)
+        otaTask = OtaManager.shared.startTlsrOta(device: device, otaBleName: otaBleName, otaDatas: otaDatas, readyCallback: {
+            weakSelf?.stopLoading()
+        }, progressCallback: nil, finishCallback: nil)
+        otaTask?.config = config
     }
     
     @objc func backToHome() {

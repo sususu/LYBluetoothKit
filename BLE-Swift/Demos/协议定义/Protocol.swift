@@ -47,7 +47,7 @@ extension Protocol {
     var paramUnits: [CmdUnit]? {
         var units = [CmdUnit]()
         for unit in cmdUnits {
-            if unit.type == .variable && unit.param != nil {
+            if unit.type == .variable && unit.param != nil && unit.valueStr != "Len" {
                 units.append(unit)
             }
         }

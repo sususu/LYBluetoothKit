@@ -23,6 +23,8 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
         hideShowBtn.setTitle(TR("展开"), for: .selected)
         hideShowBtn.setTitle(TR("隐藏"), for: .normal)
         
+        bleNameLbl.text = product.bleName
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.allowsSelection = false
@@ -87,11 +89,67 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
     }
     
     // 屏蔽箱测试
+    private var isZiCe: Bool = false
     @IBAction func pbTestBtnClick(_ sender: Any) {
+        if product.pbxCsUnits.count == 0 {
+            printLog("测试用例是空的，请点击“自测配置”进行配置")
+            return
+        }
+        if isZiCe {
+            printLog("正在测试，请不要重复点击")
+            return
+        }
+        isZiCe = true
+        zice(testUnits: product.pbxCsUnits, index: 0)
     }
+    
+    func zice(testUnits:[DeviceTestUnit], index: Int) {
+        
+        if index == testUnits.count {
+            printLog("测试结束！！！！！！")
+            isZiCe = false
+            return
+        }
+        
+        let tu = testUnits[index]
+        
+        let runner = ProtocolRunner()
+        runner.run(tu.prol, boolCallback: { (bool) in
+            let str = bool ? "成功" : "失败"
+            self.printLog(str)
+            self.zice(testUnits: testUnits, index: index + 1)
+        }, stringCallback: { (str) in
+            let result = "返回：" + str
+            self.printLog(result)
+            self.zice(testUnits: testUnits, index: index + 1)
+        }, dictCallback: { (dict) in
+            let str = self.getJSONStringFromDictionary(dictionary: dict)
+            self.printLog("返回：\(str)")
+            self.zice(testUnits: testUnits, index: index + 1)
+        }, dictArrayCallback: { (dictArr) in
+            let str = self.getJSONStringFromArray(array: dictArr)
+            self.printLog("返回：\(str)")
+            self.zice(testUnits: testUnits, index: index + 1)
+        }) { (error) in
+            self.printLog("错误：" + self.errorMsgFromBleError(error))
+            self.zice(testUnits: testUnits, index: index + 1)
+        }
+        
+    }
+    
     
     // 自动测试
     @IBAction func zdTestBtnClick(_ sender: Any) {
+        if product.ziceUnits.count == 0 {
+            printLog("测试用例是空的，请点击“自测配置”进行配置")
+            return
+        }
+        if isZiCe {
+            printLog("正在测试，请不要重复点击")
+            return
+        }
+        isZiCe = true
+        zice(testUnits: product.ziceUnits, index: 0)
     }
     
     @IBAction func addTestBtnClick(_ sender: Any) {
@@ -117,7 +175,9 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
     
     
     @IBAction func zeceConfig(_ sender: Any) {
-        
+        let vc = TestConfigVC()
+        vc.product = self.product
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     // MARK: - tableView
@@ -216,5 +276,31 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
         loginTextView.text = logStr
         logLine += 1
         loginTextView.scrollRangeToVisible(NSMakeRange(logStr.count - 1, 1))
+    }
+    
+    
+    
+    func getJSONStringFromDictionary(dictionary:Dictionary<String, Any>) -> String {
+        if (!JSONSerialization.isValidJSONObject(dictionary)) {
+            print("无法解析出JSONString")
+            return ""
+        }
+        let data = try? JSONSerialization.data(withJSONObject: dictionary, options: [.prettyPrinted])
+        
+        return String(bytes: data ?? Data(), encoding: .utf8) ?? "";
+    }
+    
+    //数组转json
+    func getJSONStringFromArray(array:Array<Dictionary<String, Any>>) -> String {
+        
+        if (!JSONSerialization.isValidJSONObject(array)) {
+            print("无法解析出JSONString")
+            return ""
+        }
+        
+        let data = try? JSONSerialization.data(withJSONObject: array, options: [.prettyPrinted])
+        let JSONString = String(bytes:data ?? Data(), encoding: .utf8) ?? ""
+        return JSONString
+        
     }
 }

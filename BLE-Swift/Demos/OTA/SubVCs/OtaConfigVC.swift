@@ -103,7 +103,7 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
             return
         }
         
-        if !device.isApollo3 && prefixTextField.text?.count == 0 {
+        if !device.isApollo3 && prefixTextField.text?.count == 0 && config.platform != .tlsr {
             showError(TR("The connected device is not kind of Apollo3, please input OTA prefix"))
             return
         }

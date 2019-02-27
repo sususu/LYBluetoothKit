@@ -16,6 +16,10 @@
 		2B2E27412172E76500726FC7 /* BLEArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2E27402172E76400726FC7 /* BLEArrayExtensions.swift */; };
 		2B2E27472173265800726FC7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2E27462173265800726FC7 /* BaseViewController.swift */; };
 		2B2E27492173266500726FC7 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2E27482173266500726FC7 /* BaseTableViewController.swift */; };
+		2B2F8A7422262F0C0078D69F /* TestConfigVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F8A7222262F0C0078D69F /* TestConfigVC.swift */; };
+		2B2F8A7522262F0C0078D69F /* TestConfigVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B2F8A7322262F0C0078D69F /* TestConfigVC.xib */; };
+		2B2F8A78222635A10078D69F /* TestConfigCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F8A76222635A10078D69F /* TestConfigCell.swift */; };
+		2B2F8A79222635A10078D69F /* TestConfigCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B2F8A77222635A10078D69F /* TestConfigCell.xib */; };
 		2B36578421DC9D100070E7AB /* apis_devices.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B36578321DC9D100070E7AB /* apis_devices.plist */; };
 		2B36578721DCA42E0070E7AB /* BLEDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36578621DCA42E0070E7AB /* BLEDataParser.swift */; };
 		2B36578C21DCBFC90070E7AB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36578B21DCBFC90070E7AB /* HomeViewController.swift */; };
@@ -240,6 +244,10 @@
 		2B2E27402172E76400726FC7 /* BLEArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEArrayExtensions.swift; sourceTree = "<group>"; };
 		2B2E27462173265800726FC7 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		2B2E27482173266500726FC7 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
+		2B2F8A7222262F0C0078D69F /* TestConfigVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConfigVC.swift; sourceTree = "<group>"; };
+		2B2F8A7322262F0C0078D69F /* TestConfigVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestConfigVC.xib; sourceTree = "<group>"; };
+		2B2F8A76222635A10078D69F /* TestConfigCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConfigCell.swift; sourceTree = "<group>"; };
+		2B2F8A77222635A10078D69F /* TestConfigCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestConfigCell.xib; sourceTree = "<group>"; };
 		2B36578321DC9D100070E7AB /* apis_devices.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = apis_devices.plist; sourceTree = "<group>"; };
 		2B36578621DCA42E0070E7AB /* BLEDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDataParser.swift; sourceTree = "<group>"; };
 		2B36578B21DCBFC90070E7AB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -557,6 +565,17 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		2B2F8A7122262EF30078D69F /* 配置 */ = {
+			isa = PBXGroup;
+			children = (
+				2B2F8A7222262F0C0078D69F /* TestConfigVC.swift */,
+				2B2F8A7322262F0C0078D69F /* TestConfigVC.xib */,
+				2B2F8A76222635A10078D69F /* TestConfigCell.swift */,
+				2B2F8A77222635A10078D69F /* TestConfigCell.xib */,
+			);
+			path = "配置";
+			sourceTree = "<group>";
+		};
 		2B36578521DCA41F0070E7AB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -702,6 +721,7 @@
 		2B45B95721EDE60A0058E137 /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				2B2F8A7122262EF30078D69F /* 配置 */,
 				2B45B96021EDFC130058E137 /* Views */,
 				2B45B95821EDE6C70058E137 /* DeviceTestVC.swift */,
 				2B45B95921EDE6C70058E137 /* DeviceTestVC.xib */,
@@ -1405,6 +1425,7 @@
 				2BE7704D21E49A3600FD6374 /* OtaDataSelectCell.xib in Resources */,
 				2B56A15E21F6F1D40073E2A7 /* LoginVC.xib in Resources */,
 				2BB4B6EE21E9C21C00F22268 /* OtaTaskDetailVC.xib in Resources */,
+				2B2F8A7522262F0C0078D69F /* TestConfigVC.xib in Resources */,
 				2B3657AC21DCD0140070E7AB /* LeftViewController.xib in Resources */,
 				2B7C9237221FE6F9005C905A /* ModifyPwdVC.xib in Resources */,
 				2BB4B6E821E99B6C00F22268 /* TaskSummaryCell.xib in Resources */,
@@ -1422,6 +1443,7 @@
 				2B62A58521E04DB70051DD38 /* ProtocolMenuDetailCell.xib in Resources */,
 				2B45B95B21EDE6C70058E137 /* DeviceTestVC.xib in Resources */,
 				2B06DDEE222397180062E7CB /* ProtocolObjCell.xib in Resources */,
+				2B2F8A79222635A10078D69F /* TestConfigCell.xib in Resources */,
 				2B7C9233221FE6DB005C905A /* ModifyNameVC.xib in Resources */,
 				2B9DD97021E7205E00C215E5 /* otaPrefix.json in Resources */,
 				2B4AB47C21F3035B00EF5327 /* ZdOtaConfigVC.xib in Resources */,
@@ -1643,6 +1665,7 @@
 				2B56A15821F6F1060073E2A7 /* AppSettingVC.swift in Sources */,
 				2B7AB99021EECE5900D01E39 /* AddDeviceTestVC.swift in Sources */,
 				2B80C1EC21EC35D600FE7BF7 /* PrefixAddVC.swift in Sources */,
+				2B2F8A7422262F0C0078D69F /* TestConfigVC.swift in Sources */,
 				2B9DD96A21E717EA00C215E5 /* PrefixCell.swift in Sources */,
 				2B9DD97B21E745AD00C215E5 /* OtaTaskTipView.swift in Sources */,
 				2B45B95D21EDF5A50058E137 /* DeviceTestGroup.swift in Sources */,
@@ -1658,6 +1681,7 @@
 				2B62A56521DF28470051DD38 /* CharacteristicCellTableViewCell.swift in Sources */,
 				2BE7701421E2F9A600FD6374 /* ProtocolRunner.swift in Sources */,
 				2B62A57621DF6B730051DD38 /* ProtocolJsonParser.swift in Sources */,
+				2B2F8A78222635A10078D69F /* TestConfigCell.swift in Sources */,
 				2BE7704821E4980700FD6374 /* OtaDataModel.swift in Sources */,
 				2B36579421DCC6190070E7AB /* ToolsViewController.swift in Sources */,
 				2B44C74F21EEFAEE0037F5C3 /* CmdUnit.swift in Sources */,
@@ -1953,7 +1977,10 @@
 				DEVELOPMENT_TEAM = W74YV9GZDZ;
 				INFOPLIST_FILE = "BLE-Swift/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ss.BLE-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1970,7 +1997,10 @@
 				DEVELOPMENT_TEAM = W74YV9GZDZ;
 				INFOPLIST_FILE = "BLE-Swift/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ss.BLE-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1987,7 +2017,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W74YV9GZDZ;
 				INFOPLIST_FILE = "BLE-SwiftTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ss.BLE-SwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -2005,7 +2039,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W74YV9GZDZ;
 				INFOPLIST_FILE = "BLE-SwiftTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ss.BLE-SwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -2022,7 +2060,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W74YV9GZDZ;
 				INFOPLIST_FILE = "BLE-SwiftUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ss.BLE-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -2039,7 +2081,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W74YV9GZDZ;
 				INFOPLIST_FILE = "BLE-SwiftUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ss.BLE-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

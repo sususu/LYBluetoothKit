@@ -35,8 +35,14 @@ class ToolsViewController: BaseViewController, UITableViewDataSource, UITableVie
         
         setNavLeftButton(text: TR("EXPORT"), sel: #selector(exportBtnClick))
         setNavRightButton(text: TR("ADD"), sel: #selector(addBtnClick))
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(toolsChangedNotification), name: kDeviceProductListChangedNotification, object: nil)
     }
     
+    @objc func toolsChangedNotification() {
+        products = ToolsService.shared.products
+        tableView.reloadData()
+    }
     
     // MARK: - 事件处理
     @objc func exportBtnClick() {

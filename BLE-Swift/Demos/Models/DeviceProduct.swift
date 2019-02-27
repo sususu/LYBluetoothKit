@@ -15,8 +15,10 @@ class DeviceProduct: NSObject, Codable, NSCopying {
     var bleName: String = ""
     var createTime: TimeInterval
     var testGroups: [DeviceTestGroup] = []
-    //自测单元
+    //自动测单元
     var ziceUnits: [DeviceTestUnit] = []
+    //屏蔽箱测试
+    var pbxCsUnits: [DeviceTestUnit] = []
     
     init(name: String, createTime: TimeInterval) {
         self.name = name
