@@ -20,6 +20,11 @@
 		2B2F8A7522262F0C0078D69F /* TestConfigVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B2F8A7322262F0C0078D69F /* TestConfigVC.xib */; };
 		2B2F8A78222635A10078D69F /* TestConfigCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F8A76222635A10078D69F /* TestConfigCell.swift */; };
 		2B2F8A79222635A10078D69F /* TestConfigCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B2F8A77222635A10078D69F /* TestConfigCell.xib */; };
+		2B2F8A812226C0EA0078D69F /* ToolsObjCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F8A7F2226C0EA0078D69F /* ToolsObjCell.swift */; };
+		2B2F8A822226C0EA0078D69F /* ToolsObjCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B2F8A802226C0EA0078D69F /* ToolsObjCell.xib */; };
+		2B2F8A842226C2650078D69F /* ToolsObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F8A832226C2650078D69F /* ToolsObj.swift */; };
+		2B2F8A88222779F90078D69F /* OtherProtocolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F8A86222779F90078D69F /* OtherProtocolCell.swift */; };
+		2B2F8A89222779F90078D69F /* OtherProtocolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B2F8A87222779F90078D69F /* OtherProtocolCell.xib */; };
 		2B36578421DC9D100070E7AB /* apis_devices.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B36578321DC9D100070E7AB /* apis_devices.plist */; };
 		2B36578721DCA42E0070E7AB /* BLEDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36578621DCA42E0070E7AB /* BLEDataParser.swift */; };
 		2B36578C21DCBFC90070E7AB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36578B21DCBFC90070E7AB /* HomeViewController.swift */; };
@@ -209,8 +214,6 @@
 		2BEC5D6C21746A5A00E0902B /* BLECenterCommonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */; };
 		2BEC5D6E217470C300E0902B /* BLEDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6D217470C300E0902B /* BLEDataExtensions.swift */; };
 		2BEC5D702174870100E0902B /* BLECenterDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6F2174870100E0902B /* BLECenterDeviceExtension.swift */; };
-		2BF991DE221D556C0022D989 /* ProtocolSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF991DC221D556C0022D989 /* ProtocolSettingCell.swift */; };
-		2BF991DF221D556C0022D989 /* ProtocolSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BF991DD221D556C0022D989 /* ProtocolSettingCell.xib */; };
 		2BFAF610216F2089003AEAD6 /* BLEDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFAF60F216F2089003AEAD6 /* BLEDataCenter.swift */; };
 		76C8C7ABC4084DA92023482F /* Pods_BLE_SwiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A9D2E2F02B2CC16DA69B09 /* Pods_BLE_SwiftUITests.framework */; };
 		F5B483AB661D4095000C7ED7 /* Pods_BLE_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFED2B6D2ED38A974E68B62 /* Pods_BLE_Swift.framework */; };
@@ -248,6 +251,11 @@
 		2B2F8A7322262F0C0078D69F /* TestConfigVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestConfigVC.xib; sourceTree = "<group>"; };
 		2B2F8A76222635A10078D69F /* TestConfigCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConfigCell.swift; sourceTree = "<group>"; };
 		2B2F8A77222635A10078D69F /* TestConfigCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestConfigCell.xib; sourceTree = "<group>"; };
+		2B2F8A7F2226C0EA0078D69F /* ToolsObjCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsObjCell.swift; sourceTree = "<group>"; };
+		2B2F8A802226C0EA0078D69F /* ToolsObjCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToolsObjCell.xib; sourceTree = "<group>"; };
+		2B2F8A832226C2650078D69F /* ToolsObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsObj.swift; sourceTree = "<group>"; };
+		2B2F8A86222779F90078D69F /* OtherProtocolCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherProtocolCell.swift; sourceTree = "<group>"; };
+		2B2F8A87222779F90078D69F /* OtherProtocolCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OtherProtocolCell.xib; sourceTree = "<group>"; };
 		2B36578321DC9D100070E7AB /* apis_devices.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = apis_devices.plist; sourceTree = "<group>"; };
 		2B36578621DCA42E0070E7AB /* BLEDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDataParser.swift; sourceTree = "<group>"; };
 		2B36578B21DCBFC90070E7AB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -457,8 +465,6 @@
 		2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterCommonExtension.swift; sourceTree = "<group>"; };
 		2BEC5D6D217470C300E0902B /* BLEDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDataExtensions.swift; sourceTree = "<group>"; };
 		2BEC5D6F2174870100E0902B /* BLECenterDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterDeviceExtension.swift; sourceTree = "<group>"; };
-		2BF991DC221D556C0022D989 /* ProtocolSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolSettingCell.swift; sourceTree = "<group>"; };
-		2BF991DD221D556C0022D989 /* ProtocolSettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProtocolSettingCell.xib; sourceTree = "<group>"; };
 		2BFAF60F216F2089003AEAD6 /* BLEDataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDataCenter.swift; sourceTree = "<group>"; };
 		3FFED2B6D2ED38A974E68B62 /* Pods_BLE_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLE_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43E8BBB9CBBFC5F3B677A6E5 /* Pods-BLE-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLE-Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-BLE-Swift/Pods-BLE-Swift.release.xcconfig"; sourceTree = "<group>"; };
@@ -576,6 +582,15 @@
 			path = "配置";
 			sourceTree = "<group>";
 		};
+		2B2F8A85222779DA0078D69F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2B2F8A86222779F90078D69F /* OtherProtocolCell.swift */,
+				2B2F8A87222779F90078D69F /* OtherProtocolCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		2B36578521DCA41F0070E7AB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -623,7 +638,6 @@
 			isa = PBXGroup;
 			children = (
 				2B7C922F221FE6BE005C905A /* 账号管理 */,
-				2BF991DB221D551C0022D989 /* 协议管理 */,
 				2B56A14521F6ECCC0073E2A7 /* Views */,
 				2B56A14021F6EB1C0073E2A7 /* Models */,
 				2B36579A21DCC6330070E7AB /* SettingsViewController.swift */,
@@ -868,6 +882,7 @@
 				2B56A14121F6EBA50073E2A7 /* MenuSection.swift */,
 				2B56A14321F6EBAF0073E2A7 /* MenuRow.swift */,
 				2B06DDE9222393B80062E7CB /* ProtocolObj.swift */,
+				2B2F8A832226C2650078D69F /* ToolsObj.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -877,6 +892,8 @@
 			children = (
 				2B06DDEB222397180062E7CB /* ProtocolObjCell.swift */,
 				2B06DDEC222397180062E7CB /* ProtocolObjCell.xib */,
+				2B2F8A7F2226C0EA0078D69F /* ToolsObjCell.swift */,
+				2B2F8A802226C0EA0078D69F /* ToolsObjCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1176,6 +1193,7 @@
 		2BA3B58421FC350D0084E291 /* 协议执行 */ = {
 			isa = PBXGroup;
 			children = (
+				2B2F8A85222779DA0078D69F /* Views */,
 				2BA3B58521FC35340084E291 /* ProtocolExcuteVC.swift */,
 				2BA3B58621FC35340084E291 /* ProtocolExcuteVC.xib */,
 			);
@@ -1277,15 +1295,6 @@
 				2B36578321DC9D100070E7AB /* apis_devices.plist */,
 			);
 			path = APIs;
-			sourceTree = "<group>";
-		};
-		2BF991DB221D551C0022D989 /* 协议管理 */ = {
-			isa = PBXGroup;
-			children = (
-				2BF991DC221D556C0022D989 /* ProtocolSettingCell.swift */,
-				2BF991DD221D556C0022D989 /* ProtocolSettingCell.xib */,
-			);
-			path = "协议管理";
 			sourceTree = "<group>";
 		};
 		A31EC39E90189A6891C76CEB /* Frameworks */ = {
@@ -1441,13 +1450,13 @@
 				2B76006821F30EDC006B4C63 /* ZdOtaFirmwaresVC.xib in Resources */,
 				2BA23FA321E4B5FF00EF1B77 /* FirmwareTypeVC.xib in Resources */,
 				2B62A58521E04DB70051DD38 /* ProtocolMenuDetailCell.xib in Resources */,
+				2B2F8A89222779F90078D69F /* OtherProtocolCell.xib in Resources */,
 				2B45B95B21EDE6C70058E137 /* DeviceTestVC.xib in Resources */,
 				2B06DDEE222397180062E7CB /* ProtocolObjCell.xib in Resources */,
 				2B2F8A79222635A10078D69F /* TestConfigCell.xib in Resources */,
 				2B7C9233221FE6DB005C905A /* ModifyNameVC.xib in Resources */,
 				2B9DD97021E7205E00C215E5 /* otaPrefix.json in Resources */,
 				2B4AB47C21F3035B00EF5327 /* ZdOtaConfigVC.xib in Resources */,
-				2BF991DF221D556C0022D989 /* ProtocolSettingCell.xib in Resources */,
 				2B3657BA21DDB05C0070E7AB /* LeftDeviceCell.xib in Resources */,
 				2B7C923B221FE70E005C905A /* ForgetPwdVC.xib in Resources */,
 				2B45B96421EDFC3C0058E137 /* DeviceTestCell.xib in Resources */,
@@ -1458,6 +1467,7 @@
 				2B80C1FC21EC583200FE7BF7 /* OtaViewController.xib in Resources */,
 				2B56A14D21F6F0210073E2A7 /* FirmwareManagerVC.xib in Resources */,
 				2B4874A5214F763500AC5841 /* Assets.xcassets in Resources */,
+				2B2F8A822226C0EA0078D69F /* ToolsObjCell.xib in Resources */,
 				2B3657A721DCCF5C0070E7AB /* Icons.xcassets in Resources */,
 				2B80C1EE21EC35E700FE7BF7 /* PrefixAddVC.xib in Resources */,
 				2BA3B58821FC35340084E291 /* ProtocolExcuteVC.xib in Resources */,
@@ -1634,6 +1644,7 @@
 				2B9DD97221E727D500C215E5 /* BLEDeviceExtensions.swift in Sources */,
 				2B62A58F21E0A0880051DD38 /* BLEDataError.swift in Sources */,
 				2B2E27492173266500726FC7 /* BaseTableViewController.swift in Sources */,
+				2B2F8A842226C2650078D69F /* ToolsObj.swift in Sources */,
 				2BD12FF2221A8B1D00EDC488 /* NetworkAPIs.swift in Sources */,
 				2B4AB47021F1854000EF5327 /* TestGroupLayout.swift in Sources */,
 				2B4874CD214F766300AC5841 /* BLECenter.swift in Sources */,
@@ -1655,6 +1666,7 @@
 				2B62A57C21E042680051DD38 /* ProtocolMenuCell.swift in Sources */,
 				2B36578721DCA42E0070E7AB /* BLEDataParser.swift in Sources */,
 				2B62A55921DDD84D0051DD38 /* RefreshBtn.swift in Sources */,
+				2B2F8A88222779F90078D69F /* OtherProtocolCell.swift in Sources */,
 				2B4AB46521F02AE500EF5327 /* UIImageExtensions.swift in Sources */,
 				2B5832EB2175CC4600259593 /* DevicesCell.swift in Sources */,
 				2B45B95221EDC18D0058E137 /* DeviceProductCell.swift in Sources */,
@@ -1713,6 +1725,7 @@
 				2B56A16D21F70FB90073E2A7 /* VoiceSpeaker.swift in Sources */,
 				2B62A58721E0564C0051DD38 /* ProtocolResultDisplayView.swift in Sources */,
 				2B56A15021F6F0780073E2A7 /* ProtocolManagerVC.swift in Sources */,
+				2B2F8A812226C0EA0078D69F /* ToolsObjCell.swift in Sources */,
 				2B9DD96521E7145B00C215E5 /* PrefixSelectVC.swift in Sources */,
 				2B5832E0217573E000259593 /* UIDefines.swift in Sources */,
 				2B9DD97421E729DD00C215E5 /* BLECenterExtensions.swift in Sources */,
@@ -1728,7 +1741,6 @@
 				2B62A57421DF6B070051DD38 /* ProtocolMenu.swift in Sources */,
 				2BA23FAA21E58ABB00EF1B77 /* File.swift in Sources */,
 				2B5832E72175C87B00259593 /* DevicesViewController.swift in Sources */,
-				2BF991DE221D556C0022D989 /* ProtocolSettingCell.swift in Sources */,
 				2BB4B6E721E99B6C00F22268 /* TaskSummaryCell.swift in Sources */,
 				2B3657AB21DCD0140070E7AB /* LeftViewController.swift in Sources */,
 				2B4AB47B21F3035B00EF5327 /* ZdOtaConfigVC.swift in Sources */,
@@ -1984,7 +1996,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ss.BLE-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -2004,7 +2016,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ss.BLE-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

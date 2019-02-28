@@ -9,15 +9,20 @@
 import UIKit
 import YYKit
 
-class ProtocolExcuteVC: BaseViewController {
+class ProtocolExcuteVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     var proto: Protocol!
+    var protocols: [Protocol]!
+    var selectedIndex: Int = 0
+    var itemSizes: [CGSize] = []
     
     var runner = ProtocolRunner()
     
     @IBOutlet weak var cmdTV: UITextView!
     
     var previewLbl: YYLabel!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var logTV: UITextView!
     
@@ -29,7 +34,11 @@ class ProtocolExcuteVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.titleLbl.text = proto.name
+        
+        for proto in protocols {
+            let size = CGSize(width: proto.name.size(withFont: font(12)).width + 20, height: 30)
+            itemSizes.append(size)
+        }
         
         showConnectState()
         
@@ -40,6 +49,19 @@ class ProtocolExcuteVC: BaseViewController {
         previewLbl.textVerticalAlignment = .top
         cmdTV.addSubview(previewLbl)
         
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 10
+        layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        layout.scrollDirection = .vertical
+        
+        collectionView.setCollectionViewLayout(layout, animated: false)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.showsHorizontalScrollIndicator = false
+        
+        collectionView.register(UINib(nibName: "OtherProtocolCell", bundle: nil), forCellWithReuseIdentifier: "cellId")
+        
+        
         reloadData()
     }
     
@@ -49,6 +71,10 @@ class ProtocolExcuteVC: BaseViewController {
     }
     
     func reloadData() {
+        
+        proto = protocols[selectedIndex]
+        
+        self.titleLbl.text = proto.name
         
         var string = ""
         var startIndexs = [Int]()
@@ -236,5 +262,31 @@ class ProtocolExcuteVC: BaseViewController {
         logTV.text = logStr
         logLine += 1
         logTV.scrollRangeToVisible(NSMakeRange(logStr.count - 1, 1))
+    }
+    
+    
+    
+    
+    // MARK: - collectionView
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return protocols.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! OtherProtocolCell
+        cell.update(withProtocol: protocols[indexPath.row], selected: (indexPath.row == selectedIndex))
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return itemSizes[indexPath.row]
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selectedIndex = indexPath.row
+        collectionView.reloadData()
+        collectionView.collectionViewLayout.invalidateLayout()
+        reloadData()
     }
 }

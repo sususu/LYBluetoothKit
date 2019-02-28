@@ -37,7 +37,7 @@
                                 <segments>
                                     <segment title="Apollo平台"/>
                                     <segment title="Nordic平台"/>
-                                    <segment title="TLSR平台"/>
+                                    <segment title="Telink平台"/>
                                 </segments>
                                 <color key="tintColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
@@ -73,7 +73,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apollo3平台的手表手环不需要填写，其他的需要填写，详情点击前缀选择查看" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HfN-v2-uBN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apollo3、Telink平台的手表手环不需要填写，其他的需要填写，详情点击前缀选择查看" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HfN-v2-uBN">
                                 <rect key="frame" x="20" y="105" width="335" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="1" green="0.2395336881" blue="0.21081201320000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

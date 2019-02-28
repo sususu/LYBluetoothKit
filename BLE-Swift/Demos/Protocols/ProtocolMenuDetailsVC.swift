@@ -86,7 +86,9 @@ class ProtocolMenuDetailsVC: BaseViewController, UITableViewDataSource, UITableV
         }
  */
         let vc = ProtocolExcuteVC()
-        vc.proto = menu.protocols[indexPath.row]
+//        vc.proto = menu.protocols[indexPath.row]
+        vc.protocols = menu.protocols
+        vc.selectedIndex = indexPath.row
         navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -24,6 +24,8 @@ class ModifyNameVC: BaseViewController {
 
     @IBAction func btnClick(_ sender: Any) {
         
+        self.view.endEditing(true)
+        
         guard let name = nNameTF.text, name.count > 0 else {
             showError("请输入名称");
             return;

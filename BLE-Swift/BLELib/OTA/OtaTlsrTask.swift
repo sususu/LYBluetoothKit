@@ -61,14 +61,17 @@ class OtaTlsrTask: OtaTask {
             return
         }
         
+        totalLength = dataModel.tlsrOtaDataPackages.count
+        
         let onceSendCount:Int = 1024 / 16
         
         for i in 0 ..< onceSendCount
         {
-            if i == dataModel.tlsrOtaDataPackages.count - 1 {
+            if dataModel.tlsrOtaDataIndex + i == dataModel.tlsrOtaDataPackages.count - 1 {
                 isSingleOTAFinish = true
                 endOta()
                 // 进度回调
+                sendLength = totalLength
                 DispatchQueue.main.async {
                     self.progressCallback?(1)
                     NotificationCenter.default.post(name: kOtaTaskProgressUpdateNotification, object: nil, userInfo: [BLEKey.task: self])
@@ -80,16 +83,18 @@ class OtaTlsrTask: OtaTask {
             writeData(data: sd)
             
             // 进度回调
-            let progress:Float = Float(dataModel.tlsrOtaDataIndex + i) / Float(dataModel.tlsrOtaDataPackages.count);
+            sendLength = dataModel.tlsrOtaDataIndex + i
+            
+            print("index:\(dataModel.tlsrOtaDataIndex), count:\(dataModel.tlsrOtaDataPackages.count), progress:\(progress)")
             DispatchQueue.main.async {
-                self.progressCallback?(progress)
+                self.progressCallback?(self.progress)
                 NotificationCenter.default.post(name: kOtaTaskProgressUpdateNotification, object: nil, userInfo: [BLEKey.task: self])
             }
             // 必须睡眠，否则ota失败，设备蓝牙速度慢
-            Thread.sleep(forTimeInterval: 0.002)
+            Thread.sleep(forTimeInterval: 0.01)
         }
         dataModel.tlsrOtaDataIndex += onceSendCount
-        print("index:\(dataModel.tlsrOtaDataIndex), count:\(dataModel.tlsrOtaDataPackages.count)")
+        
         addTimer(timeout: 10, action: 2)
         readData()
     }
@@ -103,7 +108,7 @@ class OtaTlsrTask: OtaTask {
     
     
     func writeData(data: Data) {
-        print("发送数据：\(data.hexEncodedString())")
+//        print("发送数据：\(data.hexEncodedString())")
         _ = self.device.write(data, characteristicUUID: UUID.tlsrOtaUuid)
     }
     

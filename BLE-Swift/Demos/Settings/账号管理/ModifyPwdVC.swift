@@ -23,6 +23,8 @@ class ModifyPwdVC: BaseViewController {
 
     @IBAction func saveBtnClick(_ sender: Any) {
         
+        self.view.endEditing(true)
+        
         let oldPwd = oldPwdTf.text ?? ""
         let newPwd = newPwdTf.text ?? ""
         

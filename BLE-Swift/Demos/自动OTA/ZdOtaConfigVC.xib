@@ -131,7 +131,7 @@
                         <constraint firstAttribute="height" constant="40" id="XDa-R7-c0J"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <state key="normal" title="TLSR">
+                    <state key="normal" title="Telink">
                         <color key="titleColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </state>
                     <userDefinedRuntimeAttributes>
