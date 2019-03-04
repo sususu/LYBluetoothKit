@@ -9,7 +9,7 @@
 import UIKit
 import YYKit
 
-class ProtocolExcuteVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class ProtocolExcuteVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, AddProtocolVCDelegate {
 
     var proto: Protocol!
     var protocols: [Protocol]!
@@ -61,6 +61,7 @@ class ProtocolExcuteVC: BaseViewController, UICollectionViewDataSource, UICollec
         
         collectionView.register(UINib(nibName: "OtherProtocolCell", bundle: nil), forCellWithReuseIdentifier: "cellId")
         
+        setNavRightButton(text: "编辑", sel: #selector(editBtnClick))
         
         reloadData()
     }
@@ -159,7 +160,10 @@ class ProtocolExcuteVC: BaseViewController, UICollectionViewDataSource, UICollec
     // MARK: - 事件处理
     
     @objc func editBtnClick() {
-        
+        let vc = AddProtocolVC()
+        vc.proto = proto
+        vc.delegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     private var isRunning: Bool = false
@@ -285,6 +289,12 @@ class ProtocolExcuteVC: BaseViewController, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.selectedIndex = indexPath.row
+        collectionView.reloadData()
+        collectionView.collectionViewLayout.invalidateLayout()
+        reloadData()
+    }
+    
+    func didAddNewProtocol(protocol: Protocol) {
         collectionView.reloadData()
         collectionView.collectionViewLayout.invalidateLayout()
         reloadData()

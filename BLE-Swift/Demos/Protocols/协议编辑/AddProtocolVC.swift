@@ -42,6 +42,8 @@ class AddProtocolVC: BaseViewController, ReturnFormatVCDelegate, CmdInputViewDel
     
     var menu: ProtocolMenu!
     
+    var proto: Protocol?
+    
     var returnFormat = boolReturnFormat()
     
     override func viewDidLoad() {
@@ -60,12 +62,34 @@ class AddProtocolVC: BaseViewController, ReturnFormatVCDelegate, CmdInputViewDel
         boolRadio.otherButtons = [stringRadio, splitRadio, tlvRadio, customRadio]
 
         self.title = TR("添加协议")
+        if proto != nil {
+            self.title = "编辑协议"
+            reloadData()
+        }
         setNavRightButton(text: TR("SAVE"), sel: #selector(saveBtnClick))
     }
 
+    
+    func reloadData() {
+        nameTF.text = proto?.name
+        returnFormat = proto?.returnFormat ?? boolReturnFormat()
+        cmdInputView.units = proto?.cmdUnits ?? []
+        
+        if returnFormat.type == .bool {
+            boolRadio.isSelected = true
+        }
+        else if returnFormat.type == .string {
+            stringRadio.isSelected = true
+        }
+        else if returnFormat.type == .split {
+            splitRadio.isSelected = true
+        }
+    }
 
     // MARK: - 事件处理
     @objc func saveBtnClick() {
+        self.view.endEditing(true)
+        
         if cmdInputView.units.count == 0 {
             showError(TR("请输入指令"))
             return
@@ -76,18 +100,25 @@ class AddProtocolVC: BaseViewController, ReturnFormatVCDelegate, CmdInputViewDel
             return
         }
         
-        let proto = Protocol()
-        proto.name = name
-        proto.cmdUnits = cmdInputView.units
-        proto.returnFormat = returnFormat
+        var pl = Protocol()
+        pl.name = name
+        pl.cmdUnits = cmdInputView.units
+        pl.returnFormat = returnFormat
         
-        menu.protocols.insert(proto, at: 0)
+        if proto != nil {
+            proto?.name = name
+            proto?.cmdUnits = cmdInputView.units
+            proto?.returnFormat = returnFormat
+            pl = proto!
+        } else {
+            menu.protocols.insert(pl, at: 0)
+        }
         
         ProtocolService.shared.saveMenus()
         
         showSuccess(TR("Success"))
         
-        delegate?.didAddNewProtocol(protocol: proto)
+        delegate?.didAddNewProtocol(protocol: pl)
         
         navigationController?.popViewController(animated: true)
     }

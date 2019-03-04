@@ -16,7 +16,8 @@ class NetworkManager {
     
     init() {
         
-        LYNetworking.setApiBasePath(kTestBaseUrl)
+//        LYNetworking.setApiBasePath(kTestBaseUrl)
+        LYNetworking.setApiBasePath(kBaseUrl)
         LYNetworking.setDebugLoggerSwitch(true)
         LYNetworking.setTimeoutInterval(30)
 

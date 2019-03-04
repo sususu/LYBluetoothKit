@@ -23,7 +23,8 @@ class FirmwareSelectCell: UITableViewCell {
 
     func updateUI(withFirmware firmware: Firmware) {
         nameLbl.text = firmware.name
-        createTimeLbl.text = Date(timeIntervalSince1970: firmware.createTime).description
+        createTimeLbl.text = String.timeString(fromTimeInterval: firmware.createTime)
+            //Date(timeIntervalSince1970: firmware.createTime).description
         versionLbl.text = firmware.versionName
         
         switch firmware.type {

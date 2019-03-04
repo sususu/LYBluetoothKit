@@ -25,7 +25,11 @@ class CmdInputView: UIView, UICollectionViewDataSource, UICollectionViewDelegate
     private var keyboard = CmdKeyBoardView()
     
     var numCount = 0
-    var units: [CmdUnit] = []
+    var units: [CmdUnit] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     weak var delegate: CmdInputViewDelegate?
     

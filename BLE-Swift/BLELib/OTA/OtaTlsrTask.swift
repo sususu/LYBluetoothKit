@@ -108,11 +108,17 @@ class OtaTlsrTask: OtaTask {
     
     
     func writeData(data: Data) {
+        if checkIsCancel() {
+            return
+        }
 //        print("发送数据：\(data.hexEncodedString())")
         _ = self.device.write(data, characteristicUUID: UUID.tlsrOtaUuid)
     }
     
     func readData() {
+        if checkIsCancel() {
+            return
+        }
         _ = self.device.read(characteristicUUID: UUID.tlsrOtaUuid)
     }
     
