@@ -176,7 +176,9 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
             self.discoveredServices.append(service)
             if let characteristics = service.characteristics {
                 for characteristic in characteristics {
+                    // 记录下发现的特征值
                     self.characteristics[characteristic.uuid.uuidString] = characteristic;
+                    // 如果有通知属性，则订阅该特征
                     if characteristic.properties.contains(.notify) {
                         peripheral.setNotifyValue(true, for: characteristic)
                     }

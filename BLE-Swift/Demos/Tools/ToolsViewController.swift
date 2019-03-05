@@ -240,7 +240,7 @@ class ToolsViewController: BaseViewController, UITableViewDataSource, UITableVie
             return
         }
         
-        guard let url = StorageUtils.saveAsFile(forData: data, fileName: "DeviceProducts.json") else {
+        guard let url = StorageUtils.saveAsFile(forData: data, fileName: "BLE-Appscomm_DeviceProducts.json") else {
             showError(TR("Save as file failed"))
             return
         }
@@ -248,7 +248,7 @@ class ToolsViewController: BaseViewController, UITableViewDataSource, UITableVie
             docController = UIDocumentInteractionController(url: url)
         }
         docController!.delegate = self
-        docController?.name = "DeviceProducts.json"
+        docController?.name = "BLE-Appscomm_DeviceProducts.json"
         
         docController!.presentOpenInMenu(from: CGRect.zero, in: self.view, animated: true)
     }

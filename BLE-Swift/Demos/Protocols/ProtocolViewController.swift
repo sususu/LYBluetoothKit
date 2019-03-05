@@ -88,7 +88,7 @@ class ProtocolViewController: BaseViewController, UITableViewDataSource, UITable
             return
         }
         
-        guard let url = StorageUtils.saveAsFile(forData: data, fileName: "ProtocolMenus.json") else {
+        guard let url = StorageUtils.saveAsFile(forData: data, fileName: "BLE-Appscomm_ProtocolMenus.json") else {
             showError("保存协议菜单文件失败")
             return
         }
@@ -97,7 +97,7 @@ class ProtocolViewController: BaseViewController, UITableViewDataSource, UITable
             docController = UIDocumentInteractionController(url: url)
         }
         docController!.delegate = self
-        docController?.name = "ProtocolMenus.json"
+        docController?.name = "BLE-Appscomm_ProtocolMenus.json"
         
         docController!.presentOpenInMenu(from: CGRect.zero, in: self.view, animated: true)
         

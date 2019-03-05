@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let fileName = url.absoluteString.lastPathComponent
         
         // 如果是协议导入
-        if fileName.hasPrefix("ProtocolMenus") {
+        if fileName.hasPrefix("BLE-Appscomm_ProtocolMenus") {
             let alert = UIAlertController(title: "非常重要", message: "是否要覆盖本地的协议配置信息？", preferredStyle: .alert)
             let ok = UIAlertAction(title: "确定", style: .default) { (letion) in
                 let data = (try? Data(contentsOf: url)) ?? Data()
@@ -92,8 +92,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         
+        // 如果是工具导入
         //DeviceProducts
-        if fileName.hasPrefix("DeviceProducts") {
+        if fileName.hasPrefix("BLE-Appscomm_DeviceProducts") {
             let alert = UIAlertController(title: "非常重要", message: "是否要覆盖本地的工具配置信息？", preferredStyle: .alert)
             let ok = UIAlertAction(title: "确定", style: .default) { (letion) in
                 let data = (try? Data(contentsOf: url)) ?? Data()
@@ -109,11 +110,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         
-        // 如果是工具导入
-        if fileName.hasPrefix("DeviceProducts") {
-            let alert = UIAlertController(title: "非常重要", message: "是否要覆盖本地的工具配置信息？", preferredStyle: .alert)
+        // 如果是前缀导入
+        // Prefixs.json
+        if fileName.hasPrefix("BLE-Appscomm_Prefixs") {
+            let alert = UIAlertController(title: "非常重要", message: "是否要覆盖本地的蓝牙前缀配置信息？", preferredStyle: .alert)
             let ok = UIAlertAction(title: "确定", style: .default) { (action) in
-                
+                let data = (try? Data(contentsOf: url)) ?? Data()
+                _ = StorageUtils.save(data, forKey: kPrefixListCacheKey)
             }
             let cancel = UIAlertAction(title: "取消", style: .cancel) { (action) in
                 _ = StorageUtils.deleteFile(atPath: url.absoluteString)
@@ -123,6 +126,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController?.present(alert, animated: true, completion: nil)
             return true
         }
+        
         
         let filePath = "Inbox".stringByAppending(pathComponent: fileName)
         

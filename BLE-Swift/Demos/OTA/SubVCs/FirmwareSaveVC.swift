@@ -79,7 +79,7 @@ class FirmwareSaveVC: BaseViewController, FirmwareTypeVCDelegate {
 
     func didFinishSelectType(type: OtaDataType) {
         tmpFirmware.type = type
-        updateUI()
+        typeLbl.text = Firmware.getTypeName(withType: tmpFirmware.type)
     }
     
 }

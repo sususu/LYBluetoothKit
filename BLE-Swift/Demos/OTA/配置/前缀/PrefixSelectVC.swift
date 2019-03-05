@@ -13,11 +13,13 @@ protocol PrefixSelectVCDelegate: NSObjectProtocol {
 }
 
 
-class PrefixSelectVC: BaseViewController, UITableViewDataSource, UITableViewDelegate, PrefixAddVCDelegate {
+class PrefixSelectVC: BaseViewController, UITableViewDataSource, UITableViewDelegate, PrefixAddVCDelegate, UIDocumentInteractionControllerDelegate {
 
     var prefixs: [OtaPrefix]!
     
     weak var delegate: PrefixSelectVCDelegate?
+    
+    var docController: UIDocumentInteractionController?
     
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -49,6 +51,19 @@ class PrefixSelectVC: BaseViewController, UITableViewDataSource, UITableViewDele
     
     @IBAction func exportAllItems(_ sender: Any) {
         
+        let data = try! JSONEncoder().encode(prefixs)
+        
+        guard let url = StorageUtils.saveAsFile(forData: data, fileName: "BLE-Appscomm_Prefixs.json") else {
+            showError(TR("Save as file failed"))
+            return
+        }
+        if docController == nil {
+            docController = UIDocumentInteractionController(url: url)
+        }
+        docController!.delegate = self
+        docController?.name = "BLE-Appscomm_Prefixs.json"
+        
+        docController!.presentOpenInMenu(from: CGRect.zero, in: self.view, animated: true)
     }
     
     @objc func editBtnClick() {
