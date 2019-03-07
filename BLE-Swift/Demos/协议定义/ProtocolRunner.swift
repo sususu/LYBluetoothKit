@@ -108,8 +108,51 @@ class ProtocolRunner {
         }
         
         if str.hasPrefix("Int") {
-            guard let len = Int(str.suffix(1)), var intValue = Int(unit.param?.value ?? "") else {
+            
+            guard let param = unit.param else {
                 return Data()
+            }
+            guard let len = Int(str.suffix(1)) else {
+                return Data()
+            }
+            guard let valueStr = param.value else {
+                return Data()
+            }
+            
+            var intValue = 0
+            if param.type == .enumeration {
+                intValue = Int(valueStr.components(separatedBy: ":")[1]) ?? 0
+            }
+            else if param.type == .int {
+                intValue = Int(valueStr) ?? 0
+            }
+                
+            else if param.type == .time || param.type == .date || param.type == .datetime {
+                let date = NSDate()
+                var year = date.year
+                var month = date.month
+                var day = date.day
+                var hour = date.hour
+                var minute = date.minute
+                var second = date.second
+                
+                var data = Data()
+                if param.type == .time {
+                    data.append(bytes: &hour, count: 1)
+                    data.append(bytes: &minute, count: 1)
+                    data.append(bytes: &second, count: 1)
+                }
+                else {
+                    data.append(bytes: &year, count: 2)
+                    data.append(bytes: &month, count: 1)
+                    data.append(bytes: &day, count: 1)
+                    if param.type == .datetime {
+                        data.append(bytes: &hour, count: 1)
+                        data.append(bytes: &minute, count: 1)
+                        data.append(bytes: &second, count: 1)
+                    }
+                }
+                return data
             }
             return Data(bytes: &intValue, count: len)
         }

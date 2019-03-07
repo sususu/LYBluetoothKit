@@ -158,29 +158,8 @@
                     </constraints>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SC7-nc-nmT">
-                    <rect key="frame" x="151.5" y="270" width="50" height="30"/>
-                    <color key="backgroundColor" red="0.47874365479999997" green="0.028350659350000001" blue="0.061894793789999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="It6-ym-MYx"/>
-                        <constraint firstAttribute="width" constant="50" id="qLc-eO-HU6"/>
-                    </constraints>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" title="选择">
-                        <color key="titleColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="3"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="selectBtnClick:" destination="-1" eventType="touchUpInside" id="a2X-q3-13Y"/>
-                    </connections>
-                </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="n4h-yw-RuL">
                     <rect key="frame" x="10" y="165" width="355" height="95"/>
                     <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
@@ -212,7 +191,6 @@
                 <constraint firstItem="cMr-Ak-CHI" firstAttribute="top" secondItem="Wa5-Kg-0yW" secondAttribute="bottom" constant="125" id="MtD-Qc-1bK"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="YD4-y1-x4R" secondAttribute="trailing" constant="10" id="PfS-SG-9AV"/>
                 <constraint firstItem="G6F-Yq-T1Q" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="PoD-lD-nfg"/>
-                <constraint firstItem="SC7-nc-nmT" firstAttribute="top" secondItem="Wa5-Kg-0yW" secondAttribute="bottom" constant="110" id="Vdm-8l-9lg"/>
                 <constraint firstItem="fLo-pH-fXj" firstAttribute="leading" secondItem="3Y5-9s-hPg" secondAttribute="trailing" constant="10" id="WQI-L5-cXJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="cM5-K6-dJ3" secondAttribute="trailing" constant="10" id="YEf-9J-s1r"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="n4h-yw-RuL" secondAttribute="trailing" constant="10" id="Yj4-sx-B7V"/>
@@ -222,7 +200,6 @@
                 <constraint firstItem="YD4-y1-x4R" firstAttribute="leading" secondItem="fLo-pH-fXj" secondAttribute="trailing" constant="10" id="m1l-2c-Fvl"/>
                 <constraint firstItem="HVH-uA-674" firstAttribute="top" secondItem="G6F-Yq-T1Q" secondAttribute="bottom" constant="10" id="mEb-HC-6Qd"/>
                 <constraint firstItem="Wa5-Kg-0yW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="mnf-4m-ds5"/>
-                <constraint firstItem="SC7-nc-nmT" firstAttribute="leading" secondItem="7mF-o5-WLX" secondAttribute="trailing" constant="5" id="mx0-yv-7qD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Wa5-Kg-0yW" secondAttribute="trailing" constant="10" id="pGh-as-ogq"/>
                 <constraint firstItem="zm9-Wy-1td" firstAttribute="top" secondItem="cMr-Ak-CHI" secondAttribute="bottom" constant="10" id="wiz-Fp-eqf"/>
             </constraints>
