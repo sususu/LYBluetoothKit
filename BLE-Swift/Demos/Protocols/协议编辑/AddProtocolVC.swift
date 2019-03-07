@@ -84,6 +84,7 @@ class AddProtocolVC: BaseViewController, ReturnFormatVCDelegate, CmdInputViewDel
         else if returnFormat.type == .split {
             splitRadio.isSelected = true
         }
+        didFinishEditing()
     }
 
     // MARK: - 事件处理
@@ -208,6 +209,20 @@ class AddProtocolVC: BaseViewController, ReturnFormatVCDelegate, CmdInputViewDel
         }
         
         print("hello:\(unit.valueStr ?? "--")")
+        
+        if param.type == .int ||
+            param.type == .date ||
+            param.type == .time ||
+            param.type == .datetime ||
+            param.type == .enumeration {
+            ParamsInputModalView.show(withStr: unit.valueStr!, okCallback: { (p) in
+                unit.param = p
+                self.didFinishEditing()
+            }, cancelCallback: nil)
+            ParamsInputModalView.setOldParam(param)
+            return
+        }
+        
         let alert = UIAlertController(title: nil, message: "请输入参数信息", preferredStyle: .alert)
         alert.addTextField { (textField) in
             textField.placeholder = "参数名（选填）"

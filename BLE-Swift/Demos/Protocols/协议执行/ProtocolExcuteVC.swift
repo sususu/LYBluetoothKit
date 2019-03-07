@@ -140,6 +140,31 @@ class ProtocolExcuteVC: BaseViewController, UICollectionViewDataSource, UICollec
         }
         
         print("hello:\(unit.valueStr ?? "--")")
+        
+        if param.type == .enumeration {
+            EnumSelectModalView.show { (enm) in
+                param.value = enm.0 + ":\(enm.1)"
+                self.reloadData()
+            }
+            EnumSelectModalView.setOldParam(param)
+            return
+        }
+        
+        else if param.type == .int {
+            NumberInputModalView.show { (intValue) in
+                param.value = "\(intValue)"
+                self.reloadData()
+            }
+            NumberInputModalView.setOldParam(param)
+            return
+        }
+        
+        else if param.type == .time || param.type == .date || param.type == .datetime {
+            self.alert(msg: "会自动填充系统的日期时间", confirmText: "好的", confirmSel: nil, cancelText: nil, cancelSel: nil)
+            return
+        }
+        
+        
         let alert = UIAlertController(title: nil, message: "请输入参数值", preferredStyle: .alert)
         alert.addTextField { (textField) in
             if param.type == .int {

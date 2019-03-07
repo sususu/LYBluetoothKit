@@ -32,6 +32,9 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
     public var name:String = ""
     public var rssi:Int!
     
+    /// advertisementData
+    var advertisementData: Dictionary<String, Any>?
+    
     /// all services of peripheral
     var services:Dictionary<String, CBService> = Dictionary()
     var discoveredServices:[CBService] = []
@@ -63,12 +66,20 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
     public convenience init(_ peripheral:CBPeripheral, rssi:NSNumber, advertisementData:Dictionary<String, Any>) {
         self.init(peripheral)
         self.rssi = rssi.intValue
+        self.advertisementData = advertisementData
         if self.rssi > 0 {
             self.rssi = 0
         }
         if let name = advertisementData["kCBAdvDataLocalName"] as? String {
             self.name = name
         }
+        
+        if let serviceUUIDs = advertisementData["kCBAdvDataServiceUUIDs"] as? Array<CBUUID> {
+            for uuid in serviceUUIDs {
+                self.broadcastServiceUUIDs.append(uuid.uuidString)
+            }
+        }
+        
     }
     
     // MARK: - 公开方法

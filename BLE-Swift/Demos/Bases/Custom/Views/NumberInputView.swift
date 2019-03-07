@@ -45,6 +45,7 @@ class NumberInputView: UIControl {
         textField.borderStyle = .roundedRect
 //        textField.layer.borderColor = rgb(200, 200, 200).cgColor
 //        textField.layer.borderWidth = 1
+        textField.keyboardType = .numberPad
         textField.textAlignment = .center
         addSubview(textField)
         

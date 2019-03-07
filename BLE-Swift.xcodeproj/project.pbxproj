@@ -214,6 +214,9 @@
 		2BEC5D6C21746A5A00E0902B /* BLECenterCommonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */; };
 		2BEC5D6E217470C300E0902B /* BLEDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6D217470C300E0902B /* BLEDataExtensions.swift */; };
 		2BEC5D702174870100E0902B /* BLECenterDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6F2174870100E0902B /* BLECenterDeviceExtension.swift */; };
+		2BEDD5A4222F6A440085A937 /* ParamsInputModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEDD5A3222F6A440085A937 /* ParamsInputModalView.swift */; };
+		2BEDD5A9223102640085A937 /* EnumSelectModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEDD5A8223102640085A937 /* EnumSelectModalView.swift */; };
+		2BEDD5AB22310CA80085A937 /* NumberInputModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEDD5AA22310CA80085A937 /* NumberInputModalView.swift */; };
 		2BFAF610216F2089003AEAD6 /* BLEDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFAF60F216F2089003AEAD6 /* BLEDataCenter.swift */; };
 		76C8C7ABC4084DA92023482F /* Pods_BLE_SwiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A9D2E2F02B2CC16DA69B09 /* Pods_BLE_SwiftUITests.framework */; };
 		F5B483AB661D4095000C7ED7 /* Pods_BLE_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFED2B6D2ED38A974E68B62 /* Pods_BLE_Swift.framework */; };
@@ -465,6 +468,9 @@
 		2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterCommonExtension.swift; sourceTree = "<group>"; };
 		2BEC5D6D217470C300E0902B /* BLEDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDataExtensions.swift; sourceTree = "<group>"; };
 		2BEC5D6F2174870100E0902B /* BLECenterDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterDeviceExtension.swift; sourceTree = "<group>"; };
+		2BEDD5A3222F6A440085A937 /* ParamsInputModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamsInputModalView.swift; sourceTree = "<group>"; };
+		2BEDD5A8223102640085A937 /* EnumSelectModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumSelectModalView.swift; sourceTree = "<group>"; };
+		2BEDD5AA22310CA80085A937 /* NumberInputModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInputModalView.swift; sourceTree = "<group>"; };
 		2BFAF60F216F2089003AEAD6 /* BLEDataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDataCenter.swift; sourceTree = "<group>"; };
 		3FFED2B6D2ED38A974E68B62 /* Pods_BLE_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLE_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43E8BBB9CBBFC5F3B677A6E5 /* Pods-BLE-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLE-Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-BLE-Swift/Pods-BLE-Swift.release.xcconfig"; sourceTree = "<group>"; };
@@ -551,6 +557,7 @@
 		2B2E27442173263500726FC7 /* Bases */ = {
 			isa = PBXGroup;
 			children = (
+				2BEDD5A2222F69BD0085A937 /* Views */,
 				2BA23FA821E58AA200EF1B77 /* Extensions */,
 				2B62A55621DDD81D0051DD38 /* Custom */,
 				2B5832F2217704B400259593 /* Models */,
@@ -1297,6 +1304,16 @@
 			path = APIs;
 			sourceTree = "<group>";
 		};
+		2BEDD5A2222F69BD0085A937 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2BEDD5A3222F6A440085A937 /* ParamsInputModalView.swift */,
+				2BEDD5A8223102640085A937 /* EnumSelectModalView.swift */,
+				2BEDD5AA22310CA80085A937 /* NumberInputModalView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		A31EC39E90189A6891C76CEB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1660,6 +1677,7 @@
 				2B9DD97821E72C7600C215E5 /* SDOtaVC.swift in Sources */,
 				2B06DDED222397180062E7CB /* ProtocolObjCell.swift in Sources */,
 				2B5832E22175832200259593 /* StringExtensions.swift in Sources */,
+				2BEDD5A4222F6A440085A937 /* ParamsInputModalView.swift in Sources */,
 				2B4AB46921F174D200EF5327 /* ReturnFormatVC.swift in Sources */,
 				2B56A15421F6F0B50073E2A7 /* ToolManagerVC.swift in Sources */,
 				2B5832F4217704CD00259593 /* TableMenu.swift in Sources */,
@@ -1676,6 +1694,7 @@
 				2B4AB47221F2BAFA00EF5327 /* NumberInputView.swift in Sources */,
 				2B56A15821F6F1060073E2A7 /* AppSettingVC.swift in Sources */,
 				2B7AB99021EECE5900D01E39 /* AddDeviceTestVC.swift in Sources */,
+				2BEDD5AB22310CA80085A937 /* NumberInputModalView.swift in Sources */,
 				2B80C1EC21EC35D600FE7BF7 /* PrefixAddVC.swift in Sources */,
 				2B2F8A7422262F0C0078D69F /* TestConfigVC.swift in Sources */,
 				2B9DD96A21E717EA00C215E5 /* PrefixCell.swift in Sources */,
@@ -1712,6 +1731,7 @@
 				2BE7704C21E49A3600FD6374 /* OtaDataSelectCell.swift in Sources */,
 				2B45B96321EDFC3C0058E137 /* DeviceTestCell.swift in Sources */,
 				2B44C74921EEDE7D0037F5C3 /* CmdInputView.swift in Sources */,
+				2BEDD5A9223102640085A937 /* EnumSelectModalView.swift in Sources */,
 				2B4874D12150C83B00AC5841 /* BLEDefines.swift in Sources */,
 				2B9DD97F21E74D6100C215E5 /* OtaDataSection.swift in Sources */,
 				2BA3B58221FC29070084E291 /* ProtocolService.swift in Sources */,

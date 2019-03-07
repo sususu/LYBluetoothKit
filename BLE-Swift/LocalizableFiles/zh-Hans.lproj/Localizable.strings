@@ -83,3 +83,8 @@
 "OK" = "确定";
 "EXPORT" = "导出";
 "Are you to delete ?" = "您确定要删除吗？";
+
+"Connected Devices" = "已链接设备";
+"connected" = "已链接";
+"disconnected" = "已断链";
+"Device Information" = "设备信息";

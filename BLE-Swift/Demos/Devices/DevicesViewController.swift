@@ -14,7 +14,7 @@ class DevicesViewController: BaseViewController, UICollectionViewDataSource, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Connected Devices"
+        self.title = TR("Connected Devices")
 
         let layout = UICollectionViewFlowLayout()
         let space:CGFloat = 10
@@ -46,7 +46,8 @@ class DevicesViewController: BaseViewController, UICollectionViewDataSource, UIC
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let device = BLECenter.shared.connectedDevices[indexPath.item];
 //        BLECenter.shared.defaultInteractionDeviceName = device.name
-        let vc = DevicesVC()
+        let vc = DeviceInfoViewController(device: device);
+//        let vc = DevicesVC()
         navigationController?.pushViewController(vc, animated: true)
     }
 

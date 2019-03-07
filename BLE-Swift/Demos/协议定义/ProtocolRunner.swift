@@ -21,7 +21,7 @@ class ProtocolRunner {
              errorCallback: ((BLEError)->Void)?) {
         
         if let sendData = getCmdData(pcl: pcl) {
-            BLECenter.shared.send(data: sendData, recvCount: pcl.returnCount, dataArrayCallback: { (datas, err) in
+            _ = BLECenter.shared.send(data: sendData, recvCount: pcl.returnCount, dataArrayCallback: { (datas, err) in
                 
                 if err != nil {
                     errorCallback?(err!)

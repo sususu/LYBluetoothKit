@@ -97,15 +97,26 @@ class ConnectVC: BaseTableViewController, LeftDeviceCellDelegate, UISearchBarDel
     func filterDevices(withName name: String?) {
         guard let str = name, str.count > 0 else {
             self.filteredDevices = self.devices
-            tableView.reloadData()
+            sortAndReloadTableView()
             return
         }
         
         self.filteredDevices = self.devices.filter({ (p) -> Bool in
             return p.name.contains(str)
         })
-        tableView.reloadData()
         
+        sortAndReloadTableView()
+    }
+    
+    func sortAndReloadTableView() {
+        self.filteredDevices.sort { (d1, d2) -> Bool in
+            if d1.rssi == d2.rssi {
+                return d1.name > d2.name
+            } else {
+                return d1.rssi > d2.rssi
+            }
+        }
+        tableView.reloadData()
     }
     
     
