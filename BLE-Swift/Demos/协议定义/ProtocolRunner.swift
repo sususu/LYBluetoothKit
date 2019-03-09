@@ -183,7 +183,7 @@ class ProtocolRunner {
                 let len = Int(tmp[0]) ?? 0
                 let name = tmp[1]
                 let type = tmp[2]
-                if data.count > index + len {
+                if data.count >= index + len {
                     
                     // 普通整型
                     if type == "Int" {

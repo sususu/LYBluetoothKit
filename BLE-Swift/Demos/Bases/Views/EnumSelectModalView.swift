@@ -87,6 +87,9 @@ class EnumSelectModalView: UIView, UITableViewDataSource, UITableViewDelegate {
         tableView.layer.masksToBounds = true
         contentView.addSubview(tableView!)
         
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(selfClick))
+        addGestureRecognizer(tap)
     }
     
     
@@ -108,4 +111,8 @@ class EnumSelectModalView: UIView, UITableViewDataSource, UITableViewDelegate {
         hide()
     }
     
+    
+    @objc func selfClick() {
+        hide()
+    }
 }

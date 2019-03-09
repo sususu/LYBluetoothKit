@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Bugly
 
 let kFirmwareFilePath = StorageUtils.getDocPath() + "/Firmwares"
 
@@ -20,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
     
+        Bugly.start(withAppId: "8092dc4a83")
+        
         createFirmwareDirectory()
         
         SlideMenuOptions.leftViewWidth = UIScreen.main.bounds.width - 80;
@@ -77,10 +80,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 如果是协议导入
         if fileName.hasPrefix("BLE-Appscomm_ProtocolMenus") {
-            let alert = UIAlertController(title: "非常重要", message: "是否要覆盖本地的协议配置信息？", preferredStyle: .alert)
+            let alert = UIAlertController(title: "非常重要", message: "是否要覆盖本地（相同名字）的协议配置信息？", preferredStyle: .alert)
             let ok = UIAlertAction(title: "确定", style: .default) { (letion) in
                 let data = (try? Data(contentsOf: url)) ?? Data()
-                _ = StorageUtils.save(data, forKey: ProtocolService.kMenusCacheKey)
+                if let tmp: [ProtocolMenu] = try? JSONDecoder().decode([ProtocolMenu].self, from: data) {
+                    for pm in tmp {
+                        ProtocolService.shared.protocolMenus.remove(pm)
+                    }
+                    for pm in tmp {
+                        ProtocolService.shared.protocolMenus.insert(pm, at: 0)
+                    }
+                }
+                
+                ProtocolService.shared.saveMenus()
                 ProtocolService.shared.refreshMenusFromDisk()
             }
             let cancel = UIAlertAction(title: "取消", style: .cancel) { (action) in
@@ -98,7 +110,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let alert = UIAlertController(title: "非常重要", message: "是否要覆盖本地的工具配置信息？", preferredStyle: .alert)
             let ok = UIAlertAction(title: "确定", style: .default) { (letion) in
                 let data = (try? Data(contentsOf: url)) ?? Data()
-                _ = StorageUtils.save(data, forKey: kDeviceProductListKey)
+                if let tmp: [DeviceProduct] = try? JSONDecoder().decode([DeviceProduct].self, from: data) {
+                    for dp in tmp {
+                        ToolsService.shared.products.remove(dp)
+                    }
+                    
+                    for dp in tmp {
+                        ToolsService.shared.products.insert(dp, at: 0)
+                    }
+                    
+                }
+                ToolsService.shared.saveProductsToDisk()
                 ToolsService.shared.refreshToolsFromDisk()
             }
             let cancel = UIAlertAction(title: "取消", style: .cancel) { (action) in

@@ -31,4 +31,11 @@ class DeviceProduct: NSObject, Codable, NSCopying {
         ndp.testGroups = self.testGroups
         return ndp
     }
+    
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let other = object as? DeviceProduct else {
+            return false
+        }
+        return self.name == other.name
+    }
 }

@@ -141,7 +141,7 @@ class ToolManagerVC: BaseViewController, UITableViewDataSource, UITableViewDeleg
         let indexPath = self.tableView.indexPath(for: cell)!
         let po = self.toolsList[indexPath.row]
         
-        let alert = UIAlertController(title: "非常重要", message: "是否要覆盖本地的工具配置信息？", preferredStyle: .alert)
+        let alert = UIAlertController(title: "非常重要", message: "是否要覆盖本地（相同名字项目）的工具配置信息？", preferredStyle: .alert)
         let ok = UIAlertAction(title: "确定", style: .default) { (letion) in
             self.loadDetailAndMerget(po: po)
         }
@@ -177,7 +177,18 @@ class ToolManagerVC: BaseViewController, UITableViewDataSource, UITableViewDeleg
                 self.showError("工具数据为空，无法合并!")
                 return
             }
-            _ = StorageUtils.save(data, forKey: kDeviceProductListKey)
+            
+            if let tmp: [DeviceProduct] = try? JSONDecoder().decode([DeviceProduct].self, from: data) {
+                for dp in tmp {
+                    ToolsService.shared.products.remove(dp)
+                }
+                
+                for dp in tmp {
+                    ToolsService.shared.products.insert(dp, at: 0)
+                }
+                
+            }
+            ToolsService.shared.saveProductsToDisk()
             ToolsService.shared.refreshToolsFromDisk()
             self.showSuccess("合并成功")
         }

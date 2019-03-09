@@ -13,6 +13,7 @@ target 'BLE-Swift' do
   pod 'Alamofire'
 #  pod 'MLeaksFinder'
   pod 'MJRefresh'
+  pod 'Bugly'
 #  pod 'SlideMenuControllerSwift'
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!

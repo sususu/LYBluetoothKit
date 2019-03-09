@@ -139,7 +139,7 @@ class ProtocolManagerVC: BaseViewController, UITableViewDataSource, UITableViewD
         let indexPath = self.tableView.indexPath(for: cell)!
         let po = self.protocolList[indexPath.row]
         
-        let alert = UIAlertController(title: "非常重要", message: "是否要覆盖本地的协议配置信息？", preferredStyle: .alert)
+        let alert = UIAlertController(title: "非常重要", message: "是否要覆盖本地（相同名字）的协议配置信息？", preferredStyle: .alert)
         let ok = UIAlertAction(title: "确定", style: .default) { (letion) in
             self.loadDetailAndMerget(po: po)
         }
@@ -175,7 +175,17 @@ class ProtocolManagerVC: BaseViewController, UITableViewDataSource, UITableViewD
                 self.showError("协议数据为空，无法合并!")
                 return
             }
-            _ = StorageUtils.save(data, forKey: ProtocolService.kMenusCacheKey)
+            
+            if let tmp: [ProtocolMenu] = try? JSONDecoder().decode([ProtocolMenu].self, from: data) {
+                for pm in tmp {
+                    ProtocolService.shared.protocolMenus.remove(pm)
+                }
+                for pm in tmp {
+                    ProtocolService.shared.protocolMenus.insert(pm, at: 0)
+                }
+            }
+            
+            ProtocolService.shared.saveMenus()
             ProtocolService.shared.refreshMenusFromDisk()
             self.showSuccess("合并成功")
         }

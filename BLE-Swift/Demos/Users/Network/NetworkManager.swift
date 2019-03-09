@@ -19,7 +19,7 @@ class NetworkManager {
 //        LYNetworking.setApiBasePath(kTestBaseUrl)
         LYNetworking.setApiBasePath(kBaseUrl)
         LYNetworking.setDebugLoggerSwitch(true)
-        LYNetworking.setTimeoutInterval(30)
+        LYNetworking.setTimeoutInterval(20)
 
         
         LYErrorCodeManager.shared()?.setMsg("无法连接服务器", forCode: -1004)

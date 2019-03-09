@@ -267,7 +267,7 @@ class ProtocolExcuteVC: BaseViewController, UICollectionViewDataSource, UICollec
     
     private var resultStr: String?
     @IBAction func copyResultBtnClick(_ sender: Any) {
-        UIPasteboard.general.string = resultStr
+        UIPasteboard.general.string = resultStr ?? ""
     }
     
     @IBAction func copyBtnClick(_ sender: Any) {

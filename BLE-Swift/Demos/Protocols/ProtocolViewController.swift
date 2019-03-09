@@ -57,7 +57,7 @@ class ProtocolViewController: BaseViewController, UITableViewDataSource, UITable
         let ok = UIAlertAction(title: TR("OK"), style: .default) { (action) in
             self.createNewMenu(withName: alert.textFields![0].text ?? "")
         }
-        let cancel = UIAlertAction(title: TR("NO"), style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: TR("Cancel"), style: .cancel, handler: nil)
         alert.addAction(ok)
         alert.addAction(cancel)
         alert.addTextField { (tf) in
