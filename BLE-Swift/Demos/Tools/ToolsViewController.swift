@@ -65,7 +65,7 @@ class ToolsViewController: BaseViewController, UITableViewDataSource, UITableVie
         alert.addAction(cancel)
         alert.addTextField { (tf) in
             tf.placeholder = TR("产品名称")
-            tf.becomeFirstResponder()
+//            tf.becomeFirstResponder()
         }
         alert.addTextField { (tf) in
             tf.placeholder = TR("蓝牙名称")
@@ -141,7 +141,7 @@ class ToolsViewController: BaseViewController, UITableViewDataSource, UITableVie
         alert.addTextField { (tf) in
             tf.placeholder = TR("产品名称")
             tf.text = pm.name
-            tf.becomeFirstResponder()
+//            tf.becomeFirstResponder()
         }
         alert.addTextField { (tf) in
             tf.placeholder = TR("蓝牙名称")
@@ -166,7 +166,7 @@ class ToolsViewController: BaseViewController, UITableViewDataSource, UITableVie
         alert.addAction(cancel)
         alert.addTextField { (tf) in
             tf.placeholder = TR("产品名称")
-            tf.becomeFirstResponder()
+//            tf.becomeFirstResponder()
         }
         alert.addTextField { (tf) in
             tf.placeholder = TR("蓝牙名称")

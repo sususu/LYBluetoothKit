@@ -217,6 +217,12 @@
 		2BEDD5A4222F6A440085A937 /* ParamsInputModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEDD5A3222F6A440085A937 /* ParamsInputModalView.swift */; };
 		2BEDD5A9223102640085A937 /* EnumSelectModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEDD5A8223102640085A937 /* EnumSelectModalView.swift */; };
 		2BEDD5AB22310CA80085A937 /* NumberInputModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEDD5AA22310CA80085A937 /* NumberInputModalView.swift */; };
+		2BEDD5AF22323C750085A937 /* EnumManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEDD5AD22323C750085A937 /* EnumManagerVC.swift */; };
+		2BEDD5B022323C750085A937 /* EnumManagerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEDD5AE22323C750085A937 /* EnumManagerVC.xib */; };
+		2BEDD5B322323F100085A937 /* EnumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEDD5B222323F100085A937 /* EnumService.swift */; };
+		2BEDD5B522323F220085A937 /* EnumObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEDD5B422323F220085A937 /* EnumObj.swift */; };
+		2BEDD5B8223240720085A937 /* EditEnumVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEDD5B6223240720085A937 /* EditEnumVC.swift */; };
+		2BEDD5B9223240720085A937 /* EditEnumVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEDD5B7223240720085A937 /* EditEnumVC.xib */; };
 		2BFAF610216F2089003AEAD6 /* BLEDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFAF60F216F2089003AEAD6 /* BLEDataCenter.swift */; };
 		76C8C7ABC4084DA92023482F /* Pods_BLE_SwiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A9D2E2F02B2CC16DA69B09 /* Pods_BLE_SwiftUITests.framework */; };
 		F5B483AB661D4095000C7ED7 /* Pods_BLE_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFED2B6D2ED38A974E68B62 /* Pods_BLE_Swift.framework */; };
@@ -471,6 +477,12 @@
 		2BEDD5A3222F6A440085A937 /* ParamsInputModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamsInputModalView.swift; sourceTree = "<group>"; };
 		2BEDD5A8223102640085A937 /* EnumSelectModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumSelectModalView.swift; sourceTree = "<group>"; };
 		2BEDD5AA22310CA80085A937 /* NumberInputModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInputModalView.swift; sourceTree = "<group>"; };
+		2BEDD5AD22323C750085A937 /* EnumManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumManagerVC.swift; sourceTree = "<group>"; };
+		2BEDD5AE22323C750085A937 /* EnumManagerVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EnumManagerVC.xib; sourceTree = "<group>"; };
+		2BEDD5B222323F100085A937 /* EnumService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumService.swift; sourceTree = "<group>"; };
+		2BEDD5B422323F220085A937 /* EnumObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumObj.swift; sourceTree = "<group>"; };
+		2BEDD5B6223240720085A937 /* EditEnumVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEnumVC.swift; sourceTree = "<group>"; };
+		2BEDD5B7223240720085A937 /* EditEnumVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditEnumVC.xib; sourceTree = "<group>"; };
 		2BFAF60F216F2089003AEAD6 /* BLEDataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDataCenter.swift; sourceTree = "<group>"; };
 		3FFED2B6D2ED38A974E68B62 /* Pods_BLE_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLE_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43E8BBB9CBBFC5F3B677A6E5 /* Pods-BLE-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLE-Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-BLE-Swift/Pods-BLE-Swift.release.xcconfig"; sourceTree = "<group>"; };
@@ -1113,6 +1125,7 @@
 		2B918D912153363900B0B5DE /* Demos */ = {
 			isa = PBXGroup;
 			children = (
+				2BEDD5AC22323C290085A937 /* 枚举管理 */,
 				2B45B94C21EDABC90058E137 /* Models */,
 				2B62A56E21DF68630051DD38 /* 协议定义 */,
 				2B2E27442173263500726FC7 /* Bases */,
@@ -1314,6 +1327,27 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		2BEDD5AC22323C290085A937 /* 枚举管理 */ = {
+			isa = PBXGroup;
+			children = (
+				2BEDD5B122323EFD0085A937 /* Services */,
+				2BEDD5AD22323C750085A937 /* EnumManagerVC.swift */,
+				2BEDD5AE22323C750085A937 /* EnumManagerVC.xib */,
+				2BEDD5B6223240720085A937 /* EditEnumVC.swift */,
+				2BEDD5B7223240720085A937 /* EditEnumVC.xib */,
+			);
+			path = "枚举管理";
+			sourceTree = "<group>";
+		};
+		2BEDD5B122323EFD0085A937 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2BEDD5B222323F100085A937 /* EnumService.swift */,
+				2BEDD5B422323F220085A937 /* EnumObj.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		A31EC39E90189A6891C76CEB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1462,6 +1496,7 @@
 				2B45441A21F55AF100FC3E91 /* ZdOtaDisplayVC.xib in Resources */,
 				2B80C21E21EC74EB00FE7BF7 /* FirmwareSaveVC.xib in Resources */,
 				2B45B95321EDC18D0058E137 /* DeviceProductCell.xib in Resources */,
+				2BEDD5B9223240720085A937 /* EditEnumVC.xib in Resources */,
 				2B80C1E021EC33B600FE7BF7 /* Localizable.strings in Resources */,
 				2B62A58C21E087E60051DD38 /* ResultDisplayCell.xib in Resources */,
 				2B76006821F30EDC006B4C63 /* ZdOtaFirmwaresVC.xib in Resources */,
@@ -1473,6 +1508,7 @@
 				2B2F8A79222635A10078D69F /* TestConfigCell.xib in Resources */,
 				2B7C9233221FE6DB005C905A /* ModifyNameVC.xib in Resources */,
 				2B9DD97021E7205E00C215E5 /* otaPrefix.json in Resources */,
+				2BEDD5B022323C750085A937 /* EnumManagerVC.xib in Resources */,
 				2B4AB47C21F3035B00EF5327 /* ZdOtaConfigVC.xib in Resources */,
 				2B3657BA21DDB05C0070E7AB /* LeftDeviceCell.xib in Resources */,
 				2B7C923B221FE70E005C905A /* ForgetPwdVC.xib in Resources */,
@@ -1635,6 +1671,7 @@
 				2BEC5D702174870100E0902B /* BLECenterDeviceExtension.swift in Sources */,
 				2B45B95F21EDF5C80058E137 /* DeviceTestUnit.swift in Sources */,
 				2B76006721F30EDC006B4C63 /* ZdOtaFirmwaresVC.swift in Sources */,
+				2BEDD5B8223240720085A937 /* EditEnumVC.swift in Sources */,
 				2B62A58421E04DB70051DD38 /* ProtocolMenuDetailCell.swift in Sources */,
 				2BA23FA221E4B5FF00EF1B77 /* FirmwareTypeVC.swift in Sources */,
 				2BE7705021E4A54C00FD6374 /* FirmwareSelectVC.swift in Sources */,
@@ -1658,6 +1695,7 @@
 				2B5832F02176E46C00259593 /* DevicesVC.swift in Sources */,
 				2B5832F6217705D400259593 /* TableSection.swift in Sources */,
 				2BA23F9E21E4B05700EF1B77 /* FirmwareSaveVC.swift in Sources */,
+				2BEDD5B322323F100085A937 /* EnumService.swift in Sources */,
 				2B9DD97221E727D500C215E5 /* BLEDeviceExtensions.swift in Sources */,
 				2B62A58F21E0A0880051DD38 /* BLEDataError.swift in Sources */,
 				2B2E27492173266500726FC7 /* BaseTableViewController.swift in Sources */,
@@ -1673,9 +1711,11 @@
 				2BE7701621E2FBA700FD6374 /* BLEStringExtensions.swift in Sources */,
 				2B50C4DF221A9AC000D699D3 /* NetworkCode.swift in Sources */,
 				2B4874CF214F911300AC5841 /* BLEDevice.swift in Sources */,
+				2BEDD5B522323F220085A937 /* EnumObj.swift in Sources */,
 				2BEC5D6E217470C300E0902B /* BLEDataExtensions.swift in Sources */,
 				2B9DD97821E72C7600C215E5 /* SDOtaVC.swift in Sources */,
 				2B06DDED222397180062E7CB /* ProtocolObjCell.swift in Sources */,
+				2BEDD5AF22323C750085A937 /* EnumManagerVC.swift in Sources */,
 				2B5832E22175832200259593 /* StringExtensions.swift in Sources */,
 				2BEDD5A4222F6A440085A937 /* ParamsInputModalView.swift in Sources */,
 				2B4AB46921F174D200EF5327 /* ReturnFormatVC.swift in Sources */,

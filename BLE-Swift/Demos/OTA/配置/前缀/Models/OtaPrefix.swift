@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct OtaPrefix: Codable {
+class OtaPrefix: Codable {
     
     var deviceName = ""
     var bleName = ""

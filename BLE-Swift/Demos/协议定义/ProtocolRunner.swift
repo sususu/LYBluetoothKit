@@ -185,6 +185,7 @@ class ProtocolRunner {
                 let type = tmp[2]
                 if data.count > index + len {
                     
+                    // 普通整型
                     if type == "Int" {
                         var intValue = 0
                         for i in 0 ..< len {
@@ -193,7 +194,64 @@ class ProtocolRunner {
                         dict[name] = intValue
                         index += len
                         
-                    } else {
+                    }
+                    // 枚举类型
+                    else if type == "Enum" {
+                        var intValue = 0
+                        for i in 0 ..< len {
+                            intValue += Int(data[index + i]) << (8 * i)
+                        }
+                        
+                        var hasEo = false
+                        for eo in EnumService.shared.enums {
+                            if eo.name == name {
+                                for i in 0 ..< eo.valueArr.count {
+                                    if intValue == eo.valueArr[i] {
+                                        hasEo = true
+                                        dict[name] = eo.labelArr[i]
+                                        break
+                                    }
+                                }
+                            }
+                            if hasEo {
+                                break
+                            }
+                        }
+                        if !hasEo {
+                            dict[name] = intValue
+                        }
+                        
+                        index += len
+                    }
+                    else if type == "Time" {
+                        let hour = data[index]
+                        let min = data[index + 1]
+                        let sec = data[index + 2]
+                        
+                        dict[name] = "\(hour):\(min):\(sec)"
+                        index += 3
+                    }
+                    else if type == "Date" {
+                        let year = data[index] + (data[index + 1] << 8)
+                        let month = data[index + 2]
+                        let day = data[index + 3]
+                        
+                        dict[name] = "\(year)-\(month)-\(day)"
+                        index += 4
+                    }
+                    else if type == "Datetime" {
+                        
+                        let year = data[index] + (data[index + 1] << 8)
+                        let month = data[index + 2]
+                        let day = data[index + 3]
+                        let hour = data[index + 4]
+                        let min = data[index + 5]
+                        let sec = data[index + 6]
+                        
+                        dict[name] = "\(year)-\(month)-\(day) \(hour):\(min):\(sec)"
+                        index += 7
+                    }
+                    else {
                         if len == 0 {
                             let strData = data.subdata(in: index ..< data.count)
                             let str = String(bytes: strData, encoding: .utf8)

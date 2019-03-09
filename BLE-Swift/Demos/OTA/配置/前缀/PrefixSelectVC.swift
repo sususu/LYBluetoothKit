@@ -34,6 +34,7 @@ class PrefixSelectVC: BaseViewController, UITableViewDataSource, UITableViewDele
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.allowsSelectionDuringEditing = true
         tableView.register(UINib(nibName: "PrefixCell", bundle: nil), forCellReuseIdentifier: "cellId")
         
         title = TR("OTA蓝牙前缀")
@@ -88,16 +89,39 @@ class PrefixSelectVC: BaseViewController, UITableViewDataSource, UITableViewDele
         prefixs[destinationIndexPath.row] = tmp
     }
     
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let rowActions = [
+            UITableViewRowAction(style: .destructive, title: "删除", handler: { (action, indexPath) in
+                self.deletePrefix(atIndexPath: indexPath)
+            }),
+            UITableViewRowAction(style: .normal, title: "编辑", handler: { (action, indexPath) in
+                self.editPrefix(atIndexPath: indexPath)
+            })
+        ]
+        return rowActions
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle != .delete {
             return
         }
+        deletePrefix(atIndexPath: indexPath)
+    }
+    
+    private func deletePrefix(atIndexPath indexPath: IndexPath) {
         prefixs.remove(at: indexPath.row)
         tableView.beginUpdates()
         tableView.deleteRow(at: indexPath, with: .automatic)
         tableView.endUpdates()
         OtaService.shared.prefixs = prefixs
         OtaService.shared.savePrefixsToDisk()
+    }
+    
+    private func editPrefix(atIndexPath indexPath: IndexPath) {
+        let vc = PrefixAddVC()
+        vc.prefix = prefixs[indexPath.row]
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     // MARK: - tableView
@@ -118,8 +142,12 @@ class PrefixSelectVC: BaseViewController, UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        delegate?.didSelectPrefixStr(prefixStr: prefixs[indexPath.row].prefix, bleName: prefixs[indexPath.row].bleName)
-        navigationController?.popViewController(animated: true)
+        if tableView.isEditing {
+            editPrefix(atIndexPath: indexPath)
+        } else {
+            delegate?.didSelectPrefixStr(prefixStr: prefixs[indexPath.row].prefix, bleName: prefixs[indexPath.row].bleName)
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

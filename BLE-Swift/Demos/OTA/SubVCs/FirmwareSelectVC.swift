@@ -40,7 +40,8 @@ class FirmwareSelectVC: BaseViewController, UITableViewDataSource, UITableViewDe
             tableView.allowsMultipleSelection = true
         }
         
-        title = TR("Firmwares")
+        title = Firmware.getTypeName(withType: selectType)
+        
         setNavRightButton(text: TR("DONE"), sel: #selector(doneBtnClick))
     }
     
@@ -82,7 +83,11 @@ class FirmwareSelectVC: BaseViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch selectType! {
+        return getTitle(forType: selectType!)
+    }
+    
+    func getTitle(forType type: OtaDataType) -> String {
+        switch type {
         case .platform:
             return TR("Firmware List")
         case .touchPanel:

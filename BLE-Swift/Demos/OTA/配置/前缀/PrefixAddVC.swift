@@ -20,6 +20,8 @@ class PrefixAddVC: BaseViewController {
     
     @IBOutlet weak var otaPrefixTF: UITextField!
     
+    var prefix: OtaPrefix?
+    
     weak var delegate: PrefixAddVCDelegate?
     
     override func viewDidLoad() {
@@ -28,6 +30,12 @@ class PrefixAddVC: BaseViewController {
         title = TR("Add OTA Prefix")
         
         setNavRightButton(text: TR("SAVE"), sel: #selector(saveBtnClick))
+        
+        if let pf = prefix {
+            nameTF.text = pf.deviceName
+            bleNamePrefixTF.text = pf.bleName
+            otaPrefixTF.text = pf.prefix
+        }
         
         nameTF.becomeFirstResponder()
     }
@@ -50,10 +58,21 @@ class PrefixAddVC: BaseViewController {
             return
         }
         
-        let pf = OtaPrefix(deviceName: deviceName, bleName: bleName, prefix: otaPrefix)
-        OtaService.shared.prefixs.insert(pf, at: 0)
-        OtaService.shared.savePrefixsToDisk()
-        delegate?.didSavePrefix(prefix: pf)
+        if let pf = prefix {
+            pf.deviceName = deviceName
+            pf.bleName = bleName
+            pf.prefix = otaPrefix
+            
+            OtaService.shared.savePrefixsToDisk()
+            delegate?.didSavePrefix(prefix: pf)
+            
+        } else {
+            let pf = OtaPrefix(deviceName: deviceName, bleName: bleName, prefix: otaPrefix)
+            OtaService.shared.prefixs.insert(pf, at: 0)
+            OtaService.shared.savePrefixsToDisk()
+            delegate?.didSavePrefix(prefix: pf)
+        }
+        
         showSuccess(TR("Success"))
         
         navigationController?.popViewController(animated: true)

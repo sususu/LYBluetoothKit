@@ -62,7 +62,7 @@ class ProtocolViewController: BaseViewController, UITableViewDataSource, UITable
         alert.addAction(cancel)
         alert.addTextField { (tf) in
             tf.placeholder = TR("协议分组名称")
-            tf.becomeFirstResponder()
+//            tf.becomeFirstResponder()
         }
         navigationController?.present(alert, animated: true, completion: nil)
         

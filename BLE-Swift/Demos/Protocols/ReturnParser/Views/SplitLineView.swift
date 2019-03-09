@@ -32,8 +32,35 @@ class SplitLineView: UIView {
     
     var typeStr: String {
         get {
-            return type == .int ? "Int" : "Str"
+            if type == .int {
+                return "Int"
+            }
+            else if type == .time {
+                return "Time"
+            }
+            else if type == .date {
+                return "Date"
+            }
+            else if type == .datetime {
+                return "Datetime"
+            }
+            else if type == .enumeration {
+                return "Enum"
+            }
+            else {
+                return "Str"
+            }
         }
+    }
+    
+    convenience init(frame: CGRect, enumObj: EnumObj) {
+        self.init(frame: frame)
+        self.type = .enumeration
+        typeLbl.text = "Enum"
+        nameTF.text = enumObj.name
+        nameTF.isEnabled = false
+        
+        numberInput.textField.text = "1"
     }
     
     convenience init(frame: CGRect, type: ParamType) {
@@ -42,8 +69,26 @@ class SplitLineView: UIView {
         
         if type == .int {
             typeLbl.text = "Int"
-        } else {
+        } else if type == .string {
             typeLbl.text = "Str"
+        } else if type == .time {
+            typeLbl.text = "Time"
+            numberInput.textField.text = "3"
+            numberInput.textField.isEnabled = false
+            numberInput.jiaBtn.isEnabled = false
+            numberInput.jianBtn.isEnabled = false
+        } else if type == .date {
+            typeLbl.text = "Date"
+            numberInput.textField.text = "4"
+            numberInput.textField.isEnabled = false
+            numberInput.jiaBtn.isEnabled = false
+            numberInput.jianBtn.isEnabled = false
+        } else if type == .datetime {
+            typeLbl.text = "DT"
+            numberInput.textField.text = "7"
+            numberInput.textField.isEnabled = false
+            numberInput.jiaBtn.isEnabled = false
+            numberInput.jianBtn.isEnabled = false
         }
     }
 

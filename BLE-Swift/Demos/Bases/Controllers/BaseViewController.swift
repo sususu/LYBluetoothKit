@@ -155,7 +155,7 @@ class BaseViewController: UIViewController {
         
         if image != nil {
             btnWidth = image!.size.width / image!.size.height * btnHeight
-            let offsetLeft = btnWidth - image!.size.width
+            let offsetLeft = (btnWidth - image!.size.width) / 2
             btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -offsetLeft, bottom: 0, right: 0)
         }
         
@@ -181,7 +181,7 @@ class BaseViewController: UIViewController {
         
         if image != nil {
             btnWidth = image!.size.width / image!.size.height * btnHeight
-            let offsetRight = btnWidth - image!.size.width
+            let offsetRight = (btnWidth - image!.size.width) / 2
             btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -offsetRight)
         }
         

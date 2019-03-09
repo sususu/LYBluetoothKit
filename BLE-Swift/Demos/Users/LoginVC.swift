@@ -21,8 +21,8 @@ class LoginVC: BaseViewController {
 
         self.title = "登录"
         
-        emailTF.text = "sujiang@appscomm.cn";
-        passwordTF.text = "qwerty";
+//        emailTF.text = "sujiang@appscomm.cn";
+//        passwordTF.text = "qwerty";
     }
 
 

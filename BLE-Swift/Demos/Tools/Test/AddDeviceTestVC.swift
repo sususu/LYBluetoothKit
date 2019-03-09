@@ -234,7 +234,7 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
         alert.addAction(cancel)
         alert.addTextField { (tf) in
             tf.placeholder = "分组名"
-            tf.becomeFirstResponder()
+//            tf.becomeFirstResponder()
         }
         navigationController?.present(alert, animated: true, completion: nil)
     }
