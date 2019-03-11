@@ -53,6 +53,9 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
         let fmSection = MenuSection(title: "")
         sections.append(fmSection)
         
+        let testSection = MenuSection(title: "")
+        sections.append(testSection)
+        
         let settingSection = MenuSection(title: "")
         sections.append(settingSection)
         
@@ -64,6 +67,10 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
         fmSection.rows?.append(fmRow)
         fmSection.rows?.append(xyRow)
         fmSection.rows?.append(gjRow)
+        
+        let testRow = MenuRow(title: "设备测试", icon: nil, selector: nil, pushVC: "StressTestingVC")
+        testSection.rows = [MenuRow]()
+        testSection.rows?.append(testRow)
         
         
         let settingRow = MenuRow(title: "账号设置", icon: nil, selector: nil, pushVC: "AppSettingVC")
