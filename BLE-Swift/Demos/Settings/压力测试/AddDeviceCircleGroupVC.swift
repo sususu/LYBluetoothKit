@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AddDeviceCircleGroupVCDelegate: NSObjectProtocol {
-    func didAddCircleGroup(_ testGroup: CircleGroup);
+    func didAddCircleGroup(_ testGroup: CircleGroup)
 }
 
 class AddDeviceCircleGroupVC: BaseViewController {
@@ -23,6 +23,9 @@ class AddDeviceCircleGroupVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "添加循环组"
+        
+        numberInputView.textField.text = "1"
 
         setNavRightButton(text: "保存", sel: #selector(saveCircleGroupClick))
     }
@@ -30,7 +33,21 @@ class AddDeviceCircleGroupVC: BaseViewController {
 
     // MARK: - 事件处理
     @objc func saveCircleGroupClick() {
+        guard let name = nameTF.text else {
+            showError("请输入名称")
+            return
+        }
         
+        guard let numStr = numberInputView.textField.text else {
+            showError("请输入重复次数")
+            return
+        }
+        
+        let cg = CircleGroup()
+        cg.name = name
+        cg.repeatCount = Int(numStr) ?? 1
+        delegate?.didAddCircleGroup(cg)
+        navigationController?.popViewController(animated: true)
     }
     
     

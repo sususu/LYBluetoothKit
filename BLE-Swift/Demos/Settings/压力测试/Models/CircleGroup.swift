@@ -8,9 +8,14 @@
 
 import UIKit
 
-class CircleGroup: Codable {
-
+class CircleGroup: Codable, Equatable {
+    
     var repeatCount = 1
     var name = ""
     
+    var tests: [CircleTest] = []
+    
+    static func == (lhs: CircleGroup, rhs: CircleGroup) -> Bool {
+        return lhs.name == rhs.name
+    }
 }

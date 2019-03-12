@@ -33,6 +33,7 @@
 		2B314733223638AA0018495D /* CircleGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B314732223638AA0018495D /* CircleGroup.swift */; };
 		2B314736223639840018495D /* AddDeviceCircleGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B314734223639840018495D /* AddDeviceCircleGroupVC.swift */; };
 		2B314737223639840018495D /* AddDeviceCircleGroupVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B314735223639840018495D /* AddDeviceCircleGroupVC.xib */; };
+		2B3147392236852E0018495D /* CircleTestGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3147382236852E0018495D /* CircleTestGroupView.swift */; };
 		2B36578421DC9D100070E7AB /* apis_devices.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B36578321DC9D100070E7AB /* apis_devices.plist */; };
 		2B36578721DCA42E0070E7AB /* BLEDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36578621DCA42E0070E7AB /* BLEDataParser.swift */; };
 		2B36578C21DCBFC90070E7AB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36578B21DCBFC90070E7AB /* HomeViewController.swift */; };
@@ -281,6 +282,7 @@
 		2B314732223638AA0018495D /* CircleGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleGroup.swift; sourceTree = "<group>"; };
 		2B314734223639840018495D /* AddDeviceCircleGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDeviceCircleGroupVC.swift; sourceTree = "<group>"; };
 		2B314735223639840018495D /* AddDeviceCircleGroupVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddDeviceCircleGroupVC.xib; sourceTree = "<group>"; };
+		2B3147382236852E0018495D /* CircleTestGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleTestGroupView.swift; sourceTree = "<group>"; };
 		2B36578321DC9D100070E7AB /* apis_devices.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = apis_devices.plist; sourceTree = "<group>"; };
 		2B36578621DCA42E0070E7AB /* BLEDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDataParser.swift; sourceTree = "<group>"; };
 		2B36578B21DCBFC90070E7AB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -644,6 +646,7 @@
 		2B31472A223635150018495D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2B3147382236852E0018495D /* CircleTestGroupView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1733,6 +1736,7 @@
 				2B62A58B21E087E60051DD38 /* ResultDisplayCell.swift in Sources */,
 				2B62A57221DF68840051DD38 /* Param.swift in Sources */,
 				2B3657B621DDA83E0070E7AB /* ConnectBaseVC.swift in Sources */,
+				2B3147392236852E0018495D /* CircleTestGroupView.swift in Sources */,
 				2B62A56021DEF3DB0051DD38 /* DeviceInfo.swift in Sources */,
 				2BEC5D6C21746A5A00E0902B /* BLECenterCommonExtension.swift in Sources */,
 				2B4AB46321F0215A00EF5327 /* CmdKeyBoardView.swift in Sources */,

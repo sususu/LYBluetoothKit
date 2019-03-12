@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StressTestingVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+class StressTestingVC: BaseViewController, UITableViewDataSource, UITableViewDelegate, AddDeviceCircleGroupVCDelegate, CircleTestGroupViewDelegate {
 
     @IBOutlet weak var logView: UITextView!
     
@@ -17,17 +17,29 @@ class StressTestingVC: BaseViewController, UITableViewDataSource, UITableViewDel
     
     @IBOutlet weak var nameTF: UITextField!
     
+    var groups: [CircleGroup] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
     
     // MARK: - tableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return groups[section].tests.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return groups.count
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let ctg = CircleTestGroupView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 40), index: section)
+        ctg.update(withCg: groups[section])
+        return ctg
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -39,7 +51,7 @@ class StressTestingVC: BaseViewController, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0.001
+        return 40
     }
 
 
@@ -51,6 +63,9 @@ class StressTestingVC: BaseViewController, UITableViewDataSource, UITableViewDel
     
     
     @IBAction func addTestCircle(_ sender: Any) {
+        let vc = AddDeviceCircleGroupVC()
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 
@@ -58,6 +73,29 @@ class StressTestingVC: BaseViewController, UITableViewDataSource, UITableViewDel
     }
     
     @IBAction func readBtnClick(_ sender: Any) {
+    }
+    
+    // MARK: - 代理
+    func didAddCircleGroup(_ testGroup: CircleGroup) {
+        self.groups.append(testGroup)
+        self.tableView.reloadData()
+    }
+    
+    func cgvDidClickAdd(cg: CircleGroup) {
+        let vc = AddDeviceCircleTestVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func cgvDidClickDel(cg: CircleGroup) {
+        let alert = UIAlertController(title: nil, message: "您确定要删除", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "确定", style: .default) { (action) in
+            self.groups.remove(cg)
+            self.tableView.reloadData()
+        }
+        let cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        navigationController?.present(alert, animated: true, completion: nil)
     }
     
 }
