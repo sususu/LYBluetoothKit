@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="logView" destination="fg9-yo-c85" id="3Wb-cJ-MQN"/>
                 <outlet property="nameTF" destination="xIZ-VA-Cqz" id="FeQ-zt-J6a"/>
+                <outlet property="startStopBtn" destination="lAQ-cC-DEH" id="00A-Zz-SH7"/>
                 <outlet property="tableView" destination="ZaF-e7-eOZ" id="cYB-xZ-hez"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

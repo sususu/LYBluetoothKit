@@ -9,9 +9,9 @@
 import UIKit
 
 enum CircleTestType: Int, Codable {
-    case cmd
     case connect
     case disconnect
+    case cmd
 }
 
 class CircleTest: Codable {

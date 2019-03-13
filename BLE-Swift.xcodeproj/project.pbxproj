@@ -173,6 +173,10 @@
 		2B80C21721EC685B00FE7BF7 /* SDOtaVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B80C21921EC685B00FE7BF7 /* SDOtaVC.xib */; };
 		2B80C21E21EC74EB00FE7BF7 /* FirmwareSaveVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B80C22021EC74EB00FE7BF7 /* FirmwareSaveVC.xib */; };
 		2B8272FF21F7FA0700F6CC9E /* OtaNordicTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8272FE21F7FA0700F6CC9E /* OtaNordicTask.swift */; };
+		2B86063D2238D1E400728B0B /* DeviceTestConfigsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86063B2238D1E400728B0B /* DeviceTestConfigsVC.swift */; };
+		2B86063E2238D1E400728B0B /* DeviceTestConfigsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B86063C2238D1E400728B0B /* DeviceTestConfigsVC.xib */; };
+		2B8606402238D2C200728B0B /* DeviceTestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B86063F2238D2C200728B0B /* DeviceTestConfig.swift */; };
+		2B8606432238D51400728B0B /* CircleTestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8606422238D51400728B0B /* CircleTestService.swift */; };
 		2B918D932153365A00B0B5DE /* ConnectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B918D922153365A00B0B5DE /* ConnectVC.swift */; };
 		2B9DD96521E7145B00C215E5 /* PrefixSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9DD96321E7145B00C215E5 /* PrefixSelectVC.swift */; };
 		2B9DD96A21E717EA00C215E5 /* PrefixCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9DD96821E717EA00C215E5 /* PrefixCell.swift */; };
@@ -442,6 +446,10 @@
 		2B80C22221EC74ED00FE7BF7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FirmwareSaveVC.strings; sourceTree = "<group>"; };
 		2B80C22421EC74EE00FE7BF7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/FirmwareSaveVC.strings"; sourceTree = "<group>"; };
 		2B8272FE21F7FA0700F6CC9E /* OtaNordicTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtaNordicTask.swift; sourceTree = "<group>"; };
+		2B86063B2238D1E400728B0B /* DeviceTestConfigsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTestConfigsVC.swift; sourceTree = "<group>"; };
+		2B86063C2238D1E400728B0B /* DeviceTestConfigsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceTestConfigsVC.xib; sourceTree = "<group>"; };
+		2B86063F2238D2C200728B0B /* DeviceTestConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTestConfig.swift; sourceTree = "<group>"; };
+		2B8606422238D51400728B0B /* CircleTestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleTestService.swift; sourceTree = "<group>"; };
 		2B918D922153365A00B0B5DE /* ConnectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectVC.swift; sourceTree = "<group>"; };
 		2B9DD96321E7145B00C215E5 /* PrefixSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefixSelectVC.swift; sourceTree = "<group>"; };
 		2B9DD96821E717EA00C215E5 /* PrefixCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefixCell.swift; sourceTree = "<group>"; };
@@ -631,6 +639,8 @@
 		2B31472522362BF10018495D /* 压力测试 */ = {
 			isa = PBXGroup;
 			children = (
+				2B8606412238D4FD00728B0B /* Services */,
+				2B86063A2238D17700728B0B /* 配置操作 */,
 				2B31472F223635900018495D /* Models */,
 				2B31472A223635150018495D /* Views */,
 				2B31472622362C130018495D /* StressTestingVC.swift */,
@@ -1173,6 +1183,24 @@
 			path = LocalizableFiles;
 			sourceTree = "<group>";
 		};
+		2B86063A2238D17700728B0B /* 配置操作 */ = {
+			isa = PBXGroup;
+			children = (
+				2B86063B2238D1E400728B0B /* DeviceTestConfigsVC.swift */,
+				2B86063C2238D1E400728B0B /* DeviceTestConfigsVC.xib */,
+				2B86063F2238D2C200728B0B /* DeviceTestConfig.swift */,
+			);
+			path = "配置操作";
+			sourceTree = "<group>";
+		};
+		2B8606412238D4FD00728B0B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2B8606422238D51400728B0B /* CircleTestService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		2B918D912153363900B0B5DE /* Demos */ = {
 			isa = PBXGroup;
 			children = (
@@ -1558,6 +1586,7 @@
 				2B45B95B21EDE6C70058E137 /* DeviceTestVC.xib in Resources */,
 				2B06DDEE222397180062E7CB /* ProtocolObjCell.xib in Resources */,
 				2B2F8A79222635A10078D69F /* TestConfigCell.xib in Resources */,
+				2B86063E2238D1E400728B0B /* DeviceTestConfigsVC.xib in Resources */,
 				2B7C9233221FE6DB005C905A /* ModifyNameVC.xib in Resources */,
 				2B9DD97021E7205E00C215E5 /* otaPrefix.json in Resources */,
 				2BEDD5B022323C750085A937 /* EnumManagerVC.xib in Resources */,
@@ -1777,6 +1806,7 @@
 				2B4AB46921F174D200EF5327 /* ReturnFormatVC.swift in Sources */,
 				2B56A15421F6F0B50073E2A7 /* ToolManagerVC.swift in Sources */,
 				2B5832F4217704CD00259593 /* TableMenu.swift in Sources */,
+				2B86063D2238D1E400728B0B /* DeviceTestConfigsVC.swift in Sources */,
 				2B62A57C21E042680051DD38 /* ProtocolMenuCell.swift in Sources */,
 				2B36578721DCA42E0070E7AB /* BLEDataParser.swift in Sources */,
 				2B62A55921DDD84D0051DD38 /* RefreshBtn.swift in Sources */,
@@ -1804,6 +1834,7 @@
 				2BE7704221E48CB900FD6374 /* StorageUtils.swift in Sources */,
 				2B56A14C21F6F0210073E2A7 /* FirmwareManagerVC.swift in Sources */,
 				2B5188F122141C08003E2EF5 /* OtaTlsrTask.swift in Sources */,
+				2B8606402238D2C200728B0B /* DeviceTestConfig.swift in Sources */,
 				2B4AB47721F2D2E400EF5327 /* TlvLineView.swift in Sources */,
 				2B36579821DCC6290070E7AB /* OtaViewController.swift in Sources */,
 				2B62A56521DF28470051DD38 /* CharacteristicCellTableViewCell.swift in Sources */,
@@ -1820,6 +1851,7 @@
 				2B3657A021DCC6AA0070E7AB /* ProtocolViewController.swift in Sources */,
 				2BD12FEF221A8AAF00EDC488 /* NetworkManager.swift in Sources */,
 				2B56A14721F6ED490073E2A7 /* User.swift in Sources */,
+				2B8606432238D51400728B0B /* CircleTestService.swift in Sources */,
 				2B36578C21DCBFC90070E7AB /* HomeViewController.swift in Sources */,
 				2B7C9236221FE6F9005C905A /* ModifyPwdVC.swift in Sources */,
 				2B45B95621EDC6E60058E137 /* ToolsService.swift in Sources */,
