@@ -110,6 +110,7 @@
                         <constraint firstAttribute="height" constant="30" id="e7u-e4-rXI"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="开始测试">
                         <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
@@ -123,11 +124,11 @@
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ZaF-e7-eOZ">
-                    <rect key="frame" x="0.0" y="115" width="375" height="402"/>
+                    <rect key="frame" x="0.0" y="115" width="375" height="372"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 </tableView>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fg9-yo-c85">
-                    <rect key="frame" x="0.0" y="517" width="375" height="150"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fg9-yo-c85">
+                    <rect key="frame" x="0.0" y="487" width="375" height="180"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -143,7 +144,7 @@
                 <constraint firstItem="Owp-2G-AVk" firstAttribute="top" secondItem="xIZ-VA-Cqz" secondAttribute="bottom" constant="10" id="Frb-Ni-hfe"/>
                 <constraint firstItem="Owp-2G-AVk" firstAttribute="leading" secondItem="rIo-lh-4TE" secondAttribute="trailing" constant="5" id="HKk-x4-Zvw"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="fg9-yo-c85" secondAttribute="bottom" id="Icj-lo-He1"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ZaF-e7-eOZ" secondAttribute="bottom" constant="150" id="JWA-yK-9Lf"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ZaF-e7-eOZ" secondAttribute="bottom" constant="180" id="JWA-yK-9Lf"/>
                 <constraint firstItem="fg9-yo-c85" firstAttribute="top" secondItem="ZaF-e7-eOZ" secondAttribute="bottom" id="LPG-jq-N0d"/>
                 <constraint firstItem="lAQ-cC-DEH" firstAttribute="top" secondItem="xIZ-VA-Cqz" secondAttribute="bottom" constant="10" id="Tua-YI-2ct"/>
                 <constraint firstItem="vUS-Sn-eZj" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="15" id="W82-g6-FYp"/>

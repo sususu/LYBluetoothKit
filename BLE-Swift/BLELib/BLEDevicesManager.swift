@@ -48,13 +48,13 @@ class BLEDevicesManager: NSObject {
         }
         DispatchQueue.main.async {
             // 回调连接的block
+            self.removeConnectTask(task: task)
             task.connectBlock?(task.device, task.error)
             
             if task.device != nil && task.error == nil {
                 // 发送已经连接上的通知
                 NotificationCenter.default.post(name: BLENotification.deviceConnected, object: nil, userInfo: [BLEKey.device : task.device!])
             }
-            self.removeConnectTask(task: task)
         }
     }
     
@@ -154,6 +154,7 @@ class BLEDevicesManager: NSObject {
         if task.device == nil {
             task.device = device
         }
+        task.connectSuccess()
         task.device!.state = .disconnected
         task.error = nil
         task.state = .success

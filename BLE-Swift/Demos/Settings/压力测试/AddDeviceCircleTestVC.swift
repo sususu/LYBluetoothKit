@@ -12,16 +12,23 @@ protocol AddDeviceCircleTestVCDelegate: NSObjectProtocol {
     func didAddDeviceCT(ct: CircleTest, forGroup:CircleGroup)
 }
 
-class AddDeviceCircleTestVC: BaseViewController {
+class AddDeviceCircleTestVC: BaseViewController, CmdKeyBoardViewDelegate {
     
     var delegate: AddDeviceCircleTestVCDelegate?
     
     var group: CircleGroup!
+    
+    
+    @IBOutlet weak var cmdTF: UITextField!
+    private var keyboard = CmdKeyBoardView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = "测试操作"
+        
+        keyboard.delegate = self
+        cmdTF.inputView = keyboard
         
         setNavRightButton(text: "完成", sel: #selector(finishAdd))
     }
@@ -84,4 +91,24 @@ class AddDeviceCircleTestVC: BaseViewController {
         navigationController?.present(alert, animated: true, completion: nil)
     }
     
+    func didEnterStr(str: String) {
+        if str.hasPrefix("Str") ||
+            str.hasPrefix("Int") ||
+            str.hasPrefix("Len") {
+            return
+        }
+        cmdTF.text = (cmdTF.text ?? "") + str
+    }
+    
+    func didFinishInput() {
+        
+    }
+    func didFallback() {
+        
+        guard let text = cmdTF.text, text.count > 0 else {
+            return
+        }
+        
+        cmdTF.text = String(text.prefix(text.count - 1))
+    }
 }

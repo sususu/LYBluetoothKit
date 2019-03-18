@@ -406,9 +406,12 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         // 如果有错误，并且，当前外设还是处于链接状态，则认为是断链失败了
+        print("didDisconnectPeripheral:\(peripheral.name)")
         if error != nil && peripheral.state == .connected {
+            print("still connected????? or error")
             self.devicesManager.didFailToDisconnectPeripheral(peripheral)
         } else {
+            print("normal discnnect")
             self.devicesManager.didDisconnectPeripheral(peripheral)
         }
         

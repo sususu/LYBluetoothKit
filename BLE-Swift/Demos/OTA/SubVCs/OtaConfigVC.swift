@@ -103,6 +103,12 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
             return
         }
         
+        if device.isOTAing {
+            self.showError("设备：\(device.name)，正在ota了，你可以返回首页进行查看进度。")
+            return
+        }
+        
+        
         if !device.isApollo3 && prefixTextField.text?.count == 0 && config.platform != .tlsr {
             showError(TR("The connected device is not kind of Apollo3, please input OTA prefix"))
             return

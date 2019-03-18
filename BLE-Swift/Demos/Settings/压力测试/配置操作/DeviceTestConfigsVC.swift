@@ -27,7 +27,7 @@ class DeviceTestConfigsVC: BaseViewController, UITableViewDataSource, UITableVie
 
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = 45
+        tableView.rowHeight = 50
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
         
     }

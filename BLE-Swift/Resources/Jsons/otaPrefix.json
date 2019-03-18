@@ -1,4 +1,159 @@
 [
+    {
+        "deviceName" : "P03A",
+        "bleName" : "Helio #",
+        "prefix" : "Helio"
+    },
+    {
+        "deviceName" : "WBT21-A",
+        "bleName" : "WBT21-A #",
+        "prefix" : "WBT21-A"
+    },
+    {
+        "deviceName" : "W007A",
+        "bleName" : "ZeTime#",
+        "prefix" : "07A"
+    },
+    {
+        "deviceName" : "W007B",
+        "bleName" : "ZeTime#",
+        "prefix" : "07B"
+    },
+    {
+        "deviceName" : "surpass_WNB11",
+        "bleName" : "surpass_WNB11#",
+        "prefix" : "WNB11_A"
+    },
+    {
+        "deviceName" : "surpass_P01A",
+        "bleName" : "surpass_P01A#",
+        "prefix" : "P01A"
+    },
+    {
+        "deviceName" : "Surpass_P02A",
+        "bleName" : "Surpass_P02A#",
+        "prefix" : "P02A"
+    },
+    {
+        "deviceName" : "ITING_P01A",
+        "bleName" : "ITING_P01A#",
+        "prefix" : "P01A"
+    },
+    {
+        "deviceName" : "ITING_P01B",
+        "bleName" : "ITING_P01B#",
+        "prefix" : "P01B"
+    },
+    {
+        "deviceName" : "ITING_P02A",
+        "bleName" : "ITING_P02A#",
+        "prefix" : "P02A"
+    },
+    {
+        "deviceName" : "ITING_W007C",
+        "bleName" : "ITING_W007C#",
+        "prefix" : "W007C"
+    },
+    {
+        "deviceName" : "TING_W007D",
+        "bleName" : "TING_W007D#",
+        "prefix" : "W007D"
+    },
+    {
+        "deviceName" : "TING_W007G",
+        "bleName" : "TING_W007G#",
+        "prefix" : "W007G"
+    },
+    {
+        "deviceName" : "ITING_W007H",
+        "bleName" : "ITING_W007H#",
+        "prefix" : "W007H"
+    },
+    {
+        "deviceName" : "ITING_W007GA",
+        "bleName" : "ITING_W007GA#",
+        "prefix" : "W007GA"
+    },
+    {
+        "deviceName" : "ITING_W007HA",
+        "bleName" : "ITING_W007HA#",
+        "prefix" : "W007HA"
+    },
+    {
+        "deviceName" : "巴西_P04A",
+        "bleName" : "P04A#",
+        "prefix" : "07A"
+    },
+    {
+        "deviceName" : "巴西_P04B",
+        "bleName" : "P04B#",
+        "prefix" : "07A"
+    },
+    {
+        "deviceName" : "天王_W007GT",
+        "bleName" : "W007GT#",
+        "prefix" : "W007GT"
+    },
+    {
+        "deviceName" : "天王_W007HT",
+        "bleName" : "W007HT#",
+        "prefix" : "W007HT"
+    },
+    {
+        "deviceName" : "罗马尼亚_W007C",
+        "bleName" : "W007C#",
+        "prefix" : "W007C"
+    },
+    {
+        "deviceName" : "罗马尼亚_P01A",
+        "bleName" : "P01A#",
+        "prefix" : "P01A"
+    },
+    {
+        "deviceName" : "L38I 德国",
+        "bleName" : "L38IOTA#",
+        "prefix" : "L38IOTA"
+    },
+    {
+        "deviceName" : "L38I 3plus",
+        "bleName" : "L38I#",
+        "prefix" : "38I"
+    },
+    {
+        "deviceName" : "L38I 汇思",
+        "bleName" : "L38I#",
+        "prefix" : "L38IOTA"
+    },
+    {
+        "deviceName" : "L38I 印度",
+        "bleName" : "L38I#",
+        "prefix" : "L38OTA"
+    },
+    {
+        "deviceName" : "L42A 3plus",
+        "bleName" : "L42A 3plus#",
+        "prefix" : "42"
+    },
+    {
+        "deviceName" : "L42A 沙特",
+        "bleName" : "Allwatch V#",
+        "prefix" : "Allwatch V"
+    },
+    {
+        "deviceName" : "L42B 罗马尼亚",
+        "bleName" : "L42B#",
+        "prefix" : "E42BV#"
+    },
+    {
+        "deviceName" : "L38U",
+        "bleName" : "L38U#",
+        "prefix" : "38U"
+    },
+    {
+        "deviceName" : "L28U",
+        "bleName" : "L28U#",
+        "prefix" : "28U"
+    },
   {
     "deviceName" : "ZeTime 男款",
     "bleName" : "ZeTime#",

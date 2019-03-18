@@ -39,6 +39,8 @@ BLEDeviceDelegate
         startStopBtn.backgroundColor = rgb(80, 80, 80)
         
         setNavRightButton(text: "清除链接", sel: #selector(clearConnection))
+        
+        nameTF.text = "Helio #03691"
     }
     
     
@@ -85,7 +87,20 @@ BLEDeviceDelegate
 
     // MARK: - 事件处理
     @objc func clearConnection() {
-        
+        if let d = self.device {
+            if d.state == .ready {
+                BLECenter.shared.disconnect(device: d, callback: { (d, err) in
+                    self.device = nil
+                    self.showSuccess("成功")
+                })
+            }
+            else {
+                self.device = nil
+                self.showSuccess("成功")
+            }
+        } else {
+            self.showSuccess("成功")
+        }
     }
     
     private var isTesting: Bool = false
@@ -102,14 +117,49 @@ BLEDeviceDelegate
         {
             isTesting = true
             startStopBtn.backgroundColor = rgb(230, 40, 40)
-            startStopBtn.isSelected = false
+            startStopBtn.isSelected = true
+            isStop = false
+            i = 0
+            j = 0
+            repeatCount = 0
+            
+            if groups.count == 0 {
+                printError(err: "测试内容不能为空")
+                return
+            }
+            
             startTest()
         }
     }
     
     private var i = 0
     private var j = 0
+    private var repeatCount = 0
     func startTest() {
+        
+        self.view.endEditing(true)
+        
+        guard let name = nameTF.text, name.count > 0 else {
+            printError(err: "请输入要测试的蓝牙名称")
+            return
+        }
+        
+        
+        if groups.count <= i {
+            printInfo(info: "测试完成了")
+            return
+        }
+        
+        if groups[i].tests.count <= j {
+            j = 0
+            repeatCount += 1
+            if groups[i].repeatCount <= repeatCount {
+                i += 1
+            }
+            startTest()
+            return
+        }
+        
         
         let ct = groups[i].tests[j]
         DispatchQueue.main.asyncAfter(deadline: .now() + ct.span) {
@@ -119,7 +169,52 @@ BLEDeviceDelegate
     
     private var device: BLEDevice?
     
+    func searchDevice(_ ct: CircleTest) {
+        
+        if isStop {
+            return
+        }
+        
+        guard let name = nameTF.text else {
+            printError(err: "请输入要测试的蓝牙名称")
+            return
+        }
+        printInfo(info: "正在查找：\(name)")
+        BLECenter.shared.scan(callback: { (devices, err) in
+            if let ds = devices {
+                for d in ds {
+                    if d.name == name {
+                        self.device = d
+                        self.printInfo(info: "找到了！")
+                        BLECenter.shared.stopScan()
+                        self.doTest(ct)
+                    }
+                }
+            }
+        }, stop: {
+            if self.device == nil {
+                self.printError(err: "搜索不到: \(name)，2秒之后重新搜索")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                    self.searchDevice(ct)
+                })
+            }
+        }, after: 5)
+    }
+    
     func doTest(_ ct: CircleTest) {
+        
+        if isStop {
+            return
+        }
+        
+        if device == nil {
+            printInfo(info: "开始搜索设备")
+            searchDevice(ct)
+            return
+        }
+        
+        j += 1
+        
         switch ct.type {
         case .connect:
             guard let name = nameTF.text else {
@@ -129,27 +224,53 @@ BLEDeviceDelegate
             if device != nil && device!.name == name {
                 printInfo(info: "开始链接设备：\(name)")
                 BLECenter.shared.connect(device: device!, callback: { (d, err) in
+                    if err != nil {
+                        self.printError(err: "链接设备发生错误：\(err.debugDescription)")
+                        return
+                    }
+                    self.printInfo(info: "已经链接上！")
                     self.device = d
-                    self.startTest()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                        self.startTest()
+                    })
                 })
             }
             else {
                 printInfo(info: "开始搜索链接设备：\(name)")
                 BLECenter.shared.connect(deviceName: name, callback: { (d, err) in
+                    if err != nil {
+                        self.printError(err: "链接设备发生错误：\(err.debugDescription)")
+                        return
+                    }
+                    self.printInfo(info: "已经链接上！")
                     self.device = d
-                    self.startTest()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                        self.startTest()
+                    })
                 })
             }
         case .disconnect:
             if device != nil && device!.state == .ready {
+                printInfo(info: "开始断链设备：\(device!.name)")
                 BLECenter.shared.disconnect(device: device!, callback: { (d, err) in
+                    if err != nil {
+                        self.printError(err: "断链设备发生错误：\(err.debugDescription)")
+                        return
+                    }
+                    self.printInfo(info: "已经断链了！")
                     self.device = d
-                    self.startTest()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                        self.startTest()
+                    })
+                    
                 })
             }
             else
             {
                 printError(err: "设备已经断链了，还要进行断链吗？")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                    self.startTest()
+                })
             }
         case .cmd:
             if device != nil && device!.state == .ready {
@@ -172,8 +293,9 @@ BLEDeviceDelegate
     }
     
     
+    private var isStop = false
     func stopTest() {
-        
+        isStop = true
     }
     
     
@@ -253,28 +375,33 @@ BLEDeviceDelegate
     
     
     func printInfo(info: String) {
-        let attr = NSMutableAttributedString(string: info)
+        let attr = NSMutableAttributedString(string: info + "\n")
         attr.addAttribute(.foregroundColor, value: UIColor.green, range: NSMakeRange(0, attr.length))
-        attr.addAttribute(.font, value: font(12), range: NSMakeRange(0, attr.length))
+        attr.addAttribute(.font, value: font(10), range: NSMakeRange(0, attr.length))
         addAttrStr(str: attr)
     }
     
     func printError(err: String) {
-        let attr = NSMutableAttributedString(string: err)
+        let attr = NSMutableAttributedString(string: err + "\n")
         attr.addAttribute(.foregroundColor, value: UIColor.red, range: NSMakeRange(0, attr.length))
-        attr.addAttribute(.font, value: font(12), range: NSMakeRange(0, attr.length))
+        attr.addAttribute(.font, value: font(10), range: NSMakeRange(0, attr.length))
         addAttrStr(str: attr)
     }
     
     func addAttrStr(str: NSAttributedString) {
-        let attr = NSMutableAttributedString(string: "\(logLine). ")
-        logLine += 1
-        attr.addAttribute(.foregroundColor, value: UIColor.white, range: NSMakeRange(0, attr.length))
-        attr.addAttribute(.font, value: font(12), range: NSMakeRange(0, attr.length))
-        attr.append(str)
-        logStr.append(attr)
-        logView.attributedText = logStr
-        logView.scrollRangeToVisible(NSMakeRange(logStr.length - 1, 1))
+        DispatchQueue.main.async {
+            let attr = NSMutableAttributedString(string: "\(self.logLine). ")
+            self.logLine += 1
+            attr.addAttribute(.foregroundColor, value: UIColor.white, range: NSMakeRange(0, attr.length))
+            attr.addAttribute(.font, value: font(10), range: NSMakeRange(0, attr.length))
+            attr.append(str)
+            self.logStr.append(attr)
+            self.logView.attributedText = self.logStr
+//            self.logView.text = self.logStr.string
+//            self.logView.setContentOffset(CGPoint(x: 0, y: self.logView.contentSize.height), animated: true)
+            self.logView.scrollRangeToVisible(NSMakeRange(self.logStr.string.count - 1, 1))
+        }
+        
     }
     
     // 日志

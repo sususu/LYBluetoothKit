@@ -58,6 +58,7 @@ class RegisterVC: BaseViewController {
                 return
             }
             
+            self.navigationController?.popViewController(animated: true)
             self.showSuccess("注册成功")
         })
         

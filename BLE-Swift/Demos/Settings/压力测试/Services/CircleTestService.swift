@@ -17,7 +17,7 @@ class CircleTestService {
     var configs: [DeviceTestConfig] = []
     
     private init() {
-        
+        configs = readConfigsFromDisk()
     }
     
     private func readConfigsFromDisk() -> [DeviceTestConfig] {
