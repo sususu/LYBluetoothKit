@@ -1,5 +1,15 @@
 [
     {
+        "deviceName" : "W007_CR A",
+        "bleName" : "W007_CR#",
+        "prefix" : "07CRA"
+    },
+    {
+        "deviceName" : "W007_CR B",
+        "bleName" : "W007_CR#",
+        "prefix" : "07CRB"
+    },
+    {
         "deviceName" : "P03A",
         "bleName" : "Helio #",
         "prefix" : "Helio"
@@ -18,6 +28,16 @@
         "deviceName" : "W007B",
         "bleName" : "ZeTime#",
         "prefix" : "07B"
+    },
+    {
+        "deviceName" : "W008A",
+        "bleName" : "ZeTime#",
+        "prefix" : "08A"
+    },
+    {
+        "deviceName" : "W008B",
+        "bleName" : "ZeTime#",
+        "prefix" : "08B"
     },
     {
         "deviceName" : "surpass_WNB11",

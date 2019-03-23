@@ -281,12 +281,14 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         guard let task = dict["task"] as? ZdOtaTask else {
             return
         }
+        
+        
         // 如果是准备失败的，那isConnecting也会复位成 false
         if task.name == connectingName && isConnecting {
-            printLog("准备ota失败，1秒之后重新扫描")
-            reScan(afterSecond: 2)
+            printLog("准备ota失败，2秒之后重新扫描")
+//            reScan(afterSecond: 2)
             isConnecting = false
-            return
+//            return
         }
         
         if failedList.contains(task)
@@ -294,9 +296,9 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
             task.tryCount += 1
             if task.tryCount >= kZdOtaTaskMaxTryCount {
                 unusedList.append(task)
-                if checkCountAndAlert() {
-                    return
-                }
+//                if checkCountAndAlert() {
+//                    return
+//                }
             }
         }
         else
@@ -331,6 +333,7 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         {
             // 增加停止ota代码
             stopBtnClick(nil)
+            printLog("升级个数已经达到了，停止OTA了")
             
             VoiceSpeaker.shared.speak(text: "您好，您的 O T A 升级任务已完成", shouldLoop: true)
             let alert = UIAlertController(title: "温馨提醒", message: "您的OTA升级任务已完成", preferredStyle: .alert)

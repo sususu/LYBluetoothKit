@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ModifyWatchIdVC" customModule="BLE_Swift" customModuleProvider="target">
+            <connections>
+                <outlet property="idTF" destination="4y5-DW-fur" id="DhA-SW-a0z"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="修改WatchID：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsH-oH-Fgw">
+                    <rect key="frame" x="15" y="40" width="128.5" height="21"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入WatchID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4y5-DW-fur">
+                    <rect key="frame" x="15" y="91" width="260" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Ac2-sh-S5T"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SWa-ic-HjS">
+                    <rect key="frame" x="280" y="91" width="80" height="40"/>
+                    <color key="backgroundColor" red="0.47874365479999997" green="0.028350659350000001" blue="0.061894793789999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="cMQ-vc-U6A"/>
+                        <constraint firstAttribute="width" constant="80" id="qbM-Xs-GQv"/>
+                    </constraints>
+                    <state key="normal" title="获取旧的">
+                        <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="getOldBtnClick:" destination="-1" eventType="touchUpInside" id="bC4-5K-fhM"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3WO-xf-4zR">
+                    <rect key="frame" x="15" y="141" width="100" height="40"/>
+                    <color key="backgroundColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="XI6-2N-buq"/>
+                        <constraint firstAttribute="height" constant="40" id="ouq-JW-klf"/>
+                    </constraints>
+                    <state key="normal" title="修改">
+                        <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="xgBtnClick:" destination="-1" eventType="touchUpInside" id="irF-MG-GgC"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PoP-9i-1uR">
+                    <rect key="frame" x="125" y="141" width="100" height="40"/>
+                    <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="30M-Rs-c2s"/>
+                        <constraint firstAttribute="height" constant="40" id="Xbo-DK-1Da"/>
+                    </constraints>
+                    <state key="normal" title="修改并返回">
+                        <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="xgbcBtnClick:" destination="-1" eventType="touchUpInside" id="LNQ-KY-GqG"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="PoP-9i-1uR" firstAttribute="leading" secondItem="3WO-xf-4zR" secondAttribute="trailing" constant="10" id="2dW-MW-569"/>
+                <constraint firstItem="SWa-ic-HjS" firstAttribute="top" secondItem="4y5-DW-fur" secondAttribute="top" id="Cks-Y0-spC"/>
+                <constraint firstItem="vsH-oH-Fgw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="I6N-Wg-iMX"/>
+                <constraint firstItem="PoP-9i-1uR" firstAttribute="top" secondItem="4y5-DW-fur" secondAttribute="bottom" constant="10" id="IaS-5I-Dek"/>
+                <constraint firstItem="4y5-DW-fur" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="Wpl-Nm-7at"/>
+                <constraint firstItem="vsH-oH-Fgw" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="dHo-th-Ybz"/>
+                <constraint firstItem="4y5-DW-fur" firstAttribute="top" secondItem="vsH-oH-Fgw" secondAttribute="bottom" constant="30" id="dRa-7I-vU2"/>
+                <constraint firstItem="3WO-xf-4zR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="hZJ-1l-Vgt"/>
+                <constraint firstItem="SWa-ic-HjS" firstAttribute="leading" secondItem="4y5-DW-fur" secondAttribute="trailing" constant="5" id="hlN-Gk-4Hd"/>
+                <constraint firstItem="3WO-xf-4zR" firstAttribute="top" secondItem="4y5-DW-fur" secondAttribute="bottom" constant="10" id="jeP-0r-KtD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4y5-DW-fur" secondAttribute="trailing" constant="100" id="lap-XH-Lpd"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

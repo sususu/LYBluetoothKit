@@ -26,6 +26,8 @@ class ZdOtaTaskCell: UITableViewCell {
     
     func updateUI(withTask task: ZdOtaTask) {
         nameLbl.text = task.name
+        progressView.progress = 0
+        progressLbl.text = "0%"
         weak var weakSelf = self
         task.progressCallback = { (progress) in
             weakSelf?.updateProgress(progress)

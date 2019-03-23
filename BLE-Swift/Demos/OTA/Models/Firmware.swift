@@ -11,11 +11,12 @@ import UIKit
 class Firmware: Codable, Equatable {
     
     var id = 0
-    var name = "" {
-        didSet {
-            type = Firmware.getOtaType(withFileName: name)
-        }
-    }
+    var name = ""
+//    {
+//        didSet {
+//            type = Firmware.getOtaType(withFileName: name)
+//        }
+//    }
     var path = ""
     var versionName = ""
     var versionCode = 0

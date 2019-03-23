@@ -86,4 +86,34 @@ class OtaViewController: ConnectBaseVC, OtaTaskTipViewDelegate {
     @objc func otaTasksRemoveAllNotification(notification: Notification) {
         updateUI()
     }
+    
+    
+    
+    @IBAction func modifyBtnClick(_ sender: Any) {
+        let vc = ModifyWatchIdVC()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func sportBtnClick(_ sender: Any) {
+        let vc = SportVC()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func sleepBtnClick(_ sender: Any) {
+        let vc = SleepVC()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func hrBtnClick(_ sender: Any) {
+        let vc = HeartRateVC()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    
+    
 }

@@ -160,6 +160,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let fm = Firmware()
         fm.name = fileName
+        fm.type = Firmware.getOtaType(withFileName: fileName)
         fm.path = filePath
         fm.id = Int(Date().timeIntervalSince1970)
         

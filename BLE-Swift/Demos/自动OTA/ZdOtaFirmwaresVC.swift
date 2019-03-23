@@ -253,7 +253,14 @@ class ZdOtaFirmwaresVC: BaseViewController, UITableViewDataSource, UITableViewDe
     }
     
     func didSelectFirmwares(firmwares: [Firmware]?, selectType: OtaDataType) {
+        removeFirmwares(byType: selectType)
         
+        if let fms = firmwares, fms.count > 0 {
+            for fm in fms {
+                config.firmwares.append(fm)
+            }
+        }
+        updateUI()
     }
     
     private func removeFirmwares(byType type: OtaDataType) {
@@ -283,7 +290,7 @@ class ZdOtaFirmwaresVC: BaseViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         tableView.deselectRow(at: indexPath, animated: true)
-        let type = getDataType(forIndexPath: indexPath)
+        let type = fmTypes[indexPath.row]
         selectFirmware(byType: type)
         self.view.endEditing(true)
     }

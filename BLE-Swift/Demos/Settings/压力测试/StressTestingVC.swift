@@ -105,7 +105,7 @@ BLEDeviceDelegate
     
     private var isTesting: Bool = false
     
-    @IBAction func startTestBtnClick(_ sender: Any) {
+    @IBAction func startTestBtnClick(_ sender: Any?) {
         if isTesting
         {
             isTesting = false
@@ -147,6 +147,13 @@ BLEDeviceDelegate
         
         if groups.count <= i {
             printInfo(info: "测试完成了")
+            startTestBtnClick(nil)
+            return
+        }
+        
+        if groups[i].tests.count == 0 {
+            printInfo(info: "当前测试组里面，没有测试操作，“被认为”完成了")
+            startTestBtnClick(nil)
             return
         }
         
