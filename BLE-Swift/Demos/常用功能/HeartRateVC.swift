@@ -10,10 +10,27 @@ import UIKit
 
 class HeartRateVC: BaseViewController {
 
+    
+    @IBOutlet weak var countLbl: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         showConnectState()
         
     }
 
+    
+    @IBAction func getNumBtnClick(_ sender: Any) {
+        
+    }
+    
+    @IBAction func getDetailBtnClick(_ sender: Any) {
+        
+    }
+    
+    @IBAction func delBtnClick(_ sender: Any) {
+        
+    }
+    
+    
 }

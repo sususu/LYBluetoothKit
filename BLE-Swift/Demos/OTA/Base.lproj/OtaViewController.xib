@@ -94,6 +94,11 @@
                             <state key="normal" title="修改WatchID">
                                 <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="modifyBtnClick:" destination="-1" eventType="touchUpInside" id="rQ9-F1-hUY"/>
                             </connections>
@@ -109,6 +114,11 @@
                             <state key="normal" title="运动相关">
                                 <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="sportBtnClick:" destination="-1" eventType="touchUpInside" id="rfX-kA-DSW"/>
                             </connections>
@@ -124,6 +134,11 @@
                             <state key="normal" title="睡眠相关">
                                 <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="sleepBtnClick:" destination="-1" eventType="touchUpInside" id="z1r-Lo-2Y2"/>
                             </connections>
@@ -139,6 +154,11 @@
                             <state key="normal" title="心率相关">
                                 <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="hrBtnClick:" destination="-1" eventType="touchUpInside" id="j8c-VN-Kae"/>
                             </connections>

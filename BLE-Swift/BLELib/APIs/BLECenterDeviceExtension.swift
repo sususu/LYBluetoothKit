@@ -13,6 +13,23 @@ extension BLECenter {
         return send(data: data, stringCallback: stringCallback, toDeviceName: deviceName)
     }
     
+    public func setDeviceID(id: String, boolCallback: BoolCallback?, toDeviceName deviceName: String? = nil) -> BLETask? {
+        
+        guard let idData = id.data(using: .utf8) else {
+            boolCallback?(false, BLEError.taskError(reason: .paramsError))
+            return nil
+        }
+        
+        var len = id.count + 4
+        var data = Data(bytes: [0x6f, 0xff, 0x71])
+        data.append(bytes: &len, count: 2);
+        data.append(contentsOf: [0x24, 0x24])
+        data.append(idData)
+        data.append(contentsOf: [0x26, 0x26, 0x8f])
+        return send(data: data, boolCallback: boolCallback, toDeviceName: deviceName)
+    }
+    
+    
     public func getFirmwareVersionWithBuild(stringCallback:StringCallback?, toDeviceName deviceName:String?) -> BLETask? {
         return getVersionStr(forType: 5, stringCallback: stringCallback, toDeviceName: deviceName)
     }

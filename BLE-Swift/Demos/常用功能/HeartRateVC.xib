@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HeartRateVC" customModule="BLE_Swift" customModuleProvider="target">
             <connections>
+                <outlet property="countLbl" destination="Keh-oI-fke" id="tUs-fz-mOB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -31,6 +32,14 @@
                     <state key="normal" title="1、获取心率个数">
                         <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="getNumBtnClick:" destination="-1" eventType="touchUpInside" id="qri-Oc-tw1"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0个" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Keh-oI-fke">
                     <rect key="frame" x="155" y="40" width="60" height="40"/>
@@ -53,6 +62,34 @@
                     <state key="normal" title="2、获取心率详情">
                         <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="getDetailBtnClick:" destination="-1" eventType="touchUpInside" id="9tj-Bg-MIU"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h46-Xn-hjn">
+                    <rect key="frame" x="15" y="190" width="130" height="40"/>
+                    <color key="backgroundColor" red="0.47874365479999997" green="0.028350659350000001" blue="0.061894793789999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="PHY-o8-shw"/>
+                        <constraint firstAttribute="width" constant="130" id="ytc-GC-k2X"/>
+                    </constraints>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="3、删除心率数据">
+                        <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="delBtnClick:" destination="-1" eventType="touchUpInside" id="AcZ-9s-jC6"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -61,7 +98,15 @@
                 <constraint firstItem="9GV-dc-HNv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="Mf6-ar-dPa"/>
                 <constraint firstItem="Keh-oI-fke" firstAttribute="top" secondItem="9GV-dc-HNv" secondAttribute="top" id="OGl-pK-D0D"/>
                 <constraint firstItem="Jf4-aP-qf7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="RJr-52-UPH"/>
-                <constraint firstItem="9GV-dc-HNv" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="pQT-6o-tfb"/>
+                <constraint firstItem="h46-Xn-hjn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="b3P-Ph-k4a"/>
+                <constraint firstItem="h46-Xn-hjn" firstAttribute="top" secondItem="Jf4-aP-qf7" secondAttribute="bottom" constant="50" id="jAV-2w-jIz"/>
+                <constraint firstItem="9GV-dc-HNv" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="pQT-6o-tfb">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
                 <constraint firstItem="Keh-oI-fke" firstAttribute="leading" secondItem="9GV-dc-HNv" secondAttribute="trailing" constant="10" id="wJp-o0-h7V"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
