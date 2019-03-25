@@ -41,6 +41,7 @@ class EnumSelectModalView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     private var okCallback: (((String, Int))->Void)?
     
+    private var bgView: UIView!
     private var contentView: UIView!
     
     private var titleLbl: UILabel!
@@ -58,7 +59,10 @@ class EnumSelectModalView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     private func setupViews() {
         
-        backgroundColor = rgb(0, 0, 0, 0.8)
+        bgView = UIView(frame: self.bounds)
+        addSubview(bgView)
+        bgView.backgroundColor = rgb(0, 0, 0, 0.8);
+//        backgroundColor = rgb(0, 0, 0, 0.8)
         
         var offset:CGFloat = 120
         if kiPhoneX_S {
@@ -89,7 +93,7 @@ class EnumSelectModalView: UIView, UITableViewDataSource, UITableViewDelegate {
         
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(selfClick))
-        addGestureRecognizer(tap)
+        bgView.addGestureRecognizer(tap)
     }
     
     

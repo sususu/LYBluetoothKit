@@ -10,21 +10,47 @@ import UIKit
 
 class SleepVC: BaseViewController {
 
+    @IBOutlet weak var summaryLbl: UILabel!
+    
+    @IBOutlet weak var numLbl: UILabel!
+    
+    var num: Int = 0
+    var sleeps: Array<Sleep>?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         showConnectState()
         // Do any additional setup after loading the view.
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func numBtnClick(_ sender: Any) {
+        self.summaryLbl.text = ""
+        self.sleeps = nil
+        
+        startLoading(nil)
+        weak var weakSelf = self
+        _ = BLECenter.shared.getSportSleepDataNum(callback: { (sportNum, sleepNum, err) in
+            weakSelf?.stopLoading()
+            
+            if let error = err {
+                weakSelf?.handleBleError(error: error)
+                return
+            }
+            
+            weakSelf?.num = sportNum
+            
+            weakSelf?.numLbl.text = "\(sportNum)个"
+        })
     }
-    */
-
+    
+    @IBAction func detailbtnClick(_ sender: Any) {
+    }
+    
+    
+    @IBAction func seeDetailBtnClick(_ sender: Any) {
+    }
+    
+    @IBAction func delBtnClick(_ sender: Any) {
+    }
+    
 }

@@ -84,6 +84,8 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
     // 开始连接设备
     func startConnect() {
         
+        printLog("开始筛选设备，进行连接")
+        
         // 如果已经停止了
         if isStop {
             return
@@ -91,6 +93,7 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         
         // 如果正在连接
         if isConnecting {
+            printLog("正在连接设备，不往下走了")
             return
         }
         
@@ -136,6 +139,7 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
                         let msg = weakSelf?.errorMsgFromBleError(err)
                         weakSelf?.printLog("连接(\(d.name))出错：\(msg ?? "")")
                         weakSelf?.removeOtaTask(byName: d.name)
+                        weakSelf?.isConnecting = false
                         weakSelf?.reScan(afterSecond: 5)
                         return
                     }

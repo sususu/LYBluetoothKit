@@ -108,7 +108,7 @@ class ReturnFormatVC: BaseViewController, EnumManagerVCDelegate {
             guard let name = line.name, name.count > 0 else {
                 continue
             }
-            if line.number == 0 {
+            if line.number == 0 && line.type != .string {
                 continue
             }
             // length-name,

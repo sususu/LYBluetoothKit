@@ -132,6 +132,13 @@
 		2B56A16A21F708A90073E2A7 /* ZdOtaResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B56A16821F708A90073E2A7 /* ZdOtaResultCell.swift */; };
 		2B56A16B21F708A90073E2A7 /* ZdOtaResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B56A16921F708A90073E2A7 /* ZdOtaResultCell.xib */; };
 		2B56A16D21F70FB90073E2A7 /* VoiceSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B56A16C21F70FB90073E2A7 /* VoiceSpeaker.swift */; };
+		2B57031F224867C10008208E /* BLECenterSportExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B57031E224867C10008208E /* BLECenterSportExtension.swift */; };
+		2B57032222486EAB0008208E /* Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B57032122486EAB0008208E /* Sport.swift */; };
+		2B5703262248B13F0008208E /* SportDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5703242248B13F0008208E /* SportDetailVC.swift */; };
+		2B5703272248B13F0008208E /* SportDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B5703252248B13F0008208E /* SportDetailVC.xib */; };
+		2B57032A2248B2450008208E /* SportDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5703282248B2450008208E /* SportDetailCell.swift */; };
+		2B57032B2248B2450008208E /* SportDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B5703292248B2450008208E /* SportDetailCell.xib */; };
+		2B57032D2248C5500008208E /* Sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B57032C2248C5500008208E /* Sleep.swift */; };
 		2B5832E0217573E000259593 /* UIDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5832DF217573E000259593 /* UIDefines.swift */; };
 		2B5832E22175832200259593 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5832E12175832200259593 /* StringExtensions.swift */; };
 		2B5832E421758ECA00259593 /* NumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5832E321758ECA00259593 /* NumberView.swift */; };
@@ -399,6 +406,13 @@
 		2B56A16821F708A90073E2A7 /* ZdOtaResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZdOtaResultCell.swift; sourceTree = "<group>"; };
 		2B56A16921F708A90073E2A7 /* ZdOtaResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZdOtaResultCell.xib; sourceTree = "<group>"; };
 		2B56A16C21F70FB90073E2A7 /* VoiceSpeaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceSpeaker.swift; sourceTree = "<group>"; };
+		2B57031E224867C10008208E /* BLECenterSportExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterSportExtension.swift; sourceTree = "<group>"; };
+		2B57032122486EAB0008208E /* Sport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport.swift; sourceTree = "<group>"; };
+		2B5703242248B13F0008208E /* SportDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportDetailVC.swift; sourceTree = "<group>"; };
+		2B5703252248B13F0008208E /* SportDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SportDetailVC.xib; sourceTree = "<group>"; };
+		2B5703282248B2450008208E /* SportDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportDetailCell.swift; sourceTree = "<group>"; };
+		2B5703292248B2450008208E /* SportDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SportDetailCell.xib; sourceTree = "<group>"; };
+		2B57032C2248C5500008208E /* Sleep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sleep.swift; sourceTree = "<group>"; };
 		2B5832DF217573E000259593 /* UIDefines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDefines.swift; sourceTree = "<group>"; };
 		2B5832E12175832200259593 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		2B5832E321758ECA00259593 /* NumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberView.swift; sourceTree = "<group>"; };
@@ -909,6 +923,7 @@
 		2B4874CB214F763B00AC5841 /* BLELib */ = {
 			isa = PBXGroup;
 			children = (
+				2B57032022486E070008208E /* Models */,
 				2BE7704621E497CF00FD6374 /* OTA */,
 				2B62A58D21E0A03C0051DD38 /* Error */,
 				2B36578521DCA41F0070E7AB /* Utils */,
@@ -966,6 +981,7 @@
 		2B5417D52244EB7F00C9F5DD /* 常用功能 */ = {
 			isa = PBXGroup;
 			children = (
+				2B5703232248B10D0008208E /* 运动详情 */,
 				2B5417D62244EBAA00C9F5DD /* ModifyWatchIdVC.swift */,
 				2B5417D72244EBAA00C9F5DD /* ModifyWatchIdVC.xib */,
 				2B5417DA2244EBC100C9F5DD /* SportVC.swift */,
@@ -1031,6 +1047,26 @@
 				2B56A16921F708A90073E2A7 /* ZdOtaResultCell.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		2B57032022486E070008208E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2B57032122486EAB0008208E /* Sport.swift */,
+				2B57032C2248C5500008208E /* Sleep.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2B5703232248B10D0008208E /* 运动详情 */ = {
+			isa = PBXGroup;
+			children = (
+				2B5703242248B13F0008208E /* SportDetailVC.swift */,
+				2B5703252248B13F0008208E /* SportDetailVC.xib */,
+				2B5703282248B2450008208E /* SportDetailCell.swift */,
+				2B5703292248B2450008208E /* SportDetailCell.xib */,
+			);
+			path = "运动详情";
 			sourceTree = "<group>";
 		};
 		2B5832DD2175712B00259593 /* Devices */ = {
@@ -1424,6 +1460,7 @@
 				2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */,
 				2BEC5D6F2174870100E0902B /* BLECenterDeviceExtension.swift */,
 				2B36578321DC9D100070E7AB /* apis_devices.plist */,
+				2B57031E224867C10008208E /* BLECenterSportExtension.swift */,
 			);
 			path = APIs;
 			sourceTree = "<group>";
@@ -1601,6 +1638,7 @@
 				2B3657AC21DCD0140070E7AB /* LeftViewController.xib in Resources */,
 				2B7C9237221FE6F9005C905A /* ModifyPwdVC.xib in Resources */,
 				2BB4B6E821E99B6C00F22268 /* TaskSummaryCell.xib in Resources */,
+				2B57032B2248B2450008208E /* SportDetailCell.xib in Resources */,
 				2B80C21721EC685B00FE7BF7 /* SDOtaVC.xib in Resources */,
 				2BE7705521E4A65A00FD6374 /* FirmwareSelectCell.xib in Resources */,
 				2BE7705121E4A54C00FD6374 /* FirmwareSelectVC.xib in Resources */,
@@ -1629,6 +1667,7 @@
 				2B7C923B221FE70E005C905A /* ForgetPwdVC.xib in Resources */,
 				2B45B96421EDFC3C0058E137 /* DeviceTestCell.xib in Resources */,
 				2B62A56621DF28470051DD38 /* CharacteristicCellTableViewCell.xib in Resources */,
+				2B5703272248B13F0008208E /* SportDetailVC.xib in Resources */,
 				2B4AB46E21F1779100EF5327 /* TestGroupCell.xib in Resources */,
 				2B56A15121F6F0780073E2A7 /* ProtocolManagerVC.xib in Resources */,
 				2B62A57821E03D3E0051DD38 /* Protocol111.json in Resources */,
@@ -1796,6 +1835,7 @@
 				2BE7705021E4A54C00FD6374 /* FirmwareSelectVC.swift in Sources */,
 				2B56A16A21F708A90073E2A7 /* ZdOtaResultCell.swift in Sources */,
 				2B3657A521DCCD600070E7AB /* Functions.swift in Sources */,
+				2B57031F224867C10008208E /* BLECenterSportExtension.swift in Sources */,
 				2B8272FF21F7FA0700F6CC9E /* OtaNordicTask.swift in Sources */,
 				2B2E273E2172D9B400726FC7 /* BLEConfig.swift in Sources */,
 				2B62A58B21E087E60051DD38 /* ResultDisplayCell.swift in Sources */,
@@ -1804,6 +1844,7 @@
 				2B3147392236852E0018495D /* CircleTestGroupView.swift in Sources */,
 				2B62A56021DEF3DB0051DD38 /* DeviceInfo.swift in Sources */,
 				2BEC5D6C21746A5A00E0902B /* BLECenterCommonExtension.swift in Sources */,
+				2B57032222486EAB0008208E /* Sport.swift in Sources */,
 				2B4AB46321F0215A00EF5327 /* CmdKeyBoardView.swift in Sources */,
 				2B44C74D21EEE32D0037F5C3 /* CmdInputLayout.swift in Sources */,
 				2B5417E42244EBD700C9F5DD /* SleepVC.swift in Sources */,
@@ -1842,6 +1883,7 @@
 				2BEDD5A4222F6A440085A937 /* ParamsInputModalView.swift in Sources */,
 				2B4AB46921F174D200EF5327 /* ReturnFormatVC.swift in Sources */,
 				2B56A15421F6F0B50073E2A7 /* ToolManagerVC.swift in Sources */,
+				2B57032D2248C5500008208E /* Sleep.swift in Sources */,
 				2B5832F4217704CD00259593 /* TableMenu.swift in Sources */,
 				2B86063D2238D1E400728B0B /* DeviceTestConfigsVC.swift in Sources */,
 				2B62A57C21E042680051DD38 /* ProtocolMenuCell.swift in Sources */,
@@ -1893,6 +1935,7 @@
 				2B36578C21DCBFC90070E7AB /* HomeViewController.swift in Sources */,
 				2B7C9236221FE6F9005C905A /* ModifyPwdVC.swift in Sources */,
 				2B45B95621EDC6E60058E137 /* ToolsService.swift in Sources */,
+				2B57032A2248B2450008208E /* SportDetailCell.swift in Sources */,
 				2BE7703A21E4453B00FD6374 /* OtaConfigVC.swift in Sources */,
 				2B4AB46D21F1779100EF5327 /* TestGroupCell.swift in Sources */,
 				2B44C74B21EEE3170037F5C3 /* CmdInputCell.swift in Sources */,
@@ -1915,6 +1958,7 @@
 				2B62A58721E0564C0051DD38 /* ProtocolResultDisplayView.swift in Sources */,
 				2B56A15021F6F0780073E2A7 /* ProtocolManagerVC.swift in Sources */,
 				2B2F8A812226C0EA0078D69F /* ToolsObjCell.swift in Sources */,
+				2B5703262248B13F0008208E /* SportDetailVC.swift in Sources */,
 				2B9DD96521E7145B00C215E5 /* PrefixSelectVC.swift in Sources */,
 				2B5832E0217573E000259593 /* UIDefines.swift in Sources */,
 				2B9DD97421E729DD00C215E5 /* BLECenterExtensions.swift in Sources */,

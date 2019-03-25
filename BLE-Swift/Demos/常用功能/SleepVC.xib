@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SleepVC" customModule="BLE_Swift" customModuleProvider="target">
             <connections>
+                <outlet property="numLbl" destination="50C-Qo-Djs" id="6NW-Oz-3c1"/>
+                <outlet property="summaryLbl" destination="vaa-Yb-au6" id="wB0-AQ-bXw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -36,6 +38,9 @@
                             <integer key="value" value="3"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="numBtnClick:" destination="-1" eventType="touchUpInside" id="la4-zd-FRm"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pXF-5Z-USx">
                     <rect key="frame" x="15" y="100" width="130" height="40"/>
@@ -53,6 +58,9 @@
                             <integer key="value" value="3"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="detailbtnClick:" destination="-1" eventType="touchUpInside" id="mJD-UH-msS"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vaa-Yb-au6" userLabel="detailLbl">
                     <rect key="frame" x="15" y="160" width="200" height="80"/>
@@ -80,6 +88,9 @@
                             <integer key="value" value="3"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="delBtnClick:" destination="-1" eventType="touchUpInside" id="e5b-7F-7Q8"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8VB-sm-YTh">
                     <rect key="frame" x="220" y="160" width="60" height="30"/>
@@ -98,16 +109,31 @@
                             <integer key="value" value="3"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="seeDetailBtnClick:" destination="-1" eventType="touchUpInside" id="ysb-Fp-qSR"/>
+                    </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0个" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="50C-Qo-Djs">
+                    <rect key="frame" x="150" y="40" width="80" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="8Uh-XQ-g0A"/>
+                        <constraint firstAttribute="height" constant="40" id="oJB-Qw-dcb"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="p1P-be-6M4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="1r0-cK-uzB"/>
                 <constraint firstItem="pXF-5Z-USx" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="7E5-KH-4HB"/>
                 <constraint firstItem="pXF-5Z-USx" firstAttribute="top" secondItem="p1P-be-6M4" secondAttribute="bottom" constant="20" id="CJY-RZ-bFt"/>
+                <constraint firstItem="50C-Qo-Djs" firstAttribute="leading" secondItem="p1P-be-6M4" secondAttribute="trailing" constant="5" id="OdO-5k-mjm"/>
                 <constraint firstItem="p1P-be-6M4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="PQM-w8-sMA"/>
                 <constraint firstItem="8VB-sm-YTh" firstAttribute="top" secondItem="vaa-Yb-au6" secondAttribute="top" id="Up2-7Q-RgF"/>
                 <constraint firstItem="vaa-Yb-au6" firstAttribute="top" secondItem="pXF-5Z-USx" secondAttribute="bottom" constant="20" id="Xaw-9X-jhl"/>
+                <constraint firstItem="50C-Qo-Djs" firstAttribute="top" secondItem="p1P-be-6M4" secondAttribute="top" id="bXU-Hw-cUx"/>
                 <constraint firstItem="vaa-Yb-au6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="ekf-m6-YL0"/>
                 <constraint firstItem="8VB-sm-YTh" firstAttribute="leading" secondItem="vaa-Yb-au6" secondAttribute="trailing" constant="5" id="fsO-8k-k57"/>
                 <constraint firstItem="v6k-ix-Ibw" firstAttribute="top" secondItem="vaa-Yb-au6" secondAttribute="bottom" constant="20" id="itE-7v-BYU"/>

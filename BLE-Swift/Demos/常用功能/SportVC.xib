@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SportVC" customModule="BLE_Swift" customModuleProvider="target">
             <connections>
+                <outlet property="numLbl" destination="4uQ-Vi-LLA" id="uwx-wr-qlP"/>
+                <outlet property="summaryLbl" destination="GiC-qj-WfN" id="QJC-Yf-CQN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -36,6 +38,9 @@
                             <integer key="value" value="3"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="numBtnClick:" destination="-1" eventType="touchUpInside" id="B1r-vF-0Gm"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ubm-gQ-ygO">
                     <rect key="frame" x="15" y="100" width="130" height="40"/>
@@ -53,14 +58,17 @@
                             <integer key="value" value="3"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="detailBtnClick:" destination="-1" eventType="touchUpInside" id="SGO-I7-KFV"/>
+                    </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GiC-qj-WfN" userLabel="detailLbl">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GiC-qj-WfN" userLabel="detailLbl">
                     <rect key="frame" x="15" y="160" width="200" height="80"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="80" id="aRL-5A-7hx"/>
                         <constraint firstAttribute="width" constant="200" id="oju-jJ-fqX"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -81,6 +89,9 @@
                             <integer key="value" value="3"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="seeDetailBtnClick:" destination="-1" eventType="touchUpInside" id="3m2-AO-LwK"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HpU-f3-vo6">
                     <rect key="frame" x="15" y="260" width="130" height="40"/>
@@ -98,7 +109,20 @@
                             <integer key="value" value="3"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="delBtnClick:" destination="-1" eventType="touchUpInside" id="gfc-tO-wde"/>
+                    </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0个" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4uQ-Vi-LLA" userLabel="numLbl">
+                    <rect key="frame" x="150" y="40" width="80" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="9am-Lo-o8o"/>
+                        <constraint firstAttribute="height" constant="40" id="zpI-yc-EZi"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -108,8 +132,10 @@
                 <constraint firstItem="HpU-f3-vo6" firstAttribute="top" secondItem="GiC-qj-WfN" secondAttribute="bottom" constant="20" id="Jq5-SB-dyZ"/>
                 <constraint firstItem="Ubm-gQ-ygO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="KuJ-vi-wtP"/>
                 <constraint firstItem="5a0-HC-Vw0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="Tj0-Yq-jRy"/>
+                <constraint firstItem="4uQ-Vi-LLA" firstAttribute="leading" secondItem="5a0-HC-Vw0" secondAttribute="trailing" constant="5" id="UY7-6M-Jng"/>
                 <constraint firstItem="E5m-Vg-NAh" firstAttribute="top" secondItem="GiC-qj-WfN" secondAttribute="top" id="dBA-rn-wAu"/>
                 <constraint firstItem="GiC-qj-WfN" firstAttribute="top" secondItem="Ubm-gQ-ygO" secondAttribute="bottom" constant="20" id="dly-ZD-aaz"/>
+                <constraint firstItem="4uQ-Vi-LLA" firstAttribute="top" secondItem="5a0-HC-Vw0" secondAttribute="top" id="faM-eS-vO9"/>
                 <constraint firstItem="GiC-qj-WfN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="ukb-F8-rZW"/>
                 <constraint firstItem="E5m-Vg-NAh" firstAttribute="leading" secondItem="GiC-qj-WfN" secondAttribute="trailing" constant="5" id="zo2-hQ-zIO"/>
             </constraints>
