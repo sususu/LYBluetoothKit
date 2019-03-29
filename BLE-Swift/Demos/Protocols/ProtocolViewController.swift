@@ -69,7 +69,14 @@ class ProtocolViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     func createNewMenu(withName name: String) {
-        let menu = ProtocolMenu(name: name, createTime: Date().timeIntervalSince1970)
+        
+        let name1 = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        if name.count == 0 {
+            showError("名字不能为空")
+            return
+        }
+        
+        let menu = ProtocolMenu(name: name1, createTime: Date().timeIntervalSince1970)
         if protocolMenus.contains(menu) {
             showError("这个名称已经存在了")
             return

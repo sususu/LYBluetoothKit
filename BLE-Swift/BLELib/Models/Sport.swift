@@ -25,16 +25,16 @@ public enum SportType: Int, Codable {
 
 public class Sport: Codable {
 
-    var index: Int
+    var index: UInt
     var type: SportType = .other
     var time: TimeInterval
-    var step: Int
-    var calorie: Int
-    var distance: Int
-    var duration: Int
-    var avgBpm: Int = 0
+    var step: UInt
+    var calorie: UInt
+    var distance: UInt
+    var duration: UInt
+    var avgBpm: UInt = 0
     
-    init(index: Int, time: TimeInterval, step: Int, calorie: Int, distance: Int, duration: Int) {
+    init(index: UInt, time: TimeInterval, step: UInt, calorie: UInt, distance: UInt, duration: UInt) {
         self.index = index
         self.time = time
         self.step = step
@@ -43,7 +43,7 @@ public class Sport: Codable {
         self.duration = duration
     }
     
-    convenience init(index: Int, type: SportType, time: TimeInterval, step: Int, calorie: Int, distance: Int, duration: Int) {
+    convenience init(index: UInt, type: SportType, time: TimeInterval, step: UInt, calorie: UInt, distance: UInt, duration: UInt) {
         self.init(index: index, time: time, step: step, calorie: calorie, distance: distance, duration: duration)
         self.type = type
     }

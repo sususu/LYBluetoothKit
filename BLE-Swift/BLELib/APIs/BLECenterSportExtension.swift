@@ -10,7 +10,7 @@ import Foundation
 
 extension BLECenter {
     //(Array<Data>?, BLEError?)->Void
-    public func getSportSleepDataNum(callback:((Int, Int, BLEError?)->Void)?, toDeviceName deviceName:String? = nil)->BLETask? {
+    public func getSportSleepDataNum(callback:((UInt, UInt, BLEError?)->Void)?, toDeviceName deviceName:String? = nil)->BLETask? {
         let data = Data(bytes: [0x6f,0x52,0x70,0x01,0x00,0x00,0x8f])
         return send(data: data, dataArrayCallback: { (datas, err) in
             if let error = err {
@@ -21,21 +21,21 @@ extension BLECenter {
                     return
                 }
                 let bytes = ds[0].bytes
-                let sportNum = Int(bytes[0]) + Int((bytes[1] << 8))
-                let sleepNum = Int(bytes[2]) + Int((bytes[3] << 8))
+                let sportNum = UInt(bytes[0]) + UInt((bytes[1] << 8))
+                let sleepNum = UInt(bytes[2]) + UInt((bytes[3] << 8))
                 callback?(sportNum, sleepNum, nil)
             }
         }, toDeviceName: deviceName)
     }
     
-    public func getSportDetail(num: Int, callback:((Array<Sport>?, BLEError?)->Void)?, toDeviceName deviceName:String? = nil)->BLETask? {
+    public func getSportDetail(num: UInt, callback:((Array<Sport>?, BLEError?)->Void)?, toDeviceName deviceName:String? = nil)->BLETask? {
         if num == 0 {
             callback?(nil, BLEError.taskError(reason: .paramsError))
             return nil
         }
         
         let data = Data(bytes: [0x6f,0x54,0x70,0x02,0x00,0x00,0x00,0x8f])
-        return send(data: data, recvCount: num, dataArrayCallback: { (datas, err) in
+        return send(data: data, recvCount: Int(num), dataArrayCallback: { (datas, err) in
             if let error = err {
                 callback?(nil, error)
             } else {
@@ -51,17 +51,17 @@ extension BLECenter {
                         return
                     }
                     let bytes = d.bytes
-                    let index = Int(bytes[0]) + Int((bytes[1] << 8))
-                    let time = Int(bytes[2]) + Int((bytes[3]<<8)) + Int((bytes[4]<<16)) + Int((bytes[5]<<24))
-                    let step = Int(bytes[6]) + Int((bytes[7]<<8)) + Int((bytes[8]<<16)) + Int((bytes[9]<<24))
-                    let cal = Int(bytes[10]) + Int((bytes[11]<<8)) + Int((bytes[12]<<16)) + Int((bytes[13]<<24))
-                    let dis = Int(bytes[14]) + Int((bytes[15]<<8)) + Int((bytes[16]<<16)) + Int((bytes[17]<<24))
-                    let du = Int(bytes[18]) + Int((bytes[19]<<8)) + Int((bytes[20]<<16)) + Int((bytes[21]<<24))
+                    let index = UInt(bytes[0]) + UInt((bytes[1] << 8))
+                    let time = UInt(bytes[2]) + UInt((bytes[3]<<8)) + UInt((bytes[4]<<16)) + UInt((bytes[5]<<24))
+                    let step = UInt(bytes[6]) + UInt((bytes[7]<<8)) + UInt((bytes[8]<<16)) + UInt((bytes[9]<<24))
+                    let cal = UInt(bytes[10]) + UInt((bytes[11]<<8)) + UInt((bytes[12]<<16)) + UInt((bytes[13]<<24))
+                    let dis = UInt(bytes[14]) + UInt((bytes[15]<<8)) + UInt((bytes[16]<<16)) + UInt((bytes[17]<<24))
+                    let du = UInt(bytes[18]) + UInt((bytes[19]<<8)) + UInt((bytes[20]<<16)) + UInt((bytes[21]<<24))
                     
                     let sport = Sport(index: index, time: TimeInterval(time), step: step, calorie: cal, distance: dis, duration: du)
                     
                     if d.count >= 24 {
-                        let avgHr = Int(bytes[22])
+                        let avgHr = UInt(bytes[22])
                         let type = Int(bytes[23])
                         sport.avgBpm = avgHr
                         sport.type = SportType(rawValue: type) ?? .other

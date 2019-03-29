@@ -47,6 +47,10 @@ class AddDeviceCircleTestVC: BaseViewController, CmdKeyBoardViewDelegate {
     }
     
     @IBAction func cmdTestClick(_ sender: Any) {
+        guard let cmdStr = cmdTF.text, cmdStr.count > 0 else {
+            showError("请先输入指令")
+            return
+        }
         showInputTimeInterval(withType: 2)
     }
     
@@ -77,7 +81,16 @@ class AddDeviceCircleTestVC: BaseViewController, CmdKeyBoardViewDelegate {
             else {
                 name = alert.textFields![0].text ?? "指令执行"
                 spanStr = alert.textFields![1].text ?? "0"
+                name = name.trimmingCharacters(in: .whitespacesAndNewlines)
+                spanStr = spanStr.trimmingCharacters(in: .whitespacesAndNewlines)
+                if name.count == 0 {
+                    name = "指令执行"
+                }
+                if spanStr.count == 0 {
+                    spanStr = "0"
+                }
             }
+            
             let ct = CircleTest()
             ct.name = name
             ct.type = CircleTestType(rawValue: type)!

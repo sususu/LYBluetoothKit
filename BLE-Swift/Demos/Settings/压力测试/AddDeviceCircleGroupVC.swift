@@ -33,12 +33,12 @@ class AddDeviceCircleGroupVC: BaseViewController {
 
     // MARK: - 事件处理
     @objc func saveCircleGroupClick() {
-        guard let name = nameTF.text else {
+        guard let name = nameTF.text, name.count > 0 else {
             showError("请输入名称")
             return
         }
         
-        guard let numStr = numberInputView.textField.text else {
+        guard let numStr = numberInputView.textField.text, numStr.count > 0 else {
             showError("请输入重复次数")
             return
         }

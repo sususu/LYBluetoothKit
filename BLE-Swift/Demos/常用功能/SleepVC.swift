@@ -14,7 +14,7 @@ class SleepVC: BaseViewController {
     
     @IBOutlet weak var numLbl: UILabel!
     
-    var num: Int = 0
+    var num: UInt = 0
     var sleeps: Array<Sleep>?
     
     override func viewDidLoad() {

@@ -35,6 +35,9 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
     @IBOutlet weak var psLbl: UILabel!
     var selectedGroupIndex: Int?
     
+    var proto: Protocol?
+    var oldGroup: DeviceTestGroup?
+    
     var returnFormat = boolReturnFormat()
     
     override func viewDidLoad() {
@@ -63,9 +66,41 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
         boolRadio.isSelected = true
         boolRadio.otherButtons = [stringRadio, splitRadio]
         
+        if proto != nil {
+            title = TR("增加测试用例")
+            reloadData()
+        }
         
         setNavRightButton(text: TR("SAVE"), sel: #selector(saveBtnClick))
     }
+    
+    func reloadData() {
+        nameTF.text = proto?.name
+        returnFormat = proto?.returnFormat ?? boolReturnFormat()
+        cmdInputView.units = proto?.cmdUnits ?? []
+        if returnFormat.type == .bool {
+            boolRadio.isSelected = true
+        }
+        else if returnFormat.type == .string {
+            stringRadio.isSelected = true
+        }
+        else if returnFormat.type == .split {
+            splitRadio.isSelected = true
+        }
+        didFinishEditing()
+        
+        if let g = oldGroup {
+            for i in 0 ..< product.testGroups.count {
+                if g.name == product.testGroups[i].name {
+                    selectedGroupIndex = i
+                    return
+                }
+            }
+        }
+        collectionView.reloadData()
+        
+    }
+    
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -192,13 +227,20 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
     func saveTestUnit(name: String, units: [CmdUnit], groupIndex: Int) {
         showSuccess(TR("Success"))
         
-        let proto = Protocol()
-        proto.name = name
-        proto.cmdUnits = cmdInputView.units
-        proto.returnFormat = returnFormat
+        var pl = Protocol()
+        pl.name = name
+        pl.cmdUnits = cmdInputView.units
+        pl.returnFormat = returnFormat
         
-        let tg = product.testGroups[groupIndex]
-        tg.protocols.insert(proto, at: 0)
+        if proto != nil {
+            proto?.name = name
+            proto?.cmdUnits = cmdInputView.units
+            proto?.returnFormat = returnFormat
+            pl = proto!
+        } else {
+            let tg = product.testGroups[groupIndex]
+            tg.protocols.insert(pl, at: 0)
+        }
         
         ToolsService.shared.saveProduct(product)
         
@@ -224,7 +266,7 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @IBAction func addGroupBtnClick(_ sender: Any) {
+    @IBAction func addGroupBtnClick(_ sender: Any?) {
         let alert = UIAlertController(title: nil, message: TR("Please input name"), preferredStyle: .alert)
         let ok = UIAlertAction(title: TR("OK"), style: .default) { (action) in
             self.createTestGroup(withName: alert.textFields![0].text ?? "")
@@ -240,6 +282,13 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
     }
     
     func createTestGroup(withName name: String) {
+        let name2 = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        if name2.count == 0 {
+            showError("名字不能为空")
+            addGroupBtnClick(nil);
+            return
+        }
+        
         let group = DeviceTestGroup(name: name, createTime: Date().timeIntervalSince1970)
         product.testGroups.append(group)
         ToolsService.shared.saveProduct(product)

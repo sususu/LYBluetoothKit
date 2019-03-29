@@ -155,7 +155,7 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
             if err != nil {
                 weakSelf?.handleBleError(error: err)
             } else {
-                weakSelf?.showAlert(title: TR("DEVICE ID"), message: str ?? "")
+                weakSelf?.showAlert(title: "固件版本号", message: str ?? "")
             }
             
         }, toDeviceName: config.deviceName)

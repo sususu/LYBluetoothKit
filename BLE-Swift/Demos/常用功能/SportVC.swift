@@ -14,7 +14,7 @@ class SportVC: BaseViewController {
     
     @IBOutlet weak var numLbl: UILabel!
     
-    var num: Int = 0
+    var num: UInt = 0
     var sports: Array<Sport>?
     
     override func viewDidLoad() {
@@ -66,10 +66,10 @@ class SportVC: BaseViewController {
             }
             
             weakSelf?.sports = sportArr
-            var steps = 0
-            var du = 0
-            var cal = 0
-            var dis = 0
+            var steps: UInt = 0
+            var du: UInt = 0
+            var cal: UInt = 0
+            var dis: UInt = 0
             
             for s in sportArr {
                 steps += s.step

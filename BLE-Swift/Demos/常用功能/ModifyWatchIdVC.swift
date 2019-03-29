@@ -48,8 +48,8 @@ class ModifyWatchIdVC: BaseViewController {
     
     func modify(pushBack: Bool) {
         
-        guard let idStr = idTF.text else {
-            showError("请输入ID")
+        guard let idStr = idTF.text, idStr.count > 0 else {
+            showError("请输入Watch ID")
             return
         }
         

@@ -40,7 +40,7 @@ BLEDeviceDelegate
         
         setNavRightButton(text: "清除链接", sel: #selector(clearConnection))
         
-        nameTF.text = "Helio #03691"
+        nameTF.text = "Helio #99999"
     }
     
     
@@ -321,8 +321,11 @@ BLEDeviceDelegate
             tf.placeholder = "测试名称"
         }
         let ok = UIAlertAction(title: "确定", style: .default) { (action) in
-            let name = alert.textFields![0].text ?? "未知名"
-            let ct = DeviceTestConfig(name: name, groups: self.groups)
+            guard let text = alert.textFields![0].text, text.count > 0 else {
+                self.showError("请输入名称")
+                return
+            }
+            let ct = DeviceTestConfig(name: text, groups: self.groups)
             if CircleTestService.shared.configs.contains(ct) {
                 self.showError("已经有相同名字啦")
                 return
@@ -347,6 +350,10 @@ BLEDeviceDelegate
     
     // MARK: - 代理
     func didAddCircleGroup(_ testGroup: CircleGroup) {
+        if self.groups.contains(testGroup) {
+            showError("已经存在相同名字的组，请重新添加")
+            return
+        }
         self.groups.append(testGroup)
         self.tableView.reloadData()
     }

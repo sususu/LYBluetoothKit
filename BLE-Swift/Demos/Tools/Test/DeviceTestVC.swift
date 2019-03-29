@@ -189,6 +189,48 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
         return group.protocols.count
     }
     
+    private var rowActions: [UITableViewRowAction] = []
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        if rowActions.count == 0 {
+            let row1 = UITableViewRowAction(style: .normal, title: "编辑") { (rowAction, ip) in
+                self.editRow(atIndexPath: ip)
+            }
+            let row2 = UITableViewRowAction(style: .destructive, title: "删除") { (rowAction, ip) in
+                self.deleteRow(atIndexPath: ip)
+            }
+            rowActions.append(row1)
+            rowActions.append(row2)
+        }
+        return rowActions
+    }
+    
+    // MARK: - 编辑菜单项
+    func editRow(atIndexPath indexPath: IndexPath) {
+        let vc = AddDeviceTestVC()
+        vc.product = product
+        vc.oldGroup = product.testGroups[indexPath.section]
+        vc.proto = product.testGroups[indexPath.section].protocols[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func deleteRow(atIndexPath indexPath: IndexPath) {
+        
+        let alert = UIAlertController(title: nil, message: TR("Are you to delete ?"), preferredStyle: .alert)
+        let ok = UIAlertAction(title: TR("OK"), style: .default) { (action) in
+            let tg = self.product.testGroups[indexPath.section]
+            tg.protocols.remove(at: indexPath.row)
+            ToolsService.shared.saveProductsToDisk()
+            self.tableView.reloadData()
+            self.showSuccess(TR("Success"))
+        }
+        let cancel = UIAlertAction(title: TR("CANCEL"), style: .cancel, handler: nil)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        navigationController?.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! DeviceTestCell
         let group = product.testGroups[indexPath.section]

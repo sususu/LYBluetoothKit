@@ -56,6 +56,7 @@ class DeviceTestConfigsVC: BaseViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         configs.remove(at: indexPath.row)
+        CircleTestService.shared.configs.remove(at: indexPath.row)
         CircleTestService.shared.saveConfigs()
         tableView.beginUpdates()
         tableView.deleteRow(at: indexPath, with: .automatic)

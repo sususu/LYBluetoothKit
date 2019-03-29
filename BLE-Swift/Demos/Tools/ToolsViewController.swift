@@ -177,6 +177,8 @@ class ToolsViewController: BaseViewController, UITableViewDataSource, UITableVie
         let alert = UIAlertController(title: nil, message: TR("Are you to delete ?"), preferredStyle: .alert)
         let ok = UIAlertAction(title: TR("OK"), style: .default) { (action) in
             ToolsService.shared.deleteProduct(self.products[indexPath.row])
+            self.products.remove(at: indexPath.row)
+            self.tableView.reloadData()
             self.showSuccess(TR("Success"))
         }
         let cancel = UIAlertAction(title: TR("CANCEL"), style: .cancel, handler: nil)

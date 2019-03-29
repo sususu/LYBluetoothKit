@@ -47,6 +47,7 @@ class NumberInputView: UIControl {
 //        textField.layer.borderWidth = 1
         textField.keyboardType = .numberPad
         textField.textAlignment = .center
+        textField.addTarget(self, action: #selector(textValueChanged(tf:)), for: .editingChanged)
         addSubview(textField)
         
         jiaBtn = UIButton(type: .custom)
@@ -87,5 +88,13 @@ class NumberInputView: UIControl {
             val = 0
         }
         textField.text = "\(val)"
+    }
+    
+    
+    @objc func textValueChanged(tf: UITextField) {
+        guard let text = tf.text, text.count > 11 else {
+            return
+        }
+        tf.text = String(text.prefix(text.count - 1))
     }
 }
