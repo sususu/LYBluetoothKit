@@ -46,12 +46,12 @@ class ToolsViewController: BaseViewController, UITableViewDataSource, UITableVie
     
     // MARK: - 事件处理
     @objc func exportBtnClick() {
-        ParamsInputModalView.show(withStr: "Int1", okCallback: { (p) in
-            
-        }) {
-            
-        }
-        //openExporter()
+//        ParamsInputModalView.show(withStr: "Int1", okCallback: { (p) in
+//
+//        }) {
+//
+//        }
+        openExporter()
     }
     
     

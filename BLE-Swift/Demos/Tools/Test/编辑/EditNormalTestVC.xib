@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditNormalTestVC" customModule="BLE_Swift" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nYh-Sx-TIa">
+                    <rect key="frame" x="40" y="84" width="120" height="44"/>
+                    <color key="backgroundColor" red="0.20073086439999999" green="0.2397145192" blue="0.4142607868" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="3iY-eM-LL5"/>
+                        <constraint firstAttribute="height" constant="44" id="ZND-Lf-h9i"/>
+                    </constraints>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="亮屏">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="screenUpBtnClick:" destination="-1" eventType="touchUpInside" id="09U-oX-WKw"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2gq-sq-2hA">
+                    <rect key="frame" x="40" y="158" width="120" height="44"/>
+                    <color key="backgroundColor" red="0.20073086439999999" green="0.2397145192" blue="0.4142607868" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="9ih-8p-C2s"/>
+                        <constraint firstAttribute="width" constant="120" id="Nst-G0-0cz"/>
+                    </constraints>
+                    <state key="normal" title="初始化">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="initBtnClick:" destination="-1" eventType="touchUpInside" id="z7V-A8-54E"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="va3-gI-JcF">
+                    <rect key="frame" x="40" y="232" width="120" height="44"/>
+                    <color key="backgroundColor" red="0.20073086439999999" green="0.2397145192" blue="0.4142607868" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="Gjo-sU-me6"/>
+                        <constraint firstAttribute="height" constant="44" id="jO0-LA-zLz"/>
+                    </constraints>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="同步时间">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="syncTimeBtnClick:" destination="-1" eventType="touchUpInside" id="zeY-UX-SQU"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZxH-OY-gPF">
+                    <rect key="frame" x="40" y="306" width="120" height="44"/>
+                    <color key="backgroundColor" red="0.20073086439999999" green="0.2397145192" blue="0.4142607868" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="XG2-ss-Yd9"/>
+                        <constraint firstAttribute="width" constant="120" id="pjx-iH-Vym"/>
+                    </constraints>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="查看信息">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="infoBtnClick:" destination="-1" eventType="touchUpInside" id="Xc4-h3-XVf"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="nYh-Sx-TIa" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="27r-YJ-2v1"/>
+                <constraint firstItem="2gq-sq-2hA" firstAttribute="top" secondItem="nYh-Sx-TIa" secondAttribute="bottom" constant="30" id="9Uo-z2-BPI"/>
+                <constraint firstItem="va3-gI-JcF" firstAttribute="top" secondItem="2gq-sq-2hA" secondAttribute="bottom" constant="30" id="JHz-lB-pgc"/>
+                <constraint firstItem="ZxH-OY-gPF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="LN3-XF-VsJ"/>
+                <constraint firstItem="2gq-sq-2hA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="Rev-R6-Lpa"/>
+                <constraint firstItem="nYh-Sx-TIa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="UAf-ZG-MD6"/>
+                <constraint firstItem="va3-gI-JcF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="eng-7U-9Wv"/>
+                <constraint firstItem="ZxH-OY-gPF" firstAttribute="top" secondItem="va3-gI-JcF" secondAttribute="bottom" constant="30" id="qfd-Tf-59a"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

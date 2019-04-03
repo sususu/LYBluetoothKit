@@ -295,9 +295,9 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
             return
         }
         _ = device.write(data, characteristicUUID: UUID.otaWriteC)
-        if self.device.name.hasSuffix("0002") {
-            print("写数据-\(self.device.name)：\(data.hexEncodedString())")
-        }
+//        if self.device.name.hasSuffix("0002") {
+//            print("写数据-\(self.device.name)：\(data.hexEncodedString())")
+//        }
     }
     
     private func writeDataToNotify(_ data: Data) {

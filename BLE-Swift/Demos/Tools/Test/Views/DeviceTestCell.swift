@@ -88,7 +88,7 @@ class DeviceTestCell: UITableViewCell {
         }
         
         let runner = ProtocolRunner()
-        
+        self.delegate?.dtcAddLog(log: "执行：\(proto.name)")
         runner.run(proto, boolCallback: { (bool) in
             let str = bool ? "成功" : "失败"
             self.delegate?.dtcAddLog(log: str)

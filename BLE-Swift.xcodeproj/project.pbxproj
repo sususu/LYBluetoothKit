@@ -239,6 +239,12 @@
 		2BE7705121E4A54C00FD6374 /* FirmwareSelectVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE7704F21E4A54C00FD6374 /* FirmwareSelectVC.xib */; };
 		2BE7705421E4A65A00FD6374 /* FirmwareSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE7705221E4A65A00FD6374 /* FirmwareSelectCell.swift */; };
 		2BE7705521E4A65A00FD6374 /* FirmwareSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE7705321E4A65A00FD6374 /* FirmwareSelectCell.xib */; };
+		2BE7CE6422549CAF00A60DDA /* ToolInitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE7CE6222549CAF00A60DDA /* ToolInitVC.swift */; };
+		2BE7CE6522549CAF00A60DDA /* ToolInitVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE7CE6322549CAF00A60DDA /* ToolInitVC.xib */; };
+		2BE7CE692254B00F00A60DDA /* EditProtocolVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE7CE672254B00F00A60DDA /* EditProtocolVC.xib */; };
+		2BE7CE6A2254B00F00A60DDA /* EditProtocolVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE7CE682254B00F00A60DDA /* EditProtocolVC.swift */; };
+		2BE7CE6D2254B2BB00A60DDA /* EditNormalTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE7CE6B2254B2BB00A60DDA /* EditNormalTestVC.swift */; };
+		2BE7CE6E2254B2BB00A60DDA /* EditNormalTestVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE7CE6C2254B2BB00A60DDA /* EditNormalTestVC.xib */; };
 		2BEC5D6C21746A5A00E0902B /* BLECenterCommonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */; };
 		2BEC5D6E217470C300E0902B /* BLEDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6D217470C300E0902B /* BLEDataExtensions.swift */; };
 		2BEC5D702174870100E0902B /* BLECenterDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6F2174870100E0902B /* BLECenterDeviceExtension.swift */; };
@@ -527,6 +533,12 @@
 		2BE7704F21E4A54C00FD6374 /* FirmwareSelectVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirmwareSelectVC.xib; sourceTree = "<group>"; };
 		2BE7705221E4A65A00FD6374 /* FirmwareSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirmwareSelectCell.swift; sourceTree = "<group>"; };
 		2BE7705321E4A65A00FD6374 /* FirmwareSelectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirmwareSelectCell.xib; sourceTree = "<group>"; };
+		2BE7CE6222549CAF00A60DDA /* ToolInitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolInitVC.swift; sourceTree = "<group>"; };
+		2BE7CE6322549CAF00A60DDA /* ToolInitVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToolInitVC.xib; sourceTree = "<group>"; };
+		2BE7CE672254B00F00A60DDA /* EditProtocolVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditProtocolVC.xib; path = "BLE-Swift/Demos/Protocols/协议编辑/EditProtocolVC.xib"; sourceTree = SOURCE_ROOT; };
+		2BE7CE682254B00F00A60DDA /* EditProtocolVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProtocolVC.swift; path = "BLE-Swift/Demos/Protocols/协议编辑/EditProtocolVC.swift"; sourceTree = SOURCE_ROOT; };
+		2BE7CE6B2254B2BB00A60DDA /* EditNormalTestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNormalTestVC.swift; sourceTree = "<group>"; };
+		2BE7CE6C2254B2BB00A60DDA /* EditNormalTestVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditNormalTestVC.xib; sourceTree = "<group>"; };
 		2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterCommonExtension.swift; sourceTree = "<group>"; };
 		2BEC5D6D217470C300E0902B /* BLEDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDataExtensions.swift; sourceTree = "<group>"; };
 		2BEC5D6F2174870100E0902B /* BLECenterDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterDeviceExtension.swift; sourceTree = "<group>"; };
@@ -845,6 +857,10 @@
 		2B45B95721EDE60A0058E137 /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				2BE7CE662254AFF900A60DDA /* 协议编辑 */,
+				2BE7CE612254997600A60DDA /* 编辑 */,
+				2BE7CE602254984B00A60DDA /* 查看信息 */,
+				2BE7CE5F2254983E00A60DDA /* 初始化 */,
 				2B2F8A7122262EF30078D69F /* 配置 */,
 				2B45B96021EDFC130058E137 /* Views */,
 				2B45B95821EDE6C70058E137 /* DeviceTestVC.swift */,
@@ -1454,6 +1470,40 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		2BE7CE5F2254983E00A60DDA /* 初始化 */ = {
+			isa = PBXGroup;
+			children = (
+				2BE7CE6222549CAF00A60DDA /* ToolInitVC.swift */,
+				2BE7CE6322549CAF00A60DDA /* ToolInitVC.xib */,
+			);
+			path = "初始化";
+			sourceTree = "<group>";
+		};
+		2BE7CE602254984B00A60DDA /* 查看信息 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "查看信息";
+			sourceTree = "<group>";
+		};
+		2BE7CE612254997600A60DDA /* 编辑 */ = {
+			isa = PBXGroup;
+			children = (
+				2BE7CE6B2254B2BB00A60DDA /* EditNormalTestVC.swift */,
+				2BE7CE6C2254B2BB00A60DDA /* EditNormalTestVC.xib */,
+			);
+			path = "编辑";
+			sourceTree = "<group>";
+		};
+		2BE7CE662254AFF900A60DDA /* 协议编辑 */ = {
+			isa = PBXGroup;
+			children = (
+				2BE7CE682254B00F00A60DDA /* EditProtocolVC.swift */,
+				2BE7CE672254B00F00A60DDA /* EditProtocolVC.xib */,
+			);
+			path = "协议编辑";
+			sourceTree = "<group>";
+		};
 		2BEC5D6A2174698000E0902B /* APIs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1634,6 +1684,7 @@
 				2B56A15E21F6F1D40073E2A7 /* LoginVC.xib in Resources */,
 				2BB4B6EE21E9C21C00F22268 /* OtaTaskDetailVC.xib in Resources */,
 				2B314737223639840018495D /* AddDeviceCircleGroupVC.xib in Resources */,
+				2BE7CE6522549CAF00A60DDA /* ToolInitVC.xib in Resources */,
 				2B2F8A7522262F0C0078D69F /* TestConfigVC.xib in Resources */,
 				2B3657AC21DCD0140070E7AB /* LeftViewController.xib in Resources */,
 				2B7C9237221FE6F9005C905A /* ModifyPwdVC.xib in Resources */,
@@ -1641,6 +1692,7 @@
 				2B57032B2248B2450008208E /* SportDetailCell.xib in Resources */,
 				2B80C21721EC685B00FE7BF7 /* SDOtaVC.xib in Resources */,
 				2BE7705521E4A65A00FD6374 /* FirmwareSelectCell.xib in Resources */,
+				2BE7CE6E2254B2BB00A60DDA /* EditNormalTestVC.xib in Resources */,
 				2BE7705121E4A54C00FD6374 /* FirmwareSelectVC.xib in Resources */,
 				2B80C20921EC5B3F00FE7BF7 /* OtaConfigVC.xib in Resources */,
 				2B45441A21F55AF100FC3E91 /* ZdOtaDisplayVC.xib in Resources */,
@@ -1668,6 +1720,7 @@
 				2B45B96421EDFC3C0058E137 /* DeviceTestCell.xib in Resources */,
 				2B62A56621DF28470051DD38 /* CharacteristicCellTableViewCell.xib in Resources */,
 				2B5703272248B13F0008208E /* SportDetailVC.xib in Resources */,
+				2BE7CE692254B00F00A60DDA /* EditProtocolVC.xib in Resources */,
 				2B4AB46E21F1779100EF5327 /* TestGroupCell.xib in Resources */,
 				2B56A15121F6F0780073E2A7 /* ProtocolManagerVC.xib in Resources */,
 				2B62A57821E03D3E0051DD38 /* Protocol111.json in Resources */,
@@ -1923,6 +1976,7 @@
 				2B314731223635C30018495D /* CircleTest.swift in Sources */,
 				2BE7704821E4980700FD6374 /* OtaDataModel.swift in Sources */,
 				2B36579421DCC6190070E7AB /* ToolsViewController.swift in Sources */,
+				2BE7CE6422549CAF00A60DDA /* ToolInitVC.swift in Sources */,
 				2B5417E02244EBCD00C9F5DD /* HeartRateVC.swift in Sources */,
 				2B44C74F21EEFAEE0037F5C3 /* CmdUnit.swift in Sources */,
 				2B3657B921DDB05C0070E7AB /* LeftDeviceCell.swift in Sources */,
@@ -1956,6 +2010,7 @@
 				2B9DD98121E82A1100C215E5 /* OtaTask.swift in Sources */,
 				2B56A16D21F70FB90073E2A7 /* VoiceSpeaker.swift in Sources */,
 				2B62A58721E0564C0051DD38 /* ProtocolResultDisplayView.swift in Sources */,
+				2BE7CE6D2254B2BB00A60DDA /* EditNormalTestVC.swift in Sources */,
 				2B56A15021F6F0780073E2A7 /* ProtocolManagerVC.swift in Sources */,
 				2B2F8A812226C0EA0078D69F /* ToolsObjCell.swift in Sources */,
 				2B5703262248B13F0008208E /* SportDetailVC.swift in Sources */,
@@ -1973,6 +2028,7 @@
 				2B314733223638AA0018495D /* CircleGroup.swift in Sources */,
 				2B9DD97D21E7476A00C215E5 /* OtaManager.swift in Sources */,
 				2B48749E214F763400AC5841 /* AppDelegate.swift in Sources */,
+				2BE7CE6A2254B00F00A60DDA /* EditProtocolVC.swift in Sources */,
 				2B62A57421DF6B070051DD38 /* ProtocolMenu.swift in Sources */,
 				2BA23FAA21E58ABB00EF1B77 /* File.swift in Sources */,
 				2B5832E72175C87B00259593 /* DevicesViewController.swift in Sources */,

@@ -211,7 +211,7 @@ class OtaNordicTask: OtaTask {
         if checkIsCancel() {
             return
         }
-        print("写数据BinData(\(line))：\(data.hexEncodedString())")
+//        print("写数据BinData(\(line))：\(data.hexEncodedString())")
         _ = device.write(data, characteristicUUID: UUID.nordicOtaBin)
         line += 1;
     }
@@ -220,7 +220,7 @@ class OtaNordicTask: OtaTask {
         if checkIsCancel() {
             return
         }
-        print("写数据DatData：\(data.hexEncodedString())")
+//        print("写数据DatData：\(data.hexEncodedString())")
         _ = device.write(data, characteristicUUID: UUID.nordicOtaBat)
         
     }

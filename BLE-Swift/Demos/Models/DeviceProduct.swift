@@ -15,6 +15,10 @@ class DeviceProduct: NSObject, Codable, NSCopying {
     var bleName: String = ""
     var createTime: TimeInterval
     var testGroups: [DeviceTestGroup] = []
+    var screenUpProto: Protocol?
+    var initProtos: [Protocol]?
+    var syncTimeProto: Protocol?
+    var infoProtos: [Protocol]?
     //自动测单元
     var ziceUnits: [DeviceTestUnit] = []
     //屏蔽箱测试

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelegate, DeviceTestCellDelegate {
+class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelegate, DeviceTestCellDelegate, EditProtocolVCDelegate {
 
     @IBOutlet weak var bleNameLbl: UITextField!
     
@@ -29,6 +29,7 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
         tableView.delegate = self
         tableView.allowsSelection = false
         tableView.register(UINib(nibName: "DeviceTestCell", bundle: nil), forCellReuseIdentifier: "cellId")
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 80));
         
         setNavRightButton(text: "添加测试", sel: #selector(addTestBtnClick(_:)))
         
@@ -178,6 +179,73 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
         let vc = TestConfigVC()
         vc.product = self.product
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    // MARK: - 常规测试
+    @IBAction func screenUpClick(_ sender: Any) {
+        
+        guard let proto = product.screenUpProto, proto.cmdUnits.count > 0 else {
+            let alert = UIAlertController(title: "亮屏", message: "还没有配置亮屏的执行指令，是否前往配置？", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "确定", style: .default) { (action) in
+                self.product.screenUpProto = Protocol()
+                let vc = EditProtocolVC()
+                vc.proto = self.product.screenUpProto
+                vc.delegate = self
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            let cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            self.navigationController?.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        printLog("执行：亮屏")
+        let runner = ProtocolRunner()
+        runner.run(proto, boolCallback: { (bool) in
+            let str = bool ? "成功" : "失败"
+            self.printLog(str)
+        }, stringCallback: { (str) in
+        }, dictCallback: { (dict) in
+        }, dictArrayCallback: { (dictArr) in
+        }) { (error) in
+            self.printLog("错误：" + self.errorMsgFromBleError(error))
+        }
+    }
+    
+    @IBAction func initBtnClick(_ sender: Any) {
+        
+        guard let protos = self.product.initProtos, protos.count > 0 else {
+            let alert = UIAlertController(title: "初始化", message: "还没有配置初始化的执行指令，是否前往配置？", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "确定", style: .default) { (action) in
+                let vc = ToolInitVC()
+                vc.product = self.product
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            let cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            self.navigationController?.present(alert, animated: true, completion: nil)
+            return
+        }
+    }
+    
+    @IBAction func syncTimeBtnClick(_ sender: Any) {
+    }
+    
+    @IBAction func deviceInfoBtnClick(_ sender: Any) {
+    }
+    
+    @IBAction func editBtnClick(_ sender: Any) {
+    }
+    
+    func didAddNewProtocol(protocol: Protocol) {
+        ToolsService.shared.saveProduct(product)
+    }
+    
+    func didEditNewProtocol(protocol: Protocol) {
+        
     }
     
     // MARK: - tableView

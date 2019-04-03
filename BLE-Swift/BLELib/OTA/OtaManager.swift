@@ -32,6 +32,11 @@ public class OtaManager {
         
         let task = OtaTask(device: device, otaBleName: otaBleName, otaDatas: otaDatas, readyCallback: readyCallback, progressCallback: progressCallback, finishCallback: finishCallback)
         task.start()
+        
+        taskList = taskList.filter { (t) -> Bool in
+            return (t.device.name != task.device.name && t.otaBleName != otaBleName)
+        }
+        
         taskList.append(task)
         
         
