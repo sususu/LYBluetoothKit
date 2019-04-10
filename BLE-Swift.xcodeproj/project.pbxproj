@@ -245,6 +245,8 @@
 		2BE7CE6A2254B00F00A60DDA /* EditProtocolVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE7CE682254B00F00A60DDA /* EditProtocolVC.swift */; };
 		2BE7CE6D2254B2BB00A60DDA /* EditNormalTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE7CE6B2254B2BB00A60DDA /* EditNormalTestVC.swift */; };
 		2BE7CE6E2254B2BB00A60DDA /* EditNormalTestVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE7CE6C2254B2BB00A60DDA /* EditNormalTestVC.xib */; };
+		2BE7CE77225C443A00A60DDA /* WatchInfoEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE7CE75225C443A00A60DDA /* WatchInfoEditVC.swift */; };
+		2BE7CE78225C443A00A60DDA /* WatchInfoEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE7CE76225C443A00A60DDA /* WatchInfoEditVC.xib */; };
 		2BEC5D6C21746A5A00E0902B /* BLECenterCommonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */; };
 		2BEC5D6E217470C300E0902B /* BLEDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6D217470C300E0902B /* BLEDataExtensions.swift */; };
 		2BEC5D702174870100E0902B /* BLECenterDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC5D6F2174870100E0902B /* BLECenterDeviceExtension.swift */; };
@@ -539,6 +541,8 @@
 		2BE7CE682254B00F00A60DDA /* EditProtocolVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProtocolVC.swift; path = "BLE-Swift/Demos/Protocols/协议编辑/EditProtocolVC.swift"; sourceTree = SOURCE_ROOT; };
 		2BE7CE6B2254B2BB00A60DDA /* EditNormalTestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNormalTestVC.swift; sourceTree = "<group>"; };
 		2BE7CE6C2254B2BB00A60DDA /* EditNormalTestVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditNormalTestVC.xib; sourceTree = "<group>"; };
+		2BE7CE75225C443A00A60DDA /* WatchInfoEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchInfoEditVC.swift; sourceTree = "<group>"; };
+		2BE7CE76225C443A00A60DDA /* WatchInfoEditVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WatchInfoEditVC.xib; sourceTree = "<group>"; };
 		2BEC5D6B21746A5A00E0902B /* BLECenterCommonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterCommonExtension.swift; sourceTree = "<group>"; };
 		2BEC5D6D217470C300E0902B /* BLEDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDataExtensions.swift; sourceTree = "<group>"; };
 		2BEC5D6F2174870100E0902B /* BLECenterDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterDeviceExtension.swift; sourceTree = "<group>"; };
@@ -857,6 +861,7 @@
 		2B45B95721EDE60A0058E137 /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				2BE7CE79225C47E700A60DDA /* 同步时间 */,
 				2BE7CE662254AFF900A60DDA /* 协议编辑 */,
 				2BE7CE612254997600A60DDA /* 编辑 */,
 				2BE7CE602254984B00A60DDA /* 查看信息 */,
@@ -1482,6 +1487,8 @@
 		2BE7CE602254984B00A60DDA /* 查看信息 */ = {
 			isa = PBXGroup;
 			children = (
+				2BE7CE75225C443A00A60DDA /* WatchInfoEditVC.swift */,
+				2BE7CE76225C443A00A60DDA /* WatchInfoEditVC.xib */,
 			);
 			path = "查看信息";
 			sourceTree = "<group>";
@@ -1502,6 +1509,13 @@
 				2BE7CE672254B00F00A60DDA /* EditProtocolVC.xib */,
 			);
 			path = "协议编辑";
+			sourceTree = "<group>";
+		};
+		2BE7CE79225C47E700A60DDA /* 同步时间 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "同步时间";
 			sourceTree = "<group>";
 		};
 		2BEC5D6A2174698000E0902B /* APIs */ = {
@@ -1743,6 +1757,7 @@
 				2B3657B421DDA15F0070E7AB /* logo.png in Resources */,
 				2B36579521DCC6190070E7AB /* ToolsViewController.xib in Resources */,
 				2B56A15921F6F1060073E2A7 /* AppSettingVC.xib in Resources */,
+				2BE7CE78225C443A00A60DDA /* WatchInfoEditVC.xib in Resources */,
 				2B56A16621F705660073E2A7 /* ZdOtaResultVC.xib in Resources */,
 				2B62A58121E0488A0051DD38 /* ProtocolMenuDetailsVC.xib in Resources */,
 				2B31472922362C130018495D /* StressTestingVC.xib in Resources */,
@@ -1933,6 +1948,7 @@
 				2B06DDED222397180062E7CB /* ProtocolObjCell.swift in Sources */,
 				2BEDD5AF22323C750085A937 /* EnumManagerVC.swift in Sources */,
 				2B5832E22175832200259593 /* StringExtensions.swift in Sources */,
+				2BE7CE77225C443A00A60DDA /* WatchInfoEditVC.swift in Sources */,
 				2BEDD5A4222F6A440085A937 /* ParamsInputModalView.swift in Sources */,
 				2B4AB46921F174D200EF5327 /* ReturnFormatVC.swift in Sources */,
 				2B56A15421F6F0B50073E2A7 /* ToolManagerVC.swift in Sources */,

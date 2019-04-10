@@ -238,6 +238,9 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func editBtnClick(_ sender: Any) {
+        let vc = EditNormalTestVC()
+        vc.product = self.product
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func didAddNewProtocol(protocol: Protocol) {

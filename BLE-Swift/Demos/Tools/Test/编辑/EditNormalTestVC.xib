@@ -21,60 +21,80 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nYh-Sx-TIa">
-                    <rect key="frame" x="40" y="84" width="120" height="44"/>
+                    <rect key="frame" x="40" y="84" width="180" height="44"/>
                     <color key="backgroundColor" red="0.20073086439999999" green="0.2397145192" blue="0.4142607868" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="120" id="3iY-eM-LL5"/>
+                        <constraint firstAttribute="width" constant="180" id="3iY-eM-LL5"/>
                         <constraint firstAttribute="height" constant="44" id="ZND-Lf-h9i"/>
                     </constraints>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" title="亮屏">
+                    <state key="normal" title="编辑亮屏指令">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="screenUpBtnClick:" destination="-1" eventType="touchUpInside" id="09U-oX-WKw"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2gq-sq-2hA">
-                    <rect key="frame" x="40" y="158" width="120" height="44"/>
+                    <rect key="frame" x="40" y="158" width="180" height="44"/>
                     <color key="backgroundColor" red="0.20073086439999999" green="0.2397145192" blue="0.4142607868" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="9ih-8p-C2s"/>
-                        <constraint firstAttribute="width" constant="120" id="Nst-G0-0cz"/>
+                        <constraint firstAttribute="width" constant="180" id="Nst-G0-0cz"/>
                     </constraints>
-                    <state key="normal" title="初始化">
+                    <state key="normal" title="编辑初始化流程">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="initBtnClick:" destination="-1" eventType="touchUpInside" id="z7V-A8-54E"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="va3-gI-JcF">
-                    <rect key="frame" x="40" y="232" width="120" height="44"/>
+                    <rect key="frame" x="40" y="232" width="180" height="44"/>
                     <color key="backgroundColor" red="0.20073086439999999" green="0.2397145192" blue="0.4142607868" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="120" id="Gjo-sU-me6"/>
+                        <constraint firstAttribute="width" constant="180" id="Gjo-sU-me6"/>
                         <constraint firstAttribute="height" constant="44" id="jO0-LA-zLz"/>
                     </constraints>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" title="同步时间">
+                    <state key="normal" title="编辑同步时间指令">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="syncTimeBtnClick:" destination="-1" eventType="touchUpInside" id="zeY-UX-SQU"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZxH-OY-gPF">
-                    <rect key="frame" x="40" y="306" width="120" height="44"/>
+                    <rect key="frame" x="40" y="306" width="180" height="44"/>
                     <color key="backgroundColor" red="0.20073086439999999" green="0.2397145192" blue="0.4142607868" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="XG2-ss-Yd9"/>
-                        <constraint firstAttribute="width" constant="120" id="pjx-iH-Vym"/>
+                        <constraint firstAttribute="width" constant="180" id="pjx-iH-Vym"/>
                     </constraints>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" title="查看信息">
+                    <state key="normal" title="编辑查看信息">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="infoBtnClick:" destination="-1" eventType="touchUpInside" id="Xc4-h3-XVf"/>
                     </connections>
