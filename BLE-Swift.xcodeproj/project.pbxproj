@@ -74,7 +74,6 @@
 		2B45B95321EDC18D0058E137 /* DeviceProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B45B95121EDC18D0058E137 /* DeviceProductCell.xib */; };
 		2B45B95621EDC6E60058E137 /* ToolsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45B95521EDC6E60058E137 /* ToolsService.swift */; };
 		2B45B95A21EDE6C70058E137 /* DeviceTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45B95821EDE6C70058E137 /* DeviceTestVC.swift */; };
-		2B45B95B21EDE6C70058E137 /* DeviceTestVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B45B95921EDE6C70058E137 /* DeviceTestVC.xib */; };
 		2B45B95D21EDF5A50058E137 /* DeviceTestGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45B95C21EDF5A50058E137 /* DeviceTestGroup.swift */; };
 		2B45B95F21EDF5C80058E137 /* DeviceTestUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45B95E21EDF5C80058E137 /* DeviceTestUnit.swift */; };
 		2B45B96321EDFC3C0058E137 /* DeviceTestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45B96121EDFC3C0058E137 /* DeviceTestCell.swift */; };
@@ -102,6 +101,8 @@
 		2B4AB47C21F3035B00EF5327 /* ZdOtaConfigVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B4AB47A21F3035B00EF5327 /* ZdOtaConfigVC.xib */; };
 		2B50C4DF221A9AC000D699D3 /* NetworkCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B50C4DE221A9AC000D699D3 /* NetworkCode.swift */; };
 		2B5188F122141C08003E2EF5 /* OtaTlsrTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5188F022141C08003E2EF5 /* OtaTlsrTask.swift */; };
+		2B54064A225E1E5A00B86EFF /* DeviceTestSubjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B540648225E1E5A00B86EFF /* DeviceTestSubjectView.swift */; };
+		2B54064D225ECD4800B86EFF /* DeviceTestFunctionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54064C225ECD4800B86EFF /* DeviceTestFunctionCell.swift */; };
 		2B5417D82244EBAA00C9F5DD /* ModifyWatchIdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5417D62244EBAA00C9F5DD /* ModifyWatchIdVC.swift */; };
 		2B5417D92244EBAA00C9F5DD /* ModifyWatchIdVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B5417D72244EBAA00C9F5DD /* ModifyWatchIdVC.xib */; };
 		2B5417DC2244EBC100C9F5DD /* SportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5417DA2244EBC100C9F5DD /* SportVC.swift */; };
@@ -169,6 +170,7 @@
 		2B62A58B21E087E60051DD38 /* ResultDisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A58921E087E60051DD38 /* ResultDisplayCell.swift */; };
 		2B62A58C21E087E60051DD38 /* ResultDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B62A58A21E087E60051DD38 /* ResultDisplayCell.xib */; };
 		2B62A58F21E0A0880051DD38 /* BLEDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62A58E21E0A0880051DD38 /* BLEDataError.swift */; };
+		2B707702225E1141007C5D17 /* DeviceTestVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B707701225E1141007C5D17 /* DeviceTestVC.xib */; };
 		2B76006721F30EDC006B4C63 /* ZdOtaFirmwaresVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B76006521F30EDC006B4C63 /* ZdOtaFirmwaresVC.swift */; };
 		2B76006821F30EDC006B4C63 /* ZdOtaFirmwaresVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B76006621F30EDC006B4C63 /* ZdOtaFirmwaresVC.xib */; };
 		2B7AB99021EECE5900D01E39 /* AddDeviceTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7AB98E21EECE5900D01E39 /* AddDeviceTestVC.swift */; };
@@ -350,7 +352,6 @@
 		2B45B95121EDC18D0058E137 /* DeviceProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceProductCell.xib; sourceTree = "<group>"; };
 		2B45B95521EDC6E60058E137 /* ToolsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsService.swift; sourceTree = "<group>"; };
 		2B45B95821EDE6C70058E137 /* DeviceTestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTestVC.swift; sourceTree = "<group>"; };
-		2B45B95921EDE6C70058E137 /* DeviceTestVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceTestVC.xib; sourceTree = "<group>"; };
 		2B45B95C21EDF5A50058E137 /* DeviceTestGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTestGroup.swift; sourceTree = "<group>"; };
 		2B45B95E21EDF5C80058E137 /* DeviceTestUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTestUnit.swift; sourceTree = "<group>"; };
 		2B45B96121EDFC3C0058E137 /* DeviceTestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTestCell.swift; sourceTree = "<group>"; };
@@ -384,6 +385,8 @@
 		2B4AB47A21F3035B00EF5327 /* ZdOtaConfigVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZdOtaConfigVC.xib; sourceTree = "<group>"; };
 		2B50C4DE221A9AC000D699D3 /* NetworkCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCode.swift; sourceTree = "<group>"; };
 		2B5188F022141C08003E2EF5 /* OtaTlsrTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtaTlsrTask.swift; sourceTree = "<group>"; };
+		2B540648225E1E5A00B86EFF /* DeviceTestSubjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTestSubjectView.swift; sourceTree = "<group>"; };
+		2B54064C225ECD4800B86EFF /* DeviceTestFunctionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTestFunctionCell.swift; sourceTree = "<group>"; };
 		2B5417D62244EBAA00C9F5DD /* ModifyWatchIdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyWatchIdVC.swift; sourceTree = "<group>"; };
 		2B5417D72244EBAA00C9F5DD /* ModifyWatchIdVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModifyWatchIdVC.xib; sourceTree = "<group>"; };
 		2B5417DA2244EBC100C9F5DD /* SportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportVC.swift; sourceTree = "<group>"; };
@@ -451,6 +454,7 @@
 		2B62A58921E087E60051DD38 /* ResultDisplayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDisplayCell.swift; sourceTree = "<group>"; };
 		2B62A58A21E087E60051DD38 /* ResultDisplayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultDisplayCell.xib; sourceTree = "<group>"; };
 		2B62A58E21E0A0880051DD38 /* BLEDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDataError.swift; sourceTree = "<group>"; };
+		2B707701225E1141007C5D17 /* DeviceTestVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceTestVC.xib; sourceTree = "<group>"; };
 		2B76006521F30EDC006B4C63 /* ZdOtaFirmwaresVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZdOtaFirmwaresVC.swift; sourceTree = "<group>"; };
 		2B76006621F30EDC006B4C63 /* ZdOtaFirmwaresVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZdOtaFirmwaresVC.xib; sourceTree = "<group>"; };
 		2B7AB98E21EECE5900D01E39 /* AddDeviceTestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDeviceTestVC.swift; sourceTree = "<group>"; };
@@ -869,7 +873,7 @@
 				2B2F8A7122262EF30078D69F /* 配置 */,
 				2B45B96021EDFC130058E137 /* Views */,
 				2B45B95821EDE6C70058E137 /* DeviceTestVC.swift */,
-				2B45B95921EDE6C70058E137 /* DeviceTestVC.xib */,
+				2B707701225E1141007C5D17 /* DeviceTestVC.xib */,
 				2B7AB98E21EECE5900D01E39 /* AddDeviceTestVC.swift */,
 				2B7AB98F21EECE5900D01E39 /* AddDeviceTestVC.xib */,
 			);
@@ -884,6 +888,8 @@
 				2B4AB46B21F1779100EF5327 /* TestGroupCell.swift */,
 				2B4AB46C21F1779100EF5327 /* TestGroupCell.xib */,
 				2B4AB46F21F1854000EF5327 /* TestGroupLayout.swift */,
+				2B540648225E1E5A00B86EFF /* DeviceTestSubjectView.swift */,
+				2B54064C225ECD4800B86EFF /* DeviceTestFunctionCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1720,7 +1726,6 @@
 				2BA23FA321E4B5FF00EF1B77 /* FirmwareTypeVC.xib in Resources */,
 				2B62A58521E04DB70051DD38 /* ProtocolMenuDetailCell.xib in Resources */,
 				2B2F8A89222779F90078D69F /* OtherProtocolCell.xib in Resources */,
-				2B45B95B21EDE6C70058E137 /* DeviceTestVC.xib in Resources */,
 				2B06DDEE222397180062E7CB /* ProtocolObjCell.xib in Resources */,
 				2B2F8A79222635A10078D69F /* TestConfigCell.xib in Resources */,
 				2B86063E2238D1E400728B0B /* DeviceTestConfigsVC.xib in Resources */,
@@ -1764,6 +1769,7 @@
 				2B62A57D21E042680051DD38 /* ProtocolMenuCell.xib in Resources */,
 				2B3C1C41218FEB37007F7DC6 /* DeviceCell.xib in Resources */,
 				2B5417E52244EBD700C9F5DD /* SleepVC.xib in Resources */,
+				2B707702225E1141007C5D17 /* DeviceTestVC.xib in Resources */,
 				2B80C21021EC612E00FE7BF7 /* PrefixSelectVC.xib in Resources */,
 				2B7AB99121EECE5900D01E39 /* AddDeviceTestVC.xib in Resources */,
 				2B36578421DC9D100070E7AB /* apis_devices.plist in Resources */,
@@ -1904,6 +1910,7 @@
 				2B56A16A21F708A90073E2A7 /* ZdOtaResultCell.swift in Sources */,
 				2B3657A521DCCD600070E7AB /* Functions.swift in Sources */,
 				2B57031F224867C10008208E /* BLECenterSportExtension.swift in Sources */,
+				2B54064A225E1E5A00B86EFF /* DeviceTestSubjectView.swift in Sources */,
 				2B8272FF21F7FA0700F6CC9E /* OtaNordicTask.swift in Sources */,
 				2B2E273E2172D9B400726FC7 /* BLEConfig.swift in Sources */,
 				2B62A58B21E087E60051DD38 /* ResultDisplayCell.swift in Sources */,
@@ -2050,6 +2057,7 @@
 				2B5832E72175C87B00259593 /* DevicesViewController.swift in Sources */,
 				2BB4B6E721E99B6C00F22268 /* TaskSummaryCell.swift in Sources */,
 				2B3657AB21DCD0140070E7AB /* LeftViewController.swift in Sources */,
+				2B54064D225ECD4800B86EFF /* DeviceTestFunctionCell.swift in Sources */,
 				2B4AB47B21F3035B00EF5327 /* ZdOtaConfigVC.swift in Sources */,
 				2B5832E421758ECA00259593 /* NumberView.swift in Sources */,
 				2B4AB47521F2C27D00EF5327 /* SplitLineView.swift in Sources */,

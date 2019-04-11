@@ -1,48 +1,69 @@
 //
-//  DeviceTestCell.swift
+//  DeviceTestFunctionCell.swift
 //  BLE-Swift
 //
-//  Created by SuJiang on 2019/1/15.
+//  Created by SuJiang on 2019/4/11.
 //  Copyright © 2019 ss. All rights reserved.
 //
 
 import UIKit
 
-protocol DeviceTestCellDelegate: NSObjectProtocol {
+protocol DeviceTestFunctionCellDelegate: NSObjectProtocol {
     func dtcAddLog(log: String);
     func dtcShowAlert(title: String?, msg: String);
 }
 
-
-class DeviceTestCell: UITableViewCell {
-
-    var nameBtn: UIButton!
+class DeviceTestFunctionCell: UICollectionViewCell {
+    
+    var nameLbl: UILabel!
     
     var paramViews: UIView!
     
     var proto: Protocol!
     
-//    weak var delegate: DeviceTestCellDelegate?
+    weak var delegate: DeviceTestFunctionCellDelegate?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        createViews()
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         createViews()
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func createViews() {
-        nameBtn = UIButton(type: .custom)
-        nameBtn.frame = CGRect(x: 20, y: 5, width: 100, height: 30)
-        nameBtn.backgroundColor = kMainColor
-//        nameBtn.addTarget(self, action: #selector(nameBtnClick), for: .touchUpInside)
-        nameBtn.titleLabel?.font = bFont(12)
-        nameBtn.layer.cornerRadius = 3
-        nameBtn.layer.masksToBounds = true
-        nameBtn.isUserInteractionEnabled = false
+        nameLbl = UILabel()
+        nameLbl.backgroundColor = rgb(120, 120, 120)
+        nameLbl.font = UIFont.systemFont(ofSize: 12)
+        nameLbl.layer.cornerRadius = 3
+        nameLbl.layer.masksToBounds = true
+        nameLbl.textAlignment = .center
+        nameLbl.textColor = UIColor.white
+        contentView.addSubview(nameLbl)
         
-        contentView.addSubview(nameBtn)
-        
-        paramViews = UIView(frame: CGRect(x: nameBtn.right + 10, y: 5, width: kScreenWidth - nameBtn.right - 10 - 20, height: 30))
+        paramViews = UIView(frame: CGRect(x: nameLbl.right + 5, y: 5, width: 0, height: self.height))
         contentView.addSubview(paramViews)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        var w = self.width
+        if let units = proto.paramUnits, units.count > 0 {
+            w -= 65
+        }
+        
+        nameLbl.frame = CGRect(x: 0, y: 0, width: w, height: self.height)
+        paramViews.frame = CGRect(x: nameLbl.right + 5, y: 0, width: 60, height: self.height)
+        for v in paramViews.subviews {
+            v.frame = paramViews.bounds
+        }
     }
     
     func updateUI(withProtocol proto: Protocol) {
@@ -50,21 +71,14 @@ class DeviceTestCell: UITableViewCell {
         self.proto = proto
         
         paramViews.removeAllSubviews()
-        nameBtn.setTitle(proto.name, for: .normal)
-        let nameSize = proto.name.size(withFont: nameBtn.titleLabel!.font)
-        if (nameSize.width + 20) > 100 {
-            nameBtn.width = nameSize.width + 20
-            
-            paramViews.frame = CGRect(x: nameBtn.right + 10, y: 5, width: kScreenWidth - nameBtn.right - 10 - 20, height: 30)
-        }
-        
+        nameLbl.text = proto.name
+
         guard let units = proto.paramUnits else {
             return
         }
-        var x:CGFloat = 0
-        let w:CGFloat = 100, h = paramViews.height
+        let w:CGFloat = paramViews.width, h = paramViews.height
         for unit in units {
-            let tf = UITextField(frame: CGRect(x: x, y: 0, width: w, height: h))
+            let tf = UITextField(frame: CGRect(x: 0, y: 0, width: w, height: h))
             tf.font = bFont(13)
             tf.borderStyle = .roundedRect
             tf.text = unit.param!.value
@@ -72,7 +86,6 @@ class DeviceTestCell: UITableViewCell {
                 tf.keyboardType = .namePhonePad
             }
             paramViews.addSubview(tf)
-            x += tf.width + 10
         }
     }
     
@@ -90,24 +103,24 @@ class DeviceTestCell: UITableViewCell {
         }
         
         let runner = ProtocolRunner()
-//        self.delegate?.dtcAddLog(log: "执行：\(proto.name)")
+        self.delegate?.dtcAddLog(log: "执行：\(proto.name)")
         runner.run(proto, boolCallback: { (bool) in
             let str = bool ? "成功" : "失败"
-//            self.delegate?.dtcAddLog(log: str)
-//            weakSelf?.resultStr = str
-//            weakSelf?.excuteFinish(resultStr: str)
+            self.delegate?.dtcAddLog(log: str)
+            //            weakSelf?.resultStr = str
+            //            weakSelf?.excuteFinish(resultStr: str)
         }, stringCallback: { (str) in
             let result = "返回：" + str
-//            weakSelf?.resultStr = str
-//            weakSelf?.excuteFinish(resultStr: result)
-//            self.delegate?.dtcAddLog(log: result)
+            //            weakSelf?.resultStr = str
+            //            weakSelf?.excuteFinish(resultStr: result)
+            self.delegate?.dtcAddLog(log: result)
         }, dictCallback: { (dict) in
             
         }, dictArrayCallback: { (dictArr) in
             
         }) { (error) in
-//            weakSelf?.excuteFinish(resultStr: "错误：" + (weakSelf?.errorMsgFromBleError(error) ?? ""))
-//            self.delegate?.dtcAddLog(log: "错误：" + self.errorMsgFromBleError(error))
+            //            weakSelf?.excuteFinish(resultStr: "错误：" + (weakSelf?.errorMsgFromBleError(error) ?? ""))
+            self.delegate?.dtcAddLog(log: "错误：" + self.errorMsgFromBleError(error))
         }
         
     }
@@ -150,4 +163,5 @@ class DeviceTestCell: UITableViewCell {
         }
         return ""
     }
+    
 }

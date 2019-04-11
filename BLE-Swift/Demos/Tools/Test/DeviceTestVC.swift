@@ -8,29 +8,38 @@
 
 import UIKit
 
-class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelegate, DeviceTestCellDelegate, EditProtocolVCDelegate {
+class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, DeviceTestCellDelegate, EditProtocolVCDelegate {
 
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    
     @IBOutlet weak var bleNameLbl: UITextField!
-    
-    @IBOutlet weak var tableView: UITableView!
-    
-    @IBOutlet weak var hideShowBtn: UIButton!
+
     var product: DeviceProduct!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        hideShowBtn.setTitle(TR("展开"), for: .selected)
-        hideShowBtn.setTitle(TR("隐藏"), for: .normal)
-        
         bleNameLbl.text = product.bleName
         
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.allowsSelection = false
-        tableView.register(UINib(nibName: "DeviceTestCell", bundle: nil), forCellReuseIdentifier: "cellId")
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 80));
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 10
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        layout.scrollDirection = .vertical
         
+        collectionView.setCollectionViewLayout(layout, animated: false)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.register(DeviceTestFunctionCell.self, forCellWithReuseIdentifier: "cellId")
+        
+        collectionView.register(DeviceTestSubjectView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "subjectView")
+        
+        let longPressGes = UILongPressGestureRecognizer(target: self, action: #selector(moveAction(longGes:)))
+        collectionView.isUserInteractionEnabled = true
+        collectionView.addGestureRecognizer(longPressGes)
+
         setNavRightButton(text: "添加测试", sel: #selector(addTestBtnClick(_:)))
         
         showConnectState()
@@ -38,7 +47,8 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        collectionView.reloadData()
+//        tableView.reloadData()
     }
 
     // MARK: - 事件处理
@@ -138,6 +148,32 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    func excute(proto: Protocol) {
+        self.printLog("执行：\(proto.name)")
+        let runner = ProtocolRunner()
+        runner.run(proto, boolCallback: { (bool) in
+            let str = bool ? "成功" : "失败"
+            self.printLog(str)
+        }, stringCallback: { (str) in
+            
+            var result = "返回：" + str
+            if proto.name == "获取蓝牙地址" {
+                let bytes = str.data(using: .utf8)!.bytes;
+                let tmp = String(format: "%0.2X %0.2X %0.2X %0.2X %0.2X %0.2X", bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5])
+                result = "返回：" + tmp
+            }
+            self.printLog(result)
+        }, dictCallback: { (dict) in
+            let str = self.getJSONStringFromDictionary(dictionary: dict)
+            self.printLog("返回：\(str)")
+        }, dictArrayCallback: { (dictArr) in
+            let str = self.getJSONStringFromArray(array: dictArr)
+            self.printLog("返回：\(str)")
+        }) { (error) in
+            self.printLog("错误：" + self.errorMsgFromBleError(error))
+        }
+    }
+    
     
     // 自动测试
     @IBAction func zdTestBtnClick(_ sender: Any) {
@@ -217,7 +253,7 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func initBtnClick(_ sender: Any) {
         
         guard let protos = self.product.initProtos, protos.count > 0 else {
-            let alert = UIAlertController(title: "初始化", message: "还没有配置初始化的执行指令，是否前往配置？", preferredStyle: .alert)
+            let alert = UIAlertController(title: "初始化", message: "还没有配置'初始化'的执行指令，是否前往配置？", preferredStyle: .alert)
             let ok = UIAlertAction(title: "确定", style: .default) { (action) in
                 let vc = ToolInitVC()
                 vc.product = self.product
@@ -229,12 +265,67 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
             self.navigationController?.present(alert, animated: true, completion: nil)
             return
         }
+        
+        for proto in protos {
+            
+            excute(proto: proto)
+            
+        }
     }
     
     @IBAction func syncTimeBtnClick(_ sender: Any) {
+        guard let proto = product.screenUpProto, proto.cmdUnits.count > 0 else {
+            let alert = UIAlertController(title: "同步时间", message: "还没有配置同步时间的执行指令，是否前往配置？", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "确定", style: .default) { (action) in
+                self.product.syncTimeProto = Protocol()
+                let vc = EditProtocolVC()
+                vc.proto = self.product.syncTimeProto
+                vc.delegate = self
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            let cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            self.navigationController?.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        printLog("执行：同步时间")
+        let runner = ProtocolRunner()
+        runner.run(proto, boolCallback: { (bool) in
+            let str = bool ? "成功" : "失败"
+            self.printLog(str)
+        }, stringCallback: { (str) in
+        }, dictCallback: { (dict) in
+        }, dictArrayCallback: { (dictArr) in
+        }) { (error) in
+            self.printLog("错误：" + self.errorMsgFromBleError(error))
+        }
     }
     
     @IBAction func deviceInfoBtnClick(_ sender: Any) {
+        
+        guard let protos = self.product.infoProtos, protos.count > 0 else {
+            let alert = UIAlertController(title: "查看信息", message: "还没有配置'查看信息'的执行指令，是否前往配置？", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "确定", style: .default) { (action) in
+                let vc = WatchInfoEditVC()
+                vc.product = self.product
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            let cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            self.navigationController?.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        for proto in protos {
+            
+            excute(proto: proto)
+            
+        }
+        
+        
     }
     
     @IBAction func editBtnClick(_ sender: Any) {
@@ -251,7 +342,74 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    // MARK: - tableView
+    // MARK: - 事件处理
+    @objc func moveAction(longGes: UILongPressGestureRecognizer) {
+        switch longGes.state {
+        case .began:
+            let indexPath = collectionView.indexPathForItem(at: longGes.location(in: longGes.view))
+            if let ip = indexPath {
+                collectionView.beginInteractiveMovementForItem(at: ip)
+            }
+        case .changed:
+            collectionView.updateInteractiveMovementTargetPosition(longGes.location(in: longGes.view))
+        case .ended:
+            collectionView.endInteractiveMovement()
+        default:
+            collectionView.cancelInteractiveMovement()
+        }
+    }
+    
+    // MARK: - collectionView
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return product.testGroups.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let group = product.testGroups[section]
+        return group.protocols.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! DeviceTestFunctionCell
+        let group = product.testGroups[indexPath.section]
+        cell.updateUI(withProtocol: group.protocols[indexPath.row])
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "subjectView", for: indexPath) as! DeviceTestSubjectView
+        view.setSubject(product.testGroups[indexPath.section].name)
+        return view
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        let fromGroup = product.testGroups[sourceIndexPath.section]
+        let fromItem = fromGroup.protocols[sourceIndexPath.item]
+        
+        fromGroup.protocols.remove(at: sourceIndexPath.item)
+        
+        let toGroup = product.testGroups[destinationIndexPath.section]
+        toGroup.protocols.insert(fromItem, at: destinationIndexPath.item)
+        
+        collectionView.reloadData()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return itemSizes[indexPath.row]
+        return CGSize(width: 80, height: 30)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize
+    {
+        return CGSize(width: kScreenWidth, height: 20)
+    }
+    
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return product.testGroups.count
     }
@@ -291,58 +449,13 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
             let tg = self.product.testGroups[indexPath.section]
             tg.protocols.remove(at: indexPath.row)
             ToolsService.shared.saveProductsToDisk()
-            self.tableView.reloadData()
+//            self.tableView.reloadData()
             self.showSuccess(TR("Success"))
         }
         let cancel = UIAlertAction(title: TR("CANCEL"), style: .cancel, handler: nil)
         alert.addAction(ok)
         alert.addAction(cancel)
         navigationController?.present(alert, animated: true, completion: nil)
-    }
-    
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! DeviceTestCell
-        let group = product.testGroups[indexPath.section]
-        cell.updateUI(withProtocol: group.protocols[indexPath.row])
-        cell.delegate = self
-        return cell
-    }
-    
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return product.testGroups[section].name
-//    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
-    {
-        if product.testGroups[section].protocols.count == 0 {
-            return 0
-        }
-        return 15
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
-    {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
-    {
-        if product.testGroups[section].protocols.count == 0 {
-            return nil
-        }
-        
-        let lbl = UILabel(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 15))
-        lbl.font = font(10)
-        lbl.textColor = rgb(120, 120, 120)
-        lbl.text = "    " + product.testGroups[section].name
-        lbl.backgroundColor = UIColor.white
-        return lbl
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
     }
     
     // MARK: - 代理
@@ -364,21 +477,6 @@ class DeviceTestVC: BaseViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var loginTextView: UITextView!
     @IBOutlet weak var exportBtn: UIButton!
     @IBAction func exportBtnClick(_ sender: Any) {
-    }
-    
-    @IBAction func hideShowBtnClick(_ sender: Any) {
-        if hideShowBtn.isSelected {
-            logViewHeight.constant = 220
-//            exportBtn.isHidden = false
-            textViewRight.constant = 5
-            textViewTop.constant = 5
-        } else {
-            logViewHeight.constant = 40
-//            exportBtn.isHidden = true
-            textViewRight.constant = 50
-            textViewTop.constant = -30
-        }
-        hideShowBtn.isSelected = !hideShowBtn.isSelected
     }
     
     // 日志

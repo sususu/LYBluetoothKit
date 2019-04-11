@@ -36,10 +36,10 @@ class WatchInfoEditVC: BaseViewController, UITableViewDataSource, UITableViewDel
     }
     
     func didAddNewProtocol(protocol proto: Protocol) {
-        if product.initProtos == nil {
-            product.initProtos = []
+        if product.infoProtos == nil {
+            product.infoProtos = []
         }
-        product.initProtos!.append(proto)
+        product.infoProtos!.append(proto)
         ToolsService.shared.saveProduct(product)
         tableView.reloadData()
     }

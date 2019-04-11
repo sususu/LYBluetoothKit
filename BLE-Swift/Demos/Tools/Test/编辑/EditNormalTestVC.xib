@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditNormalTestVC" customModule="BLE_Swift" customModuleProvider="target">
             <connections>
+                <outlet property="tableView" destination="uru-YS-088" id="IhW-oV-36K"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,96 +21,117 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nYh-Sx-TIa">
-                    <rect key="frame" x="40" y="84" width="180" height="44"/>
-                    <color key="backgroundColor" red="0.20073086439999999" green="0.2397145192" blue="0.4142607868" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="180" id="3iY-eM-LL5"/>
-                        <constraint firstAttribute="height" constant="44" id="ZND-Lf-h9i"/>
-                    </constraints>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" title="编辑亮屏指令">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="3"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="screenUpBtnClick:" destination="-1" eventType="touchUpInside" id="09U-oX-WKw"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2gq-sq-2hA">
-                    <rect key="frame" x="40" y="158" width="180" height="44"/>
-                    <color key="backgroundColor" red="0.20073086439999999" green="0.2397145192" blue="0.4142607868" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="44" id="9ih-8p-C2s"/>
-                        <constraint firstAttribute="width" constant="180" id="Nst-G0-0cz"/>
-                    </constraints>
-                    <state key="normal" title="编辑初始化流程">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="3"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="initBtnClick:" destination="-1" eventType="touchUpInside" id="z7V-A8-54E"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="va3-gI-JcF">
-                    <rect key="frame" x="40" y="232" width="180" height="44"/>
-                    <color key="backgroundColor" red="0.20073086439999999" green="0.2397145192" blue="0.4142607868" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="180" id="Gjo-sU-me6"/>
-                        <constraint firstAttribute="height" constant="44" id="jO0-LA-zLz"/>
-                    </constraints>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" title="编辑同步时间指令">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="3"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="syncTimeBtnClick:" destination="-1" eventType="touchUpInside" id="zeY-UX-SQU"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZxH-OY-gPF">
-                    <rect key="frame" x="40" y="306" width="180" height="44"/>
-                    <color key="backgroundColor" red="0.20073086439999999" green="0.2397145192" blue="0.4142607868" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="44" id="XG2-ss-Yd9"/>
-                        <constraint firstAttribute="width" constant="180" id="pjx-iH-Vym"/>
-                    </constraints>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" title="编辑查看信息">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="3"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="infoBtnClick:" destination="-1" eventType="touchUpInside" id="Xc4-h3-XVf"/>
-                    </connections>
-                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uru-YS-088">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <view key="tableHeaderView" contentMode="scaleToFill" id="jeO-iV-QEL" userLabel="headerView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nYh-Sx-TIa">
+                                <rect key="frame" x="10" y="10" width="120" height="40"/>
+                                <color key="backgroundColor" red="0.20073086439999999" green="0.2397145192" blue="0.4142607868" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="3iY-eM-LL5"/>
+                                    <constraint firstAttribute="height" constant="40" id="ZND-Lf-h9i"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="编辑亮屏指令">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="screenUpBtnClick:" destination="-1" eventType="touchUpInside" id="09U-oX-WKw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2gq-sq-2hA">
+                                <rect key="frame" x="140" y="10" width="120" height="40"/>
+                                <color key="backgroundColor" red="0.20073086439999999" green="0.2397145192" blue="0.4142607868" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="9ih-8p-C2s"/>
+                                    <constraint firstAttribute="width" constant="120" id="Nst-G0-0cz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="编辑初始化流程">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="initBtnClick:" destination="-1" eventType="touchUpInside" id="z7V-A8-54E"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="va3-gI-JcF">
+                                <rect key="frame" x="10" y="65" width="120" height="40"/>
+                                <color key="backgroundColor" red="0.20073086439999999" green="0.2397145192" blue="0.4142607868" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="Gjo-sU-me6"/>
+                                    <constraint firstAttribute="height" constant="40" id="jO0-LA-zLz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="编辑同步时间指令">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="syncTimeBtnClick:" destination="-1" eventType="touchUpInside" id="zeY-UX-SQU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZxH-OY-gPF">
+                                <rect key="frame" x="140" y="65" width="120" height="40"/>
+                                <color key="backgroundColor" red="0.20073086439999999" green="0.2397145192" blue="0.4142607868" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="XG2-ss-Yd9"/>
+                                    <constraint firstAttribute="width" constant="120" id="pjx-iH-Vym"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="编辑查看信息">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="infoBtnClick:" destination="-1" eventType="touchUpInside" id="Xc4-h3-XVf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ZxH-OY-gPF" firstAttribute="leading" secondItem="va3-gI-JcF" secondAttribute="trailing" constant="10" id="0Kl-Oc-f2H"/>
+                            <constraint firstItem="va3-gI-JcF" firstAttribute="leading" secondItem="DLh-QQ-b9c" secondAttribute="leading" constant="10" id="5p0-hm-Z4G"/>
+                            <constraint firstItem="nYh-Sx-TIa" firstAttribute="top" secondItem="jeO-iV-QEL" secondAttribute="top" constant="10" id="LUj-Gf-rBt"/>
+                            <constraint firstItem="ZxH-OY-gPF" firstAttribute="top" secondItem="2gq-sq-2hA" secondAttribute="bottom" constant="15" id="QvE-70-kzZ"/>
+                            <constraint firstItem="2gq-sq-2hA" firstAttribute="top" secondItem="jeO-iV-QEL" secondAttribute="top" constant="10" id="Ub9-XW-gGq"/>
+                            <constraint firstItem="2gq-sq-2hA" firstAttribute="leading" secondItem="nYh-Sx-TIa" secondAttribute="trailing" constant="10" id="gyC-Ov-m4b"/>
+                            <constraint firstItem="nYh-Sx-TIa" firstAttribute="leading" secondItem="DLh-QQ-b9c" secondAttribute="leading" constant="10" id="pff-MQ-qOc"/>
+                            <constraint firstItem="va3-gI-JcF" firstAttribute="top" secondItem="nYh-Sx-TIa" secondAttribute="bottom" constant="15" id="yHb-Pc-wnd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="DLh-QQ-b9c"/>
+                    </view>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="nYh-Sx-TIa" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="27r-YJ-2v1"/>
-                <constraint firstItem="2gq-sq-2hA" firstAttribute="top" secondItem="nYh-Sx-TIa" secondAttribute="bottom" constant="30" id="9Uo-z2-BPI"/>
-                <constraint firstItem="va3-gI-JcF" firstAttribute="top" secondItem="2gq-sq-2hA" secondAttribute="bottom" constant="30" id="JHz-lB-pgc"/>
-                <constraint firstItem="ZxH-OY-gPF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="LN3-XF-VsJ"/>
-                <constraint firstItem="2gq-sq-2hA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="Rev-R6-Lpa"/>
-                <constraint firstItem="nYh-Sx-TIa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="UAf-ZG-MD6"/>
-                <constraint firstItem="va3-gI-JcF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="eng-7U-9Wv"/>
-                <constraint firstItem="ZxH-OY-gPF" firstAttribute="top" secondItem="va3-gI-JcF" secondAttribute="bottom" constant="30" id="qfd-Tf-59a"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="uru-YS-088" secondAttribute="trailing" id="Ibm-kx-XpL"/>
+                <constraint firstItem="uru-YS-088" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="JqM-3o-w6v"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="uru-YS-088" secondAttribute="bottom" id="h37-pi-N3i"/>
+                <constraint firstItem="uru-YS-088" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="zw7-ew-uJc"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
