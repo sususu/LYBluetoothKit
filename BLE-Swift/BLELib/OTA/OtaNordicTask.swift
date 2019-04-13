@@ -104,7 +104,7 @@ class OtaNordicTask: OtaTask {
         totalLength = length
         
         
-        addTimer(timeout: 10, action: 1)
+        addTimer(timeout: timeout, action: 1)
         // 发送0x09
         // 设置OTA复位，每一次升级流程只发一次，
         // 09后的数据包 ，如果有字库升级，后4个字节直接使用字库bin前4字节
@@ -127,7 +127,7 @@ class OtaNordicTask: OtaTask {
     }
     
     private func sendTypeData() {
-        addTimer(timeout: 10, action: 2)
+        addTimer(timeout: timeout, action: 2)
         
         let dm = otaDatas[0]
         
@@ -142,7 +142,7 @@ class OtaNordicTask: OtaTask {
     }
     
     private func sendInitData() {
-        addTimer(timeout: 10, action: 2)
+        addTimer(timeout: timeout, action: 2)
         
         let dm = otaDatas[0]
         
@@ -159,7 +159,7 @@ class OtaNordicTask: OtaTask {
     }
     
     private func sendOtaBinData() {
-        addTimer(timeout: 5, action: 3)
+        addTimer(timeout: timeout, action: 3)
         
         var data = Data(bytes: [0x08, UInt8(kOtaNordicTaskResponseNum), 0])
         writeDatData(data)
@@ -172,7 +172,7 @@ class OtaNordicTask: OtaTask {
     }
     
     private func sendPackages() {
-        addTimer(timeout: 15, action: 3)
+        addTimer(timeout: timeout, action: 3)
         
         if otaDatas.count <= 0 ||
            otaDatas[0].sections.count < 0 {
@@ -192,7 +192,7 @@ class OtaNordicTask: OtaTask {
     }
     
     private func sendFileEnd() {
-        addTimer(timeout: 5, action: 4)
+        addTimer(timeout: timeout, action: 4)
         let data = Data(bytes: [0x04])
         writeDatData(data)
     }

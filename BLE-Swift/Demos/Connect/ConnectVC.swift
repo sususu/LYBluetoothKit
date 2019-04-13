@@ -47,20 +47,45 @@ class ConnectVC: BaseTableViewController, LeftDeviceCellDelegate, UISearchBarDel
         
         setNavRightButton(withIcon: "shuaxin2", sel: #selector(searchDevices))
         setNavLeftButton(withIcon: "fanhui", sel: #selector(backClick))
+        
+        let btnWidth:CGFloat = 44
+        let btnHeight:CGFloat = 44
+        
+        let btn = UIButton(type: .custom)
+        let image = UIImage(named: "shuaxin2")
+        btn.setImage(image, for: .normal)
+        
+        btn.frame = CGRect(x: 0, y: 0, width: btnWidth, height: btnHeight)
+        btn.addTarget(self, action: #selector(searchDevices), for: .touchUpInside)
+        
+        let btn2 = UIButton(type: .custom)
+        btn2.setTitle("排序", for: .normal)
+        btn2.titleLabel?.font = font(14)
+        btn2.setTitleColor(kMainColor, for: .normal)
+        
+        btn2.frame = CGRect(x: 0, y: 0, width: btnWidth, height: btnHeight)
+        btn2.addTarget(self, action: #selector(sortDevices), for: .touchUpInside)
+        
+        self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: btn), UIBarButtonItem(customView: btn2)]
     }
     
     
     @objc func searchDevices() {
+        self.filteredDevices.removeAll()
         BLECenter.shared.scan(callback: { (devices, err) in
             
             self.devices = devices ?? []
             self.filterDevices(withName: self.searchBar.text)
-            self.tableView.reloadData()
             
         }, stop: {
             print("结束扫描")
         })
     }
+    
+    @objc func sortDevices() {
+        sortAndReloadTableView()
+    }
+    
     
     @objc func showConnectedDevices() {
         let devicesVC = DevicesViewController()
@@ -95,17 +120,39 @@ class ConnectVC: BaseTableViewController, LeftDeviceCellDelegate, UISearchBarDel
     }
     
     func filterDevices(withName name: String?) {
+        var devices = self.filteredDevices
         guard let str = name, str.count > 0 else {
-            self.filteredDevices = self.devices
-            sortAndReloadTableView()
+            for d in self.devices {
+                if !devices.contains(d) {
+                    devices.append(d)
+                }
+            }
+            self.filteredDevices = devices
+//            sortAndReloadTableView()
+            tableView.reloadData()
             return
         }
         
-        self.filteredDevices = self.devices.filter({ (p) -> Bool in
-            return p.name.contains(str)
+        devices = devices.filter ({ (d) -> Bool in
+            return d.name.contains(str)
         })
         
-        sortAndReloadTableView()
+        let otherDevices = self.devices.filter { (d) -> Bool in
+            return d.name.contains(str)
+        }
+        
+        for d in otherDevices {
+            if !devices.contains(d) {
+                devices.append(d)
+            }
+        }
+        self.filteredDevices = devices
+        
+//        self.filteredDevices = self.devices.filter({ (p) -> Bool in
+//            return p.name.contains(str)
+//        })
+        
+        tableView.reloadData()
     }
     
     func sortAndReloadTableView() {

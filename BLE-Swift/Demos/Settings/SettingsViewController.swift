@@ -74,8 +74,10 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
         
         
         let settingRow = MenuRow(title: "账号设置", icon: nil, selector: nil, pushVC: "AppSettingVC")
+        let roleRow = MenuRow(title: "APP设置", icon: nil, selector: nil, pushVC: "RoleManagerVC")
         settingSection.rows = [MenuRow]()
         settingSection.rows?.append(settingRow)
+        settingSection.rows?.append(roleRow)
     }
 
     func reloadData() {

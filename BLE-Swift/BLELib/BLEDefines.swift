@@ -58,6 +58,8 @@ public struct BLEKey {
     static let task = "BLEKey.task"
     static let data = "BLEKey.data"
     static let uuid = "BLEKey.uuid"
+    static let rssi = "BLEKey.rssi"
+    static let error = "BLEKey.error"
 }
 
 // MARK: - 服务特征ID
@@ -89,6 +91,7 @@ public struct BLENotification {
     static let stateChanged = NSNotification.Name(rawValue: "BLENotification.stateChanged")
     static let deviceConnected = NSNotification.Name(rawValue: "BLENotification.deviceConnected")
     static let deviceDisconnected = NSNotification.Name(rawValue: "BLENotification.deviceDisconnected")
+    static let deviceRssiUpdate = NSNotification.Name(rawValue: "BLENotification.deviceRssiUpdate")
 }
 
 struct BLEInnerNotification {

@@ -411,7 +411,7 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
             print("still connected????? or error")
             self.devicesManager.didFailToDisconnectPeripheral(peripheral)
         } else {
-            print("normal discnnect")
+            print("normal disconnect")
             self.devicesManager.didDisconnectPeripheral(peripheral)
         }
         

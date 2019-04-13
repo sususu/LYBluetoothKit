@@ -70,7 +70,7 @@ class EditNormalTestVC: BaseViewController, EditProtocolVCDelegate, UITableViewD
     }
     
     func didEditNewProtocol(protocol: Protocol) {
-        
+        ToolsService.shared.saveProduct(product)
     }
 
     
@@ -105,10 +105,10 @@ class EditNormalTestVC: BaseViewController, EditProtocolVCDelegate, UITableViewD
     
     // MARK: - 编辑菜单项
     func editRow(atIndexPath indexPath: IndexPath) {
-        let vc = AddDeviceTestVC()
-        vc.product = product
-        vc.oldGroup = product.testGroups[indexPath.section]
+        let vc = EditProtocolVC()
         vc.proto = product.testGroups[indexPath.section].protocols[indexPath.row]
+        vc.delegate = self
+        
         navigationController?.pushViewController(vc, animated: true)
     }
     

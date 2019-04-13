@@ -262,10 +262,20 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
         }
         
         if device.isApollo3 {
-            BLEConfig.shared.mtu = 128
+            BLEConfig.shared.mtu = AppConfig.current.mtuForApollo3
+            if BLEConfig.shared.mtu > 128 {
+                showTip("当前设置的MTU已经超过推荐值（128），可能会不稳定")
+            }
+//            BLEConfig.shared.mtu = 128
         } else {
-            BLEConfig.shared.mtu = 20
+            BLEConfig.shared.mtu = AppConfig.current.mtu
+            if BLEConfig.shared.mtu > 20 {
+                showTip("当前设置的MTU已经超过推荐值（20），可能会不稳定")
+            }
+//            BLEConfig.shared.mtu = 20
         }
+        
+        
         
         weak var weakSelf = self
         otaNameLbl.text = otaBleName

@@ -103,6 +103,9 @@
 		2B5188F122141C08003E2EF5 /* OtaTlsrTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5188F022141C08003E2EF5 /* OtaTlsrTask.swift */; };
 		2B54064A225E1E5A00B86EFF /* DeviceTestSubjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B540648225E1E5A00B86EFF /* DeviceTestSubjectView.swift */; };
 		2B54064D225ECD4800B86EFF /* DeviceTestFunctionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54064C225ECD4800B86EFF /* DeviceTestFunctionCell.swift */; };
+		2B54065122617E9700B86EFF /* RoleManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54064F22617E9700B86EFF /* RoleManagerVC.swift */; };
+		2B54065222617E9700B86EFF /* RoleManagerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B54065022617E9700B86EFF /* RoleManagerVC.xib */; };
+		2B54065422617EC000B86EFF /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54065322617EC000B86EFF /* Role.swift */; };
 		2B5417D82244EBAA00C9F5DD /* ModifyWatchIdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5417D62244EBAA00C9F5DD /* ModifyWatchIdVC.swift */; };
 		2B5417D92244EBAA00C9F5DD /* ModifyWatchIdVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B5417D72244EBAA00C9F5DD /* ModifyWatchIdVC.xib */; };
 		2B5417DC2244EBC100C9F5DD /* SportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5417DA2244EBC100C9F5DD /* SportVC.swift */; };
@@ -387,6 +390,9 @@
 		2B5188F022141C08003E2EF5 /* OtaTlsrTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtaTlsrTask.swift; sourceTree = "<group>"; };
 		2B540648225E1E5A00B86EFF /* DeviceTestSubjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTestSubjectView.swift; sourceTree = "<group>"; };
 		2B54064C225ECD4800B86EFF /* DeviceTestFunctionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTestFunctionCell.swift; sourceTree = "<group>"; };
+		2B54064F22617E9700B86EFF /* RoleManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleManagerVC.swift; sourceTree = "<group>"; };
+		2B54065022617E9700B86EFF /* RoleManagerVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoleManagerVC.xib; sourceTree = "<group>"; };
+		2B54065322617EC000B86EFF /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
 		2B5417D62244EBAA00C9F5DD /* ModifyWatchIdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyWatchIdVC.swift; sourceTree = "<group>"; };
 		2B5417D72244EBAA00C9F5DD /* ModifyWatchIdVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModifyWatchIdVC.xib; sourceTree = "<group>"; };
 		2B5417DA2244EBC100C9F5DD /* SportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportVC.swift; sourceTree = "<group>"; };
@@ -766,6 +772,7 @@
 		2B36578F21DCC5ED0070E7AB /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				2B54064E22617E7200B86EFF /* 角色管理 */,
 				2B31472522362BF10018495D /* 压力测试 */,
 				2B7C922F221FE6BE005C905A /* 账号管理 */,
 				2B56A14521F6ECCC0073E2A7 /* Views */,
@@ -1005,6 +1012,15 @@
 			path = "自动OTA";
 			sourceTree = "<group>";
 		};
+		2B54064E22617E7200B86EFF /* 角色管理 */ = {
+			isa = PBXGroup;
+			children = (
+				2B54064F22617E9700B86EFF /* RoleManagerVC.swift */,
+				2B54065022617E9700B86EFF /* RoleManagerVC.xib */,
+			);
+			path = "角色管理";
+			sourceTree = "<group>";
+		};
 		2B5417D52244EB7F00C9F5DD /* 常用功能 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1081,6 +1097,7 @@
 			children = (
 				2B57032122486EAB0008208E /* Sport.swift */,
 				2B57032C2248C5500008208E /* Sleep.swift */,
+				2B54065322617EC000B86EFF /* Role.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1736,6 +1753,7 @@
 				2B4AB47C21F3035B00EF5327 /* ZdOtaConfigVC.xib in Resources */,
 				2B3657BA21DDB05C0070E7AB /* LeftDeviceCell.xib in Resources */,
 				2B7C923B221FE70E005C905A /* ForgetPwdVC.xib in Resources */,
+				2B54065222617E9700B86EFF /* RoleManagerVC.xib in Resources */,
 				2B45B96421EDFC3C0058E137 /* DeviceTestCell.xib in Resources */,
 				2B62A56621DF28470051DD38 /* CharacteristicCellTableViewCell.xib in Resources */,
 				2B5703272248B13F0008208E /* SportDetailVC.xib in Resources */,
@@ -1926,6 +1944,7 @@
 				2BE7704421E4953100FD6374 /* OtaService.swift in Sources */,
 				2BE7705421E4A65A00FD6374 /* FirmwareSelectCell.swift in Sources */,
 				2B3C1C40218FEB37007F7DC6 /* DeviceCell.swift in Sources */,
+				2B54065122617E9700B86EFF /* RoleManagerVC.swift in Sources */,
 				2B40433A216C9AF100C6837B /* BLEDevicesManager.swift in Sources */,
 				2B36579C21DCC6330070E7AB /* SettingsViewController.swift in Sources */,
 				2BA3B58721FC35340084E291 /* ProtocolExcuteVC.swift in Sources */,
@@ -2004,6 +2023,7 @@
 				2B44C74F21EEFAEE0037F5C3 /* CmdUnit.swift in Sources */,
 				2B3657B921DDB05C0070E7AB /* LeftDeviceCell.swift in Sources */,
 				2BB4B6F121E9E6A600F22268 /* TaskDetailCell.swift in Sources */,
+				2B54065422617EC000B86EFF /* Role.swift in Sources */,
 				2B7C923A221FE70E005C905A /* ForgetPwdVC.swift in Sources */,
 				2B3657A021DCC6AA0070E7AB /* ProtocolViewController.swift in Sources */,
 				2BD12FEF221A8AAF00EDC488 /* NetworkManager.swift in Sources */,

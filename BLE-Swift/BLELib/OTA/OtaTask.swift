@@ -24,6 +24,8 @@ public enum OtaTaskState: Int, Codable {
 
 public class OtaTask: NSObject, BLEDeviceDelegate {
     
+    let timeout: TimeInterval = 30
+    
     var device: BLEDevice
     var otaBleName: String
     var otaDatas: [OtaDataModel]
@@ -164,7 +166,7 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
     
     // 发送ota数据总长度
     private func sendOtaDataLength(length: Int) {
-        addTimer(timeout: 10, action: 1)
+        addTimer(timeout: timeout, action: 1)
         var data = Data([0x01])
         var len = length
         data.append(bytes: &len, count: 4)
@@ -174,21 +176,21 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
     
     private func sendOtaSettingData()
     {
-        addTimer(timeout: 10, action: 2)
+        addTimer(timeout: timeout, action: 2)
         guard otaDatas.count > 0, otaDatas[0].crcData.count > 0, otaDatas[0].otaAddressData.count >= 4 else {
             return
         }
         let dm = otaDatas[0]
-        let addressBytes = dm.otaAddressData.bytes
-        if addressBytes[0] == 0 &&
-            addressBytes[1] == 0 &&
-            addressBytes[2] == 0 &&
-            addressBytes[3] == 0 {
-            print("ota 数据包的地址不对")
-            let err = BLEError.taskError(reason: .paramsError)
-            otaFailed(error: err)
-            return
-        }
+//        let addressBytes = dm.otaAddressData.bytes
+//        if addressBytes[0] == 0 &&
+//            addressBytes[1] == 0 &&
+//            addressBytes[2] == 0 &&
+//            addressBytes[3] == 0 {
+//            print("ota 数据包的地址不对")
+//            let err = BLEError.taskError(reason: .paramsError)
+//            otaFailed(error: err)
+//            return
+//        }
         
         var settingData = Data()
         
@@ -214,7 +216,7 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
     // 每包又分成20一个的package
     // 每次最多发送20个package，等带设备同步回调
     private func sendPackages() {
-        addTimer(timeout: 15, action: 3)
+        addTimer(timeout: timeout, action: 3)
 //        print("sendPackages:")
         guard otaDatas.count > 0, otaDatas[0].sections.count > 0 else {
             return
@@ -223,6 +225,10 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
         let section = otaDatas[0].sections[0]
         
         let sendMaxCount = min(section.totalPackageCount, section.currentPackageIndex + kPackageCountCallback)
+        
+        if section.currentPackageIndex >= sendMaxCount {
+            return
+        }
         
         for i in section.currentPackageIndex ..< sendMaxCount {
             let data = section.packageList[i]
@@ -238,13 +244,13 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
     private func sendCheckCrc() {
         let data = Data(bytes: [0x04])
         writeDataToNotify(data)
-        addTimer(timeout: 10, action: 4)
+        addTimer(timeout: timeout, action: 4)
     }
     
     private func sendEndOta() {
         let data = Data(bytes: [0x05])
         writeDataToNotify(data)
-        addTimer(timeout: 10, action: 5)
+        addTimer(timeout: timeout, action: 5)
     }
     
     func otaReady() {
@@ -294,6 +300,7 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
         if checkIsCancel() {
             return
         }
+        print("发送（\(UUID.otaWriteC)）:\(data.hexEncodedString())")
         _ = device.write(data, characteristicUUID: UUID.otaWriteC)
 //        if self.device.name.hasSuffix("0002") {
 //            print("写数据-\(self.device.name)：\(data.hexEncodedString())")
@@ -304,6 +311,7 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
         if checkIsCancel() {
             return
         }
+        print("发送（\(UUID.otaNotifyC)）:\(data.hexEncodedString())")
         _ = device.write(data, characteristicUUID: UUID.otaNotifyC)
     }
     
@@ -364,6 +372,7 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
 //    }
     
     private func otaDeviceDataComes(data: Data) {
+        removeTimer()
         // 命令
         let cmd = data.bytes[0]
         // 成功与否：1成功、0失败

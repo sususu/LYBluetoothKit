@@ -34,7 +34,10 @@ class ToolsViewController: BaseViewController, UITableViewDataSource, UITableVie
         tableView.tableHeaderView = searchBar
         
         setNavLeftButton(text: TR("EXPORT"), sel: #selector(exportBtnClick))
-        setNavRightButton(text: TR("ADD"), sel: #selector(addBtnClick))
+        
+        if AppConfig.current.roleType == .developer {
+            setNavRightButton(text: TR("ADD"), sel: #selector(addBtnClick))
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(toolsChangedNotification), name: kDeviceProductListChangedNotification, object: nil)
     }

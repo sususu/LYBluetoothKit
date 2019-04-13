@@ -97,6 +97,7 @@
                                     <constraint firstAttribute="height" constant="40" id="XG2-ss-Yd9"/>
                                     <constraint firstAttribute="width" constant="120" id="pjx-iH-Vym"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="编辑查看信息">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

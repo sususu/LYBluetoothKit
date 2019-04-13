@@ -9,45 +9,43 @@
 import UIKit
 
 class TestConfigVC: BaseViewController,
-UICollectionViewDelegateFlowLayout,
-UICollectionViewDataSource,
-UICollectionViewDelegate {
-
-    @IBOutlet weak var seg: UISegmentedControl!
+UITableViewDataSource,
+UITableViewDelegate {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var stepTableView: UITableView!
+    
+    @IBOutlet weak var testsTableView: UITableView!
+    
+    @IBOutlet weak var durationTF: UITextField!
     
     
     var product: DeviceProduct!
     var testUnits: [DeviceTestUnit] = []
-    var itemSizes: [CGSize] = []
+    var ziceUnits: [DeviceTestUnit] = []
+    
+//    var protos:[Protocol] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "自动测试配置"
-
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 10
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        layout.scrollDirection = .vertical
-        
-        collectionView.setCollectionViewLayout(layout, animated: false)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.showsHorizontalScrollIndicator = false
-        
-        collectionView.register(UINib(nibName: "TestConfigCell", bundle: nil), forCellWithReuseIdentifier: "cellId")
         
         for group in product.testGroups {
             for proto in group.protocols {
                 let dt = DeviceTestUnit(name: proto.name, createTime: Date().timeIntervalSinceNow)
                 dt.prol = proto
                 testUnits.append(dt)
-                
-                let size = CGSize(width: dt.name.size(withFont: font(12)).width + 20, height: 30)
-                itemSizes.append(size)
             }
         }
+        
+        ziceUnits = product.ziceUnits
+        
+        stepTableView.dataSource = self
+        stepTableView.delegate = self
+        stepTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
+        
+        testsTableView.dataSource = self
+        testsTableView.delegate = self
+        testsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
         
         setNavRightButton(text: "保存", sel: #selector(saveConfig))
         
@@ -57,44 +55,97 @@ UICollectionViewDelegate {
     // MARK: - 事件处理
     @objc func saveConfig() {
         
-        var zcArr = [DeviceTestUnit]()
-        for tu in testUnits {
-            if tu.isZiCe {
-                zcArr.append(tu)
-            }
-        }
+        product.ziceUnits = ziceUnits
         
-        if seg.selectedSegmentIndex == 0 {
-            product.pbxCsUnits = zcArr
-        } else {
-            product.ziceUnits = zcArr
-        }
         ToolsService.shared.saveProduct(product)
         showSuccess("保存成功")
     }
 
-    @IBAction func segValueChanged(_ sender: Any) {
+    
+    // MARK: - tableView
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == stepTableView {
+            return ziceUnits.count
+        } else {
+            return testUnits.count
+        }
     }
     
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return testUnits.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! TestConfigCell
-        cell.update(withDeviceTestUnit: testUnits[indexPath.row])
-//        cell.backgroundColor = kMainColor
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        var title = testUnits[indexPath.row].name
+        if tableView == stepTableView
+        {
+            title = ziceUnits[indexPath.row].name + "  -  \(ziceUnits[indexPath.row].ceshiTime)秒"
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
+        cell.textLabel?.font = font(12)
+        cell.textLabel?.textColor = rgb(150, 150, 150)
+        if tableView == stepTableView {
+            cell.textLabel?.textColor = rgb(200, 130, 130)
+        }
+        cell.textLabel?.text = title
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return itemSizes[indexPath.row]
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == stepTableView {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        testUnits[indexPath.row].isZiCe = !testUnits[indexPath.row].isZiCe
-        collectionView.reloadData()
-        collectionView.collectionViewLayout.invalidateLayout()
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if tableView == testsTableView {
+            return false
+        }
+        return true
     }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        if tableView == testsTableView {
+            return false
+        }
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+    }
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        ziceUnits.remove(at: indexPath.row)
+        tableView.beginUpdates()
+        tableView.deleteRow(at: indexPath, with: .automatic)
+        tableView.endUpdates()
+    }
+    
+    
+    // MARK: - 事件处理
+    @IBAction func addBtnClick(_ sender: Any) {
+        guard let durStr = durationTF.text, durStr.count > 0 else {
+            showError("请输入测试秒钟")
+            return
+        }
+        guard let indexPath = testsTableView.indexPathForSelectedRow else {
+            showError("请选择测试用例")
+            return
+        }
+        let dt = testUnits[indexPath.row]
+        dt.ceshiTime = Double(durStr) ?? 2
+        ziceUnits.append(dt)
+        stepTableView.reloadData()
+        
+        durationTF.text = ""
+        testsTableView.deselectRow(at: indexPath, animated: true)
+        self.view.endEditing(true)
+    }
+    
+    
+    @IBAction func editBtnClick(_ sender: Any) {
+        stepTableView.setEditing(true, animated: true)
+    }
+    
+    
 }

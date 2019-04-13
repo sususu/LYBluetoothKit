@@ -88,6 +88,13 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
         self.discoveredServices.removeAll()
         self.peripheral.discoverServices(nil)
         self.peripheral.delegate = self
+        self.peripheral.readRSSI()
+    }
+    
+    
+    /// 读取更新设备的信号量，更新到设备信号量，会发出通知
+    public func updateRssi() {
+        self.peripheral.readRSSI()
     }
     
     public func write(_ data:Data, characteristicUUID:String) -> Bool {
@@ -162,6 +169,11 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
     // MARK: - 代理实现
     public func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
         self.rssi = RSSI.intValue
+        if let err = error {
+            NotificationCenter.default.post(name: BLENotification.deviceRssiUpdate, object: nil, userInfo: [BLEKey.rssi : RSSI.intValue, BLEKey.device: self, BLEKey.error: err])
+        } else {
+            NotificationCenter.default.post(name: BLENotification.deviceRssiUpdate, object: nil, userInfo: [BLEKey.rssi : RSSI.intValue, BLEKey.device: self])
+        }
     }
 
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {

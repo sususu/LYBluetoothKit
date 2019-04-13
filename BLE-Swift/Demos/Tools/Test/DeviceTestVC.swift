@@ -10,11 +10,24 @@ import UIKit
 
 class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, DeviceTestCellDelegate, EditProtocolVCDelegate {
 
+    @IBOutlet weak var ceshiConfigBtn: UIButton!
+    
+    @IBOutlet weak var editProtoBtn: UIButton!
+    
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     
     @IBOutlet weak var bleNameLbl: UITextField!
+    
+    @IBOutlet weak var slider: UISlider!
+    @IBOutlet weak var singalLbl: UILabel!
+    
+    
+    
+    var minSingal: Int = -70
+    
+    
 
     var product: DeviceProduct!
     
@@ -40,7 +53,14 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
         collectionView.isUserInteractionEnabled = true
         collectionView.addGestureRecognizer(longPressGes)
 
-        setNavRightButton(text: "添加测试", sel: #selector(addTestBtnClick(_:)))
+        singalSliderValueChanged(slider)
+        
+        if AppConfig.current.roleType == .developer {
+            setNavRightButton(text: "添加测试", sel: #selector(addTestBtnClick(_:)))
+        } else {
+            ceshiConfigBtn.isHidden = true
+            editProtoBtn.isHidden = true
+        }
         
         showConnectState()
     }
@@ -55,17 +75,18 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
     // 自动连接
     private var toConnectDevice: BLEDevice?
     private var searchDevices: [BLEDevice] = []
-    @IBAction func autoConnectBtnClick(_ sender: Any) {
+    @IBAction func autoConnectBtnClick(_ sender: Any?) {
         guard let name = bleNameLbl.text, name.count > 0 else {
             showError("请输入蓝牙名称")
             return
         }
+        self.searchDevices.removeAll()
         toConnectDevice = nil
         printLog("开始搜索设备")
         BLECenter.shared.scan(callback: { (devices, error) in
             if let ds = devices {
                 self.searchDevices = ds.filter({ (d) -> Bool in
-                    return d.name.contains(name)
+                    return (d.name.contains(name) && (d.rssi > self.minSingal))
                 })
             }
         }, stop: {
@@ -81,12 +102,13 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
     }
     
     func connectDevice(device: BLEDevice) {
-        printLog("连接设备：\(device.name)")
+        printLog("连接设备：\(device.name)，信号：\(device.rssi ?? 0)")
         BLECenter.shared.connect(device: device, callback: { (d, err) in
             if let error = err {
                 self.printLog(self.errorMsgFromBleError(error))
             } else {
                 self.printLog("已连接上：\(device.name)")
+                self.screenUpClick(nil)
             }
         })
     }
@@ -102,75 +124,66 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
     // 屏蔽箱测试
     private var isZiCe: Bool = false
     @IBAction func pbTestBtnClick(_ sender: Any) {
-        if product.pbxCsUnits.count == 0 {
-            printLog("测试用例是空的，请点击“自测配置”进行配置")
-            return
-        }
-        if isZiCe {
-            printLog("正在测试，请不要重复点击")
-            return
-        }
-        isZiCe = true
-        zice(testUnits: product.pbxCsUnits, index: 0)
+//        if product.pbxCsUnits.count == 0 {
+//            printLog("测试用例是空的，请点击“自测配置”进行配置")
+//            return
+//        }
+//        if isZiCe {
+//            printLog("正在测试，请不要重复点击")
+//            return
+//        }
+//        isZiCe = true
+//        zice(testUnits: product.pbxCsUnits, index: 0)
     }
     
-    func zice(testUnits:[DeviceTestUnit], index: Int) {
-        
-        if index == testUnits.count {
-            printLog("测试结束！！！！！！")
-            isZiCe = false
-            return
-        }
-        
-        let tu = testUnits[index]
-        
-        let runner = ProtocolRunner()
-        runner.run(tu.prol, boolCallback: { (bool) in
-            let str = bool ? "成功" : "失败"
-            self.printLog(str)
-            self.zice(testUnits: testUnits, index: index + 1)
-        }, stringCallback: { (str) in
-            let result = "返回：" + str
-            self.printLog(result)
-            self.zice(testUnits: testUnits, index: index + 1)
-        }, dictCallback: { (dict) in
-            let str = self.getJSONStringFromDictionary(dictionary: dict)
-            self.printLog("返回：\(str)")
-            self.zice(testUnits: testUnits, index: index + 1)
-        }, dictArrayCallback: { (dictArr) in
-            let str = self.getJSONStringFromArray(array: dictArr)
-            self.printLog("返回：\(str)")
-            self.zice(testUnits: testUnits, index: index + 1)
-        }) { (error) in
-            self.printLog("错误：" + self.errorMsgFromBleError(error))
-            self.zice(testUnits: testUnits, index: index + 1)
-        }
-        
-    }
     
+    private var waitExcuteList: [Protocol] = []
+    private var isExcuting: Bool = false
     func excute(proto: Protocol) {
+        
+        if isExcuting {
+            waitExcuteList.append(proto)
+            return
+        }
+        
+        isExcuting = true
+        
         self.printLog("执行：\(proto.name)")
         let runner = ProtocolRunner()
         runner.run(proto, boolCallback: { (bool) in
             let str = bool ? "成功" : "失败"
             self.printLog(str)
+            self.excuteFinish()
         }, stringCallback: { (str) in
             
             var result = "返回：" + str
-            if proto.name == "获取蓝牙地址" {
+            if proto.name.hasSuffix("蓝牙地址") {
                 let bytes = str.data(using: .utf8)!.bytes;
                 let tmp = String(format: "%0.2X %0.2X %0.2X %0.2X %0.2X %0.2X", bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5])
                 result = "返回：" + tmp
             }
             self.printLog(result)
+            self.excuteFinish()
         }, dictCallback: { (dict) in
             let str = self.getJSONStringFromDictionary(dictionary: dict)
             self.printLog("返回：\(str)")
+            self.excuteFinish()
         }, dictArrayCallback: { (dictArr) in
             let str = self.getJSONStringFromArray(array: dictArr)
             self.printLog("返回：\(str)")
+            self.excuteFinish()
         }) { (error) in
             self.printLog("错误：" + self.errorMsgFromBleError(error))
+            self.excuteFinish()
+        }
+    }
+    
+    func excuteFinish() {
+        isExcuting = false
+        if self.waitExcuteList.count > 0 {
+            let toPro = self.waitExcuteList[0]
+            self.waitExcuteList.remove(at: 0)
+            excute(proto: toPro)
         }
     }
     
@@ -181,12 +194,10 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
             printLog("测试用例是空的，请点击“自测配置”进行配置")
             return
         }
-        if isZiCe {
-            printLog("正在测试，请不要重复点击")
-            return
+        
+        for unit in product.ziceUnits {
+            excuteTest(testUnit: unit)
         }
-        isZiCe = true
-        zice(testUnits: product.ziceUnits, index: 0)
     }
     
     @IBAction func addTestBtnClick(_ sender: Any) {
@@ -208,6 +219,7 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
     @IBAction func disconnectBtnClick(_ sender: Any) {
         BLECenter.shared.disconnectAllConnectedDevices()
         printLog("已断开全部连接设备")
+        self.autoConnectBtnClick(nil)
     }
     
     
@@ -219,7 +231,7 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
     
     
     // MARK: - 常规测试
-    @IBAction func screenUpClick(_ sender: Any) {
+    @IBAction func screenUpClick(_ sender: Any?) {
         
         guard let proto = product.screenUpProto, proto.cmdUnits.count > 0 else {
             let alert = UIAlertController(title: "亮屏", message: "还没有配置亮屏的执行指令，是否前往配置？", preferredStyle: .alert)
@@ -359,6 +371,14 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
         }
     }
     
+    @IBAction func singalSliderValueChanged(_ slider: UISlider) {
+        minSingal = -Int(slider.value)
+        singalLbl.text = "\(minSingal)"
+    }
+    
+    
+    
+    
     // MARK: - collectionView
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return product.testGroups.count
@@ -407,6 +427,15 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize
     {
         return CGSize(width: kScreenWidth, height: 20)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        let group = product.testGroups[indexPath.section]
+        let proto = group.protocols[indexPath.row]
+        
+        excute(proto: proto)
     }
     
     
@@ -467,6 +496,60 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
     func dtcShowAlert(title: String?, msg: String)
     {
         
+    }
+    
+    // MARK: - 自动测试
+    private var waitTestList: [DeviceTestUnit] = []
+    private var isTesting: Bool = false
+    func excuteTest(testUnit: DeviceTestUnit) {
+        
+        if isTesting {
+            waitTestList.append(testUnit)
+            return
+        }
+        
+        isTesting = true
+        
+        let proto = testUnit.prol!
+        self.printLog("执行：\(proto.name)")
+        let runner = ProtocolRunner()
+        runner.run(proto, boolCallback: { (bool) in
+            let str = bool ? "成功" : "失败"
+            self.printLog(str)
+            self.excuteTestFinish(after: testUnit.ceshiTime)
+        }, stringCallback: { (str) in
+            
+            var result = "返回：" + str
+            if proto.name.hasSuffix("蓝牙地址") {
+                let bytes = str.data(using: .utf8)!.bytes;
+                let tmp = String(format: "%0.2X %0.2X %0.2X %0.2X %0.2X %0.2X", bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5])
+                result = "返回：" + tmp
+            }
+            self.printLog(result)
+            self.excuteTestFinish(after: testUnit.ceshiTime)
+        }, dictCallback: { (dict) in
+            let str = self.getJSONStringFromDictionary(dictionary: dict)
+            self.printLog("返回：\(str)")
+            self.excuteTestFinish(after: testUnit.ceshiTime)
+        }, dictArrayCallback: { (dictArr) in
+            let str = self.getJSONStringFromArray(array: dictArr)
+            self.printLog("返回：\(str)")
+            self.excuteTestFinish(after: testUnit.ceshiTime)
+        }) { (error) in
+            self.printLog("错误：" + self.errorMsgFromBleError(error))
+            self.excuteTestFinish(after: testUnit.ceshiTime)
+        }
+    }
+    
+    func excuteTestFinish(after: TimeInterval) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + after) {
+            self.isTesting = false
+            if self.waitTestList.count > 0 {
+                let toTest = self.waitTestList[0]
+                self.waitTestList.remove(at: 0)
+                self.excuteTest(testUnit: toTest)
+            }
+        }
     }
     
     
