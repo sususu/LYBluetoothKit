@@ -72,17 +72,20 @@ class ZdOtaTask: Equatable {
             let path = StorageUtils.getDocPath().stringByAppending(pathComponent: fm.path)
             
             do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path))
+                var data = try Data(contentsOf: URL(fileURLWithPath: path))
                 let dm = OtaDataModel(type: fm.type, data: data)
                 otaDatas.append(dm)
+                data.removeAll()
             }
             catch {}
         }
         
         if device.isApollo3 {
-            BLEConfig.shared.mtu = 128;
+//            BLEConfig.shared.mtu = 128;
+            BLEConfig.shared.mtu = AppConfig.current.mtuForApollo3
         } else {
-            BLEConfig.shared.mtu = 20;
+//            BLEConfig.shared.mtu = 20;
+            BLEConfig.shared.mtu = AppConfig.current.mtu
         }
         
         weak var weakSelf = self
@@ -104,7 +107,16 @@ class ZdOtaTask: Equatable {
                 
                 NotificationCenter.default.post(name: kZdOtaTaskFailed, object: nil, userInfo: ["error": error!, "task": self])
             } else {
-                weakSelf?.startResetDevice()
+                if let bool = weakSelf?.config.needReset, bool == true {
+                    weakSelf?.startResetDevice()
+                } else {
+                    weakSelf?.otaSuccess()
+                }
+//                if self.config.needReset {
+//                    self.startResetDevice()
+//                } else {
+//                    self.otaSuccess()
+//                }
             }
         })
         otaTask!.config = config
@@ -121,7 +133,7 @@ class ZdOtaTask: Equatable {
     
     private func connectDevice() {
         
-        if connectCount > 8 {
+        if connectCount > 6 {
             state = .success
             self.endTime = Date().timeIntervalSince1970
             self.finishCallback?(true, nil)
@@ -145,14 +157,17 @@ class ZdOtaTask: Equatable {
     private func resetDevice() {
         print("连接设备(\(name))成功，开始重置设备")
         _ = BLECenter.shared.resetDevice(boolCallback: { (bool, error) in
-            self.state = .success
-            self.endTime = Date().timeIntervalSince1970
-            self.hadResetDevice = true
-            self.finishCallback?(true, nil)
-            NotificationCenter.default.post(name: kZdOtaTaskSuccess, object: nil, userInfo: ["task": self])
+            self.otaSuccess()
         }, toDeviceName: name)
     }
     
+    private func otaSuccess() {
+        self.state = .success
+        self.endTime = Date().timeIntervalSince1970
+        self.hadResetDevice = true
+        self.finishCallback?(true, nil)
+        NotificationCenter.default.post(name: kZdOtaTaskSuccess, object: nil, userInfo: ["task": self])
+    }
     
     public static func == (lhs: ZdOtaTask, rhs: ZdOtaTask) -> Bool {
         return lhs.name == rhs.name

@@ -96,6 +96,8 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
                     return d1.rssi > d2.rssi
                 })
                 self.connectDevice(device: self.searchDevices[0])
+            } else {
+                self.autoConnectBtnClick(nil)
             }
         }, after: 5)
         
@@ -106,6 +108,7 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
         BLECenter.shared.connect(device: device, callback: { (d, err) in
             if let error = err {
                 self.printLog(self.errorMsgFromBleError(error))
+                self.autoConnectBtnClick(nil)
             } else {
                 self.printLog("已连接上：\(device.name)")
                 self.screenUpClick(nil)
@@ -156,12 +159,12 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
             self.excuteFinish()
         }, stringCallback: { (str) in
             
-            var result = "返回：" + str
-            if proto.name.hasSuffix("蓝牙地址") {
-                let bytes = str.data(using: .utf8)!.bytes;
-                let tmp = String(format: "%0.2X %0.2X %0.2X %0.2X %0.2X %0.2X", bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5])
-                result = "返回：" + tmp
-            }
+            let result = "返回：" + str
+//            if proto.name.hasSuffix("蓝牙地址") {
+//                let bytes = str.data(using: .utf8)!.bytes;
+//                let tmp = String(format: "%0.2X %0.2X %0.2X %0.2X %0.2X %0.2X", bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5])
+//                result = "返回：" + tmp
+//            }
             self.printLog(result)
             self.excuteFinish()
         }, dictCallback: { (dict) in

@@ -34,6 +34,11 @@ public class OtaDataModel {
     var tlsrOtaDataIndex = 0
     var tlsrOtaDataPackages: [Data]!
     
+//    deinit {
+//        data.removeAll()
+//        otaData.removeAll()
+//    }
+    
     init(type: OtaDataType, data: Data) {
         self.type = type
         self.data = data
@@ -57,6 +62,7 @@ public class OtaDataModel {
         self.otaAddressData = addressData
         self.crcData = crcData
         self.sections = splitDataToSections(otaData)
+        self.data.removeAll()
         
         return true
     }
@@ -164,12 +170,12 @@ public class OtaDataModel {
         let left = data.count % kSizeOfPieceData
         for i in 0..<num {
             let data = data.subdata(in: i * kSizeOfPieceData ..< (i + 1) * kSizeOfPieceData)
-            let section = OtaDataSection(data: data)
+            let section = OtaDataSection(data: data, range: i * kSizeOfPieceData ..< (i + 1) * kSizeOfPieceData)
             sections.append(section)
         }
         if left > 0 {
             let data = data.subdata(in: data.count - left ..< data.count)
-            let section = OtaDataSection(data: data)
+            let section = OtaDataSection(data: data, range: data.count - left ..< data.count)
             sections.append(section)
         }
         
@@ -184,12 +190,12 @@ public class OtaDataModel {
         let left = data.count % sectionSize
         for i in 0..<num {
             let data = data.subdata(in: i * sectionSize ..< (i + 1) * sectionSize)
-            let section = OtaDataSection(data: data)
+            let section = OtaDataSection(data: data, range: i * sectionSize ..< (i + 1) * sectionSize)
             sections.append(section)
         }
         if left > 0 {
             let data = data.subdata(in: data.count - left ..< data.count)
-            let section = OtaDataSection(data: data)
+            let section = OtaDataSection(data: data, range: data.count - left ..< data.count)
             sections.append(section)
         }
         

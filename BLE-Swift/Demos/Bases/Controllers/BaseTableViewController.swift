@@ -13,6 +13,10 @@ class BaseTableViewController: UITableViewController {
 
     var hideBack = false
     
+    deinit {
+        print("\(BaseTableViewController.self) dealloc")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

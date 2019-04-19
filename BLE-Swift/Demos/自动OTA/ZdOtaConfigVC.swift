@@ -29,6 +29,10 @@ class ZdOtaConfigVC: BaseViewController, PrefixSelectVCDelegate {
     
     @IBOutlet weak var upgradeCountSlider: UISlider!
     
+    @IBOutlet weak var needResetSw: UISwitch!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -89,6 +93,7 @@ class ZdOtaConfigVC: BaseViewController, PrefixSelectVCDelegate {
         var config = OtaConfig()
         config.deviceNamePrefix = bleName
         config.prefix = prefixStr
+        config.needReset = needResetSw.isOn
         
         if apolloRadio.isSelected {
             config.platform = .apollo
@@ -113,6 +118,10 @@ class ZdOtaConfigVC: BaseViewController, PrefixSelectVCDelegate {
     @IBAction func upgradeCountChanged(_ sender: UISlider) {
         upgradeCountLbl.text = "\(Int(sender.value))台"
     }
+    
+    @IBAction func resetSwValueChanged(_ sender: UISwitch) {
+    }
+    
     
     @objc func selBtnClick() {
         let vc = PrefixSelectVC()

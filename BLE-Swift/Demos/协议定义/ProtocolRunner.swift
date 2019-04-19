@@ -37,8 +37,23 @@ class ProtocolRunner {
                 }
                 else if pcl.isStringReturn {
                     var str = ""
-                    if let arr = datas, arr.count > 0 {
-                        str = String(bytes: arr[0], encoding: String.Encoding.utf8) ?? ""
+                    if pcl.returnFormat.type == .string {
+                        if let arr = datas, arr.count > 0 {
+                            str = String(bytes: arr[0], encoding: String.Encoding.utf8) ?? ""
+                        }
+                    } else {
+                        var tmp = datas![0].hexEncodedString()
+                        if tmp.count % 2 == 0 {
+                            let half = tmp.count / 2
+                            for _ in 0 ..< half {
+                                str += tmp.prefix(2)
+                                str += " "
+                                tmp = String(tmp.suffix(tmp.count - 2))
+                            }
+                        } else {
+                            str = tmp
+                        }
+                        str = str.uppercased()
                     }
                     stringCallback?(str)
                 }

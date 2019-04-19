@@ -1,5 +1,5 @@
 //
-//  AddProtocolVC.swift
+//  EditProtocolVC.swift
 //  BLE-Swift
 //
 //  Created by SuJiang on 2019/1/25.
@@ -32,7 +32,7 @@ class EditProtocolVC: BaseViewController, ReturnFormatVCDelegate, CmdInputViewDe
     
     @IBOutlet weak var splitRadio: DLRadioButton!
     
-    @IBOutlet weak var tlvRadio: DLRadioButton!
+    @IBOutlet weak var hexRadio: DLRadioButton!
     
     @IBOutlet weak var customRadio: DLRadioButton!
     
@@ -58,7 +58,7 @@ class EditProtocolVC: BaseViewController, ReturnFormatVCDelegate, CmdInputViewDe
         cmdInputView.delegate = self
         
         boolRadio.isSelected = true
-        boolRadio.otherButtons = [stringRadio, splitRadio, tlvRadio, customRadio]
+        boolRadio.otherButtons = [stringRadio, splitRadio, hexRadio, customRadio]
 
         self.title = TR("添加协议")
         if proto != nil {
@@ -82,6 +82,9 @@ class EditProtocolVC: BaseViewController, ReturnFormatVCDelegate, CmdInputViewDe
         }
         else if returnFormat.type == .split {
             splitRadio.isSelected = true
+        }
+        else if returnFormat.type == .hex {
+            hexRadio.isSelected = true
         }
         didFinishEditing()
     }
@@ -134,6 +137,14 @@ class EditProtocolVC: BaseViewController, ReturnFormatVCDelegate, CmdInputViewDe
         vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
+ 
+    @IBAction func hexBtnClick(_ sender: Any) {
+        returnFormat = hexReturnFormat()
+        cancelEditReturnFormat()
+    }
+    
+    
+    
     
     // MARK: - Delegate
     func didFinishEditing() {
@@ -250,6 +261,8 @@ class EditProtocolVC: BaseViewController, ReturnFormatVCDelegate, CmdInputViewDe
             stringRadio.isSelected = true
         case .split:
             splitRadio.isSelected = true
+        case .hex:
+            hexRadio.isSelected = true
         }
         showExpressionAndPs(expression: returnFormat.expression, ps: returnFormat.ps)
     }

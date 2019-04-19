@@ -13,6 +13,7 @@ enum ReturnFormatKind: Int, Codable {
     case bool = 0
     case string
     case split
+    case hex
 }
 
 class ReturnFormat: Codable {
@@ -36,6 +37,8 @@ class ReturnFormat: Codable {
                 return "String"
             case .split:
                 return "按字节拆分"
+            case .hex:
+                return "16进制"
             }
         }
     }
@@ -48,6 +51,12 @@ func boolReturnFormat() -> ReturnFormat {
 func stringReturnFormat() -> ReturnFormat {
     let rf = ReturnFormat()
     rf.type = .string
+    return rf
+}
+
+func hexReturnFormat() -> ReturnFormat {
+    let rf = ReturnFormat()
+    rf.type = .hex
     return rf
 }
 

@@ -83,19 +83,23 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
             return
         }
         
-        var tmpArr = [OtaDataModel]()
-        for dm in otaDatas
-        {
-            if !dm.getApolloDataReady() {
-                let err = BLEError.taskError(reason: .paramsError)
-                self.otaFailed(error: err)
-                return
+        DispatchQueue.global().async {
+            var tmpArr = [OtaDataModel]()
+            for dm in self.otaDatas
+            {
+                if !dm.getApolloDataReady() {
+                    let err = BLEError.taskError(reason: .paramsError)
+                    self.otaFailed(error: err)
+                    return
+                }
+                tmpArr.append(dm)
             }
-            tmpArr.append(dm)
+            self.otaDatas = tmpArr
+            DispatchQueue.main.async {
+                self.enterUpgradeMode()
+            }
         }
-        otaDatas = tmpArr
         
-        enterUpgradeMode()
     }
     
     func cancel() {
@@ -147,7 +151,7 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
             self.device = bd!
             self.device.delegate = self
             self.startOta()
-        })
+        }, timeout: 60)
     }
     
     private func startOta() {
@@ -231,7 +235,7 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
         }
         
         for i in section.currentPackageIndex ..< sendMaxCount {
-            let data = section.packageList[i]
+            let data = section.sectionData.subdata(in: section.packageList[i])
 //            print("package(\(i))data: \(data.hexEncodedString())")
             writeData(data)
             sendLength += data.count
@@ -341,6 +345,7 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
         readyCallback = nil
         progressCallback = nil
         finishCallback = nil
+        otaDatas.removeAll()
         removeTimer()
     }
     

@@ -179,10 +179,12 @@ class OtaNordicTask: OtaTask {
             return
         }
         
-        let packages = otaDatas[0].sections[0].packageList
+        let section = otaDatas[0].sections[0]
+//        let packages = otaDatas[0].sections[0].packageList
+        let packages = section.packageList
         
         for i in 0 ..< packages.count {
-            let data = packages[i]
+            let data = section.sectionData.subdata(in: packages[i])
             //            print("package(\(i))data: \(data.hexEncodedString())")
             writeBinData(data)
             sendLength += data.count

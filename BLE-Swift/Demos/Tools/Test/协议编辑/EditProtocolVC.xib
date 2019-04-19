@@ -10,18 +10,18 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddProtocolVC" customModule="BLE_Swift" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditProtocolVC" customModule="BLE_Swift" customModuleProvider="target">
             <connections>
                 <outlet property="boolRadio" destination="cNW-7d-bWX" id="giu-hk-Yq5"/>
                 <outlet property="cmdInputView" destination="1ZI-jU-9R0" id="nhv-KZ-ADZ"/>
                 <outlet property="customRadio" destination="Wlr-Gm-YzG" id="ONz-8S-mvN"/>
                 <outlet property="expressionLbl" destination="cWn-Hg-27O" id="foP-dc-EQT"/>
+                <outlet property="hexRadio" destination="vk0-qe-6UW" id="czU-5V-SUP"/>
                 <outlet property="nameTF" destination="WXd-mo-Jf4" id="0xa-gy-vbd"/>
                 <outlet property="previewView" destination="Jax-em-xeb" id="Pmz-Ly-aFh"/>
                 <outlet property="psLbl" destination="lUO-J9-ysl" id="cjv-MM-kZE"/>
                 <outlet property="splitRadio" destination="pZD-rR-3G5" id="cl8-4c-XwZ"/>
                 <outlet property="stringRadio" destination="kLy-KA-vyq" id="No8-ti-Q5r"/>
-                <outlet property="tlvRadio" destination="vk0-qe-6UW" id="Cb4-P6-sBA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -173,14 +173,14 @@
                         <action selector="splitBtnClick:" destination="-1" eventType="touchUpInside" id="qxw-pb-lhl"/>
                     </connections>
                 </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vk0-qe-6UW" userLabel="tlv" customClass="DLRadioButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vk0-qe-6UW" userLabel="hex Radio" customClass="DLRadioButton">
                     <rect key="frame" x="183" y="360" width="43" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="3Vb-Mj-uEj"/>
                         <constraint firstAttribute="width" constant="43" id="pf5-ye-G65"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <state key="normal" title="TLV">
+                    <state key="normal" title="Hex">
                         <color key="titleColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -198,7 +198,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="tlvBtnClick:" destination="-1" eventType="touchUpInside" id="BdK-Kf-TwU"/>
+                        <action selector="hexBtnClick:" destination="-1" eventType="touchUpInside" id="QOt-eb-m1j"/>
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wlr-Gm-YzG" userLabel="自定义" customClass="DLRadioButton">

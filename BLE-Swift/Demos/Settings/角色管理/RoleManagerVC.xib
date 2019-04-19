@@ -112,10 +112,18 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                 </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="（切换角色之后，需要重启APP）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opR-zi-y6k">
+                    <rect key="frame" x="211" y="64" width="183" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.47874365479999997" green="0.028350659350000001" blue="0.061894793789999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="cni-I4-gcL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="019-KB-IMP"/>
+                <constraint firstItem="opR-zi-y6k" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="6BU-FN-GCb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="opR-zi-y6k" secondAttribute="trailing" constant="20" id="B2J-BJ-ooz"/>
                 <constraint firstItem="dm2-cB-hog" firstAttribute="top" secondItem="cni-I4-gcL" secondAttribute="bottom" constant="15" id="DFU-br-9PR"/>
                 <constraint firstItem="cni-I4-gcL" firstAttribute="top" secondItem="4B1-Zn-M0X" secondAttribute="bottom" constant="5" id="EtA-Wb-c4y"/>
                 <constraint firstItem="OuJ-ov-uJ1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="EwQ-qG-8fl"/>

@@ -29,6 +29,9 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
     
     @IBOutlet weak var splitRadio: DLRadioButton!
     
+    @IBOutlet weak var hexRadio: DLRadioButton!
+    
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var expressionLbl: UILabel!
     
@@ -64,7 +67,7 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
         cmdInputView.delegate = self
         
         boolRadio.isSelected = true
-        boolRadio.otherButtons = [stringRadio, splitRadio]
+        boolRadio.otherButtons = [stringRadio, splitRadio, hexRadio]
         
         if proto != nil {
             title = TR("增加测试用例")
@@ -86,6 +89,9 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
         }
         else if returnFormat.type == .split {
             splitRadio.isSelected = true
+        }
+        else if returnFormat.type == .hex {
+            hexRadio.isSelected = true
         }
         didFinishEditing()
         
@@ -266,6 +272,13 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    @IBAction func hexBtnClick(_ sender: Any) {
+    }
+    
+    
+    
+    
+    
     @IBAction func addGroupBtnClick(_ sender: Any?) {
         let alert = UIAlertController(title: nil, message: TR("Please input name"), preferredStyle: .alert)
         let ok = UIAlertAction(title: TR("OK"), style: .default) { (action) in
@@ -348,6 +361,8 @@ class AddDeviceTestVC: BaseViewController, CmdInputViewDelegate, UICollectionVie
             stringRadio.isSelected = true
         case .split:
             splitRadio.isSelected = true
+        case .hex:
+            hexRadio.isSelected = true
         }
         showExpressionAndPs(expression: returnFormat.expression, ps: returnFormat.ps)
     }

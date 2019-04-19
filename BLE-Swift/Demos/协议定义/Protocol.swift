@@ -34,7 +34,7 @@ extension Protocol {
     
     var isStringReturn: Bool {
         get {
-            return returnFormat.type == .string
+            return (returnFormat.type == .string || returnFormat.type == .hex)
         }
     }
     

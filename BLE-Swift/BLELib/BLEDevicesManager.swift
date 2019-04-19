@@ -50,6 +50,7 @@ class BLEDevicesManager: NSObject {
             // 回调连接的block
             self.removeConnectTask(task: task)
             task.connectBlock?(task.device, task.error)
+            task.connectBlock = nil
             
             if task.device != nil && task.error == nil {
                 // 发送已经连接上的通知
