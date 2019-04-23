@@ -22,6 +22,14 @@ public enum BLETaskState {
     var error:BLEError?
     var timeout:TimeInterval = kDefaultTimeout
     var ob:NSKeyValueObservation?
+    var startTimeInterval: TimeInterval = Date().timeIntervalSince1970
+    
+    var isTimeout: Bool {
+        get {
+            let now = Date().timeIntervalSince1970
+            return (now - startTimeInterval >= timeout)
+        }
+    }
     
     func start() {
         self.state = .start

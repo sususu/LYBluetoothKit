@@ -24,6 +24,7 @@ class BLEDevicesManager: NSObject {
     override init() {
         super.init()
         connectLock.name = "BLEDevicesManager.connectLock"
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
     // MARK: - 通知处理
@@ -33,6 +34,19 @@ class BLEDevicesManager: NSObject {
             task.connectBlock?(task.device, task.error)
             self.removeConnectTask(task: task)
         }
+    }
+    
+    @objc func applicationBecomeActive() {
+        connectLock.lock()
+        for task in connectTaskList {
+            if task.isTimeout {
+                task.connectFailed(err: BLEError.taskError(reason: .timeout))
+            }
+        }
+        connectTaskList = connectTaskList.filter({ (task) -> Bool in
+            return !task.isTimeout
+        })
+        connectLock.unlock()
     }
     
     func deviceConnected(withTask task: BLEConnectTask) {

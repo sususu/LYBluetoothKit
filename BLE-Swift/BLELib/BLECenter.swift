@@ -132,6 +132,9 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     public func scan(callback:ScanBlock?,
                      stop:EmptyBlock?,
                      after:TimeInterval = kDefaultTimeout) {
+        // 移除掉超时的
+        removeTimeoutScanTask()
+        
         // 如果当前有连接的扫描任务存在，那这个连接的扫描任务，是最优先的
         if scanTasks.count > 0 {
 //            var devices = Array(self.discoveredDevices)
@@ -200,8 +203,8 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
             center?.scanForPeripherals(withServices: nil, options: nil)
             lastScanTime = now
         }
-        // 一秒钟重复一次
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        // 3秒钟重复一次
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.beginLoopScan(interval: interval)
         }
     }
@@ -214,6 +217,14 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
                 scanTasks.remove(at: i)
                 return
             }
+        }
+    }
+    
+    private func removeTimeoutScanTask() {
+        let now = Date().timeIntervalSince1970
+        
+        scanTasks = scanTasks.filter { (task) -> Bool in
+            return (now - task.startTimeInterval < task.timeout)
         }
     }
     
@@ -282,6 +293,7 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
                     }
                 }
             }, stopCallback: nil)
+            scanTask.timeout = timeout
             beginConnectScan(task: scanTask, after: timeout)
         } else {
             DispatchQueue.main.async {

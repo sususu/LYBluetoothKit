@@ -31,6 +31,12 @@ class ZdOtaConfigVC: BaseViewController, PrefixSelectVCDelegate {
     
     @IBOutlet weak var needResetSw: UISwitch!
     
+    @IBOutlet weak var normalSpeedRadio: DLRadioButton!
+    
+    @IBOutlet weak var fastSpeedRadio: DLRadioButton!
+    
+    @IBOutlet weak var speedTF: UITextField!
+    
     
     
     override func viewDidLoad() {
@@ -70,6 +76,14 @@ class ZdOtaConfigVC: BaseViewController, PrefixSelectVCDelegate {
         
 
         apolloRadio.otherButtons = [nordicRadio, tlsrRadio]
+        normalSpeedRadio.otherButtons = [fastSpeedRadio]
+        
+        if AppConfig.current.mtu == 20 {
+            normalSpeedRadio.isSelected = true
+        } else {
+            fastSpeedRadio.isSelected = true
+        }
+        speedTF.text = "\(AppConfig.current.mtu)"
         
         setNavRightButton(text: TR("下一步"), sel: #selector(nextBtnClick))
         
@@ -89,6 +103,14 @@ class ZdOtaConfigVC: BaseViewController, PrefixSelectVCDelegate {
             showError(TR("请输入OTA名称前缀"))
             return
         }
+        
+        guard let mtuStr = speedTF.text, mtuStr.count > 0 else {
+            showError("请输入正确的MTU值，不能小于20，而且是2的倍数")
+            return
+        }
+        
+        AppConfig.current.mtu = Int(mtuStr) ?? 20
+        AppConfig.current.save()
         
         var config = OtaConfig()
         config.deviceNamePrefix = bleName
@@ -128,6 +150,24 @@ class ZdOtaConfigVC: BaseViewController, PrefixSelectVCDelegate {
         vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    @IBAction func normalSpeedValueChanged(_ sender: Any) {
+        speedTF.text = "20"
+    }
+    
+    @IBAction func fastSpeedValueChanged(_ sender: Any) {
+        speedTF.text = "120"
+    }
+    
+    @IBAction func normalSpeedBtnClick(_ sender: Any) {
+        speedTF.text = "20"
+    }
+    
+    @IBAction func fastSpeedBtnClick(_ sender: Any) {
+        speedTF.text = "120"
+    }
+    
+    
     
     // MARK: - 代理
     func didSelectPrefixStr(prefixStr: String, bleName: String) {

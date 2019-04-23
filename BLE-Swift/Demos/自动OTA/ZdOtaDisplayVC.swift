@@ -20,12 +20,17 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
     
     var successList = [ZdOtaTask]()
     var failedList = [ZdOtaTask]()
+    var failedRecordList: Dictionary<String, Int> = [String : Int]()
     var unusedList = [ZdOtaTask]()
     
     var isStop: Bool = false
     var isConnecting: Bool = false
     var connectingName: String = ""
     var isScanning: Bool = false
+    
+    deinit {
+        print("ZdOtaDisplayVC dealloc")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +64,7 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         UIApplication.shared.isIdleTimerDisabled = false
+        cleanLog()
     }
     
     // MARK: - 业务逻辑
@@ -253,8 +259,10 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
     
     @objc func gotoHome() {
        
+        weak var weakSelf = self
         let alert = UIAlertController(title: "温馨提醒", message: "如果返回首页，会停止当前所有正在进行的任务，您确定要返回吗？", preferredStyle: .alert)
         let ok = UIAlertAction(title: "返回", style: .default) { (action) in
+            weakSelf?.isStop = true
             OtaManager.shared.cancelAllTask()
         self.navigationController?.setViewControllers([self.navigationController!.viewControllers[0]], animated: true)
         }
@@ -295,10 +303,11 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
 //            return
         }
         
-        if failedList.contains(task)
+        if failedRecordList.keys.contains(task.name)
         {
-            task.tryCount += 1
-            if task.tryCount >= kZdOtaTaskMaxTryCount {
+            let count = (failedRecordList[task.name] ?? 1) + 1
+            failedRecordList[task.name] = count
+            if count >= kZdOtaTaskMaxTryCount {
                 unusedList.append(task)
 //                if checkCountAndAlert() {
 //                    return
@@ -309,6 +318,7 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         {
             task.tryCount = 1
             failedList.append(task)
+            failedRecordList[task.name] = 1
         }
         removeOtaTask(byName: task.name)
         tableView.reloadData()
@@ -345,7 +355,7 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
                 VoiceSpeaker.shared.stopSpeaking()
                 
                 let vc = ZdOtaResultVC()
-                vc.failList = self.failedList
+                vc.failList = self.unusedList
                 vc.successList = self.successList
                 self.navigationController?.pushViewController(vc, animated: true)
             }
@@ -381,9 +391,20 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
     private var logStr = ""
     private var logLine = 1
     private func printLog(_ log: String) {
+        
+        // 200行清一次数据
+        if logLine > 200 {
+            cleanLog()
+        }
+        
         logStr += "\(logLine). " + log + "\n"
         logTV.text = logStr
         logLine += 1
         logTV.scrollRangeToVisible(NSMakeRange(logStr.count - 1, 1))
+    }
+    
+    private func cleanLog() {
+        logStr = ""
+        logLine = 1
     }
 }
