@@ -13,6 +13,12 @@ let kShowConnectNotification = Notification.Name("kShowConnectNotification")
 
 class HomeViewController: UITabBarController {
 
+    override func loadView() {
+        super.loadView()
+        
+        self.tabBar.backgroundImage = image(withColor: rgb(250, 250, 250))
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -52,4 +58,20 @@ class HomeViewController: UITabBarController {
         present(nav, animated: true, completion: nil)
     }
 
+    
+    func image(withColor color: UIColor) -> UIImage? {
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        UIGraphicsBeginImageContext(rect.size)
+        guard let cxt = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
+        
+        cxt.setFillColor(color.cgColor)
+        cxt.fill(rect)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return img
+    }
+    
 }

@@ -56,47 +56,47 @@
     },
     {
         "deviceName" : "ITING_P01A",
-        "bleName" : "ITING_P01A#",
+        "bleName" : "ITING V1#",
         "prefix" : "P01A"
     },
     {
         "deviceName" : "ITING_P01B",
-        "bleName" : "ITING_P01B#",
+        "bleName" : "ITING V2#",
         "prefix" : "P01B"
     },
     {
         "deviceName" : "ITING_P02A",
-        "bleName" : "ITING_P02A#",
+        "bleName" : "ITING_E#",
         "prefix" : "P02A"
     },
     {
         "deviceName" : "ITING_W007C",
-        "bleName" : "ITING_W007C#",
+        "bleName" : "ITING CP#",
         "prefix" : "W007C"
     },
     {
         "deviceName" : "TING_W007D",
-        "bleName" : "TING_W007D#",
+        "bleName" : "ITING CP#",
         "prefix" : "W007D"
     },
     {
         "deviceName" : "TING_W007G",
-        "bleName" : "TING_W007G#",
+        "bleName" : "ITING W1#",
         "prefix" : "W007G"
     },
     {
         "deviceName" : "ITING_W007H",
-        "bleName" : "ITING_W007H#",
+        "bleName" : "ITING W2#",
         "prefix" : "W007H"
     },
     {
         "deviceName" : "ITING_W007GA",
-        "bleName" : "ITING_W007GA#",
+        "bleName" : "ITING W3#",
         "prefix" : "W007GA"
     },
     {
         "deviceName" : "ITING_W007HA",
-        "bleName" : "ITING_W007HA#",
+        "bleName" : "ITING W4#",
         "prefix" : "W007HA"
     },
     {
