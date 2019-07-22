@@ -97,6 +97,16 @@ class StorageUtils {
         }
     }
     
+    public static func copyItem(fromPath: String, toPath: String) -> Bool {
+        let manager = FileManager.default
+        do {
+            try manager.copyItem(atPath: fromPath, toPath: toPath)
+            return true
+        } catch {
+            return false
+        }
+    }
+    
     public static func deleteFile(atPath path: String) -> Bool {
         let manager = FileManager.default
         do {

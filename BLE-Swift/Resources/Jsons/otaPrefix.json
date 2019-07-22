@@ -1,5 +1,30 @@
 [
     {
+        "deviceName" : "TITAN客户P01ATN",
+        "bleName" : "P01B_TITAN",
+        "prefix" : "P01B"
+    },
+    {
+        "deviceName" : "爱国者客户P01A",
+        "bleName" : "P01AGZ",
+        "prefix" : "P01A"
+    },
+    {
+        "deviceName" : "爱国者客户P02A",
+        "bleName" : "P02AGZ",
+        "prefix" : "P02A"
+    },
+    {
+        "deviceName" : "意大利客户W007C",
+        "bleName" : "W007C TECHMADE",
+        "prefix" : "TM_W007C"
+    },
+    {
+        "deviceName" : "新UI P03A",
+        "bleName" : "P03A_ITING",
+        "prefix" : "ITING P1"
+    },
+    {
         "deviceName" : "W007_CR A",
         "bleName" : "W007_CR#",
         "prefix" : "07CRA"

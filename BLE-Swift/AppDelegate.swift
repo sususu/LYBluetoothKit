@@ -149,13 +149,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         
+        var tmpDir = "Inbox"
+        var tmpPath = StorageUtils.getDocPath().stringByAppending(pathComponent: tmpDir)
+        if !StorageUtils.isFileExits(atPath: tmpPath) {
+            tmpDir = "mybox"
+            tmpPath = StorageUtils.getDocPath().stringByAppending(pathComponent: tmpDir)
+            _ = StorageUtils.createPath(path: tmpPath)
+        }
         
-        let filePath = "Inbox".stringByAppending(pathComponent: fileName)
+        
+        let filePath = tmpDir.stringByAppending(pathComponent: fileName)
         
         let absolutePath = StorageUtils.getDocPath().stringByAppending(pathComponent: filePath)
         
         if !StorageUtils.isFileExits(atPath: absolutePath) {
-            return false
+            if StorageUtils.isFileExits(atPath: url.absoluteString) {
+                _ = StorageUtils.copyItem(fromPath: url.absoluteString, toPath: absolutePath)
+            } else {
+                let ddd = try? Data(contentsOf: url)
+                try? ddd?.write(to: URL(fileURLWithPath: absolutePath))
+            }
         }
         
         let fm = Firmware()

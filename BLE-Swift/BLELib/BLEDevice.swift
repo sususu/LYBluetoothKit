@@ -52,6 +52,7 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
     
     // MARK: - 初始化
     deinit {
+        delegate = nil
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -221,6 +222,9 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
         
         print("\(self.name)(\(characteristic.uuid.uuidString)) recv data:\(data.hexEncodedString()))")
         
+//        if delegate == nil {
+//            print("怎么突然就空了啊？？？")
+//        }
         delegate?.deviceDidUpdateData(data: data, deviceName: self.name, uuid: characteristic.uuid.uuidString)
         
         NotificationCenter.default.post(name: BLEInnerNotification.deviceDataUpdate, object: nil, userInfo: [BLEKey.data : data, BLEKey.uuid : characteristic.uuid.uuidString, BLEKey.device: self])

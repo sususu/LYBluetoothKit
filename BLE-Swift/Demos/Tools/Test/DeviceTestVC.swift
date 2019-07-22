@@ -14,15 +14,17 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
     
     @IBOutlet weak var editProtoBtn: UIButton!
     
+    @IBOutlet weak var headerHeight: NSLayoutConstraint!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     
     @IBOutlet weak var bleNameLbl: UITextField!
     
-    @IBOutlet weak var slider: UISlider!
-    @IBOutlet weak var singalLbl: UILabel!
+    @IBOutlet weak var signalLbl: UITextField!
     
+    
+    @IBOutlet weak var nearestLbl: UILabel!
     
     
     var minSingal: Int = -70
@@ -52,14 +54,13 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
         let longPressGes = UILongPressGestureRecognizer(target: self, action: #selector(moveAction(longGes:)))
         collectionView.isUserInteractionEnabled = true
         collectionView.addGestureRecognizer(longPressGes)
-
-        singalSliderValueChanged(slider)
         
         if AppConfig.current.roleType == .developer {
             setNavRightButton(text: "添加测试", sel: #selector(addTestBtnClick(_:)))
         } else {
             ceshiConfigBtn.isHidden = true
             editProtoBtn.isHidden = true
+            headerHeight.constant = 170
         }
         
         showConnectState()
@@ -85,6 +86,15 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
         printLog("开始搜索设备")
         BLECenter.shared.scan(callback: { (devices, error) in
             if let ds = devices {
+                
+                let tmp = ds.sorted(by: { (d1, d2) -> Bool in
+                    return d1.rssi > d2.rssi
+                })
+                if tmp.count > 0 {
+                    let device = tmp[0]
+                    self.nearestLbl.text = "信号：\(device.rssi ?? 0)";
+                }
+                
                 self.searchDevices = ds.filter({ (d) -> Bool in
                     return (d.name.contains(name) && (d.rssi > self.minSingal))
                 })
@@ -289,7 +299,7 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
     }
     
     @IBAction func syncTimeBtnClick(_ sender: Any) {
-        guard let proto = product.screenUpProto, proto.cmdUnits.count > 0 else {
+        guard let proto = product.syncTimeProto, proto.cmdUnits.count > 0 else {
             let alert = UIAlertController(title: "同步时间", message: "还没有配置同步时间的执行指令，是否前往配置？", preferredStyle: .alert)
             let ok = UIAlertAction(title: "确定", style: .default) { (action) in
                 self.product.syncTimeProto = Protocol()
@@ -374,12 +384,17 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
         }
     }
     
-    @IBAction func singalSliderValueChanged(_ slider: UISlider) {
-        minSingal = -Int(slider.value)
-        singalLbl.text = "\(minSingal)"
+    @IBAction func signalAddBtnClick(_ sender: Any) {
+        
+        let signal = Int(signalLbl.text ?? "") ?? 55
+        signalLbl.text = "\(signal + 1)"
+        
     }
     
-    
+    @IBAction func signalMinusBtnClick(_ sender: Any) {
+        let signal = Int(signalLbl.text ?? "") ?? 55
+        signalLbl.text = "\(signal - 1)"
+    }
     
     
     // MARK: - collectionView
@@ -424,7 +439,7 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        return itemSizes[indexPath.row]
-        return CGSize(width: 80, height: 30)
+        return CGSize(width: 80, height: 40)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize
@@ -525,8 +540,10 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
             var result = "返回：" + str
             if proto.name.hasSuffix("蓝牙地址") {
                 let bytes = str.data(using: .utf8)!.bytes;
-                let tmp = String(format: "%0.2X %0.2X %0.2X %0.2X %0.2X %0.2X", bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5])
-                result = "返回：" + tmp
+                if bytes.count >= 6 {
+                    let tmp = String(format: "%0.2X %0.2X %0.2X %0.2X %0.2X %0.2X", bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5])
+                    result = "返回：" + tmp
+                }
             }
             self.printLog(result)
             self.excuteTestFinish(after: testUnit.ceshiTime)
@@ -562,7 +579,19 @@ class DeviceTestVC: BaseViewController, UICollectionViewDataSource, UICollection
     @IBOutlet weak var textViewRight: NSLayoutConstraint!
     @IBOutlet weak var loginTextView: UITextView!
     @IBOutlet weak var exportBtn: UIButton!
+    
     @IBAction func exportBtnClick(_ sender: Any) {
+        if exportBtn.isSelected
+        {
+            logViewHeight.constant = 130
+            exportBtn.setTitle("全屏", for: .normal)
+        }
+        else
+        {
+            logViewHeight.constant = kScreenHeight
+            exportBtn.setTitle("缩小", for: .normal)
+        }
+        exportBtn.isSelected = !exportBtn.isSelected
     }
     
     // 日志

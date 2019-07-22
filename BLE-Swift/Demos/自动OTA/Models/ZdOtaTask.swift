@@ -110,7 +110,7 @@ class ZdOtaTask: Equatable {
                 if let bool = weakSelf?.config.needReset, bool == true {
                     weakSelf?.startResetDevice()
                 } else {
-                    weakSelf?.otaSuccess()
+                    weakSelf?.otaSuccess(isReset: false)
                 }
 //                if self.config.needReset {
 //                    self.startResetDevice()
@@ -157,14 +157,14 @@ class ZdOtaTask: Equatable {
     private func resetDevice() {
         print("连接设备(\(name))成功，开始重置设备")
         _ = BLECenter.shared.resetDevice(boolCallback: { (bool, error) in
-            self.otaSuccess()
+            self.otaSuccess(isReset: true)
         }, toDeviceName: name)
     }
     
-    private func otaSuccess() {
+    private func otaSuccess(isReset: Bool) {
         self.state = .success
         self.endTime = Date().timeIntervalSince1970
-        self.hadResetDevice = true
+        self.hadResetDevice = isReset
         self.finishCallback?(true, nil)
         NotificationCenter.default.post(name: kZdOtaTaskSuccess, object: nil, userInfo: ["task": self])
     }

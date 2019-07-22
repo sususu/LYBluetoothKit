@@ -22,7 +22,7 @@ public enum OtaTaskState: Int, Codable {
     case finish
 }
 
-public class OtaTask: NSObject, BLEDeviceDelegate {
+public class OtaTask: NSObject {
     
     let timeout: TimeInterval = 30
     
@@ -50,6 +50,7 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
     var otaTimer: Timer?
     
     deinit {
+        print("task deinit")
         cleanUp()
     }
     
@@ -67,9 +68,9 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
         self.finishCallback = finishCallback
         
         super.init()
-        self.device.delegate = self
+//        self.device.delegate = self
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(deviceDataUpdate(notification:)), name: BLEInnerNotification.deviceDataUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deviceDataUpdate(notification:)), name: BLEInnerNotification.deviceDataUpdate, object: nil)
     }
     
     func start() {
@@ -149,12 +150,14 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
                 return
             }
             self.device = bd!
-            self.device.delegate = self
+//            self.device.delegate = self
             self.startOta()
         }, timeout: 60)
     }
     
     private func startOta() {
+        
+//        self.device.delegate = self
         
         otaReady()
         
@@ -226,23 +229,24 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
             return
         }
         
-        let section = otaDatas[0].sections[0]
-        
-        let sendMaxCount = min(section.totalPackageCount, section.currentPackageIndex + kPackageCountCallback)
-        
-        if section.currentPackageIndex >= sendMaxCount {
-            return
-        }
-        
-        for i in section.currentPackageIndex ..< sendMaxCount {
-            let data = section.sectionData.subdata(in: section.packageList[i])
-//            print("package(\(i))data: \(data.hexEncodedString())")
-            writeData(data)
-            sendLength += data.count
+        DispatchQueue.global().async {
+            let section = self.otaDatas[0].sections[0]
             
-            otaProgressUpdate()
+            let sendMaxCount = min(section.totalPackageCount, section.currentPackageIndex + kPackageCountCallback)
+            
+            if section.currentPackageIndex >= sendMaxCount {
+                return
+            }
+            
+            for i in section.currentPackageIndex ..< sendMaxCount {
+                let data = section.sectionData.subdata(in: section.packageList[i])
+                //            print("package(\(i))data: \(data.hexEncodedString())")
+                self.writeData(data)
+                self.sendLength += data.count
+                
+                self.otaProgressUpdate()
+            }
         }
-        
     }
     
     private func sendCheckCrc() {
@@ -304,11 +308,17 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
         if checkIsCancel() {
             return
         }
-        print("发送（\(UUID.otaWriteC)）:\(data.hexEncodedString())")
+        print("\(device.name)，发送（\(UUID.otaWriteC)）:\(data.hexEncodedString())")
         _ = device.write(data, characteristicUUID: UUID.otaWriteC)
-//        if self.device.name.hasSuffix("0002") {
-//            print("写数据-\(self.device.name)：\(data.hexEncodedString())")
-//        }
+        guard let conf = self.config else {
+            return
+        }
+        if !device.isApollo3 {
+            if conf.upgradeCountMax > 1 {
+                Thread.sleep(forTimeInterval: (0.001 * Double(conf.upgradeCountMax)))
+            }
+        }
+//        Thread.sleep(forTimeInterval: 0.002)
     }
     
     private func writeDataToNotify(_ data: Data) {
@@ -352,31 +362,30 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
     // MARK: - 接收数据
     func deviceDidUpdateData(data: Data, deviceName: String, uuid: String) {
         if deviceName != self.device.name || uuid != UUID.otaNotifyC || data.count < 2 {
+            print("不符合要求？？？？？？？")
             return
-        }
-        if self.device.name.hasSuffix("0002") {
-            print("接收数据-\(deviceName)：\(data.hexEncodedString())")
         }
         otaDeviceDataComes(data: data)
     }
     
-//    @objc func deviceDataUpdate(notification: Notification?) {
-////        print("deviceUpdate: \(String(describing: notification?.userInfo))")
-//        guard let de = notification?.userInfo?[BLEKey.device] as? BLEDevice, de == self.device else {
-//            return
-//        }
-//
-//        guard let uuid = notification?.userInfo?[BLEKey.uuid] as? String, uuid == UUID.otaNotifyC else {
-//            return
-//        }
-//
-//        guard let data = notification?.userInfo?[BLEKey.data] as? Data, data.count >= 2 else {
-//            return
-//        }
-//        otaDeviceDataComes(data: data)
-//    }
+    @objc func deviceDataUpdate(notification: Notification?) {
+//        print("deviceUpdate: \(String(describing: notification?.userInfo))")
+        guard let de = notification?.userInfo?[BLEKey.device] as? BLEDevice, de == self.device else {
+            return
+        }
+
+        guard let uuid = notification?.userInfo?[BLEKey.uuid] as? String, uuid == UUID.otaNotifyC else {
+            return
+        }
+
+        guard let data = notification?.userInfo?[BLEKey.data] as? Data, data.count >= 2 else {
+            return
+        }
+        deviceDidUpdateData(data: data, deviceName: de.name, uuid: uuid)
+    }
     
     private func otaDeviceDataComes(data: Data) {
+//        print("来数据了：\(data.hexEncodedString())")
         removeTimer()
         // 命令
         let cmd = data.bytes[0]
@@ -411,11 +420,17 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
                 } else if type == 2 {
                     // 移除一个数据分区
                     //                    print("移除一个分区，开始下发下一个包")
+                    if otaDatas.count == 0 {
+                        return
+                    }
                     otaDatas[0].sections.remove(at: 0)
                     // 继续发送下一个数据分区
                     sendPackages()
                 } else {
                     //                    print("开始下发下一个回传包")
+                    if otaDatas.count == 0 {
+                        return
+                    }
                     otaDatas[0].sections[0].currentPackageIndex += kPackageCountCallback
                     sendPackages()
                 }

@@ -87,7 +87,7 @@ class OtaNordicTask: OtaTask {
                 return
             }
             weakSelf?.device = bd!
-            weakSelf?.device.delegate = self
+//            weakSelf?.device.delegate = self
             weakSelf?.startOta()
         })
     }
